@@ -1,0 +1,29 @@
+
+C:\Users\ADMIN\Documents\Work\projects\new_cms\Frontend\src\context\AuthContext.jsx
+   6:14  error  Fast refresh only works when a file only exports components. Use a new file to share constants or functions between components                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-refresh/only-export-components
+  27:13  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  25 |         const savedUser = localStorage.getItem('cms_user');
+  26 |         if (savedToken && savedUser) {
+> 27 |             setToken(savedToken);
+     |             ^^^^^^^^ Avoid calling setState() directly within an effect
+  28 |             setUser(JSON.parse(savedUser));
+  29 |         }
+  30 |         setLoading(false);  react-hooks/set-state-in-effect
+
+C:\Users\ADMIN\Documents\Work\projects\new_cms\Frontend\src\pages\ArticleEditor.jsx
+   41:8   warning  React Hook useEffect has missing dependencies: 'fetchArticle' and 'isEditMode'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+   89:18  error    'err' is defined but never used                                                                                                     no-unused-vars
+  307:70  error    'err' is defined but never used                                                                                                     no-unused-vars
+
+C:\Users\ADMIN\Documents\Work\projects\new_cms\Frontend\src\pages\Dashboard.jsx
+  41:8  warning  React Hook useEffect has a missing dependency: 'fetchArticles'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+✖ 6 problems (4 errors, 2 warnings)
+

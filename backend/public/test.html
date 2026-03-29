@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Article Creation</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; max-width: 800px; }
+        .form-group { margin-bottom: 1rem; }
+        label { display: block; font-weight: bold; margin-bottom: .25rem; }
+        input[type="text"], textarea { width: 100%; padding: .5rem; }
+        textarea { height: 150px; }
+        button { padding: .5rem 1rem; background: #007bff; color: white; border: none; cursor: pointer; }
+        #responseArea { margin-top: 2rem; background: #f4f4f4; padding: 1rem; white-space: pre-wrap; word-break: break-all; }
+    </style>
+</head>
+<body>
+    <h1>Test Article Creation API</h1>
+    <p>This form simulates submitting a multipart form-data request to the API, including the <code>{{IMG_x}}</code> markers in the text.</p>
+    
+    <form id="articleForm">
+        <div class="form-group">
+            <label>Title</label>
+            <input type="text" name="title" value="Test Article from Browser" required />
+        </div>
+        <div class="form-group">
+            <label>Short Description</label>
+            <input type="text" name="shortDescription" value="This is a test article created via the HTML tester." />
+        </div>
+        
+        <div class="form-group">
+            <label>Main Image (Thumbnail)</label>
+            <input type="file" name="mainImage" accept="image/*" />
+        </div>
+
+        <div class="form-group">
+            <label>Article Body Text (Use {{IMG_0}}, {{IMG_1}} for images)</label>
+            <textarea name="bodyText" required>Here is the first paragraph.
+            
+{{IMG_0}}
+            
+And here is the second paragraph that occurs after the first image. 
+
+{{IMG_1}}
+
+Conclusion.</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Article Image 0</label>
+            <input type="file" name="articleImages" accept="image/*" />
+        </div>
+        <div class="form-group">
+            <label>Article Image 1</label>
+            <input type="file" name="articleImages" accept="image/*" />
+        </div>
+        
+        <div class="form-group">
+            <label>Captions (JSON array matching article images)</label>
+            <input type="text" name="captions" value='["Caption for image 1", "Caption for image 2"]' />
+        </div>
+
+        <button type="submit">Submit Article</button>
+    </form>
+
+    <div id="responseArea">Waiting for submission...</div>
+
+    <script>
+        document.getElementById('articleForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const formData = new FormData(form);
+            const responseArea = document.getElementById('responseArea');
+            
+            responseArea.textContent = 'Submitting...';
+            
+            try {
+                const response = await fetch('/api/articles', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                responseArea.textContent = JSON.stringify(data, null, 2);
+            } catch (err) {
+                responseArea.textContent = 'Error: ' + err.message;
+            }
+        });
+    </script>
+</body>
+</html>

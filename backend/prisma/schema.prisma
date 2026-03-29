@@ -1,0 +1,506 @@
+generator client {
+  provider = "prisma-client"
+  output   = "./generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model session {
+  sid    String   @id @db.VarChar
+  sess   Json     @db.Json
+  expire DateTime @db.Timestamp(6)
+
+  @@index([expire], map: "IDX_session_expire")
+}
+
+model Article {
+  id               String               @id @default(uuid())
+  title            String
+  timestampDate    DateTime
+  readTime         String?
+  mainImage        String?
+  shortDescription String?
+  body             String?
+  tags             String[]
+  type             String?
+  views            Int                  @default(0)
+  images           ArticleImage[]
+  keyInsights      ArticleKeyInsight[]
+  relatedNews      ArticleRelatedNews[]
+  comments         Comment[]
+  savedBy          SavedArticle[]
+  userHistory      UserHistory[]
+
+  @@map("articles")
+}
+
+model ArticleImage {
+  id        Int     @id @default(autoincrement())
+  src       String
+  alt       String?
+  caption   String?
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@map("article_images")
+}
+
+model ArticleKeyInsight {
+  id          Int     @id @default(autoincrement())
+  insightText String
+  articleId   String
+  article     Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@map("article_key_insights")
+}
+
+model ArticleRelatedNews {
+  id        Int     @id @default(autoincrement())
+  newsTitle String
+  newsUrl   String?
+  articleId String
+  article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
+
+  @@map("article_related_news")
+}
+
+model Comment {
+  id        Int      @id @default(autoincrement())
+  text      String
+  createdAt DateTime @default(now())
+  articleId String
+  userId    String
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("comments")
+}
+
+model StockCache {
+  id     Int      @id @default(autoincrement())
+  symbol String
+  data   Json
+  date   DateTime
+
+  @@unique([symbol, date])
+}
+
+model StockInsight {
+  id        Int      @id @default(autoincrement())
+  insight   String
+  createdAt DateTime @default(now())
+
+  @@map("stock_insights")
+}
+
+model Airline {
+  id        Int            @id @default(autoincrement())
+  name      String         @unique
+  reviews   FlightReview[]
+  questions Question[]
+
+  @@map("airlines")
+}
+
+model Question {
+  id           Int      @id @default(autoincrement())
+  questionText String   @unique
+  responseType String
+  airlineId    Int?
+  answers      Answer[]
+  airline      Airline? @relation(fields: [airlineId], references: [id])
+
+  @@map("questions")
+}
+
+model FlightReview {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  airlineId Int
+  answers   Answer[]
+  airline   Airline  @relation(fields: [airlineId], references: [id])
+
+  @@map("flight_reviews")
+}
+
+model Answer {
+  id           Int          @id @default(autoincrement())
+  answerRating Int?
+  answerText   String?
+  reviewId     Int
+  questionId   Int
+  question     Question     @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  review       FlightReview @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+
+  @@map("answers")
+}
+
+model Event {
+  id              String       @id @default(uuid())
+  eventName       String
+  eventLink       String
+  venue           String
+  onlineOrOffline String
+  freeOrPaid      String
+  date            DateTime
+  time            String
+  eventType       String
+  region          String
+  image           String
+  lat             Float
+  lng             Float
+  country         String
+  description     String?
+  organizedBy     String?
+  images          String[]
+  savedBy         SavedEvent[]
+
+  @@map("events")
+}
+
+model Media {
+  id          String       @id @default(uuid())
+  type        String
+  title       String
+  description String?
+  url         String?
+  thumbnail   String?
+  tags        String[]
+  date        DateTime?
+  adId        String?
+  userId      String?
+  downloads   Int          @default(0)
+  views       Int          @default(0)
+  user        User?        @relation(fields: [userId], references: [id])
+  likes       MediaLike[]
+  savedBy     SavedMedia[]
+
+  @@map("media")
+}
+
+model User {
+  id               String          @id
+  email            String          @unique
+  name             String?
+  occupation       String?
+  phoneNumber      String?
+  profileImage     String?
+  createdAt        DateTime        @default(now())
+  bio              String?
+  coverImage       String?
+  isExpert         Boolean         @default(false)
+  preferences      String[]
+  comments         Comment[]
+  feedLikes        FeedLike[]
+  feedPosts        FeedPost[]
+  uploads          Media[]
+  usersLiked       MediaLike[]
+  receivedMessages Message[]       @relation("ReceivedMessages")
+  sentMessages     Message[]       @relation("SentMessages")
+  notifications    Notification[]
+  pinnedInsights   PinnedInsight[]
+  savedArticles    SavedArticle[]
+  savedEvents      SavedEvent[]
+  savedMedia       SavedMedia[]
+  following        UserFollow[]    @relation("follower")
+  followers        UserFollow[]    @relation("following")
+  history          UserHistory[]
+
+  @@map("users")
+}
+
+model SavedMedia {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  mediaId   String
+  createdAt DateTime @default(now())
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mediaId])
+  @@map("saved_media")
+}
+
+model MediaLike {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  mediaId   String
+  createdAt DateTime @default(now())
+  media     Media    @relation(fields: [mediaId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, mediaId])
+  @@map("media_likes")
+}
+
+model UserHistory {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  articleId String
+  visitedAt DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_history")
+}
+
+model FeedCategory {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  posts       FeedPost[]
+
+  @@map("feed_categories")
+}
+
+model FeedPost {
+  id         String        @id @default(uuid())
+  title      String?
+  content    String
+  images     String[]
+  createdAt  DateTime      @default(now())
+  updatedAt  DateTime      @updatedAt
+  userId     String
+  categoryId String?
+  parentId   String?
+  tags       String[]
+  likes      FeedLike[]
+  category   FeedCategory? @relation(fields: [categoryId], references: [id])
+  parent     FeedPost?     @relation("ThreadHistory", fields: [parentId], references: [id], onDelete: Cascade)
+  replies    FeedPost[]    @relation("ThreadHistory")
+  user       User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("feed_posts")
+}
+
+model FeedLike {
+  id        Int      @id @default(autoincrement())
+  userId    String
+  postId    String
+  createdAt DateTime @default(now())
+  post      FeedPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, postId])
+  @@map("feed_likes")
+}
+
+model AnalyticalArticle {
+  id                 String   @id @default(uuid())
+  title              String
+  headingDescription String?
+  readTime           String?
+  mainImage          String?
+  shortDescription   String?
+  body               String?
+  tags               String[]
+  dataKey            String?
+  tableOfContents    Json?
+  faq                Json?
+  advertisement      Json?
+  images             String[]
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@map("analytical_articles")
+}
+
+model UserFollow {
+  id          Int      @id @default(autoincrement())
+  followerId  String
+  followingId String
+  createdAt   DateTime @default(now())
+  follower    User     @relation("follower", fields: [followerId], references: [id], onDelete: Cascade)
+  following   User     @relation("following", fields: [followingId], references: [id], onDelete: Cascade)
+
+  @@unique([followerId, followingId])
+  @@map("user_follows")
+}
+
+model Message {
+  id                String   @id @default(uuid())
+  content           String
+  senderId          String
+  receiverId        String
+  read              Boolean  @default(false)
+  createdAt         DateTime @default(now())
+  deletedByReceiver Boolean  @default(false)
+  deletedBySender   Boolean  @default(false)
+  receiver          User     @relation("ReceivedMessages", fields: [receiverId], references: [id], onDelete: Cascade)
+  sender            User     @relation("SentMessages", fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([senderId, receiverId])
+  @@index([createdAt])
+  @@map("messages")
+}
+
+model Expert {
+  id        String   @id @default(uuid())
+  name      String
+  role      String
+  company   String
+  image     String?
+  quote     String
+  highlight String?
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  url       String?
+
+  @@map("experts")
+}
+
+model SocialTrend {
+  id          String   @id @default(uuid())
+  platform    String
+  content     String?
+  url         String
+  imageUrl    String?
+  author      String?
+  authorImage String?
+  date        DateTime @default(now())
+  likes       String?
+  comments    String?
+  shares      String?
+  isActive    Boolean  @default(true)
+
+  @@map("social_trends")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  text      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notifications")
+}
+
+model SavedEvent {
+  id        String   @id @default(uuid())
+  userId    String
+  eventId   String
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, eventId])
+  @@map("saved_events")
+}
+
+model PinnedInsight {
+  id        String   @id @default(uuid())
+  userId    String
+  title     String
+  type      String
+  data      Json?
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("pinned_insights")
+}
+
+model SavedArticle {
+  id        String   @id @default(uuid())
+  userId    String
+  articleId String
+  createdAt DateTime @default(now())
+  article   Article  @relation(fields: [articleId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, articleId])
+  @@map("saved_articles")
+}
+
+model CmsUser {
+  id                String          @id @default(uuid())
+  email             String          @unique
+  passwordHash      String
+  name              String
+  role              CmsRole         @default(JOURNALIST)
+  createdAt         DateTime        @default(now())
+  updatedAt         DateTime        @updatedAt
+  reviewedArticles  StagedArticle[] @relation("ReviewedBy")
+  submittedArticles StagedArticle[] @relation("SubmittedBy")
+  assignedArticles  StagedArticle[] @relation("AssignedTo")
+
+  @@map("cms_users")
+}
+
+model StagedArticle {
+  id                 String                     @id @default(uuid())
+  title              String                     @default("")
+  body               String?
+  shortDescription   String?
+  mainImage          String?
+  readTime           String?
+  tags               String[]
+  type               String?
+  status             StagedArticleStatus        @default(DRAFT)
+  editorNote         String?
+  submittedById      String
+  reviewedById       String?
+  assignedToId       String?                    // journalist this is assigned to
+  recalledFromId     String?                    // original published article id (for recalls)
+  publishedArticleId String?                    @unique
+  createdAt          DateTime                   @default(now())
+  updatedAt          DateTime                   @updatedAt
+  submittedAt        DateTime?
+  reviewedAt         DateTime?
+  assignedAt         DateTime?
+  images             StagedArticleImage[]
+  keyInsights        StagedArticleKeyInsight[]
+  relatedNews        StagedArticleRelatedNews[]
+  reviewedBy         CmsUser?                   @relation("ReviewedBy", fields: [reviewedById], references: [id])
+  submittedBy        CmsUser                    @relation("SubmittedBy", fields: [submittedById], references: [id])
+  assignedTo         CmsUser?                   @relation("AssignedTo", fields: [assignedToId], references: [id])
+
+  @@map("staged_articles")
+}
+
+model StagedArticleImage {
+  id              Int           @id @default(autoincrement())
+  src             String
+  alt             String?
+  caption         String?
+  stagedArticleId String
+  stagedArticle   StagedArticle @relation(fields: [stagedArticleId], references: [id], onDelete: Cascade)
+
+  @@map("staged_article_images")
+}
+
+model StagedArticleKeyInsight {
+  id              Int           @id @default(autoincrement())
+  insightText     String
+  stagedArticleId String
+  stagedArticle   StagedArticle @relation(fields: [stagedArticleId], references: [id], onDelete: Cascade)
+
+  @@map("staged_article_key_insights")
+}
+
+model StagedArticleRelatedNews {
+  id              Int           @id @default(autoincrement())
+  newsTitle       String
+  newsUrl         String?
+  stagedArticleId String
+  stagedArticle   StagedArticle @relation(fields: [stagedArticleId], references: [id], onDelete: Cascade)
+
+  @@map("staged_article_related_news")
+}
+
+enum CmsRole {
+  JOURNALIST
+  EDITOR
+  ADMIN
+}
+
+enum StagedArticleStatus {
+  DRAFT
+  SUBMITTED
+  NEEDS_CHANGES
+  PUBLISHED
+}
