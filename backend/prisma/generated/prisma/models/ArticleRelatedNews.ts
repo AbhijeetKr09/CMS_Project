@@ -36,23 +36,20 @@ export type ArticleRelatedNewsSumAggregateOutputType = {
 
 export type ArticleRelatedNewsMinAggregateOutputType = {
   id: number | null
-  newsTitle: string | null
-  newsUrl: string | null
   articleId: string | null
+  relatedArticleId: string | null
 }
 
 export type ArticleRelatedNewsMaxAggregateOutputType = {
   id: number | null
-  newsTitle: string | null
-  newsUrl: string | null
   articleId: string | null
+  relatedArticleId: string | null
 }
 
 export type ArticleRelatedNewsCountAggregateOutputType = {
   id: number
-  newsTitle: number
-  newsUrl: number
   articleId: number
+  relatedArticleId: number
   _all: number
 }
 
@@ -67,23 +64,20 @@ export type ArticleRelatedNewsSumAggregateInputType = {
 
 export type ArticleRelatedNewsMinAggregateInputType = {
   id?: true
-  newsTitle?: true
-  newsUrl?: true
   articleId?: true
+  relatedArticleId?: true
 }
 
 export type ArticleRelatedNewsMaxAggregateInputType = {
   id?: true
-  newsTitle?: true
-  newsUrl?: true
   articleId?: true
+  relatedArticleId?: true
 }
 
 export type ArticleRelatedNewsCountAggregateInputType = {
   id?: true
-  newsTitle?: true
-  newsUrl?: true
   articleId?: true
+  relatedArticleId?: true
   _all?: true
 }
 
@@ -175,9 +169,8 @@ export type ArticleRelatedNewsGroupByArgs<ExtArgs extends runtime.Types.Extensio
 
 export type ArticleRelatedNewsGroupByOutputType = {
   id: number
-  newsTitle: string
-  newsUrl: string | null
   articleId: string
+  relatedArticleId: string
   _count: ArticleRelatedNewsCountAggregateOutputType | null
   _avg: ArticleRelatedNewsAvgAggregateOutputType | null
   _sum: ArticleRelatedNewsSumAggregateOutputType | null
@@ -205,18 +198,18 @@ export type ArticleRelatedNewsWhereInput = {
   OR?: Prisma.ArticleRelatedNewsWhereInput[]
   NOT?: Prisma.ArticleRelatedNewsWhereInput | Prisma.ArticleRelatedNewsWhereInput[]
   id?: Prisma.IntFilter<"ArticleRelatedNews"> | number
-  newsTitle?: Prisma.StringFilter<"ArticleRelatedNews"> | string
-  newsUrl?: Prisma.StringNullableFilter<"ArticleRelatedNews"> | string | null
   articleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
+  relatedArticleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  relatedArticle?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }
 
 export type ArticleRelatedNewsOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  newsTitle?: Prisma.SortOrder
-  newsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   articleId?: Prisma.SortOrder
+  relatedArticleId?: Prisma.SortOrder
   article?: Prisma.ArticleOrderByWithRelationInput
+  relatedArticle?: Prisma.ArticleOrderByWithRelationInput
 }
 
 export type ArticleRelatedNewsWhereUniqueInput = Prisma.AtLeast<{
@@ -224,17 +217,16 @@ export type ArticleRelatedNewsWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ArticleRelatedNewsWhereInput | Prisma.ArticleRelatedNewsWhereInput[]
   OR?: Prisma.ArticleRelatedNewsWhereInput[]
   NOT?: Prisma.ArticleRelatedNewsWhereInput | Prisma.ArticleRelatedNewsWhereInput[]
-  newsTitle?: Prisma.StringFilter<"ArticleRelatedNews"> | string
-  newsUrl?: Prisma.StringNullableFilter<"ArticleRelatedNews"> | string | null
   articleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
+  relatedArticleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
+  relatedArticle?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }, "id">
 
 export type ArticleRelatedNewsOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  newsTitle?: Prisma.SortOrder
-  newsUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   articleId?: Prisma.SortOrder
+  relatedArticleId?: Prisma.SortOrder
   _count?: Prisma.ArticleRelatedNewsCountOrderByAggregateInput
   _avg?: Prisma.ArticleRelatedNewsAvgOrderByAggregateInput
   _max?: Prisma.ArticleRelatedNewsMaxOrderByAggregateInput
@@ -247,54 +239,46 @@ export type ArticleRelatedNewsScalarWhereWithAggregatesInput = {
   OR?: Prisma.ArticleRelatedNewsScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ArticleRelatedNewsScalarWhereWithAggregatesInput | Prisma.ArticleRelatedNewsScalarWhereWithAggregatesInput[]
   id?: Prisma.IntWithAggregatesFilter<"ArticleRelatedNews"> | number
-  newsTitle?: Prisma.StringWithAggregatesFilter<"ArticleRelatedNews"> | string
-  newsUrl?: Prisma.StringNullableWithAggregatesFilter<"ArticleRelatedNews"> | string | null
   articleId?: Prisma.StringWithAggregatesFilter<"ArticleRelatedNews"> | string
+  relatedArticleId?: Prisma.StringWithAggregatesFilter<"ArticleRelatedNews"> | string
 }
 
 export type ArticleRelatedNewsCreateInput = {
-  newsTitle: string
-  newsUrl?: string | null
   article: Prisma.ArticleCreateNestedOneWithoutRelatedNewsInput
+  relatedArticle: Prisma.ArticleCreateNestedOneWithoutRelatedArticlesInput
 }
 
 export type ArticleRelatedNewsUncheckedCreateInput = {
   id?: number
-  newsTitle: string
-  newsUrl?: string | null
   articleId: string
+  relatedArticleId: string
 }
 
 export type ArticleRelatedNewsUpdateInput = {
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article?: Prisma.ArticleUpdateOneRequiredWithoutRelatedNewsNestedInput
+  relatedArticle?: Prisma.ArticleUpdateOneRequiredWithoutRelatedArticlesNestedInput
 }
 
 export type ArticleRelatedNewsUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedArticleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ArticleRelatedNewsCreateManyInput = {
   id?: number
-  newsTitle: string
-  newsUrl?: string | null
   articleId: string
+  relatedArticleId: string
 }
 
 export type ArticleRelatedNewsUpdateManyMutationInput = {
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+
 }
 
 export type ArticleRelatedNewsUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
+  relatedArticleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ArticleRelatedNewsListRelationFilter = {
@@ -309,9 +293,8 @@ export type ArticleRelatedNewsOrderByRelationAggregateInput = {
 
 export type ArticleRelatedNewsCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  newsTitle?: Prisma.SortOrder
-  newsUrl?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
+  relatedArticleId?: Prisma.SortOrder
 }
 
 export type ArticleRelatedNewsAvgOrderByAggregateInput = {
@@ -320,16 +303,14 @@ export type ArticleRelatedNewsAvgOrderByAggregateInput = {
 
 export type ArticleRelatedNewsMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  newsTitle?: Prisma.SortOrder
-  newsUrl?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
+  relatedArticleId?: Prisma.SortOrder
 }
 
 export type ArticleRelatedNewsMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  newsTitle?: Prisma.SortOrder
-  newsUrl?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
+  relatedArticleId?: Prisma.SortOrder
 }
 
 export type ArticleRelatedNewsSumOrderByAggregateInput = {
@@ -343,10 +324,24 @@ export type ArticleRelatedNewsCreateNestedManyWithoutArticleInput = {
   connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
 }
 
+export type ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput = {
+  create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput[]
+  connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput[]
+  createMany?: Prisma.ArticleRelatedNewsCreateManyRelatedArticleInputEnvelope
+  connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+}
+
 export type ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput = {
   create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutArticleInput[]
   connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutArticleInput[]
   createMany?: Prisma.ArticleRelatedNewsCreateManyArticleInputEnvelope
+  connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+}
+
+export type ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput = {
+  create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput[]
+  connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput[]
+  createMany?: Prisma.ArticleRelatedNewsCreateManyRelatedArticleInputEnvelope
   connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
 }
 
@@ -364,6 +359,20 @@ export type ArticleRelatedNewsUpdateManyWithoutArticleNestedInput = {
   deleteMany?: Prisma.ArticleRelatedNewsScalarWhereInput | Prisma.ArticleRelatedNewsScalarWhereInput[]
 }
 
+export type ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput[]
+  connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput[]
+  upsert?: Prisma.ArticleRelatedNewsUpsertWithWhereUniqueWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpsertWithWhereUniqueWithoutRelatedArticleInput[]
+  createMany?: Prisma.ArticleRelatedNewsCreateManyRelatedArticleInputEnvelope
+  set?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  disconnect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  delete?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  update?: Prisma.ArticleRelatedNewsUpdateWithWhereUniqueWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpdateWithWhereUniqueWithoutRelatedArticleInput[]
+  updateMany?: Prisma.ArticleRelatedNewsUpdateManyWithWhereWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpdateManyWithWhereWithoutRelatedArticleInput[]
+  deleteMany?: Prisma.ArticleRelatedNewsScalarWhereInput | Prisma.ArticleRelatedNewsScalarWhereInput[]
+}
+
 export type ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput = {
   create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutArticleInput[]
   connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutArticleInput[]
@@ -378,15 +387,27 @@ export type ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput = {
   deleteMany?: Prisma.ArticleRelatedNewsScalarWhereInput | Prisma.ArticleRelatedNewsScalarWhereInput[]
 }
 
+export type ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput> | Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput[] | Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput[]
+  connectOrCreate?: Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput[]
+  upsert?: Prisma.ArticleRelatedNewsUpsertWithWhereUniqueWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpsertWithWhereUniqueWithoutRelatedArticleInput[]
+  createMany?: Prisma.ArticleRelatedNewsCreateManyRelatedArticleInputEnvelope
+  set?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  disconnect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  delete?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  connect?: Prisma.ArticleRelatedNewsWhereUniqueInput | Prisma.ArticleRelatedNewsWhereUniqueInput[]
+  update?: Prisma.ArticleRelatedNewsUpdateWithWhereUniqueWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpdateWithWhereUniqueWithoutRelatedArticleInput[]
+  updateMany?: Prisma.ArticleRelatedNewsUpdateManyWithWhereWithoutRelatedArticleInput | Prisma.ArticleRelatedNewsUpdateManyWithWhereWithoutRelatedArticleInput[]
+  deleteMany?: Prisma.ArticleRelatedNewsScalarWhereInput | Prisma.ArticleRelatedNewsScalarWhereInput[]
+}
+
 export type ArticleRelatedNewsCreateWithoutArticleInput = {
-  newsTitle: string
-  newsUrl?: string | null
+  relatedArticle: Prisma.ArticleCreateNestedOneWithoutRelatedArticlesInput
 }
 
 export type ArticleRelatedNewsUncheckedCreateWithoutArticleInput = {
   id?: number
-  newsTitle: string
-  newsUrl?: string | null
+  relatedArticleId: string
 }
 
 export type ArticleRelatedNewsCreateOrConnectWithoutArticleInput = {
@@ -396,6 +417,25 @@ export type ArticleRelatedNewsCreateOrConnectWithoutArticleInput = {
 
 export type ArticleRelatedNewsCreateManyArticleInputEnvelope = {
   data: Prisma.ArticleRelatedNewsCreateManyArticleInput | Prisma.ArticleRelatedNewsCreateManyArticleInput[]
+  skipDuplicates?: boolean
+}
+
+export type ArticleRelatedNewsCreateWithoutRelatedArticleInput = {
+  article: Prisma.ArticleCreateNestedOneWithoutRelatedNewsInput
+}
+
+export type ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput = {
+  id?: number
+  articleId: string
+}
+
+export type ArticleRelatedNewsCreateOrConnectWithoutRelatedArticleInput = {
+  where: Prisma.ArticleRelatedNewsWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput>
+}
+
+export type ArticleRelatedNewsCreateManyRelatedArticleInputEnvelope = {
+  data: Prisma.ArticleRelatedNewsCreateManyRelatedArticleInput | Prisma.ArticleRelatedNewsCreateManyRelatedArticleInput[]
   skipDuplicates?: boolean
 }
 
@@ -420,88 +460,120 @@ export type ArticleRelatedNewsScalarWhereInput = {
   OR?: Prisma.ArticleRelatedNewsScalarWhereInput[]
   NOT?: Prisma.ArticleRelatedNewsScalarWhereInput | Prisma.ArticleRelatedNewsScalarWhereInput[]
   id?: Prisma.IntFilter<"ArticleRelatedNews"> | number
-  newsTitle?: Prisma.StringFilter<"ArticleRelatedNews"> | string
-  newsUrl?: Prisma.StringNullableFilter<"ArticleRelatedNews"> | string | null
   articleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
+  relatedArticleId?: Prisma.StringFilter<"ArticleRelatedNews"> | string
+}
+
+export type ArticleRelatedNewsUpsertWithWhereUniqueWithoutRelatedArticleInput = {
+  where: Prisma.ArticleRelatedNewsWhereUniqueInput
+  update: Prisma.XOR<Prisma.ArticleRelatedNewsUpdateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedUpdateWithoutRelatedArticleInput>
+  create: Prisma.XOR<Prisma.ArticleRelatedNewsCreateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedCreateWithoutRelatedArticleInput>
+}
+
+export type ArticleRelatedNewsUpdateWithWhereUniqueWithoutRelatedArticleInput = {
+  where: Prisma.ArticleRelatedNewsWhereUniqueInput
+  data: Prisma.XOR<Prisma.ArticleRelatedNewsUpdateWithoutRelatedArticleInput, Prisma.ArticleRelatedNewsUncheckedUpdateWithoutRelatedArticleInput>
+}
+
+export type ArticleRelatedNewsUpdateManyWithWhereWithoutRelatedArticleInput = {
+  where: Prisma.ArticleRelatedNewsScalarWhereInput
+  data: Prisma.XOR<Prisma.ArticleRelatedNewsUpdateManyMutationInput, Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleInput>
 }
 
 export type ArticleRelatedNewsCreateManyArticleInput = {
   id?: number
-  newsTitle: string
-  newsUrl?: string | null
+  relatedArticleId: string
+}
+
+export type ArticleRelatedNewsCreateManyRelatedArticleInput = {
+  id?: number
+  articleId: string
 }
 
 export type ArticleRelatedNewsUpdateWithoutArticleInput = {
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle?: Prisma.ArticleUpdateOneRequiredWithoutRelatedArticlesNestedInput
 }
 
 export type ArticleRelatedNewsUncheckedUpdateWithoutArticleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ArticleRelatedNewsUncheckedUpdateManyWithoutArticleInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
-  newsTitle?: Prisma.StringFieldUpdateOperationsInput | string
-  newsUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticleId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ArticleRelatedNewsUpdateWithoutRelatedArticleInput = {
+  article?: Prisma.ArticleUpdateOneRequiredWithoutRelatedNewsNestedInput
+}
+
+export type ArticleRelatedNewsUncheckedUpdateWithoutRelatedArticleInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  articleId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleInput = {
+  id?: Prisma.IntFieldUpdateOperationsInput | number
+  articleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
 
 export type ArticleRelatedNewsSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  newsTitle?: boolean
-  newsUrl?: boolean
   articleId?: boolean
+  relatedArticleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleRelatedNews"]>
 
 export type ArticleRelatedNewsSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  newsTitle?: boolean
-  newsUrl?: boolean
   articleId?: boolean
+  relatedArticleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleRelatedNews"]>
 
 export type ArticleRelatedNewsSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  newsTitle?: boolean
-  newsUrl?: boolean
   articleId?: boolean
+  relatedArticleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleRelatedNews"]>
 
 export type ArticleRelatedNewsSelectScalar = {
   id?: boolean
-  newsTitle?: boolean
-  newsUrl?: boolean
   articleId?: boolean
+  relatedArticleId?: boolean
 }
 
-export type ArticleRelatedNewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "newsTitle" | "newsUrl" | "articleId", ExtArgs["result"]["articleRelatedNews"]>
+export type ArticleRelatedNewsOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "articleId" | "relatedArticleId", ExtArgs["result"]["articleRelatedNews"]>
 export type ArticleRelatedNewsInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type ArticleRelatedNewsIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type ArticleRelatedNewsIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
+  relatedArticle?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 
 export type $ArticleRelatedNewsPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ArticleRelatedNews"
   objects: {
     article: Prisma.$ArticlePayload<ExtArgs>
+    relatedArticle: Prisma.$ArticlePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
-    newsTitle: string
-    newsUrl: string | null
     articleId: string
+    relatedArticleId: string
   }, ExtArgs["result"]["articleRelatedNews"]>
   composites: {}
 }
@@ -897,6 +969,7 @@ readonly fields: ArticleRelatedNewsFieldRefs;
 export interface Prisma__ArticleRelatedNewsClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  relatedArticle<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -927,9 +1000,8 @@ export interface Prisma__ArticleRelatedNewsClient<T, Null = never, ExtArgs exten
  */
 export interface ArticleRelatedNewsFieldRefs {
   readonly id: Prisma.FieldRef<"ArticleRelatedNews", 'Int'>
-  readonly newsTitle: Prisma.FieldRef<"ArticleRelatedNews", 'String'>
-  readonly newsUrl: Prisma.FieldRef<"ArticleRelatedNews", 'String'>
   readonly articleId: Prisma.FieldRef<"ArticleRelatedNews", 'String'>
+  readonly relatedArticleId: Prisma.FieldRef<"ArticleRelatedNews", 'String'>
 }
     
 

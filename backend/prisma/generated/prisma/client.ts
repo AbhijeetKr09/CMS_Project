@@ -72,35 +72,15 @@ export type ArticleRelatedNews = Prisma.ArticleRelatedNewsModel
  */
 export type Comment = Prisma.CommentModel
 /**
- * Model StockCache
- * 
- */
-export type StockCache = Prisma.StockCacheModel
-/**
- * Model StockInsight
- * 
- */
-export type StockInsight = Prisma.StockInsightModel
-/**
  * Model Airline
  * 
  */
 export type Airline = Prisma.AirlineModel
 /**
- * Model Question
- * 
- */
-export type Question = Prisma.QuestionModel
-/**
  * Model FlightReview
  * 
  */
 export type FlightReview = Prisma.FlightReviewModel
-/**
- * Model Answer
- * 
- */
-export type Answer = Prisma.AnswerModel
 /**
  * Model Event
  * 
@@ -211,8 +191,3 @@ export type StagedArticleImage = Prisma.StagedArticleImageModel
  * 
  */
 export type StagedArticleKeyInsight = Prisma.StagedArticleKeyInsightModel
-/**
- * Model StagedArticleRelatedNews
- * 
- */
-export type StagedArticleRelatedNews = Prisma.StagedArticleRelatedNewsModel

@@ -32,10 +32,10 @@ export type ExpertMinAggregateOutputType = {
   image: string | null
   quote: string | null
   highlight: string | null
+  url: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  url: string | null
 }
 
 export type ExpertMaxAggregateOutputType = {
@@ -46,10 +46,10 @@ export type ExpertMaxAggregateOutputType = {
   image: string | null
   quote: string | null
   highlight: string | null
+  url: string | null
   isActive: boolean | null
   createdAt: Date | null
   updatedAt: Date | null
-  url: string | null
 }
 
 export type ExpertCountAggregateOutputType = {
@@ -60,10 +60,10 @@ export type ExpertCountAggregateOutputType = {
   image: number
   quote: number
   highlight: number
+  url: number
   isActive: number
   createdAt: number
   updatedAt: number
-  url: number
   _all: number
 }
 
@@ -76,10 +76,10 @@ export type ExpertMinAggregateInputType = {
   image?: true
   quote?: true
   highlight?: true
+  url?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
-  url?: true
 }
 
 export type ExpertMaxAggregateInputType = {
@@ -90,10 +90,10 @@ export type ExpertMaxAggregateInputType = {
   image?: true
   quote?: true
   highlight?: true
+  url?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
-  url?: true
 }
 
 export type ExpertCountAggregateInputType = {
@@ -104,10 +104,10 @@ export type ExpertCountAggregateInputType = {
   image?: true
   quote?: true
   highlight?: true
+  url?: true
   isActive?: true
   createdAt?: true
   updatedAt?: true
-  url?: true
   _all?: true
 }
 
@@ -191,10 +191,10 @@ export type ExpertGroupByOutputType = {
   image: string | null
   quote: string
   highlight: string | null
+  url: string | null
   isActive: boolean
   createdAt: Date
   updatedAt: Date
-  url: string | null
   _count: ExpertCountAggregateOutputType | null
   _min: ExpertMinAggregateOutputType | null
   _max: ExpertMaxAggregateOutputType | null
@@ -226,10 +226,10 @@ export type ExpertWhereInput = {
   image?: Prisma.StringNullableFilter<"Expert"> | string | null
   quote?: Prisma.StringFilter<"Expert"> | string
   highlight?: Prisma.StringNullableFilter<"Expert"> | string | null
+  url?: Prisma.StringNullableFilter<"Expert"> | string | null
   isActive?: Prisma.BoolFilter<"Expert"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Expert"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Expert"> | Date | string
-  url?: Prisma.StringNullableFilter<"Expert"> | string | null
 }
 
 export type ExpertOrderByWithRelationInput = {
@@ -240,10 +240,10 @@ export type ExpertOrderByWithRelationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   quote?: Prisma.SortOrder
   highlight?: Prisma.SortOrderInput | Prisma.SortOrder
+  url?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  url?: Prisma.SortOrderInput | Prisma.SortOrder
 }
 
 export type ExpertWhereUniqueInput = Prisma.AtLeast<{
@@ -257,10 +257,10 @@ export type ExpertWhereUniqueInput = Prisma.AtLeast<{
   image?: Prisma.StringNullableFilter<"Expert"> | string | null
   quote?: Prisma.StringFilter<"Expert"> | string
   highlight?: Prisma.StringNullableFilter<"Expert"> | string | null
+  url?: Prisma.StringNullableFilter<"Expert"> | string | null
   isActive?: Prisma.BoolFilter<"Expert"> | boolean
   createdAt?: Prisma.DateTimeFilter<"Expert"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Expert"> | Date | string
-  url?: Prisma.StringNullableFilter<"Expert"> | string | null
 }, "id">
 
 export type ExpertOrderByWithAggregationInput = {
@@ -271,10 +271,10 @@ export type ExpertOrderByWithAggregationInput = {
   image?: Prisma.SortOrderInput | Prisma.SortOrder
   quote?: Prisma.SortOrder
   highlight?: Prisma.SortOrderInput | Prisma.SortOrder
+  url?: Prisma.SortOrderInput | Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  url?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.ExpertCountOrderByAggregateInput
   _max?: Prisma.ExpertMaxOrderByAggregateInput
   _min?: Prisma.ExpertMinOrderByAggregateInput
@@ -291,10 +291,10 @@ export type ExpertScalarWhereWithAggregatesInput = {
   image?: Prisma.StringNullableWithAggregatesFilter<"Expert"> | string | null
   quote?: Prisma.StringWithAggregatesFilter<"Expert"> | string
   highlight?: Prisma.StringNullableWithAggregatesFilter<"Expert"> | string | null
+  url?: Prisma.StringNullableWithAggregatesFilter<"Expert"> | string | null
   isActive?: Prisma.BoolWithAggregatesFilter<"Expert"> | boolean
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Expert"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Expert"> | Date | string
-  url?: Prisma.StringNullableWithAggregatesFilter<"Expert"> | string | null
 }
 
 export type ExpertCreateInput = {
@@ -305,10 +305,10 @@ export type ExpertCreateInput = {
   image?: string | null
   quote: string
   highlight?: string | null
+  url?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  url?: string | null
 }
 
 export type ExpertUncheckedCreateInput = {
@@ -319,10 +319,10 @@ export type ExpertUncheckedCreateInput = {
   image?: string | null
   quote: string
   highlight?: string | null
+  url?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  url?: string | null
 }
 
 export type ExpertUpdateInput = {
@@ -333,10 +333,10 @@ export type ExpertUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quote?: Prisma.StringFieldUpdateOperationsInput | string
   highlight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpertUncheckedUpdateInput = {
@@ -347,10 +347,10 @@ export type ExpertUncheckedUpdateInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quote?: Prisma.StringFieldUpdateOperationsInput | string
   highlight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpertCreateManyInput = {
@@ -361,10 +361,10 @@ export type ExpertCreateManyInput = {
   image?: string | null
   quote: string
   highlight?: string | null
+  url?: string | null
   isActive?: boolean
   createdAt?: Date | string
   updatedAt?: Date | string
-  url?: string | null
 }
 
 export type ExpertUpdateManyMutationInput = {
@@ -375,10 +375,10 @@ export type ExpertUpdateManyMutationInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quote?: Prisma.StringFieldUpdateOperationsInput | string
   highlight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpertUncheckedUpdateManyInput = {
@@ -389,10 +389,10 @@ export type ExpertUncheckedUpdateManyInput = {
   image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   quote?: Prisma.StringFieldUpdateOperationsInput | string
   highlight?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isActive?: Prisma.BoolFieldUpdateOperationsInput | boolean
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  url?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ExpertCountOrderByAggregateInput = {
@@ -403,10 +403,10 @@ export type ExpertCountOrderByAggregateInput = {
   image?: Prisma.SortOrder
   quote?: Prisma.SortOrder
   highlight?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  url?: Prisma.SortOrder
 }
 
 export type ExpertMaxOrderByAggregateInput = {
@@ -417,10 +417,10 @@ export type ExpertMaxOrderByAggregateInput = {
   image?: Prisma.SortOrder
   quote?: Prisma.SortOrder
   highlight?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  url?: Prisma.SortOrder
 }
 
 export type ExpertMinOrderByAggregateInput = {
@@ -431,10 +431,10 @@ export type ExpertMinOrderByAggregateInput = {
   image?: Prisma.SortOrder
   quote?: Prisma.SortOrder
   highlight?: Prisma.SortOrder
+  url?: Prisma.SortOrder
   isActive?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  url?: Prisma.SortOrder
 }
 
 
@@ -447,10 +447,10 @@ export type ExpertSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   image?: boolean
   quote?: boolean
   highlight?: boolean
+  url?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  url?: boolean
 }, ExtArgs["result"]["expert"]>
 
 export type ExpertSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -461,10 +461,10 @@ export type ExpertSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   image?: boolean
   quote?: boolean
   highlight?: boolean
+  url?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  url?: boolean
 }, ExtArgs["result"]["expert"]>
 
 export type ExpertSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -475,10 +475,10 @@ export type ExpertSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   image?: boolean
   quote?: boolean
   highlight?: boolean
+  url?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  url?: boolean
 }, ExtArgs["result"]["expert"]>
 
 export type ExpertSelectScalar = {
@@ -489,13 +489,13 @@ export type ExpertSelectScalar = {
   image?: boolean
   quote?: boolean
   highlight?: boolean
+  url?: boolean
   isActive?: boolean
   createdAt?: boolean
   updatedAt?: boolean
-  url?: boolean
 }
 
-export type ExpertOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "role" | "company" | "image" | "quote" | "highlight" | "isActive" | "createdAt" | "updatedAt" | "url", ExtArgs["result"]["expert"]>
+export type ExpertOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "role" | "company" | "image" | "quote" | "highlight" | "url" | "isActive" | "createdAt" | "updatedAt", ExtArgs["result"]["expert"]>
 
 export type $ExpertPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Expert"
@@ -508,10 +508,10 @@ export type $ExpertPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     image: string | null
     quote: string
     highlight: string | null
+    url: string | null
     isActive: boolean
     createdAt: Date
     updatedAt: Date
-    url: string | null
   }, ExtArgs["result"]["expert"]>
   composites: {}
 }
@@ -942,10 +942,10 @@ export interface ExpertFieldRefs {
   readonly image: Prisma.FieldRef<"Expert", 'String'>
   readonly quote: Prisma.FieldRef<"Expert", 'String'>
   readonly highlight: Prisma.FieldRef<"Expert", 'String'>
+  readonly url: Prisma.FieldRef<"Expert", 'String'>
   readonly isActive: Prisma.FieldRef<"Expert", 'Boolean'>
   readonly createdAt: Prisma.FieldRef<"Expert", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Expert", 'DateTime'>
-  readonly url: Prisma.FieldRef<"Expert", 'String'>
 }
     
 

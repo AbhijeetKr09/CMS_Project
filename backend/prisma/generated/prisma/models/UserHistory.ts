@@ -208,8 +208,8 @@ export type UserHistoryWhereInput = {
   userId?: Prisma.StringFilter<"UserHistory"> | string
   articleId?: Prisma.StringFilter<"UserHistory"> | string
   visitedAt?: Prisma.DateTimeFilter<"UserHistory"> | Date | string
-  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }
 
 export type UserHistoryOrderByWithRelationInput = {
@@ -217,8 +217,8 @@ export type UserHistoryOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
   visitedAt?: Prisma.SortOrder
-  article?: Prisma.ArticleOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  article?: Prisma.ArticleOrderByWithRelationInput
 }
 
 export type UserHistoryWhereUniqueInput = Prisma.AtLeast<{
@@ -229,8 +229,8 @@ export type UserHistoryWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"UserHistory"> | string
   articleId?: Prisma.StringFilter<"UserHistory"> | string
   visitedAt?: Prisma.DateTimeFilter<"UserHistory"> | Date | string
-  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }, "id">
 
 export type UserHistoryOrderByWithAggregationInput = {
@@ -257,8 +257,8 @@ export type UserHistoryScalarWhereWithAggregatesInput = {
 
 export type UserHistoryCreateInput = {
   visitedAt?: Date | string
-  article: Prisma.ArticleCreateNestedOneWithoutUserHistoryInput
   user: Prisma.UserCreateNestedOneWithoutHistoryInput
+  article: Prisma.ArticleCreateNestedOneWithoutUserHistoryInput
 }
 
 export type UserHistoryUncheckedCreateInput = {
@@ -270,8 +270,8 @@ export type UserHistoryUncheckedCreateInput = {
 
 export type UserHistoryUpdateInput = {
   visitedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  article?: Prisma.ArticleUpdateOneRequiredWithoutUserHistoryNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutHistoryNestedInput
+  article?: Prisma.ArticleUpdateOneRequiredWithoutUserHistoryNestedInput
 }
 
 export type UserHistoryUncheckedUpdateInput = {
@@ -559,8 +559,8 @@ export type UserHistorySelect<ExtArgs extends runtime.Types.Extensions.InternalA
   userId?: boolean
   articleId?: boolean
   visitedAt?: boolean
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userHistory"]>
 
 export type UserHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -568,8 +568,8 @@ export type UserHistorySelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   userId?: boolean
   articleId?: boolean
   visitedAt?: boolean
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userHistory"]>
 
 export type UserHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -577,8 +577,8 @@ export type UserHistorySelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   userId?: boolean
   articleId?: boolean
   visitedAt?: boolean
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["userHistory"]>
 
 export type UserHistorySelectScalar = {
@@ -590,23 +590,23 @@ export type UserHistorySelectScalar = {
 
 export type UserHistoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "articleId" | "visitedAt", ExtArgs["result"]["userHistory"]>
 export type UserHistoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type UserHistoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 export type UserHistoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
 
 export type $UserHistoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "UserHistory"
   objects: {
-    article: Prisma.$ArticlePayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    article: Prisma.$ArticlePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1007,8 +1007,8 @@ readonly fields: UserHistoryFieldRefs;
  */
 export interface Prisma__UserHistoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  article<T extends Prisma.ArticleDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ArticleDefaultArgs<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

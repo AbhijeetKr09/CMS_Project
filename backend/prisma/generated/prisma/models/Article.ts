@@ -255,9 +255,10 @@ export type ArticleWhereInput = {
   images?: Prisma.ArticleImageListRelationFilter
   keyInsights?: Prisma.ArticleKeyInsightListRelationFilter
   relatedNews?: Prisma.ArticleRelatedNewsListRelationFilter
+  relatedArticles?: Prisma.ArticleRelatedNewsListRelationFilter
   comments?: Prisma.CommentListRelationFilter
-  savedBy?: Prisma.SavedArticleListRelationFilter
   userHistory?: Prisma.UserHistoryListRelationFilter
+  savedBy?: Prisma.SavedArticleListRelationFilter
 }
 
 export type ArticleOrderByWithRelationInput = {
@@ -274,9 +275,10 @@ export type ArticleOrderByWithRelationInput = {
   images?: Prisma.ArticleImageOrderByRelationAggregateInput
   keyInsights?: Prisma.ArticleKeyInsightOrderByRelationAggregateInput
   relatedNews?: Prisma.ArticleRelatedNewsOrderByRelationAggregateInput
+  relatedArticles?: Prisma.ArticleRelatedNewsOrderByRelationAggregateInput
   comments?: Prisma.CommentOrderByRelationAggregateInput
-  savedBy?: Prisma.SavedArticleOrderByRelationAggregateInput
   userHistory?: Prisma.UserHistoryOrderByRelationAggregateInput
+  savedBy?: Prisma.SavedArticleOrderByRelationAggregateInput
 }
 
 export type ArticleWhereUniqueInput = Prisma.AtLeast<{
@@ -296,9 +298,10 @@ export type ArticleWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.ArticleImageListRelationFilter
   keyInsights?: Prisma.ArticleKeyInsightListRelationFilter
   relatedNews?: Prisma.ArticleRelatedNewsListRelationFilter
+  relatedArticles?: Prisma.ArticleRelatedNewsListRelationFilter
   comments?: Prisma.CommentListRelationFilter
-  savedBy?: Prisma.SavedArticleListRelationFilter
   userHistory?: Prisma.UserHistoryListRelationFilter
+  savedBy?: Prisma.SavedArticleListRelationFilter
 }, "id">
 
 export type ArticleOrderByWithAggregationInput = {
@@ -349,9 +352,10 @@ export type ArticleCreateInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateInput = {
@@ -368,9 +372,10 @@ export type ArticleUncheckedCreateInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUpdateInput = {
@@ -387,9 +392,10 @@ export type ArticleUpdateInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateInput = {
@@ -406,9 +412,10 @@ export type ArticleUncheckedUpdateInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateManyInput = {
@@ -563,12 +570,26 @@ export type ArticleCreateNestedOneWithoutRelatedNewsInput = {
   connect?: Prisma.ArticleWhereUniqueInput
 }
 
+export type ArticleCreateNestedOneWithoutRelatedArticlesInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedCreateWithoutRelatedArticlesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutRelatedArticlesInput
+  connect?: Prisma.ArticleWhereUniqueInput
+}
+
 export type ArticleUpdateOneRequiredWithoutRelatedNewsNestedInput = {
   create?: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedNewsInput, Prisma.ArticleUncheckedCreateWithoutRelatedNewsInput>
   connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutRelatedNewsInput
   upsert?: Prisma.ArticleUpsertWithoutRelatedNewsInput
   connect?: Prisma.ArticleWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutRelatedNewsInput, Prisma.ArticleUpdateWithoutRelatedNewsInput>, Prisma.ArticleUncheckedUpdateWithoutRelatedNewsInput>
+}
+
+export type ArticleUpdateOneRequiredWithoutRelatedArticlesNestedInput = {
+  create?: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedCreateWithoutRelatedArticlesInput>
+  connectOrCreate?: Prisma.ArticleCreateOrConnectWithoutRelatedArticlesInput
+  upsert?: Prisma.ArticleUpsertWithoutRelatedArticlesInput
+  connect?: Prisma.ArticleWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ArticleUpdateToOneWithWhereWithoutRelatedArticlesInput, Prisma.ArticleUpdateWithoutRelatedArticlesInput>, Prisma.ArticleUncheckedUpdateWithoutRelatedArticlesInput>
 }
 
 export type ArticleCreateNestedOneWithoutCommentsInput = {
@@ -626,9 +647,10 @@ export type ArticleCreateWithoutImagesInput = {
   views?: number
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutImagesInput = {
@@ -644,9 +666,10 @@ export type ArticleUncheckedCreateWithoutImagesInput = {
   views?: number
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutImagesInput = {
@@ -678,9 +701,10 @@ export type ArticleUpdateWithoutImagesInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutImagesInput = {
@@ -696,9 +720,10 @@ export type ArticleUncheckedUpdateWithoutImagesInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutKeyInsightsInput = {
@@ -714,9 +739,10 @@ export type ArticleCreateWithoutKeyInsightsInput = {
   views?: number
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutKeyInsightsInput = {
@@ -732,9 +758,10 @@ export type ArticleUncheckedCreateWithoutKeyInsightsInput = {
   views?: number
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutKeyInsightsInput = {
@@ -766,9 +793,10 @@ export type ArticleUpdateWithoutKeyInsightsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutKeyInsightsInput = {
@@ -784,9 +812,10 @@ export type ArticleUncheckedUpdateWithoutKeyInsightsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutRelatedNewsInput = {
@@ -802,9 +831,10 @@ export type ArticleCreateWithoutRelatedNewsInput = {
   views?: number
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutRelatedNewsInput = {
@@ -820,14 +850,58 @@ export type ArticleUncheckedCreateWithoutRelatedNewsInput = {
   views?: number
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutRelatedNewsInput = {
   where: Prisma.ArticleWhereUniqueInput
   create: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedNewsInput, Prisma.ArticleUncheckedCreateWithoutRelatedNewsInput>
+}
+
+export type ArticleCreateWithoutRelatedArticlesInput = {
+  id?: string
+  title: string
+  timestampDate: Date | string
+  readTime?: string | null
+  mainImage?: string | null
+  shortDescription?: string | null
+  body?: string | null
+  tags?: Prisma.ArticleCreatetagsInput | string[]
+  type?: string | null
+  views?: number
+  images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
+  keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
+  relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
+  userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleUncheckedCreateWithoutRelatedArticlesInput = {
+  id?: string
+  title: string
+  timestampDate: Date | string
+  readTime?: string | null
+  mainImage?: string | null
+  shortDescription?: string | null
+  body?: string | null
+  tags?: Prisma.ArticleCreatetagsInput | string[]
+  type?: string | null
+  views?: number
+  images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
+  keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
+  relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
+  userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
+}
+
+export type ArticleCreateOrConnectWithoutRelatedArticlesInput = {
+  where: Prisma.ArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedCreateWithoutRelatedArticlesInput>
 }
 
 export type ArticleUpsertWithoutRelatedNewsInput = {
@@ -854,9 +928,10 @@ export type ArticleUpdateWithoutRelatedNewsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutRelatedNewsInput = {
@@ -872,9 +947,59 @@ export type ArticleUncheckedUpdateWithoutRelatedNewsInput = {
   views?: Prisma.IntFieldUpdateOperationsInput | number
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUpsertWithoutRelatedArticlesInput = {
+  update: Prisma.XOR<Prisma.ArticleUpdateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedUpdateWithoutRelatedArticlesInput>
+  create: Prisma.XOR<Prisma.ArticleCreateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedCreateWithoutRelatedArticlesInput>
+  where?: Prisma.ArticleWhereInput
+}
+
+export type ArticleUpdateToOneWithWhereWithoutRelatedArticlesInput = {
+  where?: Prisma.ArticleWhereInput
+  data: Prisma.XOR<Prisma.ArticleUpdateWithoutRelatedArticlesInput, Prisma.ArticleUncheckedUpdateWithoutRelatedArticlesInput>
+}
+
+export type ArticleUpdateWithoutRelatedArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  timestampDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
+  keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
+  relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
+  userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
+}
+
+export type ArticleUncheckedUpdateWithoutRelatedArticlesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  timestampDate?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.ArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  views?: Prisma.IntFieldUpdateOperationsInput | number
+  images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
+  keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
+  relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
+  userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutCommentsInput = {
@@ -891,8 +1016,9 @@ export type ArticleCreateWithoutCommentsInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleUncheckedCreateWithoutCommentsInput = {
@@ -909,8 +1035,9 @@ export type ArticleUncheckedCreateWithoutCommentsInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
-  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
+  savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
 
 export type ArticleCreateOrConnectWithoutCommentsInput = {
@@ -943,8 +1070,9 @@ export type ArticleUpdateWithoutCommentsInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleUncheckedUpdateWithoutCommentsInput = {
@@ -961,8 +1089,9 @@ export type ArticleUncheckedUpdateWithoutCommentsInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
-  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
+  savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
 
 export type ArticleCreateWithoutUserHistoryInput = {
@@ -979,6 +1108,7 @@ export type ArticleCreateWithoutUserHistoryInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
   savedBy?: Prisma.SavedArticleCreateNestedManyWithoutArticleInput
 }
@@ -997,6 +1127,7 @@ export type ArticleUncheckedCreateWithoutUserHistoryInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
   savedBy?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutArticleInput
 }
@@ -1031,6 +1162,7 @@ export type ArticleUpdateWithoutUserHistoryInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
   savedBy?: Prisma.SavedArticleUpdateManyWithoutArticleNestedInput
 }
@@ -1049,6 +1181,7 @@ export type ArticleUncheckedUpdateWithoutUserHistoryInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
   savedBy?: Prisma.SavedArticleUncheckedUpdateManyWithoutArticleNestedInput
 }
@@ -1067,6 +1200,7 @@ export type ArticleCreateWithoutSavedByInput = {
   images?: Prisma.ArticleImageCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryCreateNestedManyWithoutArticleInput
 }
@@ -1085,6 +1219,7 @@ export type ArticleUncheckedCreateWithoutSavedByInput = {
   images?: Prisma.ArticleImageUncheckedCreateNestedManyWithoutArticleInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedCreateNestedManyWithoutArticleInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutArticleInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedCreateNestedManyWithoutRelatedArticleInput
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutArticleInput
   userHistory?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutArticleInput
 }
@@ -1119,6 +1254,7 @@ export type ArticleUpdateWithoutSavedByInput = {
   images?: Prisma.ArticleImageUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUpdateManyWithoutArticleNestedInput
 }
@@ -1137,6 +1273,7 @@ export type ArticleUncheckedUpdateWithoutSavedByInput = {
   images?: Prisma.ArticleImageUncheckedUpdateManyWithoutArticleNestedInput
   keyInsights?: Prisma.ArticleKeyInsightUncheckedUpdateManyWithoutArticleNestedInput
   relatedNews?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutArticleNestedInput
+  relatedArticles?: Prisma.ArticleRelatedNewsUncheckedUpdateManyWithoutRelatedArticleNestedInput
   comments?: Prisma.CommentUncheckedUpdateManyWithoutArticleNestedInput
   userHistory?: Prisma.UserHistoryUncheckedUpdateManyWithoutArticleNestedInput
 }
@@ -1150,18 +1287,20 @@ export type ArticleCountOutputType = {
   images: number
   keyInsights: number
   relatedNews: number
+  relatedArticles: number
   comments: number
-  savedBy: number
   userHistory: number
+  savedBy: number
 }
 
 export type ArticleCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   images?: boolean | ArticleCountOutputTypeCountImagesArgs
   keyInsights?: boolean | ArticleCountOutputTypeCountKeyInsightsArgs
   relatedNews?: boolean | ArticleCountOutputTypeCountRelatedNewsArgs
+  relatedArticles?: boolean | ArticleCountOutputTypeCountRelatedArticlesArgs
   comments?: boolean | ArticleCountOutputTypeCountCommentsArgs
-  savedBy?: boolean | ArticleCountOutputTypeCountSavedByArgs
   userHistory?: boolean | ArticleCountOutputTypeCountUserHistoryArgs
+  savedBy?: boolean | ArticleCountOutputTypeCountSavedByArgs
 }
 
 /**
@@ -1198,6 +1337,13 @@ export type ArticleCountOutputTypeCountRelatedNewsArgs<ExtArgs extends runtime.T
 /**
  * ArticleCountOutputType without action
  */
+export type ArticleCountOutputTypeCountRelatedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ArticleRelatedNewsWhereInput
+}
+
+/**
+ * ArticleCountOutputType without action
+ */
 export type ArticleCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CommentWhereInput
 }
@@ -1205,15 +1351,15 @@ export type ArticleCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Type
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountSavedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavedArticleWhereInput
+export type ArticleCountOutputTypeCountUserHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserHistoryWhereInput
 }
 
 /**
  * ArticleCountOutputType without action
  */
-export type ArticleCountOutputTypeCountUserHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserHistoryWhereInput
+export type ArticleCountOutputTypeCountSavedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedArticleWhereInput
 }
 
 
@@ -1231,9 +1377,10 @@ export type ArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
   keyInsights?: boolean | Prisma.Article$keyInsightsArgs<ExtArgs>
   relatedNews?: boolean | Prisma.Article$relatedNewsArgs<ExtArgs>
+  relatedArticles?: boolean | Prisma.Article$relatedArticlesArgs<ExtArgs>
   comments?: boolean | Prisma.Article$commentsArgs<ExtArgs>
-  savedBy?: boolean | Prisma.Article$savedByArgs<ExtArgs>
   userHistory?: boolean | Prisma.Article$userHistoryArgs<ExtArgs>
+  savedBy?: boolean | Prisma.Article$savedByArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["article"]>
 
@@ -1281,9 +1428,10 @@ export type ArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs
   images?: boolean | Prisma.Article$imagesArgs<ExtArgs>
   keyInsights?: boolean | Prisma.Article$keyInsightsArgs<ExtArgs>
   relatedNews?: boolean | Prisma.Article$relatedNewsArgs<ExtArgs>
+  relatedArticles?: boolean | Prisma.Article$relatedArticlesArgs<ExtArgs>
   comments?: boolean | Prisma.Article$commentsArgs<ExtArgs>
-  savedBy?: boolean | Prisma.Article$savedByArgs<ExtArgs>
   userHistory?: boolean | Prisma.Article$userHistoryArgs<ExtArgs>
+  savedBy?: boolean | Prisma.Article$savedByArgs<ExtArgs>
   _count?: boolean | Prisma.ArticleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type ArticleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1295,9 +1443,10 @@ export type $ArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     images: Prisma.$ArticleImagePayload<ExtArgs>[]
     keyInsights: Prisma.$ArticleKeyInsightPayload<ExtArgs>[]
     relatedNews: Prisma.$ArticleRelatedNewsPayload<ExtArgs>[]
+    relatedArticles: Prisma.$ArticleRelatedNewsPayload<ExtArgs>[]
     comments: Prisma.$CommentPayload<ExtArgs>[]
-    savedBy: Prisma.$SavedArticlePayload<ExtArgs>[]
     userHistory: Prisma.$UserHistoryPayload<ExtArgs>[]
+    savedBy: Prisma.$SavedArticlePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1707,9 +1856,10 @@ export interface Prisma__ArticleClient<T, Null = never, ExtArgs extends runtime.
   images<T extends Prisma.Article$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   keyInsights<T extends Prisma.Article$keyInsightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$keyInsightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleKeyInsightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   relatedNews<T extends Prisma.Article$relatedNewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$relatedNewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleRelatedNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  relatedArticles<T extends Prisma.Article$relatedArticlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$relatedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ArticleRelatedNewsPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   comments<T extends Prisma.Article$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  savedBy<T extends Prisma.Article$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   userHistory<T extends Prisma.Article$userHistoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$userHistoryArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savedBy<T extends Prisma.Article$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Article$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2214,6 +2364,30 @@ export type Article$relatedNewsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
+ * Article.relatedArticles
+ */
+export type Article$relatedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ArticleRelatedNews
+   */
+  select?: Prisma.ArticleRelatedNewsSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ArticleRelatedNews
+   */
+  omit?: Prisma.ArticleRelatedNewsOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleRelatedNewsInclude<ExtArgs> | null
+  where?: Prisma.ArticleRelatedNewsWhereInput
+  orderBy?: Prisma.ArticleRelatedNewsOrderByWithRelationInput | Prisma.ArticleRelatedNewsOrderByWithRelationInput[]
+  cursor?: Prisma.ArticleRelatedNewsWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ArticleRelatedNewsScalarFieldEnum | Prisma.ArticleRelatedNewsScalarFieldEnum[]
+}
+
+/**
  * Article.comments
  */
 export type Article$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2238,30 +2412,6 @@ export type Article$commentsArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * Article.savedBy
- */
-export type Article$savedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SavedArticle
-   */
-  select?: Prisma.SavedArticleSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SavedArticle
-   */
-  omit?: Prisma.SavedArticleOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SavedArticleInclude<ExtArgs> | null
-  where?: Prisma.SavedArticleWhereInput
-  orderBy?: Prisma.SavedArticleOrderByWithRelationInput | Prisma.SavedArticleOrderByWithRelationInput[]
-  cursor?: Prisma.SavedArticleWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SavedArticleScalarFieldEnum | Prisma.SavedArticleScalarFieldEnum[]
-}
-
-/**
  * Article.userHistory
  */
 export type Article$userHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2283,6 +2433,30 @@ export type Article$userHistoryArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.UserHistoryScalarFieldEnum | Prisma.UserHistoryScalarFieldEnum[]
+}
+
+/**
+ * Article.savedBy
+ */
+export type Article$savedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SavedArticle
+   */
+  select?: Prisma.SavedArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SavedArticle
+   */
+  omit?: Prisma.SavedArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SavedArticleInclude<ExtArgs> | null
+  where?: Prisma.SavedArticleWhereInput
+  orderBy?: Prisma.SavedArticleOrderByWithRelationInput | Prisma.SavedArticleOrderByWithRelationInput[]
+  cursor?: Prisma.SavedArticleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SavedArticleScalarFieldEnum | Prisma.SavedArticleScalarFieldEnum[]
 }
 
 /**

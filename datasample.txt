@@ -1,0 +1,304 @@
+
+Media page data sample 
+type: image (this is simple upload to s3)
+type: video need segmentation method to upload all video and image get upload in public s3 bucket
+
+  "media": {
+    "id": "ec69ff1d-d7a2-47d6-ab7f-51a3a85ac3db",
+    "type": "image",
+    "title": "Image 21",
+    "description": "Generated metadata for Image 21",
+    "url": "https://avionyz-public-data.s3.ap-south-1.amazonaws.com/Media_images/image_21.webp",
+    "thumbnail": "https://avionyz-public-data.s3.ap-south-1.amazonaws.com/Media_images/image_21.webp",
+    "tags": [
+      "image",
+      "gallery"
+    ],
+    "date": "2026-03-10T07:52:30.093Z",
+    "adId": null,
+    "userId": null,
+    "views": 0,
+    "downloads": 0
+  },
+
+  {
+    "id": "ccb074e3-eadb-412f-8aca-87aa92935a92",
+    "type": "video",
+    "title": "landscape test2",
+    "description": "Synced from S3",
+    "url": "https://avionyz-public-data.s3.ap-south-1.amazonaws.com/videos/landscape_test2.m3u8",
+    "thumbnail": "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80",
+    "tags": [
+      "synced"
+    ],
+    "date": "2026-01-21T21:23:13.889Z",
+    "adId": null,
+    "userId": null,
+    "views": 15,
+    "downloads": 0
+  },
+
+
+Event data sample
+base url = https://avionyz-public-data.s3.ap-south-1.amazonaws.com/
+
+here all the info is being added by the Editor except id 
+images and image are being uploaded by the editor to the public s3 bucket one to be used in "image" other to be used in the "images" array
+this is being done by the editor manually but in data only the key is being stored not the full url
+  "events": {
+    "id": "a5f93564-bbc2-45af-9167-68a223ad5c96",
+    "eventName": "MEBAA Show",
+    "eventLink": "https://www.mebaa.aero/",
+    "venue": "Dubai, UAE",
+    "onlineOrOffline": "Offline",
+    "freeOrPaid": "Paid (trade) / Free (public)",
+    "date": "2026-12-08T00:00:00.000Z",
+    "time": "10:00–18:00 (UTC+4)",
+    "eventType": "Expo",
+    "region": "Middle East",
+    "image": "Event/Middle-East/Middle-East-3.avif",
+    "lat": 25.2048,
+    "lng": 55.2708,
+    "country": "UAE",
+    "description": "Middle East Business Aviation Association Show.",
+    "organizedBy": "MEBAA",
+    "images": [
+      "Event/Middle-East/Middle-East-3.avif"
+    ]
+  },
+
+
+analytic article data sample
+
+here we have private s3 bucket for data and images
+so signed url required and for private s3 url is 
+https://avionyz-storage.s3.ap-south-1.amazonaws.com/analytics/alarming-rise-of-co2-levels/data/data.xlsx
+
+the alarming rise of co2 levels is the id of the article which is also the name of the folder containing respective data and images
+
+
+{
+        "title": "India's Aviation Expansion Moment",
+        "id": "India-Aviation-Expansion-Moment",
+        "dataKey": "analytics/India-Aviation-Expansion-Moment/data/data.xlsx",
+        "timestamp": "2026-03-11T00:00:00.000Z",
+        "shortDescription": "India's aviation industry faces a paradox: record passenger numbers alongside mounting financial losses. This article breaks down the expansion, the bottlenecks, and the real chances for new airlines entering a market dominated by two giants.",
+        "headingDescription": "India's aviation industry is at an inflection point. More people are flying than ever before — 167 million domestic passengers in 2025 — yet airlines are expected to post losses of 170–180 billion rupees in FY2026. A decade of airport expansion has doubled operational airports from 74 to 162, and Indian carriers have placed nearly 2,000 aircraft on order. But engine groundings, a weak rupee, sky-high fuel taxes, and a looming pilot shortage are squeezing the system from multiple directions. Three new airlines — Shankh Air, Alhind Air, and FlyExpress — have received government clearance to enter this crowded market without any guarantee of survival. This article examines the structural realities behind India's aviation boom and asks whether the market can actually support what is being built.",
+        "body": "\n### Overview: India's Aviation Expansion Moment\n\nIndia's aviation industry is currently facing a strange contradiction. On one hand, more people are flying than ever before. On the other hand, airlines are struggling with deep financial losses and a system stretched to its limit.\n\nIn 2025, India's domestic air travel reached a new milestone. About 167 million passengers took to the skies, a 3.5% increase from the previous year. This growth happened despite thousands of flight cancellations and delays late in the year, proving that the public's appetite for flying remains incredibly strong.\n\nCurrently, the market is a duopoly. Two giants — IndiGo and the Air India Group — control over 90% of all domestic flights. To increase competition, the government recently cleared the way for three new airlines: Shankh Air, Alhind Air, and FlyExpress. However, the financial health of the sector is worrying. Analysts expect the industry to lose between 170 billion and 180 billion rupees in the 2026 fiscal year. While the demand is there, the high costs of fuel and a weak rupee make it difficult for even established players to turn a profit.\n\nIn practical terms: The arrival of new airlines is a response to massive demand, but they are entering a market where even the biggest players are bleeding cash. This raises a vital question: can the market actually support these newcomers?\n\n[IMAGE]\n\nThe graph above highlights a decade of transformation. Since 2014, India has more than doubled its operational airports — from 74 to 162 — creating a vast new network that reaches deep into smaller cities. This \"hardware\" upgrade has successfully fueled a massive surge in travelers, with passenger volume nearly tripling to reach 167 million by 2025. However, the data also reveals a narrowing gap: while we have more runways than ever, the growth in passenger numbers is starting to stabilize. This suggests that the next challenge isn't just building more airports, but ensuring airlines have enough functional planes and stable ticket prices to keep these new routes busy.\n\n[Advertisement]\n\n### India's Current Capacity Expansion Landscape\n\nIndia is currently ordering more planes than almost any other country. As of early 2026, Indian airlines have nearly 2,000 jets on order. IndiGo leads with about 1,000 aircraft, followed by Air India with over 500.\n\nNewer carriers are also growing fast. Akasa Air recently welcomed its 34th aircraft and plans to take delivery of nearly 200 more over the next six years. Most of these are narrow-body planes, which are smaller, single-aisle jets perfect for the short-to-medium flights that dominate India.\n\nThe government is also building the \"hardware\" to match this fleet. The number of operational airports has grown from 74 in 2014 to 162 by late 2025. This expansion is designed to connect smaller cities — often called Tier-2 and Tier-3 towns — to the national network.\n\nHowever, global supply issues are a major bottleneck. By late 2024, about 144 planes were grounded due to engine problems. This forced many airlines to lease expensive planes and crews from other countries just to keep their schedules running.\n\nThis suggests: While the capacity or total number of available seats is growing on paper, the real-world supply is held back by technical issues. For new airlines, getting their hands on reliable aircraft will be their first major hurdle.\n\n[IMAGE]\n\nWhile today's fleet of roughly 860 aircraft feels large, it is only the beginning. Industry leaders predict that India will need thousands of new airplanes over the next two decades to keep up with demand. By 2044, the active fleet is expected to reach 2,925 aircraft — nearly four times its current size (Source: Boeing's latest CMO). This growth is driven by a massive transition to modern, fuel-efficient jets designed to connect smaller cities directly to the world.\n\n[IMAGE]\n\nDespite a fleet of nearly 900 aircraft, India faces a hidden capacity crisis. Roughly 16% of all planes (144 units) are currently grounded due to microscopic powder metal defects in their Pratt & Whitney (P&W) engines. These technical flaws have overwhelmed global repair shops, leaving planes stranded in hangars for months. For passengers, this parked fleet means fewer flights and record-high ticket prices; for airlines, it's a financial drain of millions in lease costs for aircraft that cannot fly.\n\n### Demand Absorption & Market Utilisation\n\nThe big question is whether there are enough passengers to fill all these new seats. In 2025, the industry saw muted growth of 3.5%, which is slower than previous years but still steady.\n\nDespite this slowdown, planes are packed. In late 2025, the load factor — a measure of how many seats are filled on a plane — reached 94%. This is unusually high. In a healthy market, a high load factor is good, but in India, it currently indicates a shortage of planes.\n\nMajor routes are busier than ever. The Mumbai-Delhi sector remains the busiest, with over 628,000 seats available in February 2026 alone. Meanwhile, routes like Bangalore-Delhi have seen capacity jump by 22% in a single year.\n\nFor new airlines, this means: The market is crowded but hungry for seats. However, 94% load factors leave zero room for error. If a new airline has even a small technical delay, they have no extra capacity to help stranded passengers.\n\n[IMAGE]\n\nThis chart illustrates a dangerous imbalance in the market. While passenger numbers grew by 3.5%, seat capacity only increased by 2.1%. This means demand is outstripping supply. When more people want to fly than there are seats available, planes become overcrowded — leading to that 94% load factor (Source: Ministry of Civil Aviation February 2026 Update) — and ticket prices naturally skyrocket.\n\n[IMAGE]\n\nWhy is 94% significant? In aviation, anything above 90% is considered operationally stressed. At 94%, there is effectively no spare seat on most flights. This is why when a flight is cancelled, passengers often have to wait 2–3 days for the next available seat, as all other flights are already fully booked.\n\n[Advertisement]\n\n### Entry of New Airlines: Structural Implications\n\nThe government is pushing for new players to break the current duopoly and lower ticket prices. Three airlines are leading this charge:\n\n- **Shankh Air:** Based in Uttar Pradesh, it plans to launch in early 2026 from Lucknow. Its goal is to connect major metros with regional cities in the north, treating air travel as efficient public transport rather than a luxury.\n\n- **Alhind Air:** Coming from Kerala, this airline already has a massive travel agency business. It will start with small turboprop planes (ATR 72s) to serve Southern India before eventually flying to the Middle East.\n\n- **FlyExpress:** Based in Hyderabad, this carrier is backed by logistics and cargo experts. It is expected to focus on regional routes that connect smaller cities.\n\nHistory, however, offers a warning. India has seen many famous airlines fail, including Kingfisher, Jet Airways, and Go First. Most failed because they expanded too quickly or didn't have enough cash to survive the first few years.\n\nThis suggests: The travel ecosystem approach of Alhind Air may give them a marketing edge, but Shankh Air's focus on regional hubs like Lucknow will test if a new airline can survive without relying only on the crowded Delhi-Mumbai route.\n\n### Profitability vs Expansion Reality\n\nIn Indian aviation, growth does not always mean profit. Even as revenues hit record highs, profits are shrinking. For example, in late 2025, IndiGo reported its highest-ever quarterly revenue of about 23,472 crore rupees.\n\nDespite this record income, their profit dropped by 78% compared to the year before. The reason? Massive exceptional costs from flight disruptions and new labor laws that increased pilot rest times.\n\nAirlines also face a forex trap. Most of their costs — like aircraft leases and maintenance — are paid in US dollars. When the Indian rupee weakens, as it did throughout late 2025 and early 2026, the cost of flying increases automatically, regardless of how many tickets are sold.\n\nIn practical terms: A new airline might fill every seat and still lose money if fuel prices spike or the rupee drops. The financial barrier to entry is estimated at 3,000 crore rupees just to stay afloat during the first few years.\n\n[Advertisement]\n\n### Cost & Competitive Pressures in India\n\nOperating an airline in India is more expensive than in almost any other country. There are three main reasons:\n\n1. **Fuel Taxes:** Aviation Turbine Fuel (ATF) makes up 40% of an airline's costs. Because it isn't under a unified national tax (GST), different states charge different taxes, ranging from 0% to 29%.\n\n2. **Dollar Expenses:** About 70% of the Indian fleet is leased. These monthly payments are in dollars, making airlines extremely vulnerable to currency swings.\n\n3. **Airport Fees:** Charges for landing and parking planes add another 5% to 10% to operating costs.\n\n[IMAGE]\n\nWhile fuel prices were cut by about 7% in early 2026, they remain nearly 50% higher than they were before the pandemic. To survive, airlines must have a low-cost DNA, meaning they have to be obsessively efficient with every rupee.\n\nThis suggests: New entrants cannot compete on luxury or service alone. Success in India depends entirely on managing the Cost per Available Seat Kilometer (CASK). If you can't fly cheaper than the big players, you won't survive the first price war.\n\n[IMAGE]\n\n### Structural Reality Check: Can the Market Absorb New Airlines?\n\nThe final reality check for the industry depends on three factors: airports, people, and maintenance.\n\n**Infrastructure:** The launch of new hubs like Noida International (Jewar) and Navi Mumbai in early 2026 will provide the slots new airlines need. Without these new airports, there is simply no physical space for more planes to land at peak times.\n\n**The Pilot Crisis:** India needs 45,000 pilots over the next 20 years. Major airlines are currently in a hiring war, offering bonuses of up to 50 lakh rupees to poach experienced captains. A new airline that can't find or keep pilots will find its planes grounded before they even take off.\n\n**Self-Reliance:** For years, Indian airlines sent their engines abroad for repair, costing billions. New maintenance hubs opening in 2026, like the Safran facility in Hyderabad, could save the industry up to $15 billion in the long run.\n\nNarrative Connection: The market can absorb the planes and the passengers, but the system is still catching up. The success of new entrants depends more on these structural supports than on passenger demand alone.\n\n[IMAGE]\n\nThis chart highlights a major bottleneck: India has the Hardware (world-leading plane orders) and the Demand (packed flights), but lacks the Software (qualified pilots and repair shops) to support them. While new airports like Noida and Navi Mumbai are finally providing more parking space for planes, the Pilot Supply (4/10) is in a critical red zone. For a new airline, the risk isn't a lack of passengers — it's having multimillion-dollar jets sitting idle because there aren't enough captains to fly them or local facilities to fix their engines.\n\n### Key Insights & Forward-Looking Indicators\n\nIndia's aviation expansion is at a crossroads. While the long-term outlook remains positive, the near-term signals suggest a period of high risk.\n\n- **Regional Growth is the Real Story:** The survival of new players like Shankh Air will depend on whether they can create new demand in Tier-2 cities rather than fighting for scraps on the major metro routes.\n\n- **Watch the Grounding Numbers:** If the engine issues for the major carriers are resolved by late 2026, a sudden flood of new capacity could trigger a price war, making it even harder for new airlines to reach profitability.\n\n- **Policy is the Greatest Catalyst:** Bringing jet fuel under a unified national tax (GST) would be the single most important event for airline sustainability.\n\n- **Infrastructure is the Bottleneck:** Monitor the operational stability of the Jewar and Navi Mumbai airports. Their success will determine how much new competition the market can physically hold.\n\n[Advertisement]\n",
+        "advertisement": {
+            "descriptions": [
+                "Unlock the complete report for exclusive charts, expert insights, and downloadable resources. Stay informed with the most in-depth aviation analysis available.",
+                "Get full access to high-resolution data visualizations, detailed case studies, and a comprehensive PDF report. Upgrade your knowledge and make smarter decisions.",
+                "Enjoying this preview? Subscribe now to reveal the entire analysis, including interactive graphs, expert commentary, and actionable recommendations.",
+                "Go beyond the basics — access the full story with premium content, advanced analytics, and downloadable materials. Don't miss out on the insights that matter most."
+            ]
+        },
+        "images": [
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-main.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-1.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-2.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-3.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-4.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-5.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-6.webp",
+            "analytics/India-Aviation-Expansion-Moment/images/India-Aviation-Expansion-Moment-7.webp"
+        ],
+        "tableOfContents": [
+            {
+                "title": "Overview: India's Aviation Expansion Moment",
+                "link": "#overview-indias-aviation-expansion-moment"
+            },
+            {
+                "title": "India's Current Capacity Expansion Landscape",
+                "link": "#indias-current-capacity-expansion-landscape"
+            },
+            {
+                "title": "Demand Absorption & Market Utilisation",
+                "link": "#demand-absorption-market-utilisation"
+            },
+            {
+                "title": "Entry of New Airlines: Structural Implications",
+                "link": "#entry-of-new-airlines-structural-implications"
+            },
+            {
+                "title": "Profitability vs Expansion Reality",
+                "link": "#profitability-vs-expansion-reality"
+            },
+            {
+                "title": "Cost & Competitive Pressures in India",
+                "link": "#cost-competitive-pressures-in-india"
+            },
+            {
+                "title": "Structural Reality Check: Can the Market Absorb New Airlines?",
+                "link": "#structural-reality-check-can-the-market-absorb-new-airlines"
+            },
+            {
+                "title": "Key Insights & Forward-Looking Indicators",
+                "link": "#key-insights-forward-looking-indicators"
+            }
+        ],
+        "faq": [
+            {
+                "question": "Why is India's aviation industry losing money despite record passenger numbers?",
+                "answer": "Airlines face a structural cost imbalance: most major expenses like aircraft leases, fuel, and maintenance are either dollar-denominated or heavily taxed, while ticket revenue is in rupees. A weak rupee and fuel prices still 50% above pre-pandemic levels mean that even full flights can generate losses."
+            },
+            {
+                "question": "What is causing so many aircraft to be grounded in India?",
+                "answer": "Approximately 144 aircraft — around 16% of India's fleet — are grounded due to microscopic powder metal defects in Pratt & Whitney engines. Global repair capacity is overwhelmed, leaving planes idle for months and costing airlines millions in lease payments for non-flying jets."
+            },
+            {
+                "question": "Can new airlines like Shankh Air and Alhind Air realistically survive?",
+                "answer": "It is challenging. History shows that Kingfisher, Jet Airways, and Go First all failed due to rapid expansion and cash shortfalls. New entrants need at least 3,000 crore rupees to survive their early years and must achieve very low Cost per Available Seat Kilometre (CASK) to compete with IndiGo and Air India."
+            },
+            {
+                "question": "What does a 94% load factor mean for travellers?",
+                "answer": "A 94% load factor means that on average, almost every seat on every flight is occupied. At this level, when a flight is cancelled, passengers typically wait 2–3 days for an alternative seat because all other flights are already full. It reflects a shortage of aircraft capacity rather than a healthy demand-supply balance."
+            },
+            {
+                "question": "What is the single biggest policy change that could transform Indian aviation?",
+                "answer": "Bringing Aviation Turbine Fuel (ATF) under India's Goods and Services Tax (GST) framework would be the most impactful change. Currently, state-level taxes on ATF range from 0% to 29%, and airlines cannot claim input tax credits. Unified national taxation would significantly reduce operating costs across all carriers."
+            },
+            {
+                "question": "How significant is the pilot shortage for new airlines?",
+                "answer": "India needs approximately 45,000 pilots over the next 20 years. Established airlines are already offering bonuses of up to 50 lakh rupees to recruit experienced captains. A new entrant that cannot attract and retain qualified pilots risks having its aircraft grounded regardless of passenger demand."
+            }
+        ]
+    }
+
+  must be able to register new journalist
+  allow editor to reset their passoword and change their role
+  creating their profile for later use in article credit giving 
+
+  "cms_users  (passwordHash omitted)": {
+    "id": "d2c9581a-7ecf-4edd-82d5-33cdcc8e3fd7",
+    "email": "avionyz.tech@gmail.com",
+    "name": "Avionyz Tech",
+    "role": "EDITOR",
+    "createdAt": "2026-03-25T03:42:54.247Z",
+    "updatedAt": "2026-03-25T03:42:54.247Z"
+  },
+
+  able to delete staged articles 
+  "staged_articles": {
+    "id": "b1196112-f864-46db-88d5-15f1183bd201",
+    "title": "The Invisible Supply Chain: How Air Trade and Cargo Runs the Global Economy",
+    "body": "Every year, aviation moves goods worth over $6.2 trillion across the world. Semiconductors from Taiwan, vaccines from Belgium, fresh flowers from Kenya, and luxury goods from Milan all get transported through the air. It does this on 39 million flights, across 22,000 routes, in the bellyhold of passenger jets and the cargo decks of dedicated freighters. In 2024 alone, air cargo demand grew 11.3%, the strongest full-year performance on record, as reported by *IATA*. Hence, in the present day, the aviation industry forms the backbone of global trade and logistics. \n\n## How Aviation Carries the World's Trade\n\nAir freight operates through two parallel channels. Dedicated freighter aircraft like the Boeing 777F  carry up to 100 tonnes of cargo and haul bulk shipments. Approximately 40% of annual global air cargo moves in the belly hold of passenger aircraft, as per the reports of the *World Economic Forum.* Moreover,* a standard passenger 777 carries nearly 20 tonnes of belly cargo on every commercial flight. It is this dual-channel model of  freighters and belly space that gives air cargo its extraordinary reach and frequency.\n\nCargo logistics through air serve as the preferred mode of transportation. In 2025, AI-related hardware and semiconductors accounted for 53.5% of the value of all air-transported trade, while representing only 7% of volume, as reported by *IATA*. Pharmaceuticals, fresh produce, luxury goods, and e-commerce parcels are among the top trade categories.\n\n![](articleimage/article-147/article-147-1.webp)## Economic Impact of Supply Chain Fallout in the Aviation Industry\n\nAs per *PwC's* supply chain analysis, when passenger flights collapsed to 66% year-on-year by volume during the COVID-19 Pandemic, air cargo tonne-kilometres (CTKs) fell by 15.3% year-on-year in the three months to April 2020. The shutdown of commercial aviation severely limited air cargo capacities, making it harder to move vital supplies such as medical equipment to fight the outbreak around the world. Airlines lost $371 billion in passenger operating revenues in 2020, and millions of jobs were destroyed across the aviation supply chain, as reported by the *Eurasian Research Institute.*\n\nIn April 2010,  when Iceland's volcano shut down European airspace for six days, approximately 108,000 commercial flights were cancelled, airlines lost revenues of USD 1.7 billion, and 10.5 million passengers had their travel plans disrupted. The cargo damage was visceral and immediate. Kenya destroyed 400 tonnes of flowers that it was unable to ship to the UK. The country's economy was estimated to be incurring losses of $3.8 million each day of the disruption. Zambia's flower and vegetable sector lost $150,000 per day.\n\n Bone marrow shipments for transplant patients in Europe were criti*cally delayed. The price of shares in major airlines dropped between 2.5 and 3.3% during the eruption, as reported by Internet Geography*. *IATA* estimated airlines were losing £130 million ($200 million) per day, as per its own May 2010 economic briefing. Both crises underscored the same truth: air cargo is not a luxury logistics channel. It is a critical infrastructure.\n\n![](articleimage/article-147/article-147-2.webp)## Looking Ahead\n\nAviation supports $8.3 trillion in global trade and 86.5 million jobs worldwide, as reported by *IATA*. The two disruption events of 2010 and 2020 cost the global economy hundreds of billions of dollars combined and demonstrated beyond any argument that air cargo is not a single industry's problem; when it fails,  it is everyone's. As tariff tensions, geopolitical flux, and climate-related airspace disruptions mount through the late 2020s, the resilience of the aviation cargo system will be tested again. The question is not whether aviation matters to global trade. It is whether the world has learned  from the last two crises to protect itself before the next one arrives.",
+    "shortDescription": "Every semiconductor, vaccine vial, and luxury good crossing continents almost certainly travelled by air, and the world's $6.2 trillion trade depends on it. Take a look at how the entire process takes place",
+    "mainImage": "articleimage/article-147/article-147-main.webp",
+    "readTime": "",
+    "tags": [
+      "Air Cargo",
+      "Logistics",
+      "Boeing 777",
+      "Trade"
+    ],
+    "type": "Trending",
+    "status": "SUBMITTED",
+    "editorNote": null,
+    "submittedById": "0352e7a7-078f-4eb1-b9ad-7e5bc26dd594",
+    "reviewedById": null,
+    "assignedToId": null,
+    "recalledFromId": null,
+    "publishedArticleId": null,
+    "createdAt": "2026-03-30T16:30:28.087Z",
+    "updatedAt": "2026-03-30T16:30:28.507Z",
+    "submittedAt": "2026-03-30T16:30:28.507Z",
+    "reviewedAt": null,
+    "assignedAt": null,
+    "images": [
+      {
+        "id": 56,
+        "src": "articleimage/article-147/article-147-1.webp",
+        "alt": "Image Source: Pexels",
+        "caption": "Air freight ensures rapid delivery of high-value and time-sensitive cargo",
+        "stagedArticleId": "b1196112-f864-46db-88d5-15f1183bd201"
+      },
+      {
+        "id": 57,
+        "src": "articleimage/article-147/article-147-2.webp",
+        "alt": "Image Source: Pexels",
+        "caption": "Shipments move seamlessly from point of production through air transport",
+        "stagedArticleId": "b1196112-f864-46db-88d5-15f1183bd201"
+      }
+    ],
+    "submittedBy": {
+      "id": "0352e7a7-078f-4eb1-b9ad-7e5bc26dd594",
+      "name": "Aaditi Dassani",
+      "email": "aditi.dassani@avionyz.com",
+      "role": "JOURNALIST"
+    },
+    "reviewedBy": null,
+    "assignedTo": null
+  },
+  "staged_article_images": {
+    "id": 57,
+    "src": "articleimage/article-147/article-147-2.webp",
+    "alt": "Image Source: Pexels",
+    "caption": "Shipments move seamlessly from point of production through air transport",
+    "stagedArticleId": "b1196112-f864-46db-88d5-15f1183bd201"
+  },
+  "staged_article_key_insights": {
+    "_note": "Table not yet migrated — run prisma migrate deploy"
+  },
+  "staged_article_related_news": {
+    "_note": "Table not yet migrated — run prisma migrate deploy"
+  },
+
+
+  here CRUD required
+  "airlines": {
+    "id": 47,
+    "name": "Indigo",
+    "reviews": [
+      {
+        "id": 2,
+        "createdAt": "2026-03-30T10:56:55.623Z",
+        "airlineId": 47,
+        "rating": 1,
+        "experience": "worst"
+      }
+    ]
+  },
+
+  must show the editor in a pannel all the reviews only Read required
+  "flight_reviews": {
+    "id": 2,
+    "createdAt": "2026-03-30T10:56:55.623Z",
+    "airlineId": 47,
+    "rating": 1,
+    "experience": "worst"
+  },
+
+
+
+
+  this is also managed by the editor and it just have url and platform everything edited by the editor
+  "social_trends": {
+    "id": "1c3cf63d-4479-455e-ab86-711bb557c03c",
+    "platform": "linkedin",
+    "content": "The Rise of Boeing",
+    "url": "",
+    "imageUrl": null,
+    "author": null,
+    "authorImage": null,
+    "date": "2026-03-10T08:14:32.590Z",
+    "likes": null,
+    "comments": null,
+    "shares": null,
+    "isActive": true
+  },
+
+For the expert session images needed to be uploaded it's again in the public bucket and the url is https://avionyz-public-data.s3.ap-south-1.amazonaws.com/
+  "experts": {
+    "id": "8706b5e0-8743-4c0a-a001-345931306994",
+    "name": "Scott Kirby",
+    "role": "CEO",
+    "company": "United Airlines",
+    "image": "expert-image/scott.jpg",
+    "quote": "Meeting the Phillips family last month was the most inspirational thing that I've been a part of at any of my 38 earnings town hall appearances.",
+    "highlight": null,
+    "url": "https://www.linkedin.com/posts/jscott-kirby_meeting-the-phillips-family-last-month-was-activity-7430644025441013760--RfI?utm_source=social_share_send&utm_medium=member_desktop_web&rcm=ACoAAEEuauoBwVRw1OlFRzDrJ9hXs0RUOE7QLmM",
+    "isActive": true,
+    "createdAt": "2026-02-25T15:12:51.661Z",
+    "updatedAt": "2026-02-25T07:10:27.305Z"
+  },

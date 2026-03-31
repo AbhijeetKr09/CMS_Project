@@ -35,7 +35,8 @@ const ArticleEditor = () => {
 
     // Relations
     const [keyInsights, setKeyInsights] = useState([]);
-    const [relatedNews, setRelatedNews] = useState([]);
+    // Up to 4 internal related article IDs (matches StagedArticle.relatedArticle1–4Id)
+    const [relatedArticleIds, setRelatedArticleIds] = useState(['', '', '', '']);
 
     // Status
     const [currentTimestamp, setCurrentTimestamp] = useState(null);
@@ -96,9 +97,15 @@ const ArticleEditor = () => {
             }
             setStagedArticleStatus(data.status);
             setEditorNote(data.editorNote || null);
-            // Load key insights and related news from staged article
+            // Load key insights from staged article
             setKeyInsights(data.keyInsights || []);
-            setRelatedNews(data.relatedNews || []);
+            // Load related article IDs (up to 4)
+            setRelatedArticleIds([
+                data.relatedArticle1Id || '',
+                data.relatedArticle2Id || '',
+                data.relatedArticle3Id || '',
+                data.relatedArticle4Id || '',
+            ]);
             // Resolve gallery image keys to signed URLs for preview
             if (data.images?.length) {
                 const signed = await signImagePreviews(data.images.map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '' })));
@@ -138,7 +145,13 @@ const ArticleEditor = () => {
                     setImages(signed);
                 }
                 setKeyInsights(data.keyInsights || []);
-                setRelatedNews(data.relatedNews || []);
+                // Load related article IDs (up to 4)
+                setRelatedArticleIds([
+                    data.relatedArticle1Id || '',
+                    data.relatedArticle2Id || '',
+                    data.relatedArticle3Id || '',
+                    data.relatedArticle4Id || '',
+                ]);
                 // Numeric ID for S3 folder naming
                 try {
                     const nextIdRes = await api.get('/api/articles/draft/next-id');
@@ -208,18 +221,6 @@ const ArticleEditor = () => {
         }
     };
 
-    // Related news handlers
-    const addRelatedNews = () => setRelatedNews([...relatedNews, { newsTitle: '', newsUrl: '' }]);
-    const updateRelatedNews = (idx, field, val) => {
-        const copy = [...relatedNews];
-        copy[idx][field] = val;
-        setRelatedNews(copy);
-    };
-    const removeRelatedNews = (idx) => {
-        const copy = [...relatedNews];
-        copy.splice(idx, 1);
-        setRelatedNews(copy);
-    };
 
     // Save draft to staged articles table
     const handleSaveDraft = async () => {
@@ -232,7 +233,10 @@ const ArticleEditor = () => {
             title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
             images: images.map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
             keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
-            relatedNews: relatedNews.map(({ newsTitle, newsUrl }) => ({ newsTitle, newsUrl: newsUrl || '' })),
+            relatedArticle1Id: relatedArticleIds[0] || null,
+            relatedArticle2Id: relatedArticleIds[1] || null,
+            relatedArticle3Id: relatedArticleIds[2] || null,
+            relatedArticle4Id: relatedArticleIds[3] || null,
         };
         try {
             if (isEditMode && stagedArticleStatus !== null) {
@@ -270,7 +274,10 @@ const ArticleEditor = () => {
                 title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
                 images: images.map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
                 keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
-                relatedNews: relatedNews.map(({ newsTitle, newsUrl }) => ({ newsTitle, newsUrl: newsUrl || '' })),
+                relatedArticle1Id: relatedArticleIds[0] || null,
+                relatedArticle2Id: relatedArticleIds[1] || null,
+                relatedArticle3Id: relatedArticleIds[2] || null,
+                relatedArticle4Id: relatedArticleIds[3] || null,
             };
             let articleId = id;
 
@@ -656,43 +663,45 @@ const ArticleEditor = () => {
                             </button>
                         </div>
 
-                        {/* Related News */}
+                        {/* Related Articles */}
                         <div>
                             <label className="block text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-2">
-                                Related News
+                                Related Articles (up to 4)
                             </label>
-                            <div className="space-y-3">
-                                {relatedNews.map((n, i) => (
-                                    <div key={i} className="bg-bg-primary/50 border border-border rounded-lg p-3 space-y-2">
+                            <p className="text-xs text-text-tertiary mb-3 leading-relaxed">
+                                Paste a published article ID (e.g. <code className="bg-bg-tertiary px-1 rounded">article-42</code>) for each slot.
+                            </p>
+                            <div className="space-y-2">
+                                {relatedArticleIds.map((articleId, i) => (
+                                    <div key={i} className="flex items-center gap-2">
+                                        <span className="w-5 h-5 rounded-full bg-accent/10 text-accent text-xs font-bold flex items-center justify-center flex-shrink-0">
+                                            {i + 1}
+                                        </span>
                                         <input
-                                            value={n.newsTitle}
-                                            onChange={(e) => updateRelatedNews(i, 'newsTitle', e.target.value)}
-                                            placeholder="News title"
-                                            className="w-full px-3 py-2 bg-bg-tertiary border border-transparent rounded-lg text-text-primary text-sm placeholder-text-tertiary focus:outline-none focus:border-accent transition-all"
+                                            value={articleId}
+                                            onChange={(e) => {
+                                                const copy = [...relatedArticleIds];
+                                                copy[i] = e.target.value.trim();
+                                                setRelatedArticleIds(copy);
+                                            }}
+                                            placeholder={`Article ID (slot ${i + 1})`}
+                                            className="flex-1 px-3 py-2 bg-bg-tertiary border border-transparent rounded-lg text-text-primary text-xs placeholder-text-tertiary focus:outline-none focus:border-accent transition-all font-mono"
                                         />
-                                        <div className="flex gap-2">
-                                            <input
-                                                value={n.newsUrl || ''}
-                                                onChange={(e) => updateRelatedNews(i, 'newsUrl', e.target.value)}
-                                                placeholder="URL (optional)"
-                                                className="flex-1 px-3 py-2 bg-bg-tertiary border border-transparent rounded-lg text-text-primary text-sm placeholder-text-tertiary focus:outline-none focus:border-accent transition-all"
-                                            />
+                                        {articleId && (
                                             <button
-                                                onClick={() => removeRelatedNews(i)}
-                                                className="px-2.5 text-text-tertiary hover:text-danger transition-colors bg-transparent border border-border rounded-lg hover:border-danger/30"
+                                                onClick={() => {
+                                                    const copy = [...relatedArticleIds];
+                                                    copy[i] = '';
+                                                    setRelatedArticleIds(copy);
+                                                }}
+                                                className="p-1 text-text-tertiary hover:text-danger transition-colors bg-transparent border-none"
                                             >
-                                                <HiOutlineTrash className="w-3.5 h-3.5" />
+                                                <HiOutlineX className="w-3.5 h-3.5" />
                                             </button>
-                                        </div>
+                                        )}
                                     </div>
                                 ))}
                             </div>
-                            <button
-                                onClick={addRelatedNews}
-                                className="mt-2 w-full py-2.5 text-xs font-medium text-text-tertiary border border-dashed border-border rounded-lg hover:text-text-secondary hover:border-accent/50 transition-colors bg-transparent"
-                            >
-                                + Add Related News
-                            </button>
                         </div>
                     </div>
                 </aside>

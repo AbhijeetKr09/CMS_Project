@@ -57,12 +57,8 @@ export const ModelName = {
   ArticleKeyInsight: 'ArticleKeyInsight',
   ArticleRelatedNews: 'ArticleRelatedNews',
   Comment: 'Comment',
-  StockCache: 'StockCache',
-  StockInsight: 'StockInsight',
   Airline: 'Airline',
-  Question: 'Question',
   FlightReview: 'FlightReview',
-  Answer: 'Answer',
   Event: 'Event',
   Media: 'Media',
   User: 'User',
@@ -84,8 +80,7 @@ export const ModelName = {
   CmsUser: 'CmsUser',
   StagedArticle: 'StagedArticle',
   StagedArticleImage: 'StagedArticleImage',
-  StagedArticleKeyInsight: 'StagedArticleKeyInsight',
-  StagedArticleRelatedNews: 'StagedArticleRelatedNews'
+  StagedArticleKeyInsight: 'StagedArticleKeyInsight'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -151,9 +146,8 @@ export type ArticleKeyInsightScalarFieldEnum = (typeof ArticleKeyInsightScalarFi
 
 export const ArticleRelatedNewsScalarFieldEnum = {
   id: 'id',
-  newsTitle: 'newsTitle',
-  newsUrl: 'newsUrl',
-  articleId: 'articleId'
+  articleId: 'articleId',
+  relatedArticleId: 'relatedArticleId'
 } as const
 
 export type ArticleRelatedNewsScalarFieldEnum = (typeof ArticleRelatedNewsScalarFieldEnum)[keyof typeof ArticleRelatedNewsScalarFieldEnum]
@@ -170,25 +164,6 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const StockCacheScalarFieldEnum = {
-  id: 'id',
-  symbol: 'symbol',
-  data: 'data',
-  date: 'date'
-} as const
-
-export type StockCacheScalarFieldEnum = (typeof StockCacheScalarFieldEnum)[keyof typeof StockCacheScalarFieldEnum]
-
-
-export const StockInsightScalarFieldEnum = {
-  id: 'id',
-  insight: 'insight',
-  createdAt: 'createdAt'
-} as const
-
-export type StockInsightScalarFieldEnum = (typeof StockInsightScalarFieldEnum)[keyof typeof StockInsightScalarFieldEnum]
-
-
 export const AirlineScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -197,34 +172,15 @@ export const AirlineScalarFieldEnum = {
 export type AirlineScalarFieldEnum = (typeof AirlineScalarFieldEnum)[keyof typeof AirlineScalarFieldEnum]
 
 
-export const QuestionScalarFieldEnum = {
-  id: 'id',
-  questionText: 'questionText',
-  responseType: 'responseType',
-  airlineId: 'airlineId'
-} as const
-
-export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
-
-
 export const FlightReviewScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
-  airlineId: 'airlineId'
+  airlineId: 'airlineId',
+  rating: 'rating',
+  experience: 'experience'
 } as const
 
 export type FlightReviewScalarFieldEnum = (typeof FlightReviewScalarFieldEnum)[keyof typeof FlightReviewScalarFieldEnum]
-
-
-export const AnswerScalarFieldEnum = {
-  id: 'id',
-  answerRating: 'answerRating',
-  answerText: 'answerText',
-  reviewId: 'reviewId',
-  questionId: 'questionId'
-} as const
-
-export type AnswerScalarFieldEnum = (typeof AnswerScalarFieldEnum)[keyof typeof AnswerScalarFieldEnum]
 
 
 export const EventScalarFieldEnum = {
@@ -261,8 +217,8 @@ export const MediaScalarFieldEnum = {
   date: 'date',
   adId: 'adId',
   userId: 'userId',
-  downloads: 'downloads',
-  views: 'views'
+  views: 'views',
+  downloads: 'downloads'
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
@@ -275,10 +231,10 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   phoneNumber: 'phoneNumber',
   profileImage: 'profileImage',
-  createdAt: 'createdAt',
-  bio: 'bio',
   coverImage: 'coverImage',
+  bio: 'bio',
   isExpert: 'isExpert',
+  createdAt: 'createdAt',
   preferences: 'preferences'
 } as const
 
@@ -388,8 +344,8 @@ export const MessageScalarFieldEnum = {
   receiverId: 'receiverId',
   read: 'read',
   createdAt: 'createdAt',
-  deletedByReceiver: 'deletedByReceiver',
-  deletedBySender: 'deletedBySender'
+  deletedBySender: 'deletedBySender',
+  deletedByReceiver: 'deletedByReceiver'
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -403,10 +359,10 @@ export const ExpertScalarFieldEnum = {
   image: 'image',
   quote: 'quote',
   highlight: 'highlight',
+  url: 'url',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  url: 'url'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ExpertScalarFieldEnum = (typeof ExpertScalarFieldEnum)[keyof typeof ExpertScalarFieldEnum]
@@ -506,7 +462,11 @@ export const StagedArticleScalarFieldEnum = {
   updatedAt: 'updatedAt',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
-  assignedAt: 'assignedAt'
+  assignedAt: 'assignedAt',
+  relatedArticle1Id: 'relatedArticle1Id',
+  relatedArticle2Id: 'relatedArticle2Id',
+  relatedArticle3Id: 'relatedArticle3Id',
+  relatedArticle4Id: 'relatedArticle4Id'
 } as const
 
 export type StagedArticleScalarFieldEnum = (typeof StagedArticleScalarFieldEnum)[keyof typeof StagedArticleScalarFieldEnum]
@@ -530,16 +490,6 @@ export const StagedArticleKeyInsightScalarFieldEnum = {
 } as const
 
 export type StagedArticleKeyInsightScalarFieldEnum = (typeof StagedArticleKeyInsightScalarFieldEnum)[keyof typeof StagedArticleKeyInsightScalarFieldEnum]
-
-
-export const StagedArticleRelatedNewsScalarFieldEnum = {
-  id: 'id',
-  newsTitle: 'newsTitle',
-  newsUrl: 'newsUrl',
-  stagedArticleId: 'stagedArticleId'
-} as const
-
-export type StagedArticleRelatedNewsScalarFieldEnum = (typeof StagedArticleRelatedNewsScalarFieldEnum)[keyof typeof StagedArticleRelatedNewsScalarFieldEnum]
 
 
 export const SortOrder = {

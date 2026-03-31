@@ -27,13 +27,13 @@ export type AggregateMedia = {
 }
 
 export type MediaAvgAggregateOutputType = {
-  downloads: number | null
   views: number | null
+  downloads: number | null
 }
 
 export type MediaSumAggregateOutputType = {
-  downloads: number | null
   views: number | null
+  downloads: number | null
 }
 
 export type MediaMinAggregateOutputType = {
@@ -46,8 +46,8 @@ export type MediaMinAggregateOutputType = {
   date: Date | null
   adId: string | null
   userId: string | null
-  downloads: number | null
   views: number | null
+  downloads: number | null
 }
 
 export type MediaMaxAggregateOutputType = {
@@ -60,8 +60,8 @@ export type MediaMaxAggregateOutputType = {
   date: Date | null
   adId: string | null
   userId: string | null
-  downloads: number | null
   views: number | null
+  downloads: number | null
 }
 
 export type MediaCountAggregateOutputType = {
@@ -75,20 +75,20 @@ export type MediaCountAggregateOutputType = {
   date: number
   adId: number
   userId: number
-  downloads: number
   views: number
+  downloads: number
   _all: number
 }
 
 
 export type MediaAvgAggregateInputType = {
-  downloads?: true
   views?: true
+  downloads?: true
 }
 
 export type MediaSumAggregateInputType = {
-  downloads?: true
   views?: true
+  downloads?: true
 }
 
 export type MediaMinAggregateInputType = {
@@ -101,8 +101,8 @@ export type MediaMinAggregateInputType = {
   date?: true
   adId?: true
   userId?: true
-  downloads?: true
   views?: true
+  downloads?: true
 }
 
 export type MediaMaxAggregateInputType = {
@@ -115,8 +115,8 @@ export type MediaMaxAggregateInputType = {
   date?: true
   adId?: true
   userId?: true
-  downloads?: true
   views?: true
+  downloads?: true
 }
 
 export type MediaCountAggregateInputType = {
@@ -130,8 +130,8 @@ export type MediaCountAggregateInputType = {
   date?: true
   adId?: true
   userId?: true
-  downloads?: true
   views?: true
+  downloads?: true
   _all?: true
 }
 
@@ -232,8 +232,8 @@ export type MediaGroupByOutputType = {
   date: Date | null
   adId: string | null
   userId: string | null
-  downloads: number
   views: number
+  downloads: number
   _count: MediaCountAggregateOutputType | null
   _avg: MediaAvgAggregateOutputType | null
   _sum: MediaSumAggregateOutputType | null
@@ -270,11 +270,11 @@ export type MediaWhereInput = {
   date?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
   adId?: Prisma.StringNullableFilter<"Media"> | string | null
   userId?: Prisma.StringNullableFilter<"Media"> | string | null
-  downloads?: Prisma.IntFilter<"Media"> | number
   views?: Prisma.IntFilter<"Media"> | number
+  downloads?: Prisma.IntFilter<"Media"> | number
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  likes?: Prisma.MediaLikeListRelationFilter
   savedBy?: Prisma.SavedMediaListRelationFilter
+  likes?: Prisma.MediaLikeListRelationFilter
 }
 
 export type MediaOrderByWithRelationInput = {
@@ -288,11 +288,11 @@ export type MediaOrderByWithRelationInput = {
   date?: Prisma.SortOrderInput | Prisma.SortOrder
   adId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
   user?: Prisma.UserOrderByWithRelationInput
-  likes?: Prisma.MediaLikeOrderByRelationAggregateInput
   savedBy?: Prisma.SavedMediaOrderByRelationAggregateInput
+  likes?: Prisma.MediaLikeOrderByRelationAggregateInput
 }
 
 export type MediaWhereUniqueInput = Prisma.AtLeast<{
@@ -309,11 +309,11 @@ export type MediaWhereUniqueInput = Prisma.AtLeast<{
   date?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
   adId?: Prisma.StringNullableFilter<"Media"> | string | null
   userId?: Prisma.StringNullableFilter<"Media"> | string | null
-  downloads?: Prisma.IntFilter<"Media"> | number
   views?: Prisma.IntFilter<"Media"> | number
+  downloads?: Prisma.IntFilter<"Media"> | number
   user?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
-  likes?: Prisma.MediaLikeListRelationFilter
   savedBy?: Prisma.SavedMediaListRelationFilter
+  likes?: Prisma.MediaLikeListRelationFilter
 }, "id">
 
 export type MediaOrderByWithAggregationInput = {
@@ -327,8 +327,8 @@ export type MediaOrderByWithAggregationInput = {
   date?: Prisma.SortOrderInput | Prisma.SortOrder
   adId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrderInput | Prisma.SortOrder
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
   _count?: Prisma.MediaCountOrderByAggregateInput
   _avg?: Prisma.MediaAvgOrderByAggregateInput
   _max?: Prisma.MediaMaxOrderByAggregateInput
@@ -350,8 +350,8 @@ export type MediaScalarWhereWithAggregatesInput = {
   date?: Prisma.DateTimeNullableWithAggregatesFilter<"Media"> | Date | string | null
   adId?: Prisma.StringNullableWithAggregatesFilter<"Media"> | string | null
   userId?: Prisma.StringNullableWithAggregatesFilter<"Media"> | string | null
-  downloads?: Prisma.IntWithAggregatesFilter<"Media"> | number
   views?: Prisma.IntWithAggregatesFilter<"Media"> | number
+  downloads?: Prisma.IntWithAggregatesFilter<"Media"> | number
 }
 
 export type MediaCreateInput = {
@@ -364,11 +364,11 @@ export type MediaCreateInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
   user?: Prisma.UserCreateNestedOneWithoutUploadsInput
-  likes?: Prisma.MediaLikeCreateNestedManyWithoutMediaInput
   savedBy?: Prisma.SavedMediaCreateNestedManyWithoutMediaInput
+  likes?: Prisma.MediaLikeCreateNestedManyWithoutMediaInput
 }
 
 export type MediaUncheckedCreateInput = {
@@ -382,10 +382,10 @@ export type MediaUncheckedCreateInput = {
   date?: Date | string | null
   adId?: string | null
   userId?: string | null
-  downloads?: number
   views?: number
-  likes?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutMediaInput
+  downloads?: number
   savedBy?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutMediaInput
+  likes?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutMediaInput
 }
 
 export type MediaUpdateInput = {
@@ -398,11 +398,11 @@ export type MediaUpdateInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneWithoutUploadsNestedInput
-  likes?: Prisma.MediaLikeUpdateManyWithoutMediaNestedInput
   savedBy?: Prisma.SavedMediaUpdateManyWithoutMediaNestedInput
+  likes?: Prisma.MediaLikeUpdateManyWithoutMediaNestedInput
 }
 
 export type MediaUncheckedUpdateInput = {
@@ -416,10 +416,10 @@ export type MediaUncheckedUpdateInput = {
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
-  likes?: Prisma.MediaLikeUncheckedUpdateManyWithoutMediaNestedInput
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   savedBy?: Prisma.SavedMediaUncheckedUpdateManyWithoutMediaNestedInput
+  likes?: Prisma.MediaLikeUncheckedUpdateManyWithoutMediaNestedInput
 }
 
 export type MediaCreateManyInput = {
@@ -433,8 +433,8 @@ export type MediaCreateManyInput = {
   date?: Date | string | null
   adId?: string | null
   userId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
 }
 
 export type MediaUpdateManyMutationInput = {
@@ -447,8 +447,8 @@ export type MediaUpdateManyMutationInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MediaUncheckedUpdateManyInput = {
@@ -462,8 +462,8 @@ export type MediaUncheckedUpdateManyInput = {
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 export type MediaCountOrderByAggregateInput = {
@@ -477,13 +477,13 @@ export type MediaCountOrderByAggregateInput = {
   date?: Prisma.SortOrder
   adId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
 }
 
 export type MediaAvgOrderByAggregateInput = {
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
 }
 
 export type MediaMaxOrderByAggregateInput = {
@@ -496,8 +496,8 @@ export type MediaMaxOrderByAggregateInput = {
   date?: Prisma.SortOrder
   adId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
 }
 
 export type MediaMinOrderByAggregateInput = {
@@ -510,13 +510,13 @@ export type MediaMinOrderByAggregateInput = {
   date?: Prisma.SortOrder
   adId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
 }
 
 export type MediaSumOrderByAggregateInput = {
-  downloads?: Prisma.SortOrder
   views?: Prisma.SortOrder
+  downloads?: Prisma.SortOrder
 }
 
 export type MediaListRelationFilter = {
@@ -627,10 +627,10 @@ export type MediaCreateWithoutUserInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
-  likes?: Prisma.MediaLikeCreateNestedManyWithoutMediaInput
+  downloads?: number
   savedBy?: Prisma.SavedMediaCreateNestedManyWithoutMediaInput
+  likes?: Prisma.MediaLikeCreateNestedManyWithoutMediaInput
 }
 
 export type MediaUncheckedCreateWithoutUserInput = {
@@ -643,10 +643,10 @@ export type MediaUncheckedCreateWithoutUserInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
-  likes?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutMediaInput
+  downloads?: number
   savedBy?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutMediaInput
+  likes?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutMediaInput
 }
 
 export type MediaCreateOrConnectWithoutUserInput = {
@@ -689,8 +689,8 @@ export type MediaScalarWhereInput = {
   date?: Prisma.DateTimeNullableFilter<"Media"> | Date | string | null
   adId?: Prisma.StringNullableFilter<"Media"> | string | null
   userId?: Prisma.StringNullableFilter<"Media"> | string | null
-  downloads?: Prisma.IntFilter<"Media"> | number
   views?: Prisma.IntFilter<"Media"> | number
+  downloads?: Prisma.IntFilter<"Media"> | number
 }
 
 export type MediaCreateWithoutSavedByInput = {
@@ -703,8 +703,8 @@ export type MediaCreateWithoutSavedByInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
   user?: Prisma.UserCreateNestedOneWithoutUploadsInput
   likes?: Prisma.MediaLikeCreateNestedManyWithoutMediaInput
 }
@@ -720,8 +720,8 @@ export type MediaUncheckedCreateWithoutSavedByInput = {
   date?: Date | string | null
   adId?: string | null
   userId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
   likes?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutMediaInput
 }
 
@@ -751,8 +751,8 @@ export type MediaUpdateWithoutSavedByInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneWithoutUploadsNestedInput
   likes?: Prisma.MediaLikeUpdateManyWithoutMediaNestedInput
 }
@@ -768,8 +768,8 @@ export type MediaUncheckedUpdateWithoutSavedByInput = {
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   likes?: Prisma.MediaLikeUncheckedUpdateManyWithoutMediaNestedInput
 }
 
@@ -783,8 +783,8 @@ export type MediaCreateWithoutLikesInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
   user?: Prisma.UserCreateNestedOneWithoutUploadsInput
   savedBy?: Prisma.SavedMediaCreateNestedManyWithoutMediaInput
 }
@@ -800,8 +800,8 @@ export type MediaUncheckedCreateWithoutLikesInput = {
   date?: Date | string | null
   adId?: string | null
   userId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
   savedBy?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutMediaInput
 }
 
@@ -831,8 +831,8 @@ export type MediaUpdateWithoutLikesInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   user?: Prisma.UserUpdateOneWithoutUploadsNestedInput
   savedBy?: Prisma.SavedMediaUpdateManyWithoutMediaNestedInput
 }
@@ -848,8 +848,8 @@ export type MediaUncheckedUpdateWithoutLikesInput = {
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   savedBy?: Prisma.SavedMediaUncheckedUpdateManyWithoutMediaNestedInput
 }
 
@@ -863,8 +863,8 @@ export type MediaCreateManyUserInput = {
   tags?: Prisma.MediaCreatetagsInput | string[]
   date?: Date | string | null
   adId?: string | null
-  downloads?: number
   views?: number
+  downloads?: number
 }
 
 export type MediaUpdateWithoutUserInput = {
@@ -877,10 +877,10 @@ export type MediaUpdateWithoutUserInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
-  likes?: Prisma.MediaLikeUpdateManyWithoutMediaNestedInput
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   savedBy?: Prisma.SavedMediaUpdateManyWithoutMediaNestedInput
+  likes?: Prisma.MediaLikeUpdateManyWithoutMediaNestedInput
 }
 
 export type MediaUncheckedUpdateWithoutUserInput = {
@@ -893,10 +893,10 @@ export type MediaUncheckedUpdateWithoutUserInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
-  likes?: Prisma.MediaLikeUncheckedUpdateManyWithoutMediaNestedInput
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   savedBy?: Prisma.SavedMediaUncheckedUpdateManyWithoutMediaNestedInput
+  likes?: Prisma.MediaLikeUncheckedUpdateManyWithoutMediaNestedInput
 }
 
 export type MediaUncheckedUpdateManyWithoutUserInput = {
@@ -909,8 +909,8 @@ export type MediaUncheckedUpdateManyWithoutUserInput = {
   tags?: Prisma.MediaUpdatetagsInput | string[]
   date?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   adId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  downloads?: Prisma.IntFieldUpdateOperationsInput | number
   views?: Prisma.IntFieldUpdateOperationsInput | number
+  downloads?: Prisma.IntFieldUpdateOperationsInput | number
 }
 
 
@@ -919,13 +919,13 @@ export type MediaUncheckedUpdateManyWithoutUserInput = {
  */
 
 export type MediaCountOutputType = {
-  likes: number
   savedBy: number
+  likes: number
 }
 
 export type MediaCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  likes?: boolean | MediaCountOutputTypeCountLikesArgs
   savedBy?: boolean | MediaCountOutputTypeCountSavedByArgs
+  likes?: boolean | MediaCountOutputTypeCountLikesArgs
 }
 
 /**
@@ -941,15 +941,15 @@ export type MediaCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extens
 /**
  * MediaCountOutputType without action
  */
-export type MediaCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MediaLikeWhereInput
+export type MediaCountOutputTypeCountSavedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedMediaWhereInput
 }
 
 /**
  * MediaCountOutputType without action
  */
-export type MediaCountOutputTypeCountSavedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavedMediaWhereInput
+export type MediaCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaLikeWhereInput
 }
 
 
@@ -964,11 +964,11 @@ export type MediaSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   date?: boolean
   adId?: boolean
   userId?: boolean
-  downloads?: boolean
   views?: boolean
+  downloads?: boolean
   user?: boolean | Prisma.Media$userArgs<ExtArgs>
-  likes?: boolean | Prisma.Media$likesArgs<ExtArgs>
   savedBy?: boolean | Prisma.Media$savedByArgs<ExtArgs>
+  likes?: boolean | Prisma.Media$likesArgs<ExtArgs>
   _count?: boolean | Prisma.MediaCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
@@ -983,8 +983,8 @@ export type MediaSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   date?: boolean
   adId?: boolean
   userId?: boolean
-  downloads?: boolean
   views?: boolean
+  downloads?: boolean
   user?: boolean | Prisma.Media$userArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
@@ -999,8 +999,8 @@ export type MediaSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   date?: boolean
   adId?: boolean
   userId?: boolean
-  downloads?: boolean
   views?: boolean
+  downloads?: boolean
   user?: boolean | Prisma.Media$userArgs<ExtArgs>
 }, ExtArgs["result"]["media"]>
 
@@ -1015,15 +1015,15 @@ export type MediaSelectScalar = {
   date?: boolean
   adId?: boolean
   userId?: boolean
-  downloads?: boolean
   views?: boolean
+  downloads?: boolean
 }
 
-export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "title" | "description" | "url" | "thumbnail" | "tags" | "date" | "adId" | "userId" | "downloads" | "views", ExtArgs["result"]["media"]>
+export type MediaOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "title" | "description" | "url" | "thumbnail" | "tags" | "date" | "adId" | "userId" | "views" | "downloads", ExtArgs["result"]["media"]>
 export type MediaInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.Media$userArgs<ExtArgs>
-  likes?: boolean | Prisma.Media$likesArgs<ExtArgs>
   savedBy?: boolean | Prisma.Media$savedByArgs<ExtArgs>
+  likes?: boolean | Prisma.Media$likesArgs<ExtArgs>
   _count?: boolean | Prisma.MediaCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type MediaIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1037,8 +1037,8 @@ export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   name: "Media"
   objects: {
     user: Prisma.$UserPayload<ExtArgs> | null
-    likes: Prisma.$MediaLikePayload<ExtArgs>[]
     savedBy: Prisma.$SavedMediaPayload<ExtArgs>[]
+    likes: Prisma.$MediaLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1051,8 +1051,8 @@ export type $MediaPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     date: Date | null
     adId: string | null
     userId: string | null
-    downloads: number
     views: number
+    downloads: number
   }, ExtArgs["result"]["media"]>
   composites: {}
 }
@@ -1448,8 +1448,8 @@ readonly fields: MediaFieldRefs;
 export interface Prisma__MediaClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   user<T extends Prisma.Media$userArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$userArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-  likes<T extends Prisma.Media$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   savedBy<T extends Prisma.Media$savedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$savedByArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  likes<T extends Prisma.Media$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Media$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1489,8 +1489,8 @@ export interface MediaFieldRefs {
   readonly date: Prisma.FieldRef<"Media", 'DateTime'>
   readonly adId: Prisma.FieldRef<"Media", 'String'>
   readonly userId: Prisma.FieldRef<"Media", 'String'>
-  readonly downloads: Prisma.FieldRef<"Media", 'Int'>
   readonly views: Prisma.FieldRef<"Media", 'Int'>
+  readonly downloads: Prisma.FieldRef<"Media", 'Int'>
 }
     
 
@@ -1911,30 +1911,6 @@ export type Media$userArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs
 }
 
 /**
- * Media.likes
- */
-export type Media$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the MediaLike
-   */
-  select?: Prisma.MediaLikeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the MediaLike
-   */
-  omit?: Prisma.MediaLikeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.MediaLikeInclude<ExtArgs> | null
-  where?: Prisma.MediaLikeWhereInput
-  orderBy?: Prisma.MediaLikeOrderByWithRelationInput | Prisma.MediaLikeOrderByWithRelationInput[]
-  cursor?: Prisma.MediaLikeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.MediaLikeScalarFieldEnum | Prisma.MediaLikeScalarFieldEnum[]
-}
-
-/**
  * Media.savedBy
  */
 export type Media$savedByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1956,6 +1932,30 @@ export type Media$savedByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.SavedMediaScalarFieldEnum | Prisma.SavedMediaScalarFieldEnum[]
+}
+
+/**
+ * Media.likes
+ */
+export type Media$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the MediaLike
+   */
+  select?: Prisma.MediaLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the MediaLike
+   */
+  omit?: Prisma.MediaLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaLikeInclude<ExtArgs> | null
+  where?: Prisma.MediaLikeWhereInput
+  orderBy?: Prisma.MediaLikeOrderByWithRelationInput | Prisma.MediaLikeOrderByWithRelationInput[]
+  cursor?: Prisma.MediaLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaLikeScalarFieldEnum | Prisma.MediaLikeScalarFieldEnum[]
 }
 
 /**

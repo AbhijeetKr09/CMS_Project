@@ -214,11 +214,11 @@ export type FeedPostWhereInput = {
   categoryId?: Prisma.StringNullableFilter<"FeedPost"> | string | null
   parentId?: Prisma.StringNullableFilter<"FeedPost"> | string | null
   tags?: Prisma.StringNullableListFilter<"FeedPost">
-  likes?: Prisma.FeedLikeListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.FeedCategoryNullableScalarRelationFilter, Prisma.FeedCategoryWhereInput> | null
   parent?: Prisma.XOR<Prisma.FeedPostNullableScalarRelationFilter, Prisma.FeedPostWhereInput> | null
   replies?: Prisma.FeedPostListRelationFilter
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  likes?: Prisma.FeedLikeListRelationFilter
 }
 
 export type FeedPostOrderByWithRelationInput = {
@@ -232,11 +232,11 @@ export type FeedPostOrderByWithRelationInput = {
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   parentId?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
-  likes?: Prisma.FeedLikeOrderByRelationAggregateInput
+  user?: Prisma.UserOrderByWithRelationInput
   category?: Prisma.FeedCategoryOrderByWithRelationInput
   parent?: Prisma.FeedPostOrderByWithRelationInput
   replies?: Prisma.FeedPostOrderByRelationAggregateInput
-  user?: Prisma.UserOrderByWithRelationInput
+  likes?: Prisma.FeedLikeOrderByRelationAggregateInput
 }
 
 export type FeedPostWhereUniqueInput = Prisma.AtLeast<{
@@ -253,11 +253,11 @@ export type FeedPostWhereUniqueInput = Prisma.AtLeast<{
   categoryId?: Prisma.StringNullableFilter<"FeedPost"> | string | null
   parentId?: Prisma.StringNullableFilter<"FeedPost"> | string | null
   tags?: Prisma.StringNullableListFilter<"FeedPost">
-  likes?: Prisma.FeedLikeListRelationFilter
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   category?: Prisma.XOR<Prisma.FeedCategoryNullableScalarRelationFilter, Prisma.FeedCategoryWhereInput> | null
   parent?: Prisma.XOR<Prisma.FeedPostNullableScalarRelationFilter, Prisma.FeedPostWhereInput> | null
   replies?: Prisma.FeedPostListRelationFilter
-  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  likes?: Prisma.FeedLikeListRelationFilter
 }, "id">
 
 export type FeedPostOrderByWithAggregationInput = {
@@ -300,11 +300,11 @@ export type FeedPostCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
+  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
   category?: Prisma.FeedCategoryCreateNestedOneWithoutPostsInput
   parent?: Prisma.FeedPostCreateNestedOneWithoutRepliesInput
   replies?: Prisma.FeedPostCreateNestedManyWithoutParentInput
-  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
+  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUncheckedCreateInput = {
@@ -318,8 +318,8 @@ export type FeedPostUncheckedCreateInput = {
   categoryId?: string | null
   parentId?: string | null
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
   replies?: Prisma.FeedPostUncheckedCreateNestedManyWithoutParentInput
+  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUpdateInput = {
@@ -330,11 +330,11 @@ export type FeedPostUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
   category?: Prisma.FeedCategoryUpdateOneWithoutPostsNestedInput
   parent?: Prisma.FeedPostUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.FeedPostUpdateManyWithoutParentNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
+  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateInput = {
@@ -348,8 +348,8 @@ export type FeedPostUncheckedUpdateInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
   replies?: Prisma.FeedPostUncheckedUpdateManyWithoutParentNestedInput
+  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostCreateManyInput = {
@@ -625,10 +625,10 @@ export type FeedPostCreateWithoutUserInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
   category?: Prisma.FeedCategoryCreateNestedOneWithoutPostsInput
   parent?: Prisma.FeedPostCreateNestedOneWithoutRepliesInput
   replies?: Prisma.FeedPostCreateNestedManyWithoutParentInput
+  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUncheckedCreateWithoutUserInput = {
@@ -641,8 +641,8 @@ export type FeedPostUncheckedCreateWithoutUserInput = {
   categoryId?: string | null
   parentId?: string | null
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
   replies?: Prisma.FeedPostUncheckedCreateNestedManyWithoutParentInput
+  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostCreateOrConnectWithoutUserInput = {
@@ -695,10 +695,10 @@ export type FeedPostCreateWithoutCategoryInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
+  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
   parent?: Prisma.FeedPostCreateNestedOneWithoutRepliesInput
   replies?: Prisma.FeedPostCreateNestedManyWithoutParentInput
-  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
+  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUncheckedCreateWithoutCategoryInput = {
@@ -711,8 +711,8 @@ export type FeedPostUncheckedCreateWithoutCategoryInput = {
   userId: string
   parentId?: string | null
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
   replies?: Prisma.FeedPostUncheckedCreateNestedManyWithoutParentInput
+  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostCreateOrConnectWithoutCategoryInput = {
@@ -749,10 +749,10 @@ export type FeedPostCreateWithoutRepliesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
+  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
   category?: Prisma.FeedCategoryCreateNestedOneWithoutPostsInput
   parent?: Prisma.FeedPostCreateNestedOneWithoutRepliesInput
-  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
+  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUncheckedCreateWithoutRepliesInput = {
@@ -782,10 +782,10 @@ export type FeedPostCreateWithoutParentInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
+  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
   category?: Prisma.FeedCategoryCreateNestedOneWithoutPostsInput
   replies?: Prisma.FeedPostCreateNestedManyWithoutParentInput
-  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
+  likes?: Prisma.FeedLikeCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostUncheckedCreateWithoutParentInput = {
@@ -798,8 +798,8 @@ export type FeedPostUncheckedCreateWithoutParentInput = {
   userId: string
   categoryId?: string | null
   tags?: Prisma.FeedPostCreatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
   replies?: Prisma.FeedPostUncheckedCreateNestedManyWithoutParentInput
+  likes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutPostInput
 }
 
 export type FeedPostCreateOrConnectWithoutParentInput = {
@@ -831,10 +831,10 @@ export type FeedPostUpdateWithoutRepliesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
   category?: Prisma.FeedCategoryUpdateOneWithoutPostsNestedInput
   parent?: Prisma.FeedPostUpdateOneWithoutRepliesNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
+  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateWithoutRepliesInput = {
@@ -875,10 +875,10 @@ export type FeedPostCreateWithoutLikesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   tags?: Prisma.FeedPostCreatetagsInput | string[]
+  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
   category?: Prisma.FeedCategoryCreateNestedOneWithoutPostsInput
   parent?: Prisma.FeedPostCreateNestedOneWithoutRepliesInput
   replies?: Prisma.FeedPostCreateNestedManyWithoutParentInput
-  user: Prisma.UserCreateNestedOneWithoutFeedPostsInput
 }
 
 export type FeedPostUncheckedCreateWithoutLikesInput = {
@@ -919,10 +919,10 @@ export type FeedPostUpdateWithoutLikesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
+  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
   category?: Prisma.FeedCategoryUpdateOneWithoutPostsNestedInput
   parent?: Prisma.FeedPostUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.FeedPostUpdateManyWithoutParentNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
 }
 
 export type FeedPostUncheckedUpdateWithoutLikesInput = {
@@ -959,10 +959,10 @@ export type FeedPostUpdateWithoutUserInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
   category?: Prisma.FeedCategoryUpdateOneWithoutPostsNestedInput
   parent?: Prisma.FeedPostUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.FeedPostUpdateManyWithoutParentNestedInput
+  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateWithoutUserInput = {
@@ -975,8 +975,8 @@ export type FeedPostUncheckedUpdateWithoutUserInput = {
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
   replies?: Prisma.FeedPostUncheckedUpdateManyWithoutParentNestedInput
+  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateManyWithoutUserInput = {
@@ -1011,10 +1011,10 @@ export type FeedPostUpdateWithoutCategoryInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
   parent?: Prisma.FeedPostUpdateOneWithoutRepliesNestedInput
   replies?: Prisma.FeedPostUpdateManyWithoutParentNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
+  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateWithoutCategoryInput = {
@@ -1027,8 +1027,8 @@ export type FeedPostUncheckedUpdateWithoutCategoryInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   parentId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
   replies?: Prisma.FeedPostUncheckedUpdateManyWithoutParentNestedInput
+  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateManyWithoutCategoryInput = {
@@ -1063,10 +1063,10 @@ export type FeedPostUpdateWithoutParentInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
   category?: Prisma.FeedCategoryUpdateOneWithoutPostsNestedInput
   replies?: Prisma.FeedPostUpdateManyWithoutParentNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutFeedPostsNestedInput
+  likes?: Prisma.FeedLikeUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateWithoutParentInput = {
@@ -1079,8 +1079,8 @@ export type FeedPostUncheckedUpdateWithoutParentInput = {
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.FeedPostUpdatetagsInput | string[]
-  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
   replies?: Prisma.FeedPostUncheckedUpdateManyWithoutParentNestedInput
+  likes?: Prisma.FeedLikeUncheckedUpdateManyWithoutPostNestedInput
 }
 
 export type FeedPostUncheckedUpdateManyWithoutParentInput = {
@@ -1101,13 +1101,13 @@ export type FeedPostUncheckedUpdateManyWithoutParentInput = {
  */
 
 export type FeedPostCountOutputType = {
-  likes: number
   replies: number
+  likes: number
 }
 
 export type FeedPostCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  likes?: boolean | FeedPostCountOutputTypeCountLikesArgs
   replies?: boolean | FeedPostCountOutputTypeCountRepliesArgs
+  likes?: boolean | FeedPostCountOutputTypeCountLikesArgs
 }
 
 /**
@@ -1123,15 +1123,15 @@ export type FeedPostCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Ext
 /**
  * FeedPostCountOutputType without action
  */
-export type FeedPostCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedLikeWhereInput
+export type FeedPostCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedPostWhereInput
 }
 
 /**
  * FeedPostCountOutputType without action
  */
-export type FeedPostCountOutputTypeCountRepliesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedPostWhereInput
+export type FeedPostCountOutputTypeCountLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedLikeWhereInput
 }
 
 
@@ -1146,11 +1146,11 @@ export type FeedPostSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   categoryId?: boolean
   parentId?: boolean
   tags?: boolean
-  likes?: boolean | Prisma.FeedPost$likesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
   replies?: boolean | Prisma.FeedPost$repliesArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  likes?: boolean | Prisma.FeedPost$likesArgs<ExtArgs>
   _count?: boolean | Prisma.FeedPostCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedPost"]>
 
@@ -1165,9 +1165,9 @@ export type FeedPostSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   categoryId?: boolean
   parentId?: boolean
   tags?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedPost"]>
 
 export type FeedPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1181,9 +1181,9 @@ export type FeedPostSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   categoryId?: boolean
   parentId?: boolean
   tags?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedPost"]>
 
 export type FeedPostSelectScalar = {
@@ -1201,32 +1201,32 @@ export type FeedPostSelectScalar = {
 
 export type FeedPostOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "content" | "images" | "createdAt" | "updatedAt" | "userId" | "categoryId" | "parentId" | "tags", ExtArgs["result"]["feedPost"]>
 export type FeedPostInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  likes?: boolean | Prisma.FeedPost$likesArgs<ExtArgs>
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
   replies?: boolean | Prisma.FeedPost$repliesArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  likes?: boolean | Prisma.FeedPost$likesArgs<ExtArgs>
   _count?: boolean | Prisma.FeedPostCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FeedPostIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 export type FeedPostIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   category?: boolean | Prisma.FeedPost$categoryArgs<ExtArgs>
   parent?: boolean | Prisma.FeedPost$parentArgs<ExtArgs>
-  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
 
 export type $FeedPostPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FeedPost"
   objects: {
-    likes: Prisma.$FeedLikePayload<ExtArgs>[]
+    user: Prisma.$UserPayload<ExtArgs>
     category: Prisma.$FeedCategoryPayload<ExtArgs> | null
     parent: Prisma.$FeedPostPayload<ExtArgs> | null
     replies: Prisma.$FeedPostPayload<ExtArgs>[]
-    user: Prisma.$UserPayload<ExtArgs>
+    likes: Prisma.$FeedLikePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1633,11 +1633,11 @@ readonly fields: FeedPostFieldRefs;
  */
 export interface Prisma__FeedPostClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  likes<T extends Prisma.FeedPost$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPost$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   category<T extends Prisma.FeedPost$categoryArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPost$categoryArgs<ExtArgs>>): Prisma.Prisma__FeedCategoryClient<runtime.Types.Result.GetResult<Prisma.$FeedCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   parent<T extends Prisma.FeedPost$parentArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPost$parentArgs<ExtArgs>>): Prisma.Prisma__FeedPostClient<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   replies<T extends Prisma.FeedPost$repliesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPost$repliesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  likes<T extends Prisma.FeedPost$likesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPost$likesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2078,30 +2078,6 @@ export type FeedPostDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
 }
 
 /**
- * FeedPost.likes
- */
-export type FeedPost$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FeedLike
-   */
-  select?: Prisma.FeedLikeSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the FeedLike
-   */
-  omit?: Prisma.FeedLikeOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.FeedLikeInclude<ExtArgs> | null
-  where?: Prisma.FeedLikeWhereInput
-  orderBy?: Prisma.FeedLikeOrderByWithRelationInput | Prisma.FeedLikeOrderByWithRelationInput[]
-  cursor?: Prisma.FeedLikeWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.FeedLikeScalarFieldEnum | Prisma.FeedLikeScalarFieldEnum[]
-}
-
-/**
  * FeedPost.category
  */
 export type FeedPost$categoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2161,6 +2137,30 @@ export type FeedPost$repliesArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.FeedPostScalarFieldEnum | Prisma.FeedPostScalarFieldEnum[]
+}
+
+/**
+ * FeedPost.likes
+ */
+export type FeedPost$likesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FeedLike
+   */
+  select?: Prisma.FeedLikeSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FeedLike
+   */
+  omit?: Prisma.FeedLikeOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FeedLikeInclude<ExtArgs> | null
+  where?: Prisma.FeedLikeWhereInput
+  orderBy?: Prisma.FeedLikeOrderByWithRelationInput | Prisma.FeedLikeOrderByWithRelationInput[]
+  cursor?: Prisma.FeedLikeWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FeedLikeScalarFieldEnum | Prisma.FeedLikeScalarFieldEnum[]
 }
 
 /**

@@ -193,14 +193,12 @@ export type AirlineWhereInput = {
   id?: Prisma.IntFilter<"Airline"> | number
   name?: Prisma.StringFilter<"Airline"> | string
   reviews?: Prisma.FlightReviewListRelationFilter
-  questions?: Prisma.QuestionListRelationFilter
 }
 
 export type AirlineOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   reviews?: Prisma.FlightReviewOrderByRelationAggregateInput
-  questions?: Prisma.QuestionOrderByRelationAggregateInput
 }
 
 export type AirlineWhereUniqueInput = Prisma.AtLeast<{
@@ -210,7 +208,6 @@ export type AirlineWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.AirlineWhereInput[]
   NOT?: Prisma.AirlineWhereInput | Prisma.AirlineWhereInput[]
   reviews?: Prisma.FlightReviewListRelationFilter
-  questions?: Prisma.QuestionListRelationFilter
 }, "id" | "name">
 
 export type AirlineOrderByWithAggregationInput = {
@@ -234,27 +231,23 @@ export type AirlineScalarWhereWithAggregatesInput = {
 export type AirlineCreateInput = {
   name: string
   reviews?: Prisma.FlightReviewCreateNestedManyWithoutAirlineInput
-  questions?: Prisma.QuestionCreateNestedManyWithoutAirlineInput
 }
 
 export type AirlineUncheckedCreateInput = {
   id?: number
   name: string
   reviews?: Prisma.FlightReviewUncheckedCreateNestedManyWithoutAirlineInput
-  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutAirlineInput
 }
 
 export type AirlineUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.FlightReviewUpdateManyWithoutAirlineNestedInput
-  questions?: Prisma.QuestionUpdateManyWithoutAirlineNestedInput
 }
 
 export type AirlineUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
   reviews?: Prisma.FlightReviewUncheckedUpdateManyWithoutAirlineNestedInput
-  questions?: Prisma.QuestionUncheckedUpdateManyWithoutAirlineNestedInput
 }
 
 export type AirlineCreateManyInput = {
@@ -294,30 +287,9 @@ export type AirlineSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
 }
 
-export type AirlineNullableScalarRelationFilter = {
-  is?: Prisma.AirlineWhereInput | null
-  isNot?: Prisma.AirlineWhereInput | null
-}
-
 export type AirlineScalarRelationFilter = {
   is?: Prisma.AirlineWhereInput
   isNot?: Prisma.AirlineWhereInput
-}
-
-export type AirlineCreateNestedOneWithoutQuestionsInput = {
-  create?: Prisma.XOR<Prisma.AirlineCreateWithoutQuestionsInput, Prisma.AirlineUncheckedCreateWithoutQuestionsInput>
-  connectOrCreate?: Prisma.AirlineCreateOrConnectWithoutQuestionsInput
-  connect?: Prisma.AirlineWhereUniqueInput
-}
-
-export type AirlineUpdateOneWithoutQuestionsNestedInput = {
-  create?: Prisma.XOR<Prisma.AirlineCreateWithoutQuestionsInput, Prisma.AirlineUncheckedCreateWithoutQuestionsInput>
-  connectOrCreate?: Prisma.AirlineCreateOrConnectWithoutQuestionsInput
-  upsert?: Prisma.AirlineUpsertWithoutQuestionsInput
-  disconnect?: Prisma.AirlineWhereInput | boolean
-  delete?: Prisma.AirlineWhereInput | boolean
-  connect?: Prisma.AirlineWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.AirlineUpdateToOneWithWhereWithoutQuestionsInput, Prisma.AirlineUpdateWithoutQuestionsInput>, Prisma.AirlineUncheckedUpdateWithoutQuestionsInput>
 }
 
 export type AirlineCreateNestedOneWithoutReviewsInput = {
@@ -334,53 +306,13 @@ export type AirlineUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.AirlineUpdateToOneWithWhereWithoutReviewsInput, Prisma.AirlineUpdateWithoutReviewsInput>, Prisma.AirlineUncheckedUpdateWithoutReviewsInput>
 }
 
-export type AirlineCreateWithoutQuestionsInput = {
-  name: string
-  reviews?: Prisma.FlightReviewCreateNestedManyWithoutAirlineInput
-}
-
-export type AirlineUncheckedCreateWithoutQuestionsInput = {
-  id?: number
-  name: string
-  reviews?: Prisma.FlightReviewUncheckedCreateNestedManyWithoutAirlineInput
-}
-
-export type AirlineCreateOrConnectWithoutQuestionsInput = {
-  where: Prisma.AirlineWhereUniqueInput
-  create: Prisma.XOR<Prisma.AirlineCreateWithoutQuestionsInput, Prisma.AirlineUncheckedCreateWithoutQuestionsInput>
-}
-
-export type AirlineUpsertWithoutQuestionsInput = {
-  update: Prisma.XOR<Prisma.AirlineUpdateWithoutQuestionsInput, Prisma.AirlineUncheckedUpdateWithoutQuestionsInput>
-  create: Prisma.XOR<Prisma.AirlineCreateWithoutQuestionsInput, Prisma.AirlineUncheckedCreateWithoutQuestionsInput>
-  where?: Prisma.AirlineWhereInput
-}
-
-export type AirlineUpdateToOneWithWhereWithoutQuestionsInput = {
-  where?: Prisma.AirlineWhereInput
-  data: Prisma.XOR<Prisma.AirlineUpdateWithoutQuestionsInput, Prisma.AirlineUncheckedUpdateWithoutQuestionsInput>
-}
-
-export type AirlineUpdateWithoutQuestionsInput = {
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  reviews?: Prisma.FlightReviewUpdateManyWithoutAirlineNestedInput
-}
-
-export type AirlineUncheckedUpdateWithoutQuestionsInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  name?: Prisma.StringFieldUpdateOperationsInput | string
-  reviews?: Prisma.FlightReviewUncheckedUpdateManyWithoutAirlineNestedInput
-}
-
 export type AirlineCreateWithoutReviewsInput = {
   name: string
-  questions?: Prisma.QuestionCreateNestedManyWithoutAirlineInput
 }
 
 export type AirlineUncheckedCreateWithoutReviewsInput = {
   id?: number
   name: string
-  questions?: Prisma.QuestionUncheckedCreateNestedManyWithoutAirlineInput
 }
 
 export type AirlineCreateOrConnectWithoutReviewsInput = {
@@ -401,13 +333,11 @@ export type AirlineUpdateToOneWithWhereWithoutReviewsInput = {
 
 export type AirlineUpdateWithoutReviewsInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  questions?: Prisma.QuestionUpdateManyWithoutAirlineNestedInput
 }
 
 export type AirlineUncheckedUpdateWithoutReviewsInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   name?: Prisma.StringFieldUpdateOperationsInput | string
-  questions?: Prisma.QuestionUncheckedUpdateManyWithoutAirlineNestedInput
 }
 
 
@@ -417,12 +347,10 @@ export type AirlineUncheckedUpdateWithoutReviewsInput = {
 
 export type AirlineCountOutputType = {
   reviews: number
-  questions: number
 }
 
 export type AirlineCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | AirlineCountOutputTypeCountReviewsArgs
-  questions?: boolean | AirlineCountOutputTypeCountQuestionsArgs
 }
 
 /**
@@ -442,19 +370,11 @@ export type AirlineCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types
   where?: Prisma.FlightReviewWhereInput
 }
 
-/**
- * AirlineCountOutputType without action
- */
-export type AirlineCountOutputTypeCountQuestionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.QuestionWhereInput
-}
-
 
 export type AirlineSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   name?: boolean
   reviews?: boolean | Prisma.Airline$reviewsArgs<ExtArgs>
-  questions?: boolean | Prisma.Airline$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.AirlineCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["airline"]>
 
@@ -476,7 +396,6 @@ export type AirlineSelectScalar = {
 export type AirlineOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name", ExtArgs["result"]["airline"]>
 export type AirlineInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviews?: boolean | Prisma.Airline$reviewsArgs<ExtArgs>
-  questions?: boolean | Prisma.Airline$questionsArgs<ExtArgs>
   _count?: boolean | Prisma.AirlineCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type AirlineIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -486,7 +405,6 @@ export type $AirlinePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   name: "Airline"
   objects: {
     reviews: Prisma.$FlightReviewPayload<ExtArgs>[]
-    questions: Prisma.$QuestionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -886,7 +804,6 @@ readonly fields: AirlineFieldRefs;
 export interface Prisma__AirlineClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   reviews<T extends Prisma.Airline$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Airline$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FlightReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  questions<T extends Prisma.Airline$questionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Airline$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$QuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1332,30 +1249,6 @@ export type Airline$reviewsArgs<ExtArgs extends runtime.Types.Extensions.Interna
   take?: number
   skip?: number
   distinct?: Prisma.FlightReviewScalarFieldEnum | Prisma.FlightReviewScalarFieldEnum[]
-}
-
-/**
- * Airline.questions
- */
-export type Airline$questionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Question
-   */
-  select?: Prisma.QuestionSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Question
-   */
-  omit?: Prisma.QuestionOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.QuestionInclude<ExtArgs> | null
-  where?: Prisma.QuestionWhereInput
-  orderBy?: Prisma.QuestionOrderByWithRelationInput | Prisma.QuestionOrderByWithRelationInput[]
-  cursor?: Prisma.QuestionWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.QuestionScalarFieldEnum | Prisma.QuestionScalarFieldEnum[]
 }
 
 /**

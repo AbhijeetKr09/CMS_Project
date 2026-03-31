@@ -390,12 +390,8 @@ export const ModelName = {
   ArticleKeyInsight: 'ArticleKeyInsight',
   ArticleRelatedNews: 'ArticleRelatedNews',
   Comment: 'Comment',
-  StockCache: 'StockCache',
-  StockInsight: 'StockInsight',
   Airline: 'Airline',
-  Question: 'Question',
   FlightReview: 'FlightReview',
-  Answer: 'Answer',
   Event: 'Event',
   Media: 'Media',
   User: 'User',
@@ -417,8 +413,7 @@ export const ModelName = {
   CmsUser: 'CmsUser',
   StagedArticle: 'StagedArticle',
   StagedArticleImage: 'StagedArticleImage',
-  StagedArticleKeyInsight: 'StagedArticleKeyInsight',
-  StagedArticleRelatedNews: 'StagedArticleRelatedNews'
+  StagedArticleKeyInsight: 'StagedArticleKeyInsight'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -434,7 +429,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "session" | "article" | "articleImage" | "articleKeyInsight" | "articleRelatedNews" | "comment" | "stockCache" | "stockInsight" | "airline" | "question" | "flightReview" | "answer" | "event" | "media" | "user" | "savedMedia" | "mediaLike" | "userHistory" | "feedCategory" | "feedPost" | "feedLike" | "analyticalArticle" | "userFollow" | "message" | "expert" | "socialTrend" | "notification" | "savedEvent" | "pinnedInsight" | "savedArticle" | "cmsUser" | "stagedArticle" | "stagedArticleImage" | "stagedArticleKeyInsight" | "stagedArticleRelatedNews"
+    modelProps: "session" | "article" | "articleImage" | "articleKeyInsight" | "articleRelatedNews" | "comment" | "airline" | "flightReview" | "event" | "media" | "user" | "savedMedia" | "mediaLike" | "userHistory" | "feedCategory" | "feedPost" | "feedLike" | "analyticalArticle" | "userFollow" | "message" | "expert" | "socialTrend" | "notification" | "savedEvent" | "pinnedInsight" | "savedArticle" | "cmsUser" | "stagedArticle" | "stagedArticleImage" | "stagedArticleKeyInsight"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -882,154 +877,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    StockCache: {
-      payload: Prisma.$StockCachePayload<ExtArgs>
-      fields: Prisma.StockCacheFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.StockCacheFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.StockCacheFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        findFirst: {
-          args: Prisma.StockCacheFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.StockCacheFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        findMany: {
-          args: Prisma.StockCacheFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>[]
-        }
-        create: {
-          args: Prisma.StockCacheCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        createMany: {
-          args: Prisma.StockCacheCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.StockCacheCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>[]
-        }
-        delete: {
-          args: Prisma.StockCacheDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        update: {
-          args: Prisma.StockCacheUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        deleteMany: {
-          args: Prisma.StockCacheDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.StockCacheUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.StockCacheUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>[]
-        }
-        upsert: {
-          args: Prisma.StockCacheUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockCachePayload>
-        }
-        aggregate: {
-          args: Prisma.StockCacheAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStockCache>
-        }
-        groupBy: {
-          args: Prisma.StockCacheGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StockCacheGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.StockCacheCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StockCacheCountAggregateOutputType> | number
-        }
-      }
-    }
-    StockInsight: {
-      payload: Prisma.$StockInsightPayload<ExtArgs>
-      fields: Prisma.StockInsightFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.StockInsightFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.StockInsightFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        findFirst: {
-          args: Prisma.StockInsightFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.StockInsightFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        findMany: {
-          args: Prisma.StockInsightFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>[]
-        }
-        create: {
-          args: Prisma.StockInsightCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        createMany: {
-          args: Prisma.StockInsightCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.StockInsightCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>[]
-        }
-        delete: {
-          args: Prisma.StockInsightDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        update: {
-          args: Prisma.StockInsightUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        deleteMany: {
-          args: Prisma.StockInsightDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.StockInsightUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.StockInsightUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>[]
-        }
-        upsert: {
-          args: Prisma.StockInsightUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StockInsightPayload>
-        }
-        aggregate: {
-          args: Prisma.StockInsightAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStockInsight>
-        }
-        groupBy: {
-          args: Prisma.StockInsightGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StockInsightGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.StockInsightCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StockInsightCountAggregateOutputType> | number
-        }
-      }
-    }
     Airline: {
       payload: Prisma.$AirlinePayload<ExtArgs>
       fields: Prisma.AirlineFieldRefs
@@ -1104,80 +951,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    Question: {
-      payload: Prisma.$QuestionPayload<ExtArgs>
-      fields: Prisma.QuestionFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.QuestionFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.QuestionFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        findFirst: {
-          args: Prisma.QuestionFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.QuestionFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        findMany: {
-          args: Prisma.QuestionFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>[]
-        }
-        create: {
-          args: Prisma.QuestionCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        createMany: {
-          args: Prisma.QuestionCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.QuestionCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>[]
-        }
-        delete: {
-          args: Prisma.QuestionDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        update: {
-          args: Prisma.QuestionUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        deleteMany: {
-          args: Prisma.QuestionDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.QuestionUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.QuestionUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>[]
-        }
-        upsert: {
-          args: Prisma.QuestionUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$QuestionPayload>
-        }
-        aggregate: {
-          args: Prisma.QuestionAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateQuestion>
-        }
-        groupBy: {
-          args: Prisma.QuestionGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.QuestionGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.QuestionCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.QuestionCountAggregateOutputType> | number
-        }
-      }
-    }
     FlightReview: {
       payload: Prisma.$FlightReviewPayload<ExtArgs>
       fields: Prisma.FlightReviewFieldRefs
@@ -1249,80 +1022,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.FlightReviewCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.FlightReviewCountAggregateOutputType> | number
-        }
-      }
-    }
-    Answer: {
-      payload: Prisma.$AnswerPayload<ExtArgs>
-      fields: Prisma.AnswerFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.AnswerFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.AnswerFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        findFirst: {
-          args: Prisma.AnswerFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.AnswerFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        findMany: {
-          args: Prisma.AnswerFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>[]
-        }
-        create: {
-          args: Prisma.AnswerCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        createMany: {
-          args: Prisma.AnswerCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.AnswerCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>[]
-        }
-        delete: {
-          args: Prisma.AnswerDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        update: {
-          args: Prisma.AnswerUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        deleteMany: {
-          args: Prisma.AnswerDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.AnswerUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.AnswerUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>[]
-        }
-        upsert: {
-          args: Prisma.AnswerUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnswerPayload>
-        }
-        aggregate: {
-          args: Prisma.AnswerAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateAnswer>
-        }
-        groupBy: {
-          args: Prisma.AnswerGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AnswerGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.AnswerCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AnswerCountAggregateOutputType> | number
         }
       }
     }
@@ -2954,80 +2653,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    StagedArticleRelatedNews: {
-      payload: Prisma.$StagedArticleRelatedNewsPayload<ExtArgs>
-      fields: Prisma.StagedArticleRelatedNewsFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.StagedArticleRelatedNewsFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.StagedArticleRelatedNewsFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        findFirst: {
-          args: Prisma.StagedArticleRelatedNewsFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.StagedArticleRelatedNewsFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        findMany: {
-          args: Prisma.StagedArticleRelatedNewsFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>[]
-        }
-        create: {
-          args: Prisma.StagedArticleRelatedNewsCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        createMany: {
-          args: Prisma.StagedArticleRelatedNewsCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.StagedArticleRelatedNewsCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>[]
-        }
-        delete: {
-          args: Prisma.StagedArticleRelatedNewsDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        update: {
-          args: Prisma.StagedArticleRelatedNewsUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        deleteMany: {
-          args: Prisma.StagedArticleRelatedNewsDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.StagedArticleRelatedNewsUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.StagedArticleRelatedNewsUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>[]
-        }
-        upsert: {
-          args: Prisma.StagedArticleRelatedNewsUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$StagedArticleRelatedNewsPayload>
-        }
-        aggregate: {
-          args: Prisma.StagedArticleRelatedNewsAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateStagedArticleRelatedNews>
-        }
-        groupBy: {
-          args: Prisma.StagedArticleRelatedNewsGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StagedArticleRelatedNewsGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.StagedArticleRelatedNewsCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.StagedArticleRelatedNewsCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -3114,9 +2739,8 @@ export type ArticleKeyInsightScalarFieldEnum = (typeof ArticleKeyInsightScalarFi
 
 export const ArticleRelatedNewsScalarFieldEnum = {
   id: 'id',
-  newsTitle: 'newsTitle',
-  newsUrl: 'newsUrl',
-  articleId: 'articleId'
+  articleId: 'articleId',
+  relatedArticleId: 'relatedArticleId'
 } as const
 
 export type ArticleRelatedNewsScalarFieldEnum = (typeof ArticleRelatedNewsScalarFieldEnum)[keyof typeof ArticleRelatedNewsScalarFieldEnum]
@@ -3133,25 +2757,6 @@ export const CommentScalarFieldEnum = {
 export type CommentScalarFieldEnum = (typeof CommentScalarFieldEnum)[keyof typeof CommentScalarFieldEnum]
 
 
-export const StockCacheScalarFieldEnum = {
-  id: 'id',
-  symbol: 'symbol',
-  data: 'data',
-  date: 'date'
-} as const
-
-export type StockCacheScalarFieldEnum = (typeof StockCacheScalarFieldEnum)[keyof typeof StockCacheScalarFieldEnum]
-
-
-export const StockInsightScalarFieldEnum = {
-  id: 'id',
-  insight: 'insight',
-  createdAt: 'createdAt'
-} as const
-
-export type StockInsightScalarFieldEnum = (typeof StockInsightScalarFieldEnum)[keyof typeof StockInsightScalarFieldEnum]
-
-
 export const AirlineScalarFieldEnum = {
   id: 'id',
   name: 'name'
@@ -3160,34 +2765,15 @@ export const AirlineScalarFieldEnum = {
 export type AirlineScalarFieldEnum = (typeof AirlineScalarFieldEnum)[keyof typeof AirlineScalarFieldEnum]
 
 
-export const QuestionScalarFieldEnum = {
-  id: 'id',
-  questionText: 'questionText',
-  responseType: 'responseType',
-  airlineId: 'airlineId'
-} as const
-
-export type QuestionScalarFieldEnum = (typeof QuestionScalarFieldEnum)[keyof typeof QuestionScalarFieldEnum]
-
-
 export const FlightReviewScalarFieldEnum = {
   id: 'id',
   createdAt: 'createdAt',
-  airlineId: 'airlineId'
+  airlineId: 'airlineId',
+  rating: 'rating',
+  experience: 'experience'
 } as const
 
 export type FlightReviewScalarFieldEnum = (typeof FlightReviewScalarFieldEnum)[keyof typeof FlightReviewScalarFieldEnum]
-
-
-export const AnswerScalarFieldEnum = {
-  id: 'id',
-  answerRating: 'answerRating',
-  answerText: 'answerText',
-  reviewId: 'reviewId',
-  questionId: 'questionId'
-} as const
-
-export type AnswerScalarFieldEnum = (typeof AnswerScalarFieldEnum)[keyof typeof AnswerScalarFieldEnum]
 
 
 export const EventScalarFieldEnum = {
@@ -3224,8 +2810,8 @@ export const MediaScalarFieldEnum = {
   date: 'date',
   adId: 'adId',
   userId: 'userId',
-  downloads: 'downloads',
-  views: 'views'
+  views: 'views',
+  downloads: 'downloads'
 } as const
 
 export type MediaScalarFieldEnum = (typeof MediaScalarFieldEnum)[keyof typeof MediaScalarFieldEnum]
@@ -3238,10 +2824,10 @@ export const UserScalarFieldEnum = {
   occupation: 'occupation',
   phoneNumber: 'phoneNumber',
   profileImage: 'profileImage',
-  createdAt: 'createdAt',
-  bio: 'bio',
   coverImage: 'coverImage',
+  bio: 'bio',
   isExpert: 'isExpert',
+  createdAt: 'createdAt',
   preferences: 'preferences'
 } as const
 
@@ -3351,8 +2937,8 @@ export const MessageScalarFieldEnum = {
   receiverId: 'receiverId',
   read: 'read',
   createdAt: 'createdAt',
-  deletedByReceiver: 'deletedByReceiver',
-  deletedBySender: 'deletedBySender'
+  deletedBySender: 'deletedBySender',
+  deletedByReceiver: 'deletedByReceiver'
 } as const
 
 export type MessageScalarFieldEnum = (typeof MessageScalarFieldEnum)[keyof typeof MessageScalarFieldEnum]
@@ -3366,10 +2952,10 @@ export const ExpertScalarFieldEnum = {
   image: 'image',
   quote: 'quote',
   highlight: 'highlight',
+  url: 'url',
   isActive: 'isActive',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  url: 'url'
+  updatedAt: 'updatedAt'
 } as const
 
 export type ExpertScalarFieldEnum = (typeof ExpertScalarFieldEnum)[keyof typeof ExpertScalarFieldEnum]
@@ -3469,7 +3055,11 @@ export const StagedArticleScalarFieldEnum = {
   updatedAt: 'updatedAt',
   submittedAt: 'submittedAt',
   reviewedAt: 'reviewedAt',
-  assignedAt: 'assignedAt'
+  assignedAt: 'assignedAt',
+  relatedArticle1Id: 'relatedArticle1Id',
+  relatedArticle2Id: 'relatedArticle2Id',
+  relatedArticle3Id: 'relatedArticle3Id',
+  relatedArticle4Id: 'relatedArticle4Id'
 } as const
 
 export type StagedArticleScalarFieldEnum = (typeof StagedArticleScalarFieldEnum)[keyof typeof StagedArticleScalarFieldEnum]
@@ -3493,16 +3083,6 @@ export const StagedArticleKeyInsightScalarFieldEnum = {
 } as const
 
 export type StagedArticleKeyInsightScalarFieldEnum = (typeof StagedArticleKeyInsightScalarFieldEnum)[keyof typeof StagedArticleKeyInsightScalarFieldEnum]
-
-
-export const StagedArticleRelatedNewsScalarFieldEnum = {
-  id: 'id',
-  newsTitle: 'newsTitle',
-  newsUrl: 'newsUrl',
-  stagedArticleId: 'stagedArticleId'
-} as const
-
-export type StagedArticleRelatedNewsScalarFieldEnum = (typeof StagedArticleRelatedNewsScalarFieldEnum)[keyof typeof StagedArticleRelatedNewsScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -3764,12 +3344,8 @@ export type GlobalOmitConfig = {
   articleKeyInsight?: Prisma.ArticleKeyInsightOmit
   articleRelatedNews?: Prisma.ArticleRelatedNewsOmit
   comment?: Prisma.CommentOmit
-  stockCache?: Prisma.StockCacheOmit
-  stockInsight?: Prisma.StockInsightOmit
   airline?: Prisma.AirlineOmit
-  question?: Prisma.QuestionOmit
   flightReview?: Prisma.FlightReviewOmit
-  answer?: Prisma.AnswerOmit
   event?: Prisma.EventOmit
   media?: Prisma.MediaOmit
   user?: Prisma.UserOmit
@@ -3792,7 +3368,6 @@ export type GlobalOmitConfig = {
   stagedArticle?: Prisma.StagedArticleOmit
   stagedArticleImage?: Prisma.StagedArticleImageOmit
   stagedArticleKeyInsight?: Prisma.StagedArticleKeyInsightOmit
-  stagedArticleRelatedNews?: Prisma.StagedArticleRelatedNewsOmit
 }
 
 /* Types for Logging */

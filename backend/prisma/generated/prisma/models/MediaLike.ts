@@ -208,8 +208,8 @@ export type MediaLikeWhereInput = {
   userId?: Prisma.StringFilter<"MediaLike"> | string
   mediaId?: Prisma.StringFilter<"MediaLike"> | string
   createdAt?: Prisma.DateTimeFilter<"MediaLike"> | Date | string
-  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }
 
 export type MediaLikeOrderByWithRelationInput = {
@@ -217,8 +217,8 @@ export type MediaLikeOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   mediaId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  media?: Prisma.MediaOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  media?: Prisma.MediaOrderByWithRelationInput
 }
 
 export type MediaLikeWhereUniqueInput = Prisma.AtLeast<{
@@ -230,8 +230,8 @@ export type MediaLikeWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"MediaLike"> | string
   mediaId?: Prisma.StringFilter<"MediaLike"> | string
   createdAt?: Prisma.DateTimeFilter<"MediaLike"> | Date | string
-  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  media?: Prisma.XOR<Prisma.MediaScalarRelationFilter, Prisma.MediaWhereInput>
 }, "id" | "userId_mediaId">
 
 export type MediaLikeOrderByWithAggregationInput = {
@@ -258,8 +258,8 @@ export type MediaLikeScalarWhereWithAggregatesInput = {
 
 export type MediaLikeCreateInput = {
   createdAt?: Date | string
-  media: Prisma.MediaCreateNestedOneWithoutLikesInput
   user: Prisma.UserCreateNestedOneWithoutUsersLikedInput
+  media: Prisma.MediaCreateNestedOneWithoutLikesInput
 }
 
 export type MediaLikeUncheckedCreateInput = {
@@ -271,8 +271,8 @@ export type MediaLikeUncheckedCreateInput = {
 
 export type MediaLikeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  media?: Prisma.MediaUpdateOneRequiredWithoutLikesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutUsersLikedNestedInput
+  media?: Prisma.MediaUpdateOneRequiredWithoutLikesNestedInput
 }
 
 export type MediaLikeUncheckedUpdateInput = {
@@ -565,8 +565,8 @@ export type MediaLikeSelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   userId?: boolean
   mediaId?: boolean
   createdAt?: boolean
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mediaLike"]>
 
 export type MediaLikeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -574,8 +574,8 @@ export type MediaLikeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userId?: boolean
   mediaId?: boolean
   createdAt?: boolean
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mediaLike"]>
 
 export type MediaLikeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -583,8 +583,8 @@ export type MediaLikeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ext
   userId?: boolean
   mediaId?: boolean
   createdAt?: boolean
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["mediaLike"]>
 
 export type MediaLikeSelectScalar = {
@@ -596,23 +596,23 @@ export type MediaLikeSelectScalar = {
 
 export type MediaLikeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "mediaId" | "createdAt", ExtArgs["result"]["mediaLike"]>
 export type MediaLikeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type MediaLikeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 export type MediaLikeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  media?: boolean | Prisma.MediaDefaultArgs<ExtArgs>
 }
 
 export type $MediaLikePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "MediaLike"
   objects: {
-    media: Prisma.$MediaPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    media: Prisma.$MediaPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1013,8 +1013,8 @@ readonly fields: MediaLikeFieldRefs;
  */
 export interface Prisma__MediaLikeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  media<T extends Prisma.MediaDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.MediaDefaultArgs<ExtArgs>>): Prisma.Prisma__MediaClient<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

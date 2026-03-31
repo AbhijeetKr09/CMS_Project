@@ -11,6 +11,14 @@ import {
     HiOutlineLogout,
     HiOutlineExclamationCircle,
     HiOutlineCheckCircle,
+    HiOutlineCalendar,
+    HiOutlineTrendingUp,
+    HiOutlineUser,
+    HiOutlineFilm,
+    HiOutlineChartBar,
+    HiOutlineUsers,
+    HiOutlinePaperAirplane,
+    HiOutlineAnnotation,
 } from 'react-icons/hi';
 
 const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
@@ -65,7 +73,20 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
         },
     ];
 
+    // Management tabs visible to EDITOR + ADMIN only
+    const manageTabs = [
+        { id: 'events',               label: 'Events',              icon: HiOutlineCalendar,      action: () => navigate('/admin/events') },
+        { id: 'social-trends',        label: 'Social Trends',       icon: HiOutlineTrendingUp,    action: () => navigate('/admin/social-trends') },
+        { id: 'experts',              label: 'Experts',             icon: HiOutlineUser,          action: () => navigate('/admin/experts') },
+        { id: 'media',                label: 'Media',               icon: HiOutlineFilm,          action: () => navigate('/admin/media') },
+        { id: 'analytical-articles',  label: 'Analytical Articles', icon: HiOutlineChartBar,      action: () => navigate('/admin/analytical-articles') },
+        { id: 'users',                label: 'Users',               icon: HiOutlineUsers,         action: () => navigate('/admin/users') },
+        { id: 'airlines',             label: 'Airlines & Reviews',  icon: HiOutlinePaperAirplane, action: () => navigate('/admin/airlines') },
+        { id: 'comments',             label: 'Comments',            icon: HiOutlineAnnotation,    action: () => navigate('/admin/comments') },
+    ];
+
     const tabs = role === 'EDITOR' || role === 'ADMIN' ? editorTabs : journalistTabs;
+    const isEditorOrAdmin = role === 'EDITOR' || role === 'ADMIN';
 
     const handleTabClick = (tab) => {
         if (tab.action) {
@@ -74,6 +95,7 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
             onTabChange(tab.id);
         }
     };
+
 
     const handleLogout = () => {
         logout();
@@ -125,6 +147,7 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
 
             {/* Navigation tabs */}
             <nav className="flex-1 px-2 py-4 space-y-1 overflow-y-auto">
+                {/* Article workflow tabs */}
                 {tabs.map((tab) => {
                     const Icon = tab.icon;
                     const isActive = activeTab === tab.id;
@@ -156,7 +179,39 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
                         </button>
                     );
                 })}
+
+                {/* Manage Content section (EDITOR + ADMIN only) */}
+                {isEditorOrAdmin && (
+                    <>
+                        <div className={`${collapsed ? 'mx-2 my-2' : 'mx-1 my-2'} border-t border-border`} />
+                        {!collapsed && (
+                            <p className="px-3 py-1 text-xs font-bold text-text-tertiary uppercase tracking-wider">Manage Content</p>
+                        )}
+                        {manageTabs.map((tab) => {
+                            const Icon = tab.icon;
+                            const isActive = activeTab === tab.id;
+                            return (
+                                <button
+                                    key={tab.id}
+                                    onClick={() => handleTabClick(tab)}
+                                    title={collapsed ? tab.label : undefined}
+                                    className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all bg-transparent border-none text-left relative
+                                        ${isActive
+                                            ? 'bg-accent/10 text-accent'
+                                            : 'text-text-secondary hover:text-text-primary hover:bg-bg-primary'
+                                        }
+                                        ${collapsed ? 'justify-center' : ''}
+                                    `}
+                                >
+                                    <Icon className="w-5 h-5 flex-shrink-0" />
+                                    {!collapsed && <span className="flex-1 truncate">{tab.label}</span>}
+                                </button>
+                            );
+                        })}
+                    </>
+                )}
             </nav>
+
 
             {/* User footer */}
             <div className="border-t border-border px-2 py-3">

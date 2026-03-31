@@ -29,29 +29,37 @@ export type AggregateFlightReview = {
 export type FlightReviewAvgAggregateOutputType = {
   id: number | null
   airlineId: number | null
+  rating: number | null
 }
 
 export type FlightReviewSumAggregateOutputType = {
   id: number | null
   airlineId: number | null
+  rating: number | null
 }
 
 export type FlightReviewMinAggregateOutputType = {
   id: number | null
   createdAt: Date | null
   airlineId: number | null
+  rating: number | null
+  experience: string | null
 }
 
 export type FlightReviewMaxAggregateOutputType = {
   id: number | null
   createdAt: Date | null
   airlineId: number | null
+  rating: number | null
+  experience: string | null
 }
 
 export type FlightReviewCountAggregateOutputType = {
   id: number
   createdAt: number
   airlineId: number
+  rating: number
+  experience: number
   _all: number
 }
 
@@ -59,29 +67,37 @@ export type FlightReviewCountAggregateOutputType = {
 export type FlightReviewAvgAggregateInputType = {
   id?: true
   airlineId?: true
+  rating?: true
 }
 
 export type FlightReviewSumAggregateInputType = {
   id?: true
   airlineId?: true
+  rating?: true
 }
 
 export type FlightReviewMinAggregateInputType = {
   id?: true
   createdAt?: true
   airlineId?: true
+  rating?: true
+  experience?: true
 }
 
 export type FlightReviewMaxAggregateInputType = {
   id?: true
   createdAt?: true
   airlineId?: true
+  rating?: true
+  experience?: true
 }
 
 export type FlightReviewCountAggregateInputType = {
   id?: true
   createdAt?: true
   airlineId?: true
+  rating?: true
+  experience?: true
   _all?: true
 }
 
@@ -175,6 +191,8 @@ export type FlightReviewGroupByOutputType = {
   id: number
   createdAt: Date
   airlineId: number
+  rating: number
+  experience: string | null
   _count: FlightReviewCountAggregateOutputType | null
   _avg: FlightReviewAvgAggregateOutputType | null
   _sum: FlightReviewSumAggregateOutputType | null
@@ -204,7 +222,8 @@ export type FlightReviewWhereInput = {
   id?: Prisma.IntFilter<"FlightReview"> | number
   createdAt?: Prisma.DateTimeFilter<"FlightReview"> | Date | string
   airlineId?: Prisma.IntFilter<"FlightReview"> | number
-  answers?: Prisma.AnswerListRelationFilter
+  rating?: Prisma.IntFilter<"FlightReview"> | number
+  experience?: Prisma.StringNullableFilter<"FlightReview"> | string | null
   airline?: Prisma.XOR<Prisma.AirlineScalarRelationFilter, Prisma.AirlineWhereInput>
 }
 
@@ -212,7 +231,8 @@ export type FlightReviewOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
-  answers?: Prisma.AnswerOrderByRelationAggregateInput
+  rating?: Prisma.SortOrder
+  experience?: Prisma.SortOrderInput | Prisma.SortOrder
   airline?: Prisma.AirlineOrderByWithRelationInput
 }
 
@@ -223,7 +243,8 @@ export type FlightReviewWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.FlightReviewWhereInput | Prisma.FlightReviewWhereInput[]
   createdAt?: Prisma.DateTimeFilter<"FlightReview"> | Date | string
   airlineId?: Prisma.IntFilter<"FlightReview"> | number
-  answers?: Prisma.AnswerListRelationFilter
+  rating?: Prisma.IntFilter<"FlightReview"> | number
+  experience?: Prisma.StringNullableFilter<"FlightReview"> | string | null
   airline?: Prisma.XOR<Prisma.AirlineScalarRelationFilter, Prisma.AirlineWhereInput>
 }, "id">
 
@@ -231,6 +252,8 @@ export type FlightReviewOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  experience?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.FlightReviewCountOrderByAggregateInput
   _avg?: Prisma.FlightReviewAvgOrderByAggregateInput
   _max?: Prisma.FlightReviewMaxOrderByAggregateInput
@@ -245,11 +268,14 @@ export type FlightReviewScalarWhereWithAggregatesInput = {
   id?: Prisma.IntWithAggregatesFilter<"FlightReview"> | number
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"FlightReview"> | Date | string
   airlineId?: Prisma.IntWithAggregatesFilter<"FlightReview"> | number
+  rating?: Prisma.IntWithAggregatesFilter<"FlightReview"> | number
+  experience?: Prisma.StringNullableWithAggregatesFilter<"FlightReview"> | string | null
 }
 
 export type FlightReviewCreateInput = {
   createdAt?: Date | string
-  answers?: Prisma.AnswerCreateNestedManyWithoutReviewInput
+  rating: number
+  experience?: string | null
   airline: Prisma.AirlineCreateNestedOneWithoutReviewsInput
 }
 
@@ -257,12 +283,14 @@ export type FlightReviewUncheckedCreateInput = {
   id?: number
   createdAt?: Date | string
   airlineId: number
-  answers?: Prisma.AnswerUncheckedCreateNestedManyWithoutReviewInput
+  rating: number
+  experience?: string | null
 }
 
 export type FlightReviewUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  answers?: Prisma.AnswerUpdateManyWithoutReviewNestedInput
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   airline?: Prisma.AirlineUpdateOneRequiredWithoutReviewsNestedInput
 }
 
@@ -270,23 +298,30 @@ export type FlightReviewUncheckedUpdateInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   airlineId?: Prisma.IntFieldUpdateOperationsInput | number
-  answers?: Prisma.AnswerUncheckedUpdateManyWithoutReviewNestedInput
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlightReviewCreateManyInput = {
   id?: number
   createdAt?: Date | string
   airlineId: number
+  rating: number
+  experience?: string | null
 }
 
 export type FlightReviewUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlightReviewUncheckedUpdateManyInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   airlineId?: Prisma.IntFieldUpdateOperationsInput | number
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlightReviewListRelationFilter = {
@@ -303,33 +338,36 @@ export type FlightReviewCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  experience?: Prisma.SortOrder
 }
 
 export type FlightReviewAvgOrderByAggregateInput = {
   id?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
 }
 
 export type FlightReviewMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  experience?: Prisma.SortOrder
 }
 
 export type FlightReviewMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
+  rating?: Prisma.SortOrder
+  experience?: Prisma.SortOrder
 }
 
 export type FlightReviewSumOrderByAggregateInput = {
   id?: Prisma.SortOrder
   airlineId?: Prisma.SortOrder
-}
-
-export type FlightReviewScalarRelationFilter = {
-  is?: Prisma.FlightReviewWhereInput
-  isNot?: Prisma.FlightReviewWhereInput
+  rating?: Prisma.SortOrder
 }
 
 export type FlightReviewCreateNestedManyWithoutAirlineInput = {
@@ -374,29 +412,17 @@ export type FlightReviewUncheckedUpdateManyWithoutAirlineNestedInput = {
   deleteMany?: Prisma.FlightReviewScalarWhereInput | Prisma.FlightReviewScalarWhereInput[]
 }
 
-export type FlightReviewCreateNestedOneWithoutAnswersInput = {
-  create?: Prisma.XOR<Prisma.FlightReviewCreateWithoutAnswersInput, Prisma.FlightReviewUncheckedCreateWithoutAnswersInput>
-  connectOrCreate?: Prisma.FlightReviewCreateOrConnectWithoutAnswersInput
-  connect?: Prisma.FlightReviewWhereUniqueInput
-}
-
-export type FlightReviewUpdateOneRequiredWithoutAnswersNestedInput = {
-  create?: Prisma.XOR<Prisma.FlightReviewCreateWithoutAnswersInput, Prisma.FlightReviewUncheckedCreateWithoutAnswersInput>
-  connectOrCreate?: Prisma.FlightReviewCreateOrConnectWithoutAnswersInput
-  upsert?: Prisma.FlightReviewUpsertWithoutAnswersInput
-  connect?: Prisma.FlightReviewWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.FlightReviewUpdateToOneWithWhereWithoutAnswersInput, Prisma.FlightReviewUpdateWithoutAnswersInput>, Prisma.FlightReviewUncheckedUpdateWithoutAnswersInput>
-}
-
 export type FlightReviewCreateWithoutAirlineInput = {
   createdAt?: Date | string
-  answers?: Prisma.AnswerCreateNestedManyWithoutReviewInput
+  rating: number
+  experience?: string | null
 }
 
 export type FlightReviewUncheckedCreateWithoutAirlineInput = {
   id?: number
   createdAt?: Date | string
-  answers?: Prisma.AnswerUncheckedCreateNestedManyWithoutReviewInput
+  rating: number
+  experience?: string | null
 }
 
 export type FlightReviewCreateOrConnectWithoutAirlineInput = {
@@ -432,111 +458,54 @@ export type FlightReviewScalarWhereInput = {
   id?: Prisma.IntFilter<"FlightReview"> | number
   createdAt?: Prisma.DateTimeFilter<"FlightReview"> | Date | string
   airlineId?: Prisma.IntFilter<"FlightReview"> | number
-}
-
-export type FlightReviewCreateWithoutAnswersInput = {
-  createdAt?: Date | string
-  airline: Prisma.AirlineCreateNestedOneWithoutReviewsInput
-}
-
-export type FlightReviewUncheckedCreateWithoutAnswersInput = {
-  id?: number
-  createdAt?: Date | string
-  airlineId: number
-}
-
-export type FlightReviewCreateOrConnectWithoutAnswersInput = {
-  where: Prisma.FlightReviewWhereUniqueInput
-  create: Prisma.XOR<Prisma.FlightReviewCreateWithoutAnswersInput, Prisma.FlightReviewUncheckedCreateWithoutAnswersInput>
-}
-
-export type FlightReviewUpsertWithoutAnswersInput = {
-  update: Prisma.XOR<Prisma.FlightReviewUpdateWithoutAnswersInput, Prisma.FlightReviewUncheckedUpdateWithoutAnswersInput>
-  create: Prisma.XOR<Prisma.FlightReviewCreateWithoutAnswersInput, Prisma.FlightReviewUncheckedCreateWithoutAnswersInput>
-  where?: Prisma.FlightReviewWhereInput
-}
-
-export type FlightReviewUpdateToOneWithWhereWithoutAnswersInput = {
-  where?: Prisma.FlightReviewWhereInput
-  data: Prisma.XOR<Prisma.FlightReviewUpdateWithoutAnswersInput, Prisma.FlightReviewUncheckedUpdateWithoutAnswersInput>
-}
-
-export type FlightReviewUpdateWithoutAnswersInput = {
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  airline?: Prisma.AirlineUpdateOneRequiredWithoutReviewsNestedInput
-}
-
-export type FlightReviewUncheckedUpdateWithoutAnswersInput = {
-  id?: Prisma.IntFieldUpdateOperationsInput | number
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  airlineId?: Prisma.IntFieldUpdateOperationsInput | number
+  rating?: Prisma.IntFilter<"FlightReview"> | number
+  experience?: Prisma.StringNullableFilter<"FlightReview"> | string | null
 }
 
 export type FlightReviewCreateManyAirlineInput = {
   id?: number
   createdAt?: Date | string
+  rating: number
+  experience?: string | null
 }
 
 export type FlightReviewUpdateWithoutAirlineInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  answers?: Prisma.AnswerUpdateManyWithoutReviewNestedInput
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlightReviewUncheckedUpdateWithoutAirlineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  answers?: Prisma.AnswerUncheckedUpdateManyWithoutReviewNestedInput
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type FlightReviewUncheckedUpdateManyWithoutAirlineInput = {
   id?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  rating?: Prisma.IntFieldUpdateOperationsInput | number
+  experience?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
-
-/**
- * Count Type FlightReviewCountOutputType
- */
-
-export type FlightReviewCountOutputType = {
-  answers: number
-}
-
-export type FlightReviewCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  answers?: boolean | FlightReviewCountOutputTypeCountAnswersArgs
-}
-
-/**
- * FlightReviewCountOutputType without action
- */
-export type FlightReviewCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the FlightReviewCountOutputType
-   */
-  select?: Prisma.FlightReviewCountOutputTypeSelect<ExtArgs> | null
-}
-
-/**
- * FlightReviewCountOutputType without action
- */
-export type FlightReviewCountOutputTypeCountAnswersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.AnswerWhereInput
-}
 
 
 export type FlightReviewSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   createdAt?: boolean
   airlineId?: boolean
-  answers?: boolean | Prisma.FlightReview$answersArgs<ExtArgs>
+  rating?: boolean
+  experience?: boolean
   airline?: boolean | Prisma.AirlineDefaultArgs<ExtArgs>
-  _count?: boolean | Prisma.FlightReviewCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["flightReview"]>
 
 export type FlightReviewSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   createdAt?: boolean
   airlineId?: boolean
+  rating?: boolean
+  experience?: boolean
   airline?: boolean | Prisma.AirlineDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["flightReview"]>
 
@@ -544,6 +513,8 @@ export type FlightReviewSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   id?: boolean
   createdAt?: boolean
   airlineId?: boolean
+  rating?: boolean
+  experience?: boolean
   airline?: boolean | Prisma.AirlineDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["flightReview"]>
 
@@ -551,13 +522,13 @@ export type FlightReviewSelectScalar = {
   id?: boolean
   createdAt?: boolean
   airlineId?: boolean
+  rating?: boolean
+  experience?: boolean
 }
 
-export type FlightReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "airlineId", ExtArgs["result"]["flightReview"]>
+export type FlightReviewOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "createdAt" | "airlineId" | "rating" | "experience", ExtArgs["result"]["flightReview"]>
 export type FlightReviewInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  answers?: boolean | Prisma.FlightReview$answersArgs<ExtArgs>
   airline?: boolean | Prisma.AirlineDefaultArgs<ExtArgs>
-  _count?: boolean | Prisma.FlightReviewCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type FlightReviewIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   airline?: boolean | Prisma.AirlineDefaultArgs<ExtArgs>
@@ -569,13 +540,14 @@ export type FlightReviewIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types
 export type $FlightReviewPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FlightReview"
   objects: {
-    answers: Prisma.$AnswerPayload<ExtArgs>[]
     airline: Prisma.$AirlinePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
     createdAt: Date
     airlineId: number
+    rating: number
+    experience: string | null
   }, ExtArgs["result"]["flightReview"]>
   composites: {}
 }
@@ -970,7 +942,6 @@ readonly fields: FlightReviewFieldRefs;
  */
 export interface Prisma__FlightReviewClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  answers<T extends Prisma.FlightReview$answersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FlightReview$answersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnswerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   airline<T extends Prisma.AirlineDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.AirlineDefaultArgs<ExtArgs>>): Prisma.Prisma__AirlineClient<runtime.Types.Result.GetResult<Prisma.$AirlinePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1004,6 +975,8 @@ export interface FlightReviewFieldRefs {
   readonly id: Prisma.FieldRef<"FlightReview", 'Int'>
   readonly createdAt: Prisma.FieldRef<"FlightReview", 'DateTime'>
   readonly airlineId: Prisma.FieldRef<"FlightReview", 'Int'>
+  readonly rating: Prisma.FieldRef<"FlightReview", 'Int'>
+  readonly experience: Prisma.FieldRef<"FlightReview", 'String'>
 }
     
 
@@ -1402,30 +1375,6 @@ export type FlightReviewDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.
    * Limit how many FlightReviews to delete.
    */
   limit?: number
-}
-
-/**
- * FlightReview.answers
- */
-export type FlightReview$answersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the Answer
-   */
-  select?: Prisma.AnswerSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the Answer
-   */
-  omit?: Prisma.AnswerOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.AnswerInclude<ExtArgs> | null
-  where?: Prisma.AnswerWhereInput
-  orderBy?: Prisma.AnswerOrderByWithRelationInput | Prisma.AnswerOrderByWithRelationInput[]
-  cursor?: Prisma.AnswerWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.AnswerScalarFieldEnum | Prisma.AnswerScalarFieldEnum[]
 }
 
 /**

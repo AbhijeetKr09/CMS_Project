@@ -208,8 +208,8 @@ export type FeedLikeWhereInput = {
   userId?: Prisma.StringFilter<"FeedLike"> | string
   postId?: Prisma.StringFilter<"FeedLike"> | string
   createdAt?: Prisma.DateTimeFilter<"FeedLike"> | Date | string
-  post?: Prisma.XOR<Prisma.FeedPostScalarRelationFilter, Prisma.FeedPostWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  post?: Prisma.XOR<Prisma.FeedPostScalarRelationFilter, Prisma.FeedPostWhereInput>
 }
 
 export type FeedLikeOrderByWithRelationInput = {
@@ -217,8 +217,8 @@ export type FeedLikeOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   postId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  post?: Prisma.FeedPostOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  post?: Prisma.FeedPostOrderByWithRelationInput
 }
 
 export type FeedLikeWhereUniqueInput = Prisma.AtLeast<{
@@ -230,8 +230,8 @@ export type FeedLikeWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"FeedLike"> | string
   postId?: Prisma.StringFilter<"FeedLike"> | string
   createdAt?: Prisma.DateTimeFilter<"FeedLike"> | Date | string
-  post?: Prisma.XOR<Prisma.FeedPostScalarRelationFilter, Prisma.FeedPostWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  post?: Prisma.XOR<Prisma.FeedPostScalarRelationFilter, Prisma.FeedPostWhereInput>
 }, "id" | "userId_postId">
 
 export type FeedLikeOrderByWithAggregationInput = {
@@ -258,8 +258,8 @@ export type FeedLikeScalarWhereWithAggregatesInput = {
 
 export type FeedLikeCreateInput = {
   createdAt?: Date | string
-  post: Prisma.FeedPostCreateNestedOneWithoutLikesInput
   user: Prisma.UserCreateNestedOneWithoutFeedLikesInput
+  post: Prisma.FeedPostCreateNestedOneWithoutLikesInput
 }
 
 export type FeedLikeUncheckedCreateInput = {
@@ -271,8 +271,8 @@ export type FeedLikeUncheckedCreateInput = {
 
 export type FeedLikeUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  post?: Prisma.FeedPostUpdateOneRequiredWithoutLikesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutFeedLikesNestedInput
+  post?: Prisma.FeedPostUpdateOneRequiredWithoutLikesNestedInput
 }
 
 export type FeedLikeUncheckedUpdateInput = {
@@ -565,8 +565,8 @@ export type FeedLikeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   userId?: boolean
   postId?: boolean
   createdAt?: boolean
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedLike"]>
 
 export type FeedLikeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -574,8 +574,8 @@ export type FeedLikeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   userId?: boolean
   postId?: boolean
   createdAt?: boolean
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedLike"]>
 
 export type FeedLikeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -583,8 +583,8 @@ export type FeedLikeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   userId?: boolean
   postId?: boolean
   createdAt?: boolean
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["feedLike"]>
 
 export type FeedLikeSelectScalar = {
@@ -596,23 +596,23 @@ export type FeedLikeSelectScalar = {
 
 export type FeedLikeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "postId" | "createdAt", ExtArgs["result"]["feedLike"]>
 export type FeedLikeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }
 export type FeedLikeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }
 export type FeedLikeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  post?: boolean | Prisma.FeedPostDefaultArgs<ExtArgs>
 }
 
 export type $FeedLikePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "FeedLike"
   objects: {
-    post: Prisma.$FeedPostPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    post: Prisma.$FeedPostPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1013,8 +1013,8 @@ readonly fields: FeedLikeFieldRefs;
  */
 export interface Prisma__FeedLikeClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  post<T extends Prisma.FeedPostDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPostDefaultArgs<ExtArgs>>): Prisma.Prisma__FeedPostClient<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  post<T extends Prisma.FeedPostDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.FeedPostDefaultArgs<ExtArgs>>): Prisma.Prisma__FeedPostClient<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

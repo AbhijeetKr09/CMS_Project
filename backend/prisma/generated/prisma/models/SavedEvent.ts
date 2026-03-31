@@ -174,8 +174,8 @@ export type SavedEventWhereInput = {
   userId?: Prisma.StringFilter<"SavedEvent"> | string
   eventId?: Prisma.StringFilter<"SavedEvent"> | string
   createdAt?: Prisma.DateTimeFilter<"SavedEvent"> | Date | string
-  event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
 }
 
 export type SavedEventOrderByWithRelationInput = {
@@ -183,8 +183,8 @@ export type SavedEventOrderByWithRelationInput = {
   userId?: Prisma.SortOrder
   eventId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
-  event?: Prisma.EventOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
+  event?: Prisma.EventOrderByWithRelationInput
 }
 
 export type SavedEventWhereUniqueInput = Prisma.AtLeast<{
@@ -196,8 +196,8 @@ export type SavedEventWhereUniqueInput = Prisma.AtLeast<{
   userId?: Prisma.StringFilter<"SavedEvent"> | string
   eventId?: Prisma.StringFilter<"SavedEvent"> | string
   createdAt?: Prisma.DateTimeFilter<"SavedEvent"> | Date | string
-  event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  event?: Prisma.XOR<Prisma.EventScalarRelationFilter, Prisma.EventWhereInput>
 }, "id" | "userId_eventId">
 
 export type SavedEventOrderByWithAggregationInput = {
@@ -223,8 +223,8 @@ export type SavedEventScalarWhereWithAggregatesInput = {
 export type SavedEventCreateInput = {
   id?: string
   createdAt?: Date | string
-  event: Prisma.EventCreateNestedOneWithoutSavedByInput
   user: Prisma.UserCreateNestedOneWithoutSavedEventsInput
+  event: Prisma.EventCreateNestedOneWithoutSavedByInput
 }
 
 export type SavedEventUncheckedCreateInput = {
@@ -237,8 +237,8 @@ export type SavedEventUncheckedCreateInput = {
 export type SavedEventUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  event?: Prisma.EventUpdateOneRequiredWithoutSavedByNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutSavedEventsNestedInput
+  event?: Prisma.EventUpdateOneRequiredWithoutSavedByNestedInput
 }
 
 export type SavedEventUncheckedUpdateInput = {
@@ -528,8 +528,8 @@ export type SavedEventSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   userId?: boolean
   eventId?: boolean
   createdAt?: boolean
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savedEvent"]>
 
 export type SavedEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -537,8 +537,8 @@ export type SavedEventSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   userId?: boolean
   eventId?: boolean
   createdAt?: boolean
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savedEvent"]>
 
 export type SavedEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -546,8 +546,8 @@ export type SavedEventSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   userId?: boolean
   eventId?: boolean
   createdAt?: boolean
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["savedEvent"]>
 
 export type SavedEventSelectScalar = {
@@ -559,23 +559,23 @@ export type SavedEventSelectScalar = {
 
 export type SavedEventOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "eventId" | "createdAt", ExtArgs["result"]["savedEvent"]>
 export type SavedEventInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 export type SavedEventIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 export type SavedEventIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  event?: boolean | Prisma.EventDefaultArgs<ExtArgs>
 }
 
 export type $SavedEventPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "SavedEvent"
   objects: {
-    event: Prisma.$EventPayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
+    event: Prisma.$EventPayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -976,8 +976,8 @@ readonly fields: SavedEventFieldRefs;
  */
 export interface Prisma__SavedEventClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  event<T extends Prisma.EventDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.EventDefaultArgs<ExtArgs>>): Prisma.Prisma__EventClient<runtime.Types.Result.GetResult<Prisma.$EventPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.

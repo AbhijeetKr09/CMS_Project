@@ -4,7 +4,14 @@ import prisma from '../prismaClient.js';
 const buildSubRelations = (body) => ({
     images:      (body.images      || []).map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
     keyInsights: (body.keyInsights || []).map(({ insightText }) => ({ insightText })),
-    relatedNews: (body.relatedNews || []).map(({ newsTitle, newsUrl }) => ({ newsTitle, newsUrl: newsUrl || null })),
+});
+
+// Extract up to 4 related article IDs from request body
+const extractRelatedIds = (body) => ({
+    relatedArticle1Id: body.relatedArticle1Id || null,
+    relatedArticle2Id: body.relatedArticle2Id || null,
+    relatedArticle3Id: body.relatedArticle3Id || null,
+    relatedArticle4Id: body.relatedArticle4Id || null,
 });
 
 // Helper: include clause for full staged article with relations
@@ -14,13 +21,17 @@ const FULL_INCLUDE = {
     assignedTo:   { select: { id: true, name: true, email: true } },
     images:       true,
     keyInsights:  true,
-    relatedNews:  true,
+    relatedArticle1: { select: { id: true, title: true, mainImage: true } },
+    relatedArticle2: { select: { id: true, title: true, mainImage: true } },
+    relatedArticle3: { select: { id: true, title: true, mainImage: true } },
+    relatedArticle4: { select: { id: true, title: true, mainImage: true } },
 };
 
 // ─── JOURNALIST: Create new draft ───────────────────────────────────────────
 export const createDraft = async (req, res) => {
     try {
-        const { images, keyInsights, relatedNews } = buildSubRelations(req.body);
+        const { images, keyInsights } = buildSubRelations(req.body);
+        const relatedIds = extractRelatedIds(req.body);
         const draft = await prisma.stagedArticle.create({
             data: {
                 submittedById:   req.cmsUser.id,
@@ -31,9 +42,9 @@ export const createDraft = async (req, res) => {
                 readTime:        req.body.readTime,
                 tags:            req.body.tags            || [],
                 type:            req.body.type,
+                ...relatedIds,
                 images:      { create: images },
                 keyInsights: { create: keyInsights },
-                relatedNews: { create: relatedNews },
             },
             include: FULL_INCLUDE,
         });
@@ -56,13 +67,13 @@ export const updateDraft = async (req, res) => {
         if (!['DRAFT', 'NEEDS_CHANGES'].includes(existing.status))
             return res.status(400).json({ message: `Cannot edit article with status: ${existing.status}` });
 
-        const { images, keyInsights, relatedNews } = buildSubRelations(req.body);
+        const { images, keyInsights } = buildSubRelations(req.body);
+        const relatedIds = extractRelatedIds(req.body);
 
         // Replace sub-relation rows: delete all existing then re-create
         await prisma.$transaction([
             prisma.stagedArticleImage.deleteMany({ where: { stagedArticleId: id } }),
             prisma.stagedArticleKeyInsight.deleteMany({ where: { stagedArticleId: id } }),
-            prisma.stagedArticleRelatedNews.deleteMany({ where: { stagedArticleId: id } }),
         ]);
 
         const updated = await prisma.stagedArticle.update({
@@ -75,9 +86,9 @@ export const updateDraft = async (req, res) => {
                 readTime:         req.body.readTime         ?? existing.readTime,
                 tags:             req.body.tags             ?? existing.tags,
                 type:             req.body.type             ?? existing.type,
+                ...relatedIds,
                 images:      { create: images },
                 keyInsights: { create: keyInsights },
-                relatedNews: { create: relatedNews },
             },
             include: FULL_INCLUDE,
         });
@@ -135,9 +146,11 @@ export const listMine = async (req, res) => {
                 createdAt: true, updatedAt: true, submittedAt: true,
                 tags: true, type: true, mainImage: true, assignedToId: true,
                 assignedAt: true, recalledFromId: true,
+                relatedArticle1Id: true, relatedArticle2Id: true,
+                relatedArticle3Id: true, relatedArticle4Id: true,
                 submittedBy: { select: { id: true, name: true } },
                 assignedTo:  { select: { id: true, name: true } },
-                _count: { select: { images: true, keyInsights: true, relatedNews: true } },
+                _count: { select: { images: true, keyInsights: true } },
             },
         });
         res.json(articles);
@@ -155,7 +168,7 @@ export const listSubmissions = async (req, res) => {
             orderBy: { submittedAt: 'asc' },
             include: {
                 submittedBy: { select: { id: true, name: true, email: true } },
-                _count: { select: { images: true, keyInsights: true, relatedNews: true } },
+                _count: { select: { images: true, keyInsights: true } },
             },
         });
         res.json(articles);
@@ -288,7 +301,6 @@ export const publish = async (req, res) => {
 
             // Normalise the body: replace any inline image syntax with [IMAGE] placeholders,
             // exactly as articleController.createArticle / updateArticle does.
-            // This ensures getArticleById can re-inject signed URLs in the correct order.
             let publishBody = staged.body || '';
             publishBody = publishBody.replace(/\{\{IMG_(\d+)\}\}/g, () => '[IMAGE]');
             publishBody = publishBody.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, () => '[IMAGE]');
@@ -313,11 +325,29 @@ export const publish = async (req, res) => {
                     keyInsights: {
                         create: staged.keyInsights.map(({ insightText }) => ({ insightText })),
                     },
-                    relatedNews: {
-                        create: staged.relatedNews.map(({ newsTitle, newsUrl }) => ({ newsTitle, newsUrl })),
-                    },
                 },
             });
+
+            // Create ArticleRelatedNews rows for each non-null related article ID
+            const relatedIds = [
+                staged.relatedArticle1Id,
+                staged.relatedArticle2Id,
+                staged.relatedArticle3Id,
+                staged.relatedArticle4Id,
+            ].filter(Boolean);
+
+            for (const relatedArticleId of relatedIds) {
+                // Verify the related article exists to avoid FK violations
+                const exists = await tx.article.findUnique({ where: { id: relatedArticleId }, select: { id: true } });
+                if (exists) {
+                    await tx.articleRelatedNews.create({
+                        data: {
+                            articleId:        article.id,
+                            relatedArticleId: relatedArticleId,
+                        },
+                    });
+                }
+            }
 
             await tx.stagedArticle.update({
                 where: { id },
@@ -395,7 +425,11 @@ export const recall = async (req, res) => {
                 recalledFromId:   live.id,
                 images:      { create: live.images.map(({ src, alt, caption }) => ({ src, alt: alt ?? '', caption: caption ?? '' })) },
                 keyInsights: { create: live.keyInsights.map(({ insightText }) => ({ insightText })) },
-                relatedNews: { create: live.relatedNews.map(({ newsTitle, newsUrl }) => ({ newsTitle, newsUrl: newsUrl ?? '' })) },
+                // Map existing ArticleRelatedNews back to the flat relatedArticle1–4 IDs
+                relatedArticle1Id: live.relatedNews[0]?.relatedArticleId ?? null,
+                relatedArticle2Id: live.relatedNews[1]?.relatedArticleId ?? null,
+                relatedArticle3Id: live.relatedNews[2]?.relatedArticleId ?? null,
+                relatedArticle4Id: live.relatedNews[3]?.relatedArticleId ?? null,
             },
         });
 

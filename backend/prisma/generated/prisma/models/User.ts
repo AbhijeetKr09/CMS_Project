@@ -31,10 +31,10 @@ export type UserMinAggregateOutputType = {
   occupation: string | null
   phoneNumber: string | null
   profileImage: string | null
-  createdAt: Date | null
-  bio: string | null
   coverImage: string | null
+  bio: string | null
   isExpert: boolean | null
+  createdAt: Date | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -44,10 +44,10 @@ export type UserMaxAggregateOutputType = {
   occupation: string | null
   phoneNumber: string | null
   profileImage: string | null
-  createdAt: Date | null
-  bio: string | null
   coverImage: string | null
+  bio: string | null
   isExpert: boolean | null
+  createdAt: Date | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -57,10 +57,10 @@ export type UserCountAggregateOutputType = {
   occupation: number
   phoneNumber: number
   profileImage: number
-  createdAt: number
-  bio: number
   coverImage: number
+  bio: number
   isExpert: number
+  createdAt: number
   preferences: number
   _all: number
 }
@@ -73,10 +73,10 @@ export type UserMinAggregateInputType = {
   occupation?: true
   phoneNumber?: true
   profileImage?: true
-  createdAt?: true
-  bio?: true
   coverImage?: true
+  bio?: true
   isExpert?: true
+  createdAt?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -86,10 +86,10 @@ export type UserMaxAggregateInputType = {
   occupation?: true
   phoneNumber?: true
   profileImage?: true
-  createdAt?: true
-  bio?: true
   coverImage?: true
+  bio?: true
   isExpert?: true
+  createdAt?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -99,10 +99,10 @@ export type UserCountAggregateInputType = {
   occupation?: true
   phoneNumber?: true
   profileImage?: true
-  createdAt?: true
-  bio?: true
   coverImage?: true
+  bio?: true
   isExpert?: true
+  createdAt?: true
   preferences?: true
   _all?: true
 }
@@ -186,10 +186,10 @@ export type UserGroupByOutputType = {
   occupation: string | null
   phoneNumber: string | null
   profileImage: string | null
-  createdAt: Date
-  bio: string | null
   coverImage: string | null
+  bio: string | null
   isExpert: boolean
+  createdAt: Date
   preferences: string[]
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
@@ -221,26 +221,26 @@ export type UserWhereInput = {
   occupation?: Prisma.StringNullableFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  bio?: Prisma.StringNullableFilter<"User"> | string | null
   coverImage?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
   isExpert?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   preferences?: Prisma.StringNullableListFilter<"User">
-  comments?: Prisma.CommentListRelationFilter
-  feedLikes?: Prisma.FeedLikeListRelationFilter
-  feedPosts?: Prisma.FeedPostListRelationFilter
   uploads?: Prisma.MediaListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  history?: Prisma.UserHistoryListRelationFilter
+  feedPosts?: Prisma.FeedPostListRelationFilter
+  feedLikes?: Prisma.FeedLikeListRelationFilter
   usersLiked?: Prisma.MediaLikeListRelationFilter
-  receivedMessages?: Prisma.MessageListRelationFilter
-  sentMessages?: Prisma.MessageListRelationFilter
+  savedMedia?: Prisma.SavedMediaListRelationFilter
+  savedEvents?: Prisma.SavedEventListRelationFilter
+  savedArticles?: Prisma.SavedArticleListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   pinnedInsights?: Prisma.PinnedInsightListRelationFilter
-  savedArticles?: Prisma.SavedArticleListRelationFilter
-  savedEvents?: Prisma.SavedEventListRelationFilter
-  savedMedia?: Prisma.SavedMediaListRelationFilter
-  following?: Prisma.UserFollowListRelationFilter
   followers?: Prisma.UserFollowListRelationFilter
-  history?: Prisma.UserHistoryListRelationFilter
+  following?: Prisma.UserFollowListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  receivedMessages?: Prisma.MessageListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -250,26 +250,26 @@ export type UserOrderByWithRelationInput = {
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isExpert?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   preferences?: Prisma.SortOrder
-  comments?: Prisma.CommentOrderByRelationAggregateInput
-  feedLikes?: Prisma.FeedLikeOrderByRelationAggregateInput
-  feedPosts?: Prisma.FeedPostOrderByRelationAggregateInput
   uploads?: Prisma.MediaOrderByRelationAggregateInput
+  comments?: Prisma.CommentOrderByRelationAggregateInput
+  history?: Prisma.UserHistoryOrderByRelationAggregateInput
+  feedPosts?: Prisma.FeedPostOrderByRelationAggregateInput
+  feedLikes?: Prisma.FeedLikeOrderByRelationAggregateInput
   usersLiked?: Prisma.MediaLikeOrderByRelationAggregateInput
-  receivedMessages?: Prisma.MessageOrderByRelationAggregateInput
-  sentMessages?: Prisma.MessageOrderByRelationAggregateInput
+  savedMedia?: Prisma.SavedMediaOrderByRelationAggregateInput
+  savedEvents?: Prisma.SavedEventOrderByRelationAggregateInput
+  savedArticles?: Prisma.SavedArticleOrderByRelationAggregateInput
   notifications?: Prisma.NotificationOrderByRelationAggregateInput
   pinnedInsights?: Prisma.PinnedInsightOrderByRelationAggregateInput
-  savedArticles?: Prisma.SavedArticleOrderByRelationAggregateInput
-  savedEvents?: Prisma.SavedEventOrderByRelationAggregateInput
-  savedMedia?: Prisma.SavedMediaOrderByRelationAggregateInput
-  following?: Prisma.UserFollowOrderByRelationAggregateInput
   followers?: Prisma.UserFollowOrderByRelationAggregateInput
-  history?: Prisma.UserHistoryOrderByRelationAggregateInput
+  following?: Prisma.UserFollowOrderByRelationAggregateInput
+  sentMessages?: Prisma.MessageOrderByRelationAggregateInput
+  receivedMessages?: Prisma.MessageOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -282,26 +282,26 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   occupation?: Prisma.StringNullableFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  bio?: Prisma.StringNullableFilter<"User"> | string | null
   coverImage?: Prisma.StringNullableFilter<"User"> | string | null
+  bio?: Prisma.StringNullableFilter<"User"> | string | null
   isExpert?: Prisma.BoolFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   preferences?: Prisma.StringNullableListFilter<"User">
-  comments?: Prisma.CommentListRelationFilter
-  feedLikes?: Prisma.FeedLikeListRelationFilter
-  feedPosts?: Prisma.FeedPostListRelationFilter
   uploads?: Prisma.MediaListRelationFilter
+  comments?: Prisma.CommentListRelationFilter
+  history?: Prisma.UserHistoryListRelationFilter
+  feedPosts?: Prisma.FeedPostListRelationFilter
+  feedLikes?: Prisma.FeedLikeListRelationFilter
   usersLiked?: Prisma.MediaLikeListRelationFilter
-  receivedMessages?: Prisma.MessageListRelationFilter
-  sentMessages?: Prisma.MessageListRelationFilter
+  savedMedia?: Prisma.SavedMediaListRelationFilter
+  savedEvents?: Prisma.SavedEventListRelationFilter
+  savedArticles?: Prisma.SavedArticleListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
   pinnedInsights?: Prisma.PinnedInsightListRelationFilter
-  savedArticles?: Prisma.SavedArticleListRelationFilter
-  savedEvents?: Prisma.SavedEventListRelationFilter
-  savedMedia?: Prisma.SavedMediaListRelationFilter
-  following?: Prisma.UserFollowListRelationFilter
   followers?: Prisma.UserFollowListRelationFilter
-  history?: Prisma.UserHistoryListRelationFilter
+  following?: Prisma.UserFollowListRelationFilter
+  sentMessages?: Prisma.MessageListRelationFilter
+  receivedMessages?: Prisma.MessageListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -311,10 +311,10 @@ export type UserOrderByWithAggregationInput = {
   occupation?: Prisma.SortOrderInput | Prisma.SortOrder
   phoneNumber?: Prisma.SortOrderInput | Prisma.SortOrder
   profileImage?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   coverImage?: Prisma.SortOrderInput | Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   isExpert?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   preferences?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
@@ -331,10 +331,10 @@ export type UserScalarWhereWithAggregatesInput = {
   occupation?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   phoneNumber?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   profileImage?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
-  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   coverImage?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  bio?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   isExpert?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   preferences?: Prisma.StringNullableListFilter<"User">
 }
 
@@ -345,26 +345,26 @@ export type UserCreateInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -374,26 +374,26 @@ export type UserUncheckedCreateInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUpdateInput = {
@@ -403,26 +403,26 @@ export type UserUpdateInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -432,26 +432,26 @@ export type UserUncheckedUpdateInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -461,10 +461,10 @@ export type UserCreateManyInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
 }
 
@@ -475,10 +475,10 @@ export type UserUpdateManyMutationInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
 }
 
@@ -489,10 +489,10 @@ export type UserUncheckedUpdateManyInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
 }
 
@@ -513,10 +513,10 @@ export type UserCountOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  bio?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isExpert?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
   preferences?: Prisma.SortOrder
 }
 
@@ -527,10 +527,10 @@ export type UserMaxOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  bio?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isExpert?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -540,10 +540,10 @@ export type UserMinOrderByAggregateInput = {
   occupation?: Prisma.SortOrder
   phoneNumber?: Prisma.SortOrder
   profileImage?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
-  bio?: Prisma.SortOrder
   coverImage?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   isExpert?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
 }
 
 export type UserCreateNestedOneWithoutCommentsInput = {
@@ -687,24 +687,16 @@ export type UserUpdateOneRequiredWithoutFollowersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFollowersInput, Prisma.UserUpdateWithoutFollowersInput>, Prisma.UserUncheckedUpdateWithoutFollowersInput>
 }
 
-export type UserCreateNestedOneWithoutReceivedMessagesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput
-  connect?: Prisma.UserWhereUniqueInput
-}
-
 export type UserCreateNestedOneWithoutSentMessagesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutSentMessagesInput
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserUpdateOneRequiredWithoutReceivedMessagesNestedInput = {
+export type UserCreateNestedOneWithoutReceivedMessagesInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput
-  upsert?: Prisma.UserUpsertWithoutReceivedMessagesInput
   connect?: Prisma.UserWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedMessagesInput, Prisma.UserUpdateWithoutReceivedMessagesInput>, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
 }
 
 export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
@@ -713,6 +705,14 @@ export type UserUpdateOneRequiredWithoutSentMessagesNestedInput = {
   upsert?: Prisma.UserUpsertWithoutSentMessagesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSentMessagesInput, Prisma.UserUpdateWithoutSentMessagesInput>, Prisma.UserUncheckedUpdateWithoutSentMessagesInput>
+}
+
+export type UserUpdateOneRequiredWithoutReceivedMessagesNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutReceivedMessagesInput
+  upsert?: Prisma.UserUpsertWithoutReceivedMessagesInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReceivedMessagesInput, Prisma.UserUpdateWithoutReceivedMessagesInput>, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
 }
 
 export type UserCreateNestedOneWithoutNotificationsInput = {
@@ -778,25 +778,25 @@ export type UserCreateWithoutCommentsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutCommentsInput = {
@@ -806,25 +806,25 @@ export type UserUncheckedCreateWithoutCommentsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutCommentsInput = {
@@ -850,25 +850,25 @@ export type UserUpdateWithoutCommentsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCommentsInput = {
@@ -878,25 +878,25 @@ export type UserUncheckedUpdateWithoutCommentsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutUploadsInput = {
@@ -906,25 +906,25 @@ export type UserCreateWithoutUploadsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
   comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
   feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutUploadsInput = {
@@ -934,25 +934,25 @@ export type UserUncheckedCreateWithoutUploadsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
   comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
   feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutUploadsInput = {
@@ -978,25 +978,25 @@ export type UserUpdateWithoutUploadsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
   comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
   feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUploadsInput = {
@@ -1006,25 +1006,25 @@ export type UserUncheckedUpdateWithoutUploadsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
   comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
   feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutSavedMediaInput = {
@@ -1034,25 +1034,25 @@ export type UserCreateWithoutSavedMediaInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutSavedMediaInput = {
@@ -1062,25 +1062,25 @@ export type UserUncheckedCreateWithoutSavedMediaInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutSavedMediaInput = {
@@ -1106,25 +1106,25 @@ export type UserUpdateWithoutSavedMediaInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavedMediaInput = {
@@ -1134,25 +1134,25 @@ export type UserUncheckedUpdateWithoutSavedMediaInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutUsersLikedInput = {
@@ -1162,25 +1162,25 @@ export type UserCreateWithoutUsersLikedInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutUsersLikedInput = {
@@ -1190,25 +1190,25 @@ export type UserUncheckedCreateWithoutUsersLikedInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutUsersLikedInput = {
@@ -1234,25 +1234,25 @@ export type UserUpdateWithoutUsersLikedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutUsersLikedInput = {
@@ -1262,25 +1262,25 @@ export type UserUncheckedUpdateWithoutUsersLikedInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutHistoryInput = {
@@ -1290,25 +1290,25 @@ export type UserCreateWithoutHistoryInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutHistoryInput = {
@@ -1318,25 +1318,25 @@ export type UserUncheckedCreateWithoutHistoryInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutHistoryInput = {
@@ -1362,25 +1362,25 @@ export type UserUpdateWithoutHistoryInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutHistoryInput = {
@@ -1390,25 +1390,25 @@ export type UserUncheckedUpdateWithoutHistoryInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutFeedPostsInput = {
@@ -1418,25 +1418,25 @@ export type UserCreateWithoutFeedPostsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutFeedPostsInput = {
@@ -1446,25 +1446,25 @@ export type UserUncheckedCreateWithoutFeedPostsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutFeedPostsInput = {
@@ -1490,25 +1490,25 @@ export type UserUpdateWithoutFeedPostsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFeedPostsInput = {
@@ -1518,25 +1518,25 @@ export type UserUncheckedUpdateWithoutFeedPostsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutFeedLikesInput = {
@@ -1546,25 +1546,25 @@ export type UserCreateWithoutFeedLikesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutFeedLikesInput = {
@@ -1574,25 +1574,25 @@ export type UserUncheckedCreateWithoutFeedLikesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutFeedLikesInput = {
@@ -1618,25 +1618,25 @@ export type UserUpdateWithoutFeedLikesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFeedLikesInput = {
@@ -1646,25 +1646,25 @@ export type UserUncheckedUpdateWithoutFeedLikesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutFollowingInput = {
@@ -1674,25 +1674,25 @@ export type UserCreateWithoutFollowingInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutFollowingInput = {
@@ -1702,25 +1702,25 @@ export type UserUncheckedCreateWithoutFollowingInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutFollowingInput = {
@@ -1735,25 +1735,25 @@ export type UserCreateWithoutFollowersInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
   following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutFollowersInput = {
@@ -1763,25 +1763,25 @@ export type UserUncheckedCreateWithoutFollowersInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
   following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutFollowersInput = {
@@ -1807,25 +1807,25 @@ export type UserUpdateWithoutFollowingInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowingInput = {
@@ -1835,25 +1835,25 @@ export type UserUncheckedUpdateWithoutFollowingInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUpsertWithoutFollowersInput = {
@@ -1874,25 +1874,25 @@ export type UserUpdateWithoutFollowersInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
   following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFollowersInput = {
@@ -1902,86 +1902,25 @@ export type UserUncheckedUpdateWithoutFollowersInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
   following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserCreateWithoutReceivedMessagesInput = {
-  id: string
-  email: string
-  name?: string | null
-  occupation?: string | null
-  phoneNumber?: string | null
-  profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
-  coverImage?: string | null
-  isExpert?: boolean
-  preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
-  uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutReceivedMessagesInput = {
-  id: string
-  email: string
-  name?: string | null
-  occupation?: string | null
-  phoneNumber?: string | null
-  profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
-  coverImage?: string | null
-  isExpert?: boolean
-  preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
-  uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutReceivedMessagesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutSentMessagesInput = {
@@ -1991,25 +1930,25 @@ export type UserCreateWithoutSentMessagesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutSentMessagesInput = {
@@ -2019,25 +1958,25 @@ export type UserUncheckedCreateWithoutSentMessagesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutSentMessagesInput = {
@@ -2045,71 +1984,65 @@ export type UserCreateOrConnectWithoutSentMessagesInput = {
   create: Prisma.XOR<Prisma.UserCreateWithoutSentMessagesInput, Prisma.UserUncheckedCreateWithoutSentMessagesInput>
 }
 
-export type UserUpsertWithoutReceivedMessagesInput = {
-  update: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
+export type UserCreateWithoutReceivedMessagesInput = {
+  id: string
+  email: string
+  name?: string | null
+  occupation?: string | null
+  phoneNumber?: string | null
+  profileImage?: string | null
+  coverImage?: string | null
+  bio?: string | null
+  isExpert?: boolean
+  createdAt?: Date | string
+  preferences?: Prisma.UserCreatepreferencesInput | string[]
+  uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+}
+
+export type UserUncheckedCreateWithoutReceivedMessagesInput = {
+  id: string
+  email: string
+  name?: string | null
+  occupation?: string | null
+  phoneNumber?: string | null
+  profileImage?: string | null
+  coverImage?: string | null
+  bio?: string | null
+  isExpert?: boolean
+  createdAt?: Date | string
+  preferences?: Prisma.UserCreatepreferencesInput | string[]
+  uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+}
+
+export type UserCreateOrConnectWithoutReceivedMessagesInput = {
+  where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
-  where?: Prisma.UserWhereInput
-}
-
-export type UserUpdateToOneWithWhereWithoutReceivedMessagesInput = {
-  where?: Prisma.UserWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
-}
-
-export type UserUpdateWithoutReceivedMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
-  uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
-}
-
-export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
-  preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
-  uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithoutSentMessagesInput = {
@@ -2130,25 +2063,25 @@ export type UserUpdateWithoutSentMessagesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSentMessagesInput = {
@@ -2158,25 +2091,92 @@ export type UserUncheckedUpdateWithoutSentMessagesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
+}
+
+export type UserUpsertWithoutReceivedMessagesInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutReceivedMessagesInput, Prisma.UserUncheckedCreateWithoutReceivedMessagesInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutReceivedMessagesInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutReceivedMessagesInput, Prisma.UserUncheckedUpdateWithoutReceivedMessagesInput>
+}
+
+export type UserUpdateWithoutReceivedMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferences?: Prisma.UserUpdatepreferencesInput | string[]
+  uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+}
+
+export type UserUncheckedUpdateWithoutReceivedMessagesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  preferences?: Prisma.UserUpdatepreferencesInput | string[]
+  uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
 }
 
 export type UserCreateWithoutNotificationsInput = {
@@ -2186,25 +2186,25 @@ export type UserCreateWithoutNotificationsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
+  pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutNotificationsInput = {
@@ -2214,25 +2214,25 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
+  pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutNotificationsInput = {
@@ -2258,25 +2258,25 @@ export type UserUpdateWithoutNotificationsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
+  pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutNotificationsInput = {
@@ -2286,25 +2286,25 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
+  pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutSavedEventsInput = {
@@ -2314,25 +2314,25 @@ export type UserCreateWithoutSavedEventsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutSavedEventsInput = {
@@ -2342,25 +2342,25 @@ export type UserUncheckedCreateWithoutSavedEventsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutSavedEventsInput = {
@@ -2386,25 +2386,25 @@ export type UserUpdateWithoutSavedEventsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavedEventsInput = {
@@ -2414,25 +2414,25 @@ export type UserUncheckedUpdateWithoutSavedEventsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutPinnedInsightsInput = {
@@ -2442,25 +2442,25 @@ export type UserCreateWithoutPinnedInsightsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
-  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
   history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutPinnedInsightsInput = {
@@ -2470,25 +2470,25 @@ export type UserUncheckedCreateWithoutPinnedInsightsInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
-  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
-  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
-  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
-  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
   history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
+  usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
+  savedArticles?: Prisma.SavedArticleUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutPinnedInsightsInput = {
@@ -2514,25 +2514,25 @@ export type UserUpdateWithoutPinnedInsightsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
-  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
   history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutPinnedInsightsInput = {
@@ -2542,25 +2542,25 @@ export type UserUncheckedUpdateWithoutPinnedInsightsInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
-  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
-  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
-  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
-  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
   history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
+  usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
+  savedArticles?: Prisma.SavedArticleUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserCreateWithoutSavedArticlesInput = {
@@ -2570,25 +2570,25 @@ export type UserCreateWithoutSavedArticlesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageCreateNestedManyWithoutReceiverInput
 }
 
 export type UserUncheckedCreateWithoutSavedArticlesInput = {
@@ -2598,25 +2598,25 @@ export type UserUncheckedCreateWithoutSavedArticlesInput = {
   occupation?: string | null
   phoneNumber?: string | null
   profileImage?: string | null
-  createdAt?: Date | string
-  bio?: string | null
   coverImage?: string | null
+  bio?: string | null
   isExpert?: boolean
+  createdAt?: Date | string
   preferences?: Prisma.UserCreatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
-  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
-  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
   uploads?: Prisma.MediaUncheckedCreateNestedManyWithoutUserInput
+  comments?: Prisma.CommentUncheckedCreateNestedManyWithoutUserInput
+  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  feedPosts?: Prisma.FeedPostUncheckedCreateNestedManyWithoutUserInput
+  feedLikes?: Prisma.FeedLikeUncheckedCreateNestedManyWithoutUserInput
   usersLiked?: Prisma.MediaLikeUncheckedCreateNestedManyWithoutUserInput
-  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
-  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
+  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
   notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedCreateNestedManyWithoutUserInput
-  savedEvents?: Prisma.SavedEventUncheckedCreateNestedManyWithoutUserInput
-  savedMedia?: Prisma.SavedMediaUncheckedCreateNestedManyWithoutUserInput
-  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
   followers?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowingInput
-  history?: Prisma.UserHistoryUncheckedCreateNestedManyWithoutUserInput
+  following?: Prisma.UserFollowUncheckedCreateNestedManyWithoutFollowerInput
+  sentMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutSenderInput
+  receivedMessages?: Prisma.MessageUncheckedCreateNestedManyWithoutReceiverInput
 }
 
 export type UserCreateOrConnectWithoutSavedArticlesInput = {
@@ -2642,25 +2642,25 @@ export type UserUpdateWithoutSavedArticlesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUpdateManyWithoutReceiverNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSavedArticlesInput = {
@@ -2670,25 +2670,25 @@ export type UserUncheckedUpdateWithoutSavedArticlesInput = {
   occupation?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phoneNumber?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   profileImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   isExpert?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   preferences?: Prisma.UserUpdatepreferencesInput | string[]
-  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
-  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
-  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
   uploads?: Prisma.MediaUncheckedUpdateManyWithoutUserNestedInput
+  comments?: Prisma.CommentUncheckedUpdateManyWithoutUserNestedInput
+  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  feedPosts?: Prisma.FeedPostUncheckedUpdateManyWithoutUserNestedInput
+  feedLikes?: Prisma.FeedLikeUncheckedUpdateManyWithoutUserNestedInput
   usersLiked?: Prisma.MediaLikeUncheckedUpdateManyWithoutUserNestedInput
-  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
-  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
+  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
   notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
   pinnedInsights?: Prisma.PinnedInsightUncheckedUpdateManyWithoutUserNestedInput
-  savedEvents?: Prisma.SavedEventUncheckedUpdateManyWithoutUserNestedInput
-  savedMedia?: Prisma.SavedMediaUncheckedUpdateManyWithoutUserNestedInput
-  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
   followers?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowingNestedInput
-  history?: Prisma.UserHistoryUncheckedUpdateManyWithoutUserNestedInput
+  following?: Prisma.UserFollowUncheckedUpdateManyWithoutFollowerNestedInput
+  sentMessages?: Prisma.MessageUncheckedUpdateManyWithoutSenderNestedInput
+  receivedMessages?: Prisma.MessageUncheckedUpdateManyWithoutReceiverNestedInput
 }
 
 
@@ -2697,39 +2697,39 @@ export type UserUncheckedUpdateWithoutSavedArticlesInput = {
  */
 
 export type UserCountOutputType = {
-  comments: number
-  feedLikes: number
-  feedPosts: number
   uploads: number
+  comments: number
+  history: number
+  feedPosts: number
+  feedLikes: number
   usersLiked: number
-  receivedMessages: number
-  sentMessages: number
+  savedMedia: number
+  savedEvents: number
+  savedArticles: number
   notifications: number
   pinnedInsights: number
-  savedArticles: number
-  savedEvents: number
-  savedMedia: number
-  following: number
   followers: number
-  history: number
+  following: number
+  sentMessages: number
+  receivedMessages: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  comments?: boolean | UserCountOutputTypeCountCommentsArgs
-  feedLikes?: boolean | UserCountOutputTypeCountFeedLikesArgs
-  feedPosts?: boolean | UserCountOutputTypeCountFeedPostsArgs
   uploads?: boolean | UserCountOutputTypeCountUploadsArgs
+  comments?: boolean | UserCountOutputTypeCountCommentsArgs
+  history?: boolean | UserCountOutputTypeCountHistoryArgs
+  feedPosts?: boolean | UserCountOutputTypeCountFeedPostsArgs
+  feedLikes?: boolean | UserCountOutputTypeCountFeedLikesArgs
   usersLiked?: boolean | UserCountOutputTypeCountUsersLikedArgs
-  receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
-  sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+  savedMedia?: boolean | UserCountOutputTypeCountSavedMediaArgs
+  savedEvents?: boolean | UserCountOutputTypeCountSavedEventsArgs
+  savedArticles?: boolean | UserCountOutputTypeCountSavedArticlesArgs
   notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
   pinnedInsights?: boolean | UserCountOutputTypeCountPinnedInsightsArgs
-  savedArticles?: boolean | UserCountOutputTypeCountSavedArticlesArgs
-  savedEvents?: boolean | UserCountOutputTypeCountSavedEventsArgs
-  savedMedia?: boolean | UserCountOutputTypeCountSavedMediaArgs
-  following?: boolean | UserCountOutputTypeCountFollowingArgs
   followers?: boolean | UserCountOutputTypeCountFollowersArgs
-  history?: boolean | UserCountOutputTypeCountHistoryArgs
+  following?: boolean | UserCountOutputTypeCountFollowingArgs
+  sentMessages?: boolean | UserCountOutputTypeCountSentMessagesArgs
+  receivedMessages?: boolean | UserCountOutputTypeCountReceivedMessagesArgs
 }
 
 /**
@@ -2745,6 +2745,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MediaWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.CommentWhereInput
 }
@@ -2752,8 +2759,8 @@ export type UserCountOutputTypeCountCommentsArgs<ExtArgs extends runtime.Types.E
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountFeedLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.FeedLikeWhereInput
+export type UserCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserHistoryWhereInput
 }
 
 /**
@@ -2766,8 +2773,8 @@ export type UserCountOutputTypeCountFeedPostsArgs<ExtArgs extends runtime.Types.
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountUploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MediaWhereInput
+export type UserCountOutputTypeCountFeedLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FeedLikeWhereInput
 }
 
 /**
@@ -2780,15 +2787,22 @@ export type UserCountOutputTypeCountUsersLikedArgs<ExtArgs extends runtime.Types
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageWhereInput
+export type UserCountOutputTypeCountSavedMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedMediaWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.MessageWhereInput
+export type UserCountOutputTypeCountSavedEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedEventWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSavedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SavedArticleWhereInput
 }
 
 /**
@@ -2808,22 +2822,8 @@ export type UserCountOutputTypeCountPinnedInsightsArgs<ExtArgs extends runtime.T
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountSavedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavedArticleWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountSavedEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavedEventWhereInput
-}
-
-/**
- * UserCountOutputType without action
- */
-export type UserCountOutputTypeCountSavedMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SavedMediaWhereInput
+export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.UserFollowWhereInput
 }
 
 /**
@@ -2836,15 +2836,15 @@ export type UserCountOutputTypeCountFollowingArgs<ExtArgs extends runtime.Types.
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountFollowersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserFollowWhereInput
+export type UserCountOutputTypeCountSentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
 }
 
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountHistoryArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.UserHistoryWhereInput
+export type UserCountOutputTypeCountReceivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.MessageWhereInput
 }
 
 
@@ -2855,26 +2855,26 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   occupation?: boolean
   phoneNumber?: boolean
   profileImage?: boolean
-  createdAt?: boolean
-  bio?: boolean
   coverImage?: boolean
+  bio?: boolean
   isExpert?: boolean
+  createdAt?: boolean
   preferences?: boolean
-  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  feedLikes?: boolean | Prisma.User$feedLikesArgs<ExtArgs>
-  feedPosts?: boolean | Prisma.User$feedPostsArgs<ExtArgs>
   uploads?: boolean | Prisma.User$uploadsArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  feedPosts?: boolean | Prisma.User$feedPostsArgs<ExtArgs>
+  feedLikes?: boolean | Prisma.User$feedLikesArgs<ExtArgs>
   usersLiked?: boolean | Prisma.User$usersLikedArgs<ExtArgs>
-  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
-  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  savedMedia?: boolean | Prisma.User$savedMediaArgs<ExtArgs>
+  savedEvents?: boolean | Prisma.User$savedEventsArgs<ExtArgs>
+  savedArticles?: boolean | Prisma.User$savedArticlesArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   pinnedInsights?: boolean | Prisma.User$pinnedInsightsArgs<ExtArgs>
-  savedArticles?: boolean | Prisma.User$savedArticlesArgs<ExtArgs>
-  savedEvents?: boolean | Prisma.User$savedEventsArgs<ExtArgs>
-  savedMedia?: boolean | Prisma.User$savedMediaArgs<ExtArgs>
-  following?: boolean | Prisma.User$followingArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
-  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  following?: boolean | Prisma.User$followingArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2885,10 +2885,10 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   occupation?: boolean
   phoneNumber?: boolean
   profileImage?: boolean
-  createdAt?: boolean
-  bio?: boolean
   coverImage?: boolean
+  bio?: boolean
   isExpert?: boolean
+  createdAt?: boolean
   preferences?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -2899,10 +2899,10 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   occupation?: boolean
   phoneNumber?: boolean
   profileImage?: boolean
-  createdAt?: boolean
-  bio?: boolean
   coverImage?: boolean
+  bio?: boolean
   isExpert?: boolean
+  createdAt?: boolean
   preferences?: boolean
 }, ExtArgs["result"]["user"]>
 
@@ -2913,30 +2913,30 @@ export type UserSelectScalar = {
   occupation?: boolean
   phoneNumber?: boolean
   profileImage?: boolean
-  createdAt?: boolean
-  bio?: boolean
   coverImage?: boolean
+  bio?: boolean
   isExpert?: boolean
+  createdAt?: boolean
   preferences?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "occupation" | "phoneNumber" | "profileImage" | "createdAt" | "bio" | "coverImage" | "isExpert" | "preferences", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "name" | "occupation" | "phoneNumber" | "profileImage" | "coverImage" | "bio" | "isExpert" | "createdAt" | "preferences", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
-  feedLikes?: boolean | Prisma.User$feedLikesArgs<ExtArgs>
-  feedPosts?: boolean | Prisma.User$feedPostsArgs<ExtArgs>
   uploads?: boolean | Prisma.User$uploadsArgs<ExtArgs>
+  comments?: boolean | Prisma.User$commentsArgs<ExtArgs>
+  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  feedPosts?: boolean | Prisma.User$feedPostsArgs<ExtArgs>
+  feedLikes?: boolean | Prisma.User$feedLikesArgs<ExtArgs>
   usersLiked?: boolean | Prisma.User$usersLikedArgs<ExtArgs>
-  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
-  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  savedMedia?: boolean | Prisma.User$savedMediaArgs<ExtArgs>
+  savedEvents?: boolean | Prisma.User$savedEventsArgs<ExtArgs>
+  savedArticles?: boolean | Prisma.User$savedArticlesArgs<ExtArgs>
   notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
   pinnedInsights?: boolean | Prisma.User$pinnedInsightsArgs<ExtArgs>
-  savedArticles?: boolean | Prisma.User$savedArticlesArgs<ExtArgs>
-  savedEvents?: boolean | Prisma.User$savedEventsArgs<ExtArgs>
-  savedMedia?: boolean | Prisma.User$savedMediaArgs<ExtArgs>
-  following?: boolean | Prisma.User$followingArgs<ExtArgs>
   followers?: boolean | Prisma.User$followersArgs<ExtArgs>
-  history?: boolean | Prisma.User$historyArgs<ExtArgs>
+  following?: boolean | Prisma.User$followingArgs<ExtArgs>
+  sentMessages?: boolean | Prisma.User$sentMessagesArgs<ExtArgs>
+  receivedMessages?: boolean | Prisma.User$receivedMessagesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2945,21 +2945,21 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
-    comments: Prisma.$CommentPayload<ExtArgs>[]
-    feedLikes: Prisma.$FeedLikePayload<ExtArgs>[]
-    feedPosts: Prisma.$FeedPostPayload<ExtArgs>[]
     uploads: Prisma.$MediaPayload<ExtArgs>[]
+    comments: Prisma.$CommentPayload<ExtArgs>[]
+    history: Prisma.$UserHistoryPayload<ExtArgs>[]
+    feedPosts: Prisma.$FeedPostPayload<ExtArgs>[]
+    feedLikes: Prisma.$FeedLikePayload<ExtArgs>[]
     usersLiked: Prisma.$MediaLikePayload<ExtArgs>[]
-    receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
-    sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+    savedMedia: Prisma.$SavedMediaPayload<ExtArgs>[]
+    savedEvents: Prisma.$SavedEventPayload<ExtArgs>[]
+    savedArticles: Prisma.$SavedArticlePayload<ExtArgs>[]
     notifications: Prisma.$NotificationPayload<ExtArgs>[]
     pinnedInsights: Prisma.$PinnedInsightPayload<ExtArgs>[]
-    savedArticles: Prisma.$SavedArticlePayload<ExtArgs>[]
-    savedEvents: Prisma.$SavedEventPayload<ExtArgs>[]
-    savedMedia: Prisma.$SavedMediaPayload<ExtArgs>[]
-    following: Prisma.$UserFollowPayload<ExtArgs>[]
     followers: Prisma.$UserFollowPayload<ExtArgs>[]
-    history: Prisma.$UserHistoryPayload<ExtArgs>[]
+    following: Prisma.$UserFollowPayload<ExtArgs>[]
+    sentMessages: Prisma.$MessagePayload<ExtArgs>[]
+    receivedMessages: Prisma.$MessagePayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2968,10 +2968,10 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     occupation: string | null
     phoneNumber: string | null
     profileImage: string | null
-    createdAt: Date
-    bio: string | null
     coverImage: string | null
+    bio: string | null
     isExpert: boolean
+    createdAt: Date
     preferences: string[]
   }, ExtArgs["result"]["user"]>
   composites: {}
@@ -3367,21 +3367,21 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  feedLikes<T extends Prisma.User$feedLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  feedPosts<T extends Prisma.User$feedPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   uploads<T extends Prisma.User$uploadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$uploadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comments<T extends Prisma.User$commentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$commentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CommentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  history<T extends Prisma.User$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedPosts<T extends Prisma.User$feedPostsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedPostsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedPostPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  feedLikes<T extends Prisma.User$feedLikesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$feedLikesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FeedLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   usersLiked<T extends Prisma.User$usersLikedArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$usersLikedArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MediaLikePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  receivedMessages<T extends Prisma.User$receivedMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savedMedia<T extends Prisma.User$savedMediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savedEvents<T extends Prisma.User$savedEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  savedArticles<T extends Prisma.User$savedArticlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   pinnedInsights<T extends Prisma.User$pinnedInsightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$pinnedInsightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PinnedInsightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  savedArticles<T extends Prisma.User$savedArticlesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedArticlesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedArticlePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  savedEvents<T extends Prisma.User$savedEventsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedEventsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedEventPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  savedMedia<T extends Prisma.User$savedMediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$savedMediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SavedMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  following<T extends Prisma.User$followingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   followers<T extends Prisma.User$followersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  history<T extends Prisma.User$historyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$historyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserHistoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  following<T extends Prisma.User$followingArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$followingArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$UserFollowPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  sentMessages<T extends Prisma.User$sentMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$sentMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  receivedMessages<T extends Prisma.User$receivedMessagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$receivedMessagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$MessagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3417,10 +3417,10 @@ export interface UserFieldRefs {
   readonly occupation: Prisma.FieldRef<"User", 'String'>
   readonly phoneNumber: Prisma.FieldRef<"User", 'String'>
   readonly profileImage: Prisma.FieldRef<"User", 'String'>
-  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
-  readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly coverImage: Prisma.FieldRef<"User", 'String'>
+  readonly bio: Prisma.FieldRef<"User", 'String'>
   readonly isExpert: Prisma.FieldRef<"User", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly preferences: Prisma.FieldRef<"User", 'String[]'>
 }
     
@@ -3815,6 +3815,30 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
+ * User.uploads
+ */
+export type User$uploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Media
+   */
+  select?: Prisma.MediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Media
+   */
+  omit?: Prisma.MediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.MediaInclude<ExtArgs> | null
+  where?: Prisma.MediaWhereInput
+  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
+  cursor?: Prisma.MediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
+}
+
+/**
  * User.comments
  */
 export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -3839,27 +3863,27 @@ export type User$commentsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 }
 
 /**
- * User.feedLikes
+ * User.history
  */
-export type User$feedLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the FeedLike
+   * Select specific fields to fetch from the UserHistory
    */
-  select?: Prisma.FeedLikeSelect<ExtArgs> | null
+  select?: Prisma.UserHistorySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the FeedLike
+   * Omit specific fields from the UserHistory
    */
-  omit?: Prisma.FeedLikeOmit<ExtArgs> | null
+  omit?: Prisma.UserHistoryOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.FeedLikeInclude<ExtArgs> | null
-  where?: Prisma.FeedLikeWhereInput
-  orderBy?: Prisma.FeedLikeOrderByWithRelationInput | Prisma.FeedLikeOrderByWithRelationInput[]
-  cursor?: Prisma.FeedLikeWhereUniqueInput
+  include?: Prisma.UserHistoryInclude<ExtArgs> | null
+  where?: Prisma.UserHistoryWhereInput
+  orderBy?: Prisma.UserHistoryOrderByWithRelationInput | Prisma.UserHistoryOrderByWithRelationInput[]
+  cursor?: Prisma.UserHistoryWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.FeedLikeScalarFieldEnum | Prisma.FeedLikeScalarFieldEnum[]
+  distinct?: Prisma.UserHistoryScalarFieldEnum | Prisma.UserHistoryScalarFieldEnum[]
 }
 
 /**
@@ -3887,27 +3911,27 @@ export type User$feedPostsArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.uploads
+ * User.feedLikes
  */
-export type User$uploadsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$feedLikesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Media
+   * Select specific fields to fetch from the FeedLike
    */
-  select?: Prisma.MediaSelect<ExtArgs> | null
+  select?: Prisma.FeedLikeSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Media
+   * Omit specific fields from the FeedLike
    */
-  omit?: Prisma.MediaOmit<ExtArgs> | null
+  omit?: Prisma.FeedLikeOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MediaInclude<ExtArgs> | null
-  where?: Prisma.MediaWhereInput
-  orderBy?: Prisma.MediaOrderByWithRelationInput | Prisma.MediaOrderByWithRelationInput[]
-  cursor?: Prisma.MediaWhereUniqueInput
+  include?: Prisma.FeedLikeInclude<ExtArgs> | null
+  where?: Prisma.FeedLikeWhereInput
+  orderBy?: Prisma.FeedLikeOrderByWithRelationInput | Prisma.FeedLikeOrderByWithRelationInput[]
+  cursor?: Prisma.FeedLikeWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MediaScalarFieldEnum | Prisma.MediaScalarFieldEnum[]
+  distinct?: Prisma.FeedLikeScalarFieldEnum | Prisma.FeedLikeScalarFieldEnum[]
 }
 
 /**
@@ -3935,51 +3959,75 @@ export type User$usersLikedArgs<ExtArgs extends runtime.Types.Extensions.Interna
 }
 
 /**
- * User.receivedMessages
+ * User.savedMedia
  */
-export type User$receivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$savedMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Message
+   * Select specific fields to fetch from the SavedMedia
    */
-  select?: Prisma.MessageSelect<ExtArgs> | null
+  select?: Prisma.SavedMediaSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Message
+   * Omit specific fields from the SavedMedia
    */
-  omit?: Prisma.MessageOmit<ExtArgs> | null
+  omit?: Prisma.SavedMediaOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MessageInclude<ExtArgs> | null
-  where?: Prisma.MessageWhereInput
-  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
-  cursor?: Prisma.MessageWhereUniqueInput
+  include?: Prisma.SavedMediaInclude<ExtArgs> | null
+  where?: Prisma.SavedMediaWhereInput
+  orderBy?: Prisma.SavedMediaOrderByWithRelationInput | Prisma.SavedMediaOrderByWithRelationInput[]
+  cursor?: Prisma.SavedMediaWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+  distinct?: Prisma.SavedMediaScalarFieldEnum | Prisma.SavedMediaScalarFieldEnum[]
 }
 
 /**
- * User.sentMessages
+ * User.savedEvents
  */
-export type User$sentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$savedEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Message
+   * Select specific fields to fetch from the SavedEvent
    */
-  select?: Prisma.MessageSelect<ExtArgs> | null
+  select?: Prisma.SavedEventSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Message
+   * Omit specific fields from the SavedEvent
    */
-  omit?: Prisma.MessageOmit<ExtArgs> | null
+  omit?: Prisma.SavedEventOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.MessageInclude<ExtArgs> | null
-  where?: Prisma.MessageWhereInput
-  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
-  cursor?: Prisma.MessageWhereUniqueInput
+  include?: Prisma.SavedEventInclude<ExtArgs> | null
+  where?: Prisma.SavedEventWhereInput
+  orderBy?: Prisma.SavedEventOrderByWithRelationInput | Prisma.SavedEventOrderByWithRelationInput[]
+  cursor?: Prisma.SavedEventWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
+  distinct?: Prisma.SavedEventScalarFieldEnum | Prisma.SavedEventScalarFieldEnum[]
+}
+
+/**
+ * User.savedArticles
+ */
+export type User$savedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SavedArticle
+   */
+  select?: Prisma.SavedArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SavedArticle
+   */
+  omit?: Prisma.SavedArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SavedArticleInclude<ExtArgs> | null
+  where?: Prisma.SavedArticleWhereInput
+  orderBy?: Prisma.SavedArticleOrderByWithRelationInput | Prisma.SavedArticleOrderByWithRelationInput[]
+  cursor?: Prisma.SavedArticleWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SavedArticleScalarFieldEnum | Prisma.SavedArticleScalarFieldEnum[]
 }
 
 /**
@@ -4031,75 +4079,27 @@ export type User$pinnedInsightsArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * User.savedArticles
+ * User.followers
  */
-export type User$savedArticlesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$followersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the SavedArticle
+   * Select specific fields to fetch from the UserFollow
    */
-  select?: Prisma.SavedArticleSelect<ExtArgs> | null
+  select?: Prisma.UserFollowSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the SavedArticle
+   * Omit specific fields from the UserFollow
    */
-  omit?: Prisma.SavedArticleOmit<ExtArgs> | null
+  omit?: Prisma.UserFollowOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SavedArticleInclude<ExtArgs> | null
-  where?: Prisma.SavedArticleWhereInput
-  orderBy?: Prisma.SavedArticleOrderByWithRelationInput | Prisma.SavedArticleOrderByWithRelationInput[]
-  cursor?: Prisma.SavedArticleWhereUniqueInput
+  include?: Prisma.UserFollowInclude<ExtArgs> | null
+  where?: Prisma.UserFollowWhereInput
+  orderBy?: Prisma.UserFollowOrderByWithRelationInput | Prisma.UserFollowOrderByWithRelationInput[]
+  cursor?: Prisma.UserFollowWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SavedArticleScalarFieldEnum | Prisma.SavedArticleScalarFieldEnum[]
-}
-
-/**
- * User.savedEvents
- */
-export type User$savedEventsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SavedEvent
-   */
-  select?: Prisma.SavedEventSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SavedEvent
-   */
-  omit?: Prisma.SavedEventOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SavedEventInclude<ExtArgs> | null
-  where?: Prisma.SavedEventWhereInput
-  orderBy?: Prisma.SavedEventOrderByWithRelationInput | Prisma.SavedEventOrderByWithRelationInput[]
-  cursor?: Prisma.SavedEventWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SavedEventScalarFieldEnum | Prisma.SavedEventScalarFieldEnum[]
-}
-
-/**
- * User.savedMedia
- */
-export type User$savedMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the SavedMedia
-   */
-  select?: Prisma.SavedMediaSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the SavedMedia
-   */
-  omit?: Prisma.SavedMediaOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.SavedMediaInclude<ExtArgs> | null
-  where?: Prisma.SavedMediaWhereInput
-  orderBy?: Prisma.SavedMediaOrderByWithRelationInput | Prisma.SavedMediaOrderByWithRelationInput[]
-  cursor?: Prisma.SavedMediaWhereUniqueInput
-  take?: number
-  skip?: number
-  distinct?: Prisma.SavedMediaScalarFieldEnum | Prisma.SavedMediaScalarFieldEnum[]
+  distinct?: Prisma.UserFollowScalarFieldEnum | Prisma.UserFollowScalarFieldEnum[]
 }
 
 /**
@@ -4127,51 +4127,51 @@ export type User$followingArgs<ExtArgs extends runtime.Types.Extensions.Internal
 }
 
 /**
- * User.followers
+ * User.sentMessages
  */
-export type User$followersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$sentMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserFollow
+   * Select specific fields to fetch from the Message
    */
-  select?: Prisma.UserFollowSelect<ExtArgs> | null
+  select?: Prisma.MessageSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserFollow
+   * Omit specific fields from the Message
    */
-  omit?: Prisma.UserFollowOmit<ExtArgs> | null
+  omit?: Prisma.MessageOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserFollowInclude<ExtArgs> | null
-  where?: Prisma.UserFollowWhereInput
-  orderBy?: Prisma.UserFollowOrderByWithRelationInput | Prisma.UserFollowOrderByWithRelationInput[]
-  cursor?: Prisma.UserFollowWhereUniqueInput
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserFollowScalarFieldEnum | Prisma.UserFollowScalarFieldEnum[]
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**
- * User.history
+ * User.receivedMessages
  */
-export type User$historyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$receivedMessagesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the UserHistory
+   * Select specific fields to fetch from the Message
    */
-  select?: Prisma.UserHistorySelect<ExtArgs> | null
+  select?: Prisma.MessageSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the UserHistory
+   * Omit specific fields from the Message
    */
-  omit?: Prisma.UserHistoryOmit<ExtArgs> | null
+  omit?: Prisma.MessageOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.UserHistoryInclude<ExtArgs> | null
-  where?: Prisma.UserHistoryWhereInput
-  orderBy?: Prisma.UserHistoryOrderByWithRelationInput | Prisma.UserHistoryOrderByWithRelationInput[]
-  cursor?: Prisma.UserHistoryWhereUniqueInput
+  include?: Prisma.MessageInclude<ExtArgs> | null
+  where?: Prisma.MessageWhereInput
+  orderBy?: Prisma.MessageOrderByWithRelationInput | Prisma.MessageOrderByWithRelationInput[]
+  cursor?: Prisma.MessageWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.UserHistoryScalarFieldEnum | Prisma.UserHistoryScalarFieldEnum[]
+  distinct?: Prisma.MessageScalarFieldEnum | Prisma.MessageScalarFieldEnum[]
 }
 
 /**
