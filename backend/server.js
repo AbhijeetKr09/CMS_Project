@@ -41,10 +41,27 @@ const S3_PUBLIC_BUCKET  = process.env.S3_PUBLIC_DATA;
 const S3_PRIVATE_BUCKET = process.env.S3_BUCKET_NAME;
 const AWS_REGION        = process.env.AWS_REGION || 'ap-south-1';
 
-// ── Multer — memory storage for CMS uploads ───────────────────────────────────
+// ── Multer — memory storage for small CMS uploads (images, xlsx, etc.) ──────
 const upload = multer({
     storage: multer.memoryStorage(),
-    limits: { fileSize: 600 * 1024 * 1024 }, // 600 MB max (large enough for raw MP4)
+    limits: { fileSize: 50 * 1024 * 1024 }, // 50 MB cap for memory uploads
+});
+
+// ── Multer — DISK storage for video uploads (avoids OOM on large MP4s) ───────
+// Memory storage would hold the entire video in RAM → exit code 137 (SIGKILL)
+const tmpUploadDir = path.join(__dirname, 'uploads', 'tmp');
+const videoUpload = multer({
+    storage: multer.diskStorage({
+        destination: (_req, _file, cb) => {
+            // Ensure the tmp dir exists synchronously before multer writes to it
+            import('fs').then(({ mkdirSync }) => {
+                try { mkdirSync(tmpUploadDir, { recursive: true }); } catch {}
+                cb(null, tmpUploadDir);
+            });
+        },
+        filename: (_req, _file, cb) => cb(null, `${uuidv4()}_input.mp4`),
+    }),
+    limits: { fileSize: 2 * 1024 * 1024 * 1024 }, // 2 GB disk limit
 });
 
 // ── Middleware ────────────────────────────────────────────────────────────────
@@ -62,8 +79,8 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Serve static paths
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Note: /uploads is a temp-only dir for video processing; all files go to S3.
+// Not served as static to avoid exposing temp files.
 app.use('/', express.static(path.join(__dirname, 'public')));
 
 // ── Existing article image upload (private bucket, webp only) ─────────────────
@@ -144,7 +161,8 @@ app.post('/api/cms/upload-private', authenticate, upload.single('file'), async (
 });
 
 // ── CMS Upload: video MP4 → ffmpeg HLS segments → public bucket ───────────────
-app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (req, res) => {
+// Uses disk-based multer (videoUpload) — never loads video into RAM
+app.post('/api/cms/upload-video', authenticate, videoUpload.single('video'), async (req, res) => {
     let tmpInput  = null;
     let tmpOutDir = null;
     try {
@@ -157,19 +175,16 @@ app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (r
             ffmpeg = mod.default;
         } catch {
             return res.status(501).json({
-                message: 'ffmpeg not installed on server. Run: npm install fluent-ffmpeg @ffmpeg-installer/ffmpeg',
+                message: 'ffmpeg not installed on server.',
             });
         }
 
-        const videoId = uuidv4();
-        const tmpDir  = path.join(__dirname, 'uploads', 'tmp');
-        tmpInput      = path.join(tmpDir, `${videoId}_input.mp4`);
-        tmpOutDir     = path.join(tmpDir, videoId);
-
-        await fs.mkdir(tmpDir,    { recursive: true });
+        // req.file.path is the disk path written by multer — no RAM buffer needed
+        tmpInput  = req.file.path;
+        tmpOutDir = path.join(tmpUploadDir, path.basename(tmpInput, '_input.mp4'));
         await fs.mkdir(tmpOutDir, { recursive: true });
-        await fs.writeFile(tmpInput, req.file.buffer);
 
+        const videoId  = path.basename(tmpInput).replace('_input.mp4', '');
         const m3u8Name = `${videoId}.m3u8`;
         const m3u8Path = path.join(tmpOutDir, m3u8Name);
         const hlsKey   = `videos/${m3u8Name}`;
@@ -178,7 +193,7 @@ app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (r
         await new Promise((resolve, reject) => {
             ffmpeg(tmpInput)
                 .outputOptions([
-                    '-codec: copy',
+                    '-codec copy',
                     '-start_number 0',
                     '-hls_time 6',
                     '-hls_list_size 0',
@@ -190,6 +205,10 @@ app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (r
                 .on('error', reject)
                 .run();
         });
+
+        // ffmpeg is done — raw input MP4 no longer needed, delete it immediately
+        await fs.unlink(tmpInput).catch(() => {});
+        tmpInput = null; // prevent double-delete in finally
 
         // Patch the .m3u8 playlist so segment filenames become full S3 URLs
         const segBaseUrl = `https://${S3_PUBLIC_BUCKET}.s3.${AWS_REGION}.amazonaws.com/videos/`;
@@ -204,16 +223,19 @@ app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (r
             ContentType: 'application/vnd.apple.mpegurl',
         }));
 
-        // Upload all .ts segment files in parallel
+        // Upload each .ts segment then delete it from disk immediately — keeps disk clean
         const segments = (await fs.readdir(tmpOutDir)).filter(f => f.endsWith('.ts'));
         await Promise.all(segments.map(async seg => {
-            const buf = await fs.readFile(path.join(tmpOutDir, seg));
+            const segPath = path.join(tmpOutDir, seg);
+            const buf = await fs.readFile(segPath);
             await s3Client.send(new PutObjectCommand({
                 Bucket:      S3_PUBLIC_BUCKET,
                 Key:         `videos/${seg}`,
                 Body:        buf,
                 ContentType: 'video/MP2T',
             }));
+            // ✅ Delete from disk immediately after S3 confirms the upload
+            await fs.unlink(segPath).catch(() => {});
         }));
 
         res.json({
@@ -224,6 +246,7 @@ app.post('/api/cms/upload-video', authenticate, upload.single('video'), async (r
         console.error('[UploadVideo] error:', err);
         res.status(500).json({ message: 'Video processing failed.', error: err.message });
     } finally {
+        // Clean up disk temp files regardless of success or failure
         if (tmpInput)  fs.unlink(tmpInput).catch(() => {});
         if (tmpOutDir) fs.rm(tmpOutDir, { recursive: true, force: true }).catch(() => {});
     }

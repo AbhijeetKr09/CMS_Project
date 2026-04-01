@@ -36,6 +36,12 @@ model Article {
   userHistory      UserHistory[]
   savedBy          SavedArticle[]
 
+  // Back-relations from StagedArticle (for editors linking a draft to published articles)
+  stagedRelated1   StagedArticle[]                 @relation("StagedRelated1")
+  stagedRelated2   StagedArticle[]                 @relation("StagedRelated2")
+  stagedRelated3   StagedArticle[]                 @relation("StagedRelated3")
+  stagedRelated4   StagedArticle[]                 @relation("StagedRelated4")
+
   @@map("articles")
 }
 
@@ -446,12 +452,16 @@ model StagedArticle {
   reviewedAt         DateTime?
   assignedAt         DateTime?
 
-  // Related internal article IDs (up to 4) — mirrors Article's relatedNews structure
-  // Stored as plain strings (no FK) so the Article model stays untouched
-  relatedArticle1Id  String?                 // published article ID
-  relatedArticle2Id  String?                 // published article ID
-  relatedArticle3Id  String?                 // published article ID
-  relatedArticle4Id  String?                 // published article ID
+  // Related internal article IDs (up to 4) — proper FK relations to Article
+  // onDelete: SetNull so deleting a published article doesn't destroy the staged draft
+  relatedArticle1Id  String?
+  relatedArticle1    Article?                @relation("StagedRelated1", fields: [relatedArticle1Id], references: [id], onDelete: SetNull)
+  relatedArticle2Id  String?
+  relatedArticle2    Article?                @relation("StagedRelated2", fields: [relatedArticle2Id], references: [id], onDelete: SetNull)
+  relatedArticle3Id  String?
+  relatedArticle3    Article?                @relation("StagedRelated3", fields: [relatedArticle3Id], references: [id], onDelete: SetNull)
+  relatedArticle4Id  String?
+  relatedArticle4    Article?                @relation("StagedRelated4", fields: [relatedArticle4Id], references: [id], onDelete: SetNull)
 
   images             StagedArticleImage[]
   keyInsights        StagedArticleKeyInsight[]

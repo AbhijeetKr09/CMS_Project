@@ -16,15 +16,15 @@ const extractRelatedIds = (body) => ({
 
 // Helper: include clause for full staged article with relations
 const FULL_INCLUDE = {
-    submittedBy:  { select: { id: true, name: true, email: true } },
-    reviewedBy:   { select: { id: true, name: true, email: true } },
-    assignedTo:   { select: { id: true, name: true, email: true } },
-    images:       true,
-    keyInsights:  true,
-    relatedArticle1: { select: { id: true, title: true, mainImage: true } },
-    relatedArticle2: { select: { id: true, title: true, mainImage: true } },
-    relatedArticle3: { select: { id: true, title: true, mainImage: true } },
-    relatedArticle4: { select: { id: true, title: true, mainImage: true } },
+    submittedBy:      { select: { id: true, name: true, email: true } },
+    reviewedBy:       { select: { id: true, name: true, email: true } },
+    assignedTo:       { select: { id: true, name: true, email: true } },
+    images:           true,
+    keyInsights:      true,
+    relatedArticle1:  { select: { id: true, title: true, mainImage: true } },
+    relatedArticle2:  { select: { id: true, title: true, mainImage: true } },
+    relatedArticle3:  { select: { id: true, title: true, mainImage: true } },
+    relatedArticle4:  { select: { id: true, title: true, mainImage: true } },
 };
 
 // ─── JOURNALIST: Create new draft ───────────────────────────────────────────
