@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import path from 'path';
 import { promises as fs } from 'fs';
+import { mkdirSync } from 'fs';          // sync version for multer destination
 import 'dotenv/config';
 import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
@@ -50,16 +51,11 @@ const upload = multer({
 // ── Multer — DISK storage for video uploads (avoids OOM on large MP4s) ───────
 // Memory storage would hold the entire video in RAM → exit code 137 (SIGKILL)
 const tmpUploadDir = path.join(__dirname, 'uploads', 'tmp');
+try { mkdirSync(tmpUploadDir, { recursive: true }); } catch {} // ensure dir exists at startup
 const videoUpload = multer({
     storage: multer.diskStorage({
-        destination: (_req, _file, cb) => {
-            // Ensure the tmp dir exists synchronously before multer writes to it
-            import('fs').then(({ mkdirSync }) => {
-                try { mkdirSync(tmpUploadDir, { recursive: true }); } catch {}
-                cb(null, tmpUploadDir);
-            });
-        },
-        filename: (_req, _file, cb) => cb(null, `${uuidv4()}_input.mp4`),
+        destination: (_req, _file, cb) => cb(null, tmpUploadDir), // dir already exists
+        filename:    (_req, _file, cb) => cb(null, `${uuidv4()}_input.mp4`),
     }),
     limits: { fileSize: 2 * 1024 * 1024 * 1024 }, // 2 GB disk limit
 });
@@ -69,13 +65,24 @@ const allowedOrigins = (process.env.FRONTEND_ORIGIN || 'http://localhost:5173')
     .split(',')
     .map(o => o.trim());
 
+// Always send CORS headers so browser gets a real 403, not a cryptic CORS block.
+// When origin is not allowed, the app.use below intercepts and returns 403.
 app.use(cors({
     origin: (origin, callback) => {
         if (!origin || allowedOrigins.includes(origin)) callback(null, true);
-        else callback(new Error(`CORS: origin '${origin}' not allowed`));
+        else callback(null, false); // don't reject — let the guard below send a clean 403
     },
     credentials: true,
 }));
+
+// Origin guard — runs after CORS headers are set, sends clean 403 for unknown origins
+app.use((req, res, next) => {
+    const origin = req.headers.origin;
+    if (origin && !allowedOrigins.includes(origin)) {
+        return res.status(403).json({ message: `Origin '${origin}' not allowed.` });
+    }
+    next();
+});
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
