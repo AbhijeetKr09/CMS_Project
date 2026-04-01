@@ -3,7 +3,7 @@ import cors             from 'cors';
 import path             from 'path';
 import { promises as fs, createReadStream, mkdirSync } from 'fs';
 import 'dotenv/config';
-import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, GetObjectCommand, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import { getSignedUrl }  from '@aws-sdk/s3-request-presigner';
 import { fileURLToPath } from 'url';
 import { v4 as uuidv4 } from 'uuid';
@@ -81,7 +81,29 @@ let   activeJobs = 0;
 const log = (jobId, msg) =>
     console.log(`[Video:${jobId.slice(0, 8)}] ${msg} | mem: ${Math.round(process.memoryUsage().rss / 1024 / 1024)}MB`);
 
-// ── Core video processor (runs in background) ─────────────────────────────────
+// ── Auto-incrementing S3 video folder: video_1, video_2, video_3 … ────────────
+// Queries S3 to find the highest existing video_N folder, returns video_{N+1}.
+// This is safe even after server restarts since it reads from S3 directly.
+const getNextVideoFolderId = async () => {
+    let maxN = 0;
+    let token;
+    do {
+        const res = await s3.send(new ListObjectsV2Command({
+            Bucket:            S3_PUBLIC,
+            Prefix:            'videos/video_',
+            Delimiter:         '/',
+            ContinuationToken: token,
+        }));
+        for (const p of (res.CommonPrefixes || [])) {
+            // p.Prefix looks like 'videos/video_3/'
+            const match = p.Prefix.match(/video_(\d+)\/$/);
+            if (match) maxN = Math.max(maxN, parseInt(match[1], 10));
+        }
+        token = res.NextContinuationToken;
+    } while (token);
+    return `video_${maxN + 1}`;
+};
+
 const processVideo = async (jobId, rawPath) => {
     let tmpOutDir = null;
     const t0 = Date.now();
@@ -94,16 +116,18 @@ const processVideo = async (jobId, rawPath) => {
         try { ffmpeg = (await import('fluent-ffmpeg')).default; }
         catch { throw new Error('ffmpeg not installed on server.'); }
 
-        const videoId  = uuidv4();
+        // ── Resolve folder name from S3 (video_1, video_2 …) ─────────────────
+        const videoId  = await getNextVideoFolderId(); // e.g. 'video_2'
+        const s3Folder = `videos/${videoId}`;          // 'videos/video_2'
         tmpOutDir      = path.join(TMP_DIR, videoId);
         await fs.mkdir(tmpOutDir, { recursive: true });
 
-        const m3u8Name = `${videoId}.m3u8`;
+        const m3u8Name = `${videoId}.m3u8`;            // 'video_2.m3u8'
         const m3u8Path = path.join(tmpOutDir, m3u8Name);
-        const hlsKey   = `videos/${m3u8Name}`;
+        const hlsKey   = `${s3Folder}/${m3u8Name}`;   // 'videos/video_2/video_2.m3u8'
 
         // ── Step 1: ffmpeg → HLS segments on disk ─────────────────────────────
-        log(jobId, 'ffmpeg started');
+        log(jobId, `ffmpeg started → folder=${s3Folder}`);
         await new Promise((resolve, reject) => {
             ffmpeg(rawPath)
                 .outputOptions([
@@ -111,6 +135,7 @@ const processVideo = async (jobId, rawPath) => {
                     '-start_number 0',
                     '-hls_time 6',
                     '-hls_list_size 0',
+                    // Segments named: video_2_000.ts, video_2_001.ts …
                     `-hls_segment_filename ${path.join(tmpOutDir, `${videoId}_%03d.ts`)}`,
                     '-f hls',
                 ])
@@ -126,12 +151,13 @@ const processVideo = async (jobId, rawPath) => {
         await fs.unlink(rawPath).catch(() => {});
         log(jobId, 'Raw MP4 deleted');
 
-        // ── Step 3: Patch .m3u8 with full S3 URLs ─────────────────────────────
-        const segBase   = `https://${S3_PUBLIC}.s3.${REGION}.amazonaws.com/videos/`;
+        // ── Step 3: Patch .m3u8 — replace bare segment names with full S3 URLs ─
+        // Segments live at videos/video_2/video_2_000.ts etc.
+        const segBase   = `https://${S3_PUBLIC}.s3.${REGION}.amazonaws.com/${s3Folder}/`;
         let m3u8Content = await fs.readFile(m3u8Path, 'utf8');
         m3u8Content     = m3u8Content.replace(/^([^#].+\.ts)$/gm, `${segBase}$1`);
 
-        // Upload .m3u8 (small text file — body string is fine)
+        // Upload .m3u8 playlist
         await s3.send(new PutObjectCommand({
             Bucket:      S3_PUBLIC,
             Key:         hlsKey,
@@ -140,15 +166,14 @@ const processVideo = async (jobId, rawPath) => {
         }));
 
         // ── Step 4: Upload segments SEQUENTIALLY — stream each, delete after ──
-        // Sequential (not Promise.all) = only 1 segment in memory at a time.
         const segments = (await fs.readdir(tmpOutDir)).filter(f => f.endsWith('.ts'));
-        log(jobId, `Uploading ${segments.length} segments sequentially`);
+        log(jobId, `Uploading ${segments.length} segments → ${s3Folder}/`);
 
         for (let i = 0; i < segments.length; i++) {
             const seg     = segments[i];
             const segPath = path.join(tmpOutDir, seg);
-            await streamToS3(segPath, S3_PUBLIC, `videos/${seg}`, 'video/MP2T');
-            // segPath is deleted inside streamToS3 immediately after upload ✅
+            // Upload to videos/video_2/video_2_000.ts
+            await streamToS3(segPath, S3_PUBLIC, `${s3Folder}/${seg}`, 'video/MP2T');
             const progress = 40 + Math.round(((i + 1) / segments.length) * 58);
             jobStore.set(jobId, { status: 'processing', progress });
         }

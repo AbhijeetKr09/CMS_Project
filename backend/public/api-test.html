@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Avionyz API Tester</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0d1117; color: #e6edf3; font-family: 'Segoe UI', system-ui, sans-serif; min-height: 100vh; }
+  header { background: #161b22; border-bottom: 1px solid #30363d; padding: 18px 32px; display: flex; align-items: center; gap: 14px; }
+  header h1 { font-size: 18px; font-weight: 700; color: #58a6ff; }
+  header span { font-size: 12px; color: #8b949e; background: #21262d; padding: 3px 10px; border-radius: 20px; border: 1px solid #30363d; }
+  .layout { display: grid; grid-template-columns: 280px 1fr; height: calc(100vh - 61px); }
+  .sidebar { background: #161b22; border-right: 1px solid #30363d; overflow-y: auto; padding: 12px 0; }
+  .sidebar-group { padding: 8px 16px 4px; font-size: 10px; font-weight: 700; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
+  .sidebar-item { display: flex; align-items: center; gap: 10px; padding: 8px 16px; cursor: pointer; transition: background .15s; border: none; background: none; width: 100%; text-align: left; color: #e6edf3; font-size: 13px; }
+  .sidebar-item:hover { background: #21262d; }
+  .sidebar-item.active { background: #1f2d45; color: #58a6ff; border-left: 3px solid #58a6ff; }
+  .badge { font-size: 9px; font-weight: 700; padding: 2px 6px; border-radius: 4px; margin-left: auto; }
+  .get { background: #1a4a2a; color: #3fb950; }
+  .post { background: #2e2a1a; color: #d29922; }
+  .main { display: flex; flex-direction: column; overflow: hidden; }
+  .main-inner { flex: 1; overflow-y: auto; padding: 24px 32px; }
+  .card { background: #161b22; border: 1px solid #30363d; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .card-header { padding: 14px 18px; border-bottom: 1px solid #30363d; display: flex; align-items: center; gap: 10px; }
+  .card-header h2 { font-size: 14px; font-weight: 600; flex: 1; }
+  .card-body { padding: 18px; }
+  .method-badge { font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 5px; }
+  .route { font-family: 'Courier New', monospace; font-size: 13px; color: #8b949e; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  label { display: block; font-size: 11px; font-weight: 600; color: #8b949e; margin-bottom: 5px; text-transform: uppercase; letter-spacing: .5px; }
+  input, select, textarea { width: 100%; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; padding: 8px 12px; color: #e6edf3; font-size: 13px; font-family: inherit; transition: border .15s; }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: #58a6ff; }
+  input[type="file"] { padding: 6px; }
+  textarea { resize: vertical; min-height: 80px; font-family: 'Courier New', monospace; font-size: 12px; }
+  .btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border-radius: 7px; border: none; font-size: 13px; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .btn-primary { background: #238636; color: #fff; }
+  .btn-primary:hover { background: #2ea043; }
+  .btn-primary:disabled { opacity: .5; cursor: not-allowed; }
+  .btn-secondary { background: #21262d; color: #e6edf3; border: 1px solid #30363d; }
+  .btn-secondary:hover { background: #30363d; }
+  .actions { display: flex; gap: 8px; align-items: center; margin-top: 14px; }
+  .result-box { margin-top: 14px; background: #0d1117; border: 1px solid #30363d; border-radius: 7px; overflow: hidden; }
+  .result-header { display: flex; align-items: center; gap: 10px; padding: 8px 14px; background: #161b22; border-bottom: 1px solid #30363d; font-size: 12px; }
+  .status-ok { color: #3fb950; }
+  .status-err { color: #f85149; }
+  .result-body { padding: 14px; font-family: 'Courier New', monospace; font-size: 12px; color: #a5d6ff; max-height: 280px; overflow-y: auto; white-space: pre-wrap; word-break: break-all; }
+  .token-bar { background: #1f2d45; border: 1px solid #1f6feb; border-radius: 7px; padding: 10px 16px; margin-bottom: 20px; font-size: 12px; display: flex; align-items: center; gap: 10px; color: #58a6ff; }
+  .token-bar code { flex: 1; font-size: 11px; color: #8b949e; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .token-bar .clear { font-size: 11px; color: #f85149; cursor: pointer; background: none; border: none; text-decoration: underline; }
+  .ping { width: 8px; height: 8px; border-radius: 50%; background: #f85149; display: inline-block; margin-right: 4px; }
+  .ping.ok { background: #3fb950; }
+  .info-row { display: flex; gap: 6px; margin-bottom: 8px; font-size: 12px; color: #8b949e; }
+  .info-row strong { color: #e6edf3; }
+  .section { margin-bottom: 10px; }
+  .section-title { font-size: 11px; font-weight: 700; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; padding-bottom: 5px; border-bottom: 1px solid #21262d; }
+  .progress-bar { background: #21262d; border-radius: 4px; height: 6px; margin-top: 8px; }
+  .progress-fill { height: 100%; background: #58a6ff; border-radius: 4px; transition: width .4s; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⚡ Avionyz API Tester</h1>
+  <span id="env-label">api.avionyz.com</span>
+  <span id="health-badge" style="margin-left:auto">⬤ Checking…</span>
+</header>
+
+<div class="layout">
+  <!-- Sidebar -->
+  <nav class="sidebar">
+    <div class="sidebar-group">System</div>
+    <button class="sidebar-item active" onclick="show('health')">🟢 Health Check <span class="badge get">GET</span></button>
+    <div class="sidebar-group">Auth</div>
+    <button class="sidebar-item" onclick="show('login')">🔐 Login <span class="badge post">POST</span></button>
+    <div class="sidebar-group">Articles</div>
+    <button class="sidebar-item" onclick="show('list-articles')">📋 List Articles <span class="badge get">GET</span></button>
+    <button class="sidebar-item" onclick="show('get-article')">📄 Get Article <span class="badge get">GET</span></button>
+    <div class="sidebar-group">Uploads</div>
+    <button class="sidebar-item" onclick="show('upload-public')">🖼 Upload Public <span class="badge post">POST</span></button>
+    <button class="sidebar-item" onclick="show('upload-private')">🔒 Upload Private <span class="badge post">POST</span></button>
+    <button class="sidebar-item" onclick="show('upload-video')">🎬 Upload Video <span class="badge post">POST</span></button>
+    <div class="sidebar-group">CMS</div>
+    <button class="sidebar-item" onclick="show('staged-list')">📝 Staged Articles <span class="badge get">GET</span></button>
+    <button class="sidebar-item" onclick="show('list-events')">📅 Events <span class="badge get">GET</span></button>
+    <button class="sidebar-item" onclick="show('list-media')">🎬 Media <span class="badge get">GET</span></button>
+    <button class="sidebar-item" onclick="show('list-experts')">👤 Experts <span class="badge get">GET</span></button>
+    <button class="sidebar-item" onclick="show('list-analytical')">📊 Analytical Articles <span class="badge get">GET</span></button>
+  </nav>
+
+  <!-- Main -->
+  <div class="main">
+    <div class="main-inner">
+
+      <!-- Token Bar -->
+      <div class="token-bar" id="token-bar" style="display:none">
+        🔑 Authenticated as <strong id="token-user">–</strong>
+        <code id="token-preview">–</code>
+        <button class="clear" onclick="clearToken()">Clear</button>
+      </div>
+
+      <!-- BASE URL CONFIG -->
+      <div class="card" style="margin-bottom:20px;">
+        <div class="card-body" style="padding:14px 18px;">
+          <div class="form-row">
+            <div>
+              <label>Base URL</label>
+              <input id="base-url" value="https://api.avionyz.com" />
+            </div>
+            <div style="display:flex;align-items:flex-end;gap:8px;">
+              <button class="btn btn-secondary" onclick="pingHealth()">🔗 Test Connection</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- PANELS -->
+
+      <!-- Health -->
+      <div id="panel-health" class="panel">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge get">GET</span>
+            <h2>Health Check</h2>
+            <code class="route">/health</code>
+          </div>
+          <div class="card-body">
+            <p style="font-size:13px;color:#8b949e;margin-bottom:14px;">Checks if the API server is online and responding.</p>
+            <div class="actions">
+              <button class="btn btn-primary" onclick="runHealth()">▶ Send</button>
+            </div>
+            <div id="res-health" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Login -->
+      <div id="panel-login" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge post" style="background:#2e2a1a;color:#d29922">POST</span>
+            <h2>CMS Login</h2>
+            <code class="route">/cms/auth/login</code>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div><label>Email</label><input id="login-email" value="admin@avionyz.com" /></div>
+              <div><label>Password</label><input id="login-pass" type="password" value="" /></div>
+            </div>
+            <div class="actions">
+              <button class="btn btn-primary" onclick="runLogin()">▶ Login</button>
+            </div>
+            <div id="res-login" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- List Articles -->
+      <div id="panel-list-articles" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge get">GET</span>
+            <h2>List Articles</h2>
+            <code class="route">/api/articles</code>
+          </div>
+          <div class="card-body">
+            <div class="form-row">
+              <div><label>Page</label><input id="art-page" value="1" type="number" /></div>
+              <div><label>Limit</label><input id="art-limit" value="5" type="number" /></div>
+            </div>
+            <div class="actions"><button class="btn btn-primary" onclick="runListArticles()">▶ Send</button></div>
+            <div id="res-list-articles" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Get Article -->
+      <div id="panel-get-article" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge get">GET</span>
+            <h2>Get Article by ID</h2>
+            <code class="route">/api/articles/:id</code>
+          </div>
+          <div class="card-body">
+            <div class="form-row full"><label>Article ID</label><input id="art-id" placeholder="article-1" /></div>
+            <div class="actions"><button class="btn btn-primary" onclick="runGetArticle()">▶ Send</button></div>
+            <div id="res-get-article" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Public -->
+      <div id="panel-upload-public" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge post" style="background:#2e2a1a;color:#d29922">POST</span>
+            <h2>Upload Public File</h2>
+            <code class="route">/api/cms/upload-public</code>
+          </div>
+          <div class="card-body">
+            <p style="font-size:12px;color:#f85149;margin-bottom:12px;">⚠️ Requires auth token (login first)</p>
+            <div class="form-row">
+              <div><label>Folder</label><input id="pub-folder" value="test_uploads" /></div>
+              <div><label>Image File</label><input id="pub-file" type="file" accept="image/*" /></div>
+            </div>
+            <div class="actions"><button class="btn btn-primary" onclick="runUploadPublic()">▶ Upload</button></div>
+            <div id="res-upload-public" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Private -->
+      <div id="panel-upload-private" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge post" style="background:#2e2a1a;color:#d29922">POST</span>
+            <h2>Upload Private File (.xlsx)</h2>
+            <code class="route">/api/cms/upload-private</code>
+          </div>
+          <div class="card-body">
+            <p style="font-size:12px;color:#f85149;margin-bottom:12px;">⚠️ Requires auth token (login first)</p>
+            <div class="form-row">
+              <div><label>Folder</label><input id="priv-folder" value="analytics/test-article/data" /></div>
+              <div><label>Filename (override)</label><input id="priv-filename" value="data.xlsx" /></div>
+            </div>
+            <div class="form-row full"><label>File</label><input id="priv-file" type="file" accept=".xlsx,.xls" /></div>
+            <div class="actions"><button class="btn btn-primary" onclick="runUploadPrivate()">▶ Upload</button></div>
+            <div id="res-upload-private" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Upload Video -->
+      <div id="panel-upload-video" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header">
+            <span class="method-badge post" style="background:#2e2a1a;color:#d29922">POST</span>
+            <h2>Upload Video (Async HLS)</h2>
+            <code class="route">/api/cms/upload-video → /api/cms/video-status/:jobId</code>
+          </div>
+          <div class="card-body">
+            <p style="font-size:12px;color:#f85149;margin-bottom:12px;">⚠️ Requires auth token. Returns a jobId immediately, then polls for progress.</p>
+            <div class="form-row full"><label>MP4 File</label><input id="vid-file" type="file" accept="video/mp4" /></div>
+            <div class="actions"><button class="btn btn-primary" onclick="runUploadVideo()">▶ Upload & Track</button></div>
+            <div id="vid-progress-wrap" style="display:none;margin-top:12px;">
+              <div class="info-row"><strong id="vid-status-text">Queued…</strong></div>
+              <div class="progress-bar"><div class="progress-fill" id="vid-bar" style="width:0%"></div></div>
+            </div>
+            <div id="res-upload-video" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Staged Articles -->
+      <div id="panel-staged-list" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header"><span class="method-badge get">GET</span><h2>My Staged Articles</h2><code class="route">/cms/staged/my</code></div>
+          <div class="card-body">
+            <p style="font-size:12px;color:#f85149;margin-bottom:12px;">⚠️ Requires auth token</p>
+            <div class="actions"><button class="btn btn-primary" onclick="runAuth('GET','/cms/staged/my','res-staged-list')">▶ Send</button></div>
+            <div id="res-staged-list" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Events -->
+      <div id="panel-list-events" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header"><span class="method-badge get">GET</span><h2>List Events</h2><code class="route">/cms/events</code></div>
+          <div class="card-body">
+            <div class="actions"><button class="btn btn-primary" onclick="runAuth('GET','/cms/events','res-list-events')">▶ Send</button></div>
+            <div id="res-list-events" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media -->
+      <div id="panel-list-media" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header"><span class="method-badge get">GET</span><h2>List Media</h2><code class="route">/cms/media</code></div>
+          <div class="card-body">
+            <div class="actions"><button class="btn btn-primary" onclick="runAuth('GET','/cms/media','res-list-media')">▶ Send</button></div>
+            <div id="res-list-media" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Experts -->
+      <div id="panel-list-experts" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header"><span class="method-badge get">GET</span><h2>List Experts</h2><code class="route">/cms/experts</code></div>
+          <div class="card-body">
+            <div class="actions"><button class="btn btn-primary" onclick="runAuth('GET','/cms/experts','res-list-experts')">▶ Send</button></div>
+            <div id="res-list-experts" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Analytical -->
+      <div id="panel-list-analytical" class="panel" style="display:none">
+        <div class="card">
+          <div class="card-header"><span class="method-badge get">GET</span><h2>List Analytical Articles</h2><code class="route">/cms/analytical-articles</code></div>
+          <div class="card-body">
+            <div class="actions"><button class="btn btn-primary" onclick="runAuth('GET','/cms/analytical-articles','res-list-analytical')">▶ Send</button></div>
+            <div id="res-list-analytical" class="result-box" style="display:none"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /main-inner -->
+  </div><!-- /main -->
+</div><!-- /layout -->
+
+<script>
+let TOKEN = localStorage.getItem('avionyz_test_token') || '';
+let TOKEN_USER = localStorage.getItem('avionyz_test_user') || '';
+
+const base = () => document.getElementById('base-url').value.replace(/\/$/, '');
+
+// ── UI helpers ────────────────────────────────────────────────────────────────
+function show(id) {
+  document.querySelectorAll('.panel').forEach(p => p.style.display = 'none');
+  document.querySelectorAll('.sidebar-item').forEach(b => b.classList.remove('active'));
+  document.getElementById('panel-' + id).style.display = '';
+  event.currentTarget.classList.add('active');
+}
+
+function renderResult(elId, { ok, status, body, time }) {
+  const el = document.getElementById(elId);
+  el.style.display = '';
+  const cls = ok ? 'status-ok' : 'status-err';
+  el.innerHTML = `
+    <div class="result-header">
+      <span class="${cls}">HTTP ${status}</span>
+      <span style="color:#8b949e;margin-left:auto;">${time}ms</span>
+    </div>
+    <div class="result-body">${escHtml(JSON.stringify(body, null, 2))}</div>`;
+}
+
+function escHtml(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+async function req(method, path, opts = {}) {
+  const t0 = Date.now();
+  try {
+    const headers = { ...(opts.headers || {}) };
+    if (TOKEN && opts.auth !== false) headers['Authorization'] = `Bearer ${TOKEN}`;
+    const r = await fetch(base() + path, { method, headers, body: opts.body });
+    let body; try { body = await r.json(); } catch { body = await r.text(); }
+    return { ok: r.ok, status: r.status, body, time: Date.now() - t0 };
+  } catch (e) {
+    return { ok: false, status: 0, body: { error: e.message }, time: Date.now() - t0 };
+  }
+}
+
+function updateTokenBar() {
+  if (TOKEN) {
+    document.getElementById('token-bar').style.display = '';
+    document.getElementById('token-user').textContent = TOKEN_USER || 'User';
+    document.getElementById('token-preview').textContent = TOKEN.slice(0, 40) + '…';
+  } else {
+    document.getElementById('token-bar').style.display = 'none';
+  }
+}
+
+function clearToken() {
+  TOKEN = ''; TOKEN_USER = '';
+  localStorage.removeItem('avionyz_test_token');
+  localStorage.removeItem('avionyz_test_user');
+  updateTokenBar();
+}
+
+// ── Health ────────────────────────────────────────────────────────────────────
+async function pingHealth() {
+  const r = await req('GET', '/health', { auth: false });
+  const badge = document.getElementById('health-badge');
+  badge.textContent = r.ok ? '⬤ Online' : '⬤ Offline';
+  badge.style.color = r.ok ? '#3fb950' : '#f85149';
+}
+
+async function runHealth() {
+  const r = await req('GET', '/health', { auth: false });
+  renderResult('res-health', r);
+}
+
+// ── Login ─────────────────────────────────────────────────────────────────────
+async function runLogin() {
+  const email = document.getElementById('login-email').value;
+  const pass  = document.getElementById('login-pass').value;
+  const r = await req('POST', '/cms/auth/login', {
+    auth: false,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email, password: pass }),
+  });
+  if (r.ok && (r.body.token || r.body.accessToken)) {
+    TOKEN = r.body.token || r.body.accessToken;
+    TOKEN_USER = r.body.user?.name || r.body.name || email;
+    localStorage.setItem('avionyz_test_token', TOKEN);
+    localStorage.setItem('avionyz_test_user', TOKEN_USER);
+    updateTokenBar();
+  }
+  renderResult('res-login', r);
+}
+
+// ── Articles ──────────────────────────────────────────────────────────────────
+async function runListArticles() {
+  const page  = document.getElementById('art-page').value;
+  const limit = document.getElementById('art-limit').value;
+  renderResult('res-list-articles', await req('GET', `/api/articles?page=${page}&limit=${limit}`, { auth: false }));
+}
+
+async function runGetArticle() {
+  const id = document.getElementById('art-id').value.trim();
+  if (!id) return alert('Enter an article ID');
+  renderResult('res-get-article', await req('GET', `/api/articles/${id}`, { auth: false }));
+}
+
+// ── Generic auth GET ──────────────────────────────────────────────────────────
+async function runAuth(method, path, resId) {
+  renderResult(resId, await req(method, path));
+}
+
+// ── Upload Public ─────────────────────────────────────────────────────────────
+async function runUploadPublic() {
+  const file   = document.getElementById('pub-file').files[0];
+  const folder = document.getElementById('pub-folder').value;
+  if (!file) return alert('Select a file first');
+  if (!TOKEN) return alert('Login first to get a token');
+  const fd = new FormData();
+  fd.append('file', file);
+  const t0 = Date.now();
+  try {
+    const r = await fetch(`${base()}/api/cms/upload-public?folder=${encodeURIComponent(folder)}`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${TOKEN}` },
+      body: fd,
+    });
+    const body = await r.json();
+    renderResult('res-upload-public', { ok: r.ok, status: r.status, body, time: Date.now() - t0 });
+  } catch (e) {
+    renderResult('res-upload-public', { ok: false, status: 0, body: { error: e.message }, time: Date.now() - t0 });
+  }
+}
+
+// ── Upload Private ────────────────────────────────────────────────────────────
+async function runUploadPrivate() {
+  const file     = document.getElementById('priv-file').files[0];
+  const folder   = document.getElementById('priv-folder').value;
+  const filename = document.getElementById('priv-filename').value;
+  if (!file) return alert('Select a file first');
+  if (!TOKEN) return alert('Login first to get a token');
+  const fd = new FormData();
+  fd.append('file', file);
+  const t0 = Date.now();
+  try {
+    const url = `${base()}/api/cms/upload-private?folder=${encodeURIComponent(folder)}&filename=${encodeURIComponent(filename)}`;
+    const r = await fetch(url, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${TOKEN}` },
+      body: fd,
+    });
+    const body = await r.json();
+    renderResult('res-upload-private', { ok: r.ok, status: r.status, body, time: Date.now() - t0 });
+  } catch (e) {
+    renderResult('res-upload-private', { ok: false, status: 0, body: { error: e.message }, time: Date.now() - t0 });
+  }
+}
+
+// ── Upload Video (async polling) ──────────────────────────────────────────────
+async function runUploadVideo() {
+  const file = document.getElementById('vid-file').files[0];
+  if (!file) return alert('Select an MP4 file');
+  if (!TOKEN) return alert('Login first to get a token');
+
+  const fd = new FormData();
+  fd.append('video', file);
+  const t0 = Date.now();
+
+  // Show progress UI
+  document.getElementById('vid-progress-wrap').style.display = '';
+  document.getElementById('vid-status-text').textContent = 'Uploading to server…';
+  document.getElementById('vid-bar').style.width = '5%';
+
+  try {
+    // Step 1: POST video
+    const r = await fetch(`${base()}/api/cms/upload-video`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${TOKEN}` },
+      body: fd,
+    });
+    const data = await r.json();
+    if (!r.ok) {
+      renderResult('res-upload-video', { ok: false, status: r.status, body: data, time: Date.now() - t0 });
+      return;
+    }
+
+    const jobId = data.jobId;
+    document.getElementById('vid-status-text').textContent = `Queued — Job: ${jobId.slice(0,8)}…`;
+
+    // Step 2: Poll
+    await new Promise((resolve, reject) => {
+      const iv = setInterval(async () => {
+        try {
+          const pr = await fetch(`${base()}/api/cms/video-status/${jobId}`, {
+            headers: { Authorization: `Bearer ${TOKEN}` }
+          });
+          const job = await pr.json();
+          const pct = job.progress || 0;
+          document.getElementById('vid-bar').style.width = pct + '%';
+
+          if (job.status === 'done') {
+            clearInterval(iv);
+            document.getElementById('vid-status-text').textContent = `✅ Done! ${job.key}`;
+            renderResult('res-upload-video', { ok: true, status: 200, body: job, time: Date.now() - t0 });
+            resolve();
+          } else if (job.status === 'failed') {
+            clearInterval(iv);
+            document.getElementById('vid-status-text').textContent = `❌ Failed: ${job.error}`;
+            renderResult('res-upload-video', { ok: false, status: 500, body: job, time: Date.now() - t0 });
+            reject();
+          } else {
+            document.getElementById('vid-status-text').textContent =
+              job.status === 'queued' ? '⏳ Queued…' : `⚙️ Processing… ${pct}%`;
+          }
+        } catch (e) { clearInterval(iv); reject(e); }
+      }, 3000);
+    });
+  } catch (e) {
+    renderResult('res-upload-video', { ok: false, status: 0, body: { error: e.message }, time: Date.now() - t0 });
+  }
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+updateTokenBar();
+pingHealth();
+</script>
+</body>
+</html>

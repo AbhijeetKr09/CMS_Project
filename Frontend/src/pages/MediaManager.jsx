@@ -58,9 +58,10 @@ const MediaModal = ({ media, onClose, onSaved }) => {
             fd.append('video', file);
             const { data } = await api.post('/api/cms/upload-video', fd, {
                 headers: { 'Content-Type': 'multipart/form-data' },
-                timeout: 5 * 60 * 1000, // 5 min for the upload itself
+                timeout: 5 * 60 * 1000,
             });
             const jobId = data.jobId;
+            if (!jobId) throw new Error('No jobId returned from server');
             setVideoProgress('Video received — processing in background…');
 
             // Step 2 — Poll for job status every 3 seconds
@@ -70,14 +71,15 @@ const MediaModal = ({ media, onClose, onSaved }) => {
                         const { data: job } = await api.get(`/api/cms/video-status/${jobId}`);
                         if (job.status === 'done') {
                             clearInterval(poll);
-                            set('url', job.key);
-                            setVideoProgress(`✅ Done! Key: ${job.key}`);
+                            const hlsKey = job.key || job.url || '';
+                            const filename = hlsKey.split('/').pop() || hlsKey;
+                            set('url', hlsKey);
+                            setVideoProgress(`✅ Uploaded: ${filename}`);
                             resolve();
                         } else if (job.status === 'failed') {
                             clearInterval(poll);
-                            reject(new Error(job.error || 'Processing failed'));
+                            reject(new Error(job.error || 'Processing failed on server'));
                         } else {
-                            // queued or processing
                             const pct = job.progress || 0;
                             setVideoProgress(
                                 job.status === 'queued'
@@ -89,12 +91,11 @@ const MediaModal = ({ media, onClose, onSaved }) => {
                         clearInterval(poll);
                         reject(pollErr);
                     }
-                }, 3000); // poll every 3 seconds
+                }, 3000);
             });
 
         } catch (err) {
-            setVideoProgress('');
-            alert(err.response?.data?.message || err.message || 'Video upload failed.');
+            setVideoProgress(`❌ ${err.response?.data?.message || err.message || 'Upload failed'}`);
         } finally {
             setUploadingVideo(false);
         }
@@ -170,16 +171,46 @@ const MediaModal = ({ media, onClose, onSaved }) => {
                     {form.type === 'video' && !isEdit && (
                         <div className="space-y-2">
                             <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Video File (MP4)</label>
-                            <label className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-bg-primary cursor-pointer transition-all text-sm ${uploadingVideo ? 'text-accent border-accent/30' : 'text-text-secondary hover:border-accent hover:text-accent'}`}>
-                                <HiOutlineFilm className="w-4 h-4" />
-                                {uploadingVideo ? 'Processing…' : form.url ? `✅ ${form.url.split('/').pop()}` : 'Choose MP4'}
-                                <input type="file" className="hidden" accept="video/mp4"
-                                    onChange={e => e.target.files[0] && uploadVideo(e.target.files[0])}
-                                    disabled={uploadingVideo} />
-                            </label>
-                            {videoProgress && <p className="text-xs text-text-tertiary">{videoProgress}</p>}
+
+                            {/* Show uploaded key + replace option once a video is done */}
+                            {form.url ? (
+                                <div className="flex items-center gap-2 px-3 py-2 rounded-xl border border-green-500/30 bg-green-500/5 text-sm">
+                                    <HiOutlineCheck className="w-4 h-4 text-green-400 shrink-0" />
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-green-400 font-semibold text-xs">Video uploaded</p>
+                                        <p className="text-text-tertiary text-xs font-mono truncate">{form.url.split('/').pop()}</p>
+                                    </div>
+                                    {/* Allow replacing the video if not currently uploading */}
+                                    {!uploadingVideo && (
+                                        <button type="button"
+                                            onClick={() => { set('url', ''); setVideoProgress(''); }}
+                                            className="text-xs text-text-tertiary hover:text-red-400 bg-transparent border-none underline shrink-0">
+                                            Replace
+                                        </button>
+                                    )}
+                                </div>
+                            ) : (
+                                /* File picker — only shown when no video uploaded yet */
+                                <label className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-border bg-bg-primary cursor-pointer transition-all text-sm ${
+                                    uploadingVideo ? 'text-accent border-accent/30 pointer-events-none' : 'text-text-secondary hover:border-accent hover:text-accent'
+                                }`}>
+                                    <HiOutlineFilm className="w-4 h-4" />
+                                    {uploadingVideo ? 'Processing…' : 'Choose MP4'}
+                                    <input type="file" className="hidden" accept="video/mp4"
+                                        onChange={e => e.target.files[0] && uploadVideo(e.target.files[0])}
+                                        disabled={uploadingVideo} />
+                                </label>
+                            )}
+
+                            {/* Progress / status text */}
+                            {videoProgress && (
+                                <p className={`text-xs ${videoProgress.startsWith('❌') ? 'text-red-400' : videoProgress.startsWith('✅') ? 'text-green-400' : 'text-text-tertiary'}`}>
+                                    {videoProgress}
+                                </p>
+                            )}
                         </div>
                     )}
+
 
                     {/* Thumbnail upload */}
                     <div>
