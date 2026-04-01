@@ -51,21 +51,53 @@ const MediaModal = ({ media, onClose, onSaved }) => {
 
     const uploadVideo = async (file) => {
         setUploadingVideo(true);
-        setVideoProgress('Processing video… this may take a few minutes.');
+        setVideoProgress('Uploading video to server…');
         try {
+            // Step 1 — POST file to server (returns jobId immediately)
             const fd = new FormData();
             fd.append('video', file);
-            const res = await api.post('/api/cms/upload-video', fd, {
+            const { data } = await api.post('/api/cms/upload-video', fd, {
                 headers: { 'Content-Type': 'multipart/form-data' },
-                timeout: 10 * 60 * 1000, // 10 min timeout
+                timeout: 5 * 60 * 1000, // 5 min for the upload itself
             });
-            set('url', res.data.key);
-            setVideoProgress(`✅ Uploaded: ${res.data.key}`);
-        } catch (err) { 
+            const jobId = data.jobId;
+            setVideoProgress('Video received — processing in background…');
+
+            // Step 2 — Poll for job status every 3 seconds
+            await new Promise((resolve, reject) => {
+                const poll = setInterval(async () => {
+                    try {
+                        const { data: job } = await api.get(`/api/cms/video-status/${jobId}`);
+                        if (job.status === 'done') {
+                            clearInterval(poll);
+                            set('url', job.key);
+                            setVideoProgress(`✅ Done! Key: ${job.key}`);
+                            resolve();
+                        } else if (job.status === 'failed') {
+                            clearInterval(poll);
+                            reject(new Error(job.error || 'Processing failed'));
+                        } else {
+                            // queued or processing
+                            const pct = job.progress || 0;
+                            setVideoProgress(
+                                job.status === 'queued'
+                                    ? '⏳ Queued — waiting for worker…'
+                                    : `⚙️ Processing… ${pct}%`
+                            );
+                        }
+                    } catch (pollErr) {
+                        clearInterval(poll);
+                        reject(pollErr);
+                    }
+                }, 3000); // poll every 3 seconds
+            });
+
+        } catch (err) {
             setVideoProgress('');
-            alert(err.response?.data?.message || 'Video upload failed.');
+            alert(err.response?.data?.message || err.message || 'Video upload failed.');
+        } finally {
+            setUploadingVideo(false);
         }
-        finally { setUploadingVideo(false); }
     };
 
     const handleSubmit = async (e) => {
