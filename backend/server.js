@@ -249,6 +249,24 @@ app.post('/api/upload', express.raw({ type: 'image/webp', limit: '20mb' }), asyn
     }
 });
 
+// ── Staged article image upload (webp, private bucket) ────────────────────────
+// Uses a UUID-based path so each staged draft has its own isolated S3 folder.
+// This prevents S3 key collisions between journalists writing concurrently.
+// Path: staged/<stagedId>/<suffix>.webp
+app.post('/api/upload/staged', authenticate, express.raw({ type: 'image/webp', limit: '20mb' }), async (req, res) => {
+    try {
+        const { type, order, stagedId } = req.query;
+        if (!stagedId) return res.status(400).json({ message: 'stagedId is required' });
+        const suffix = type === 'main' ? 'main' : (order !== undefined ? order : Date.now());
+        const key    = `staged/${stagedId}/${suffix}.webp`;
+        await s3.send(new PutObjectCommand({ Bucket: S3_PRIVATE, Key: key, Body: req.body, ContentType: 'image/webp' }));
+        res.json({ key });
+    } catch (err) {
+        console.error('[Upload/staged]', err.message);
+        res.status(500).json({ message: 'Upload failed', error: err.message });
+    }
+});
+
 // ── Presigned URL for private bucket items ────────────────────────────────────
 app.get('/api/signed-url', async (req, res) => {
     const { key } = req.query;

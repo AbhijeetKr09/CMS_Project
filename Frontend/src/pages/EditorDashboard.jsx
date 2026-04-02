@@ -335,6 +335,7 @@ const SubmissionsTab = ({ navigate }) => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filter, setFilter] = useState('ALL');
+    const [deletingId, setDeletingId] = useState(null);
 
     const load = () => {
         setLoading(true);
@@ -345,6 +346,20 @@ const SubmissionsTab = ({ navigate }) => {
     };
 
     useEffect(() => { load(); }, []);
+
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
+        if (!window.confirm('Delete this staged article? This cannot be undone and will remove its uploaded images from S3.')) return;
+        setDeletingId(id);
+        try {
+            await api.delete(`/cms/staged/draft/${id}`);
+            setArticles(prev => prev.filter(a => a.id !== id));
+        } catch (err) {
+            alert(err.response?.data?.message || 'Failed to delete.');
+        } finally {
+            setDeletingId(null);
+        }
+    };
 
     const filtered = filter === 'ALL' ? articles : articles.filter(a => a.status === filter);
 
@@ -387,7 +402,19 @@ const SubmissionsTab = ({ navigate }) => {
                                     {a.tags?.length > 0 && <span className="flex items-center gap-1"><HiOutlineTag className="w-3.5 h-3.5" />{a.tags.slice(0, 2).join(', ')}</span>}
                                 </div>
                             </div>
-                            <span className="text-text-tertiary text-xs flex-shrink-0">Review →</span>
+                            <div className="flex items-center gap-2 flex-shrink-0">
+                                <span className="text-text-tertiary text-xs">Review →</span>
+                                <button
+                                    onClick={(e) => handleDelete(e, a.id)}
+                                    disabled={deletingId === a.id}
+                                    title="Delete staged draft"
+                                    className="p-1.5 rounded-lg text-text-tertiary hover:text-danger hover:bg-danger/10 transition-all bg-transparent border-none opacity-0 group-hover:opacity-100 disabled:opacity-50"
+                                >
+                                    {deletingId === a.id
+                                        ? <div className="w-4 h-4 border-2 border-danger/30 border-t-danger rounded-full animate-spin" />
+                                        : <HiOutlineTrash className="w-4 h-4" />}
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -395,6 +422,7 @@ const SubmissionsTab = ({ navigate }) => {
         </div>
     );
 };
+
 
 // ── Published tab — list + reader + recall ─────────────────────────────────────
 const PublishedTab = () => {

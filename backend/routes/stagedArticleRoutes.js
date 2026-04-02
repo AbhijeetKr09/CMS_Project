@@ -13,6 +13,7 @@ import {
     recall,
     listJournalists,
     deleteArticle,
+    deleteStagedDraft,
 } from '../controllers/stagedArticleController.js';
 
 const router = Router();
@@ -37,5 +38,8 @@ router.delete('/article/:articleId', requireRole('EDITOR', 'ADMIN'), deleteArtic
 
 // ─── Shared ──────────────────────────────────────────────────────────────────
 router.get('/:id', getById); // access control handled inside controller
+
+// ─── Delete staged draft (owner or editor/admin) — includes S3 cleanup ───────
+router.delete('/draft/:id', deleteStagedDraft);
 
 export default router;

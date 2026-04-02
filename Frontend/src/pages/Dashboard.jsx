@@ -16,6 +16,7 @@ import {
     HiOutlineLightBulb,
     HiOutlinePhotograph,
     HiOutlineExternalLink,
+    HiOutlineTrash,
 } from 'react-icons/hi';
 import ReactMarkdown from 'react-markdown';
 
@@ -333,13 +334,31 @@ const NeedsChangesTab = ({ navigate }) => {
 const MySubmissionsTab = ({ navigate }) => {
     const [articles, setArticles] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [deletingId, setDeletingId] = useState(null);
 
-    useEffect(() => {
+    const load = () => {
+        setLoading(true);
         api.get('/cms/staged/mine')
             .then(res => setArticles(res.data))
             .catch(() => setArticles([]))
             .finally(() => setLoading(false));
-    }, []);
+    };
+
+    useEffect(() => { load(); }, []);
+
+    const handleDelete = async (e, id) => {
+        e.stopPropagation();
+        if (!window.confirm('Delete this draft? This cannot be undone and will remove uploaded images.')) return;
+        setDeletingId(id);
+        try {
+            await api.delete(`/cms/staged/draft/${id}`);
+            setArticles(prev => prev.filter(a => a.id !== id));
+        } catch (err) {
+            alert(err.response?.data?.message || 'Failed to delete draft.');
+        } finally {
+            setDeletingId(null);
+        }
+    };
 
     if (loading) return <div className="flex justify-center py-16"><div className="w-6 h-6 border-2 border-accent border-t-transparent rounded-full animate-spin" /></div>;
 
@@ -372,6 +391,19 @@ const MySubmissionsTab = ({ navigate }) => {
                         </p>
                     </div>
                     {a.editorNote && <HiOutlineExclamationCircle className="w-4 h-4 text-amber-400 flex-shrink-0" title="Has editor note" />}
+                    {/* Delete button — only for actionable statuses */}
+                    {['DRAFT', 'NEEDS_CHANGES'].includes(a.status) && (
+                        <button
+                            onClick={(e) => handleDelete(e, a.id)}
+                            disabled={deletingId === a.id}
+                            title="Delete draft"
+                            className="p-1.5 rounded-lg text-text-tertiary hover:text-danger hover:bg-danger/10 transition-all bg-transparent border-none opacity-0 group-hover:opacity-100 flex-shrink-0 disabled:opacity-50"
+                        >
+                            {deletingId === a.id
+                                ? <div className="w-4 h-4 border-2 border-danger/30 border-t-danger rounded-full animate-spin" />
+                                : <HiOutlineTrash className="w-4 h-4" />}
+                        </button>
+                    )}
                 </div>
             ))}
         </div>

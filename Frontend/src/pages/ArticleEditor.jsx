@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { HiOutlineArrowLeft, HiOutlineCloudUpload, HiOutlineTrash, HiOutlinePlus, HiOutlineX, HiOutlineExclamationCircle, HiOutlinePaperAirplane } from 'react-icons/hi';
 import api from '../services/api';
-import { uploadFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
+import { uploadFile, uploadStagedFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
 import TipTapEditor from '../components/editor/TipTapEditor';
 
 const ARTICLE_TYPES = ['Headline', 'Business', 'News', 'Trending', 'Aerospace', 'Breaking'];
@@ -30,8 +30,13 @@ const ArticleEditor = () => {
     
     // Draft ID for new articles before they are saved
     const [draftId, setDraftId] = useState(null);
-    // Numeric article ID (e.g. 'article-146') — always used for S3 folder naming
+    // Numeric article ID (e.g. 'article-146') — only used for legacy direct-publish S3 folder naming
     const [draftNumericId, setDraftNumericId] = useState(null);
+    // Stable UUID used as the S3 folder for ALL staged article image uploads.
+    // For edit mode: use the staged article's own UUID (id from URL).
+    // For new articles: generate a fresh UUID on mount so two journalists simultaneously
+    // creating articles never share the same S3 folder (no key collision).
+    const [stagedFolderId] = useState(() => id || crypto.randomUUID());
 
     // Relations
     const [keyInsights, setKeyInsights] = useState([]);
@@ -111,12 +116,7 @@ const ArticleEditor = () => {
                 const signed = await signImagePreviews(data.images.map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '' })));
                 setImages(signed);
             }
-            // For S3 uploads while editing this staged article, fetch the next numeric ID
-            // so images go into the correct articleimage/article-N/ folder
-            try {
-                const nextIdRes = await api.get('/api/articles/draft/next-id');
-                setDraftNumericId(nextIdRes.data.nextId);
-            } catch { /* use existing if fails */ }
+            // (stagedFolderId is already set to `id` via useState initialiser — no fetch needed)
         } catch {
             // Fallback: load from published articles table (for direct edits by admin)
             try {
@@ -152,7 +152,7 @@ const ArticleEditor = () => {
                     data.relatedArticle3Id || '',
                     data.relatedArticle4Id || '',
                 ]);
-                // Numeric ID for S3 folder naming
+                // (legacy direct-publish path — numeric ID needed for S3 folder)
                 try {
                     const nextIdRes = await api.get('/api/articles/draft/next-id');
                     setDraftNumericId(nextIdRes.data.nextId);
@@ -172,7 +172,10 @@ const ArticleEditor = () => {
         try {
             setStatus('Uploading main image...');
             setStatusType('');
-            const key = await uploadFile(file, { type: 'main', articleId: draftNumericId || draftId });
+            // Always use the staged-specific upload endpoint with a UUID-based folder.
+            // This ensures every journalist's draft has its own isolated S3 folder
+            // and uploading a cover image never overwrites another journalist's image.
+            const key = await uploadStagedFile(file, { type: 'main', stagedId: stagedFolderId });
             setMainImage(key);
             setMainImagePreview(URL.createObjectURL(file));
             setStatus('Main image uploaded');
@@ -189,7 +192,8 @@ const ArticleEditor = () => {
             setStatus('Uploading image...');
             setStatusType('');
             const newOrder = images.length + 1;
-            const key = await uploadFile(file, { type: 'gallery', order: newOrder, articleId: draftNumericId || draftId });
+            // Use staged-specific upload so gallery images are also isolated per draft.
+            const key = await uploadStagedFile(file, { type: 'gallery', order: newOrder, stagedId: stagedFolderId });
 
             // Get a signed GET URL so TipTap renders the image immediately (even after reload)
             const signedUrl = await getSignedUrl(key);

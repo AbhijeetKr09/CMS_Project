@@ -1,4 +1,5 @@
 import prisma from '../prismaClient.js';
+import { S3Client, ListObjectsV2Command, DeleteObjectsCommand } from '@aws-sdk/client-s3';
 
 // Helper: build sub-model create payloads from request body
 const buildSubRelations = (body) => ({
@@ -468,3 +469,55 @@ export const deleteArticle = async (req, res) => {
     }
 };
 
+// ── S3 client (for staged image cleanup) ─────────────────────────────────────
+const s3 = new S3Client({
+    region: process.env.AWS_REGION || 'ap-south-1',
+    credentials: {
+        accessKeyId:     process.env.AWS_ACCESS_KEY_ID,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+    },
+});
+const S3_PRIVATE = process.env.S3_BUCKET_NAME;
+
+// Delete all objects under staged/<stagedId>/
+const cleanupStagedS3 = async (stagedId) => {
+    try {
+        const prefix = `staged/${stagedId}/`;
+        const listRes = await s3.send(new ListObjectsV2Command({ Bucket: S3_PRIVATE, Prefix: prefix }));
+        if (listRes.Contents?.length) {
+            await s3.send(new DeleteObjectsCommand({
+                Bucket: S3_PRIVATE,
+                Delete: { Objects: listRes.Contents.map(o => ({ Key: o.Key })), Quiet: true },
+            }));
+            console.log(`[StagedArticle] S3 cleaned ${listRes.Contents.length} object(s) under ${prefix}`);
+        }
+    } catch (err) {
+        console.error('[StagedArticle] S3 cleanup error (non-fatal):', err.message);
+    }
+};
+
+// ── EDITOR or OWNER: Delete a staged draft + S3 cleanup ──────────────────────
+export const deleteStagedDraft = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const existing = await prisma.stagedArticle.findUnique({ where: { id } });
+        if (!existing) return res.status(404).json({ message: 'Staged article not found.' });
+
+        const isOwner  = existing.submittedById === req.cmsUser.id;
+        const isEditor = ['EDITOR', 'ADMIN'].includes(req.cmsUser.role);
+        if (!isOwner && !isEditor)
+            return res.status(403).json({ message: 'Access denied.' });
+
+        if (existing.status === 'PUBLISHED')
+            return res.status(400).json({ message: 'Cannot delete a PUBLISHED staged record. Use recall or delete the live article.' });
+
+        await cleanupStagedS3(id);
+        // Cascade removes StagedArticleImage + StagedArticleKeyInsight rows automatically
+        await prisma.stagedArticle.delete({ where: { id } });
+
+        res.json({ message: 'Staged article deleted.' });
+    } catch (err) {
+        console.error('[StagedArticle] deleteStagedDraft ERROR:', err?.message);
+        res.status(500).json({ message: err?.message || 'Failed to delete staged article.' });
+    }
+};

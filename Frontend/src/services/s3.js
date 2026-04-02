@@ -23,6 +23,7 @@ const convertToWebp = async (file) => {
 /**
  * Upload a file to S3 via the backend proxy (avoids S3 CORS requirements).
  * Returns the S3 key (e.g. "articleimage/article-146/article-146-main.webp").
+ * Used for published articles only.
  */
 export const uploadFile = async (file, { type, order, articleId }) => {
     const webpBlob = await convertToWebp(file);
@@ -34,6 +35,24 @@ export const uploadFile = async (file, { type, order, articleId }) => {
     });
 
     return res.data.key; // e.g. "articleimage/article-146/article-146-main.webp"
+};
+
+/**
+ * Upload a file for a STAGED (draft) article.
+ * Uses the staged article's own UUID as the S3 folder so every journalist
+ * gets a completely isolated folder — no key collisions possible.
+ * Path: staged/<stagedId>/<suffix>.webp
+ */
+export const uploadStagedFile = async (file, { type, order, stagedId }) => {
+    const webpBlob = await convertToWebp(file);
+    const arrayBuffer = await webpBlob.arrayBuffer();
+
+    const res = await api.post('/api/upload/staged', arrayBuffer, {
+        params: { type, order, stagedId },
+        headers: { 'Content-Type': 'image/webp' },
+    });
+
+    return res.data.key; // e.g. "staged/<uuid>/main.webp"
 };
 
 /**
