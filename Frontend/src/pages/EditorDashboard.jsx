@@ -20,6 +20,7 @@ import {
     HiOutlineChevronDown,
     HiOutlineTrash,
     HiOutlineExclamation,
+    HiOutlinePencil,
 } from 'react-icons/hi';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────

@@ -279,7 +279,7 @@ export const publish = async (req, res) => {
         // Load staged article with all sub-relations
         const staged = await prisma.stagedArticle.findUnique({
             where: { id },
-            include: { images: true, keyInsights: true, relatedNews: true },
+            include: { images: true, keyInsights: true },
         });
         if (!staged)  return res.status(404).json({ message: 'Article not found.' });
         if (staged.status !== 'SUBMITTED')
