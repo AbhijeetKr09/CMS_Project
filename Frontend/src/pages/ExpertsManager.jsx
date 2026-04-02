@@ -67,6 +67,20 @@ const ImageUploader = ({ label, folder, onUploaded, currentKey }) => {
     );
 };
 
+// ── Expert Form Field ─────────────────────────────────────────────────────────
+const FormField = ({ label, name, required, type = 'text', placeholder, multiline, formData, onChange, ...rest }) => (
+    <div>
+        <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
+        {multiline ? (
+            <textarea value={formData[name] || ''} onChange={e => onChange(name, e.target.value)} rows={4} placeholder={placeholder}
+                className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all resize-none" {...rest} />
+        ) : (
+            <input type={type} required={required} value={formData[name] || ''} onChange={e => onChange(name, e.target.value)} placeholder={placeholder}
+                className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all" {...rest} />
+        )}
+    </div>
+);
+
 // ── Expert Form Modal ─────────────────────────────────────────────────────────
 const ExpertModal = ({ expert, onClose, onSaved }) => {
     const [form, setForm] = useState(expert ? { ...expert } : {
@@ -86,18 +100,7 @@ const ExpertModal = ({ expert, onClose, onSaved }) => {
         finally { setSaving(false); }
     };
 
-    const Field = ({ label, name, required, type = 'text', placeholder, multiline }) => (
-        <div>
-            <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
-            {multiline ? (
-                <textarea value={form[name] || ''} onChange={e => set(name, e.target.value)} rows={4} placeholder={placeholder}
-                    className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all resize-none" />
-            ) : (
-                <input type={type} required={required} value={form[name] || ''} onChange={e => set(name, e.target.value)} placeholder={placeholder}
-                    className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all" />
-            )}
-        </div>
-    );
+
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)' }}>
@@ -110,12 +113,12 @@ const ExpertModal = ({ expert, onClose, onSaved }) => {
                     <ImageUploader label="Profile Photo" folder="expert-image" currentKey={form.image}
                         onUploaded={key => set('image', key)} />
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="col-span-2"><Field label="Full Name" name="name" required /></div>
-                        <Field label="Job Title" name="role" required placeholder="CEO" />
-                        <Field label="Company" name="company" required placeholder="United Airlines" />
-                        <div className="col-span-2"><Field label="Quote" name="quote" required multiline placeholder="Featured quote shown in the widget…" /></div>
-                        <Field label="Highlight Badge" name="highlight" placeholder="Expert of the Week" />
-                        <Field label="Profile URL (LinkedIn)" name="url" type="url" />
+                        <div className="col-span-2"><FormField formData={form} onChange={set} label="Full Name" name="name" required /></div>
+                        <FormField formData={form} onChange={set} label="Job Title" name="role" required placeholder="CEO" />
+                        <FormField formData={form} onChange={set} label="Company" name="company" required placeholder="United Airlines" />
+                        <div className="col-span-2"><FormField formData={form} onChange={set} label="Quote" name="quote" required multiline placeholder="Featured quote shown in the widget…" /></div>
+                        <FormField formData={form} onChange={set} label="Highlight Badge" name="highlight" placeholder="Expert of the Week" />
+                        <FormField formData={form} onChange={set} label="Profile URL (LinkedIn)" name="url" type="url" />
                     </div>
                     <div className="flex items-center gap-3">
                         <Toggle checked={form.isActive} onChange={v => set('isActive', v)} />

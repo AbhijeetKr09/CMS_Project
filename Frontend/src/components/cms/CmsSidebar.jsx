@@ -71,6 +71,20 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
             icon: HiOutlineCheckCircle,
             description: 'Live articles',
         },
+        {
+            id: 'my-submissions',
+            label: 'My Drafts',
+            icon: HiOutlinePencil,
+            description: 'My staged articles',
+            action: () => navigate('/dashboard'),
+        },
+        {
+            id: 'write-new',
+            label: 'Write New',
+            icon: HiOutlineDocumentAdd,
+            description: 'Start a new article',
+            action: () => navigate('/editor'),
+        },
     ];
 
     // Management tabs visible to EDITOR + ADMIN only

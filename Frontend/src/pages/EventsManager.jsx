@@ -59,6 +59,19 @@ const ImageUploader = ({ label, folder, onUploaded, currentKey, single = true })
     );
 };
 
+// ── Event Form Field ────────────────────────────────────────────────────────
+const FormField = ({ label, name, type = 'text', required, formData, onChange, ...rest }) => (
+    <div>
+        <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
+        <input
+            type={type} required={required} value={formData[name] || ''}
+            onChange={e => onChange(name, e.target.value)}
+            className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all"
+            {...rest}
+        />
+    </div>
+);
+
 // ── Event Form Modal ──────────────────────────────────────────────────────────
 const EventFormModal = ({ event, onClose, onSaved }) => {
     const [form, setForm] = useState(event ? {
@@ -87,17 +100,7 @@ const EventFormModal = ({ event, onClose, onSaved }) => {
         } finally { setSaving(false); }
     };
 
-    const Field = ({ label, name, type = 'text', required, ...rest }) => (
-        <div>
-            <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
-            <input
-                type={type} required={required} value={form[name] || ''}
-                onChange={e => set(name, e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all"
-                {...rest}
-            />
-        </div>
-    );
+
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)' }}>
@@ -110,9 +113,9 @@ const EventFormModal = ({ event, onClose, onSaved }) => {
                 </div>
                 <form onSubmit={handleSubmit} className="p-6 space-y-4">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="col-span-2"><Field label="Event Name" name="eventName" required /></div>
-                        <Field label="Event Link (URL)" name="eventLink" type="url" />
-                        <Field label="Organizer" name="organizedBy" />
+                        <div className="col-span-2"><FormField formData={form} onChange={set} label="Event Name" name="eventName" required /></div>
+                        <FormField formData={form} onChange={set} label="Event Link (URL)" name="eventLink" type="url" />
+                        <FormField formData={form} onChange={set} label="Organizer" name="organizedBy" />
                         <div>
                             <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Region *</label>
                             <select value={form.region} onChange={e => set('region', e.target.value)} required
@@ -129,10 +132,10 @@ const EventFormModal = ({ event, onClose, onSaved }) => {
                                 {EVENT_TYPES.map(t => <option key={t} value={t}>{t}</option>)}
                             </select>
                         </div>
-                        <Field label="Date & Time" name="date" type="datetime-local" required />
-                        <Field label="Time (display)" name="time" placeholder="e.g. 10:00–18:00 (UTC+4)" />
-                        <Field label="Venue" name="venue" />
-                        <Field label="Country" name="country" />
+                        <FormField formData={form} onChange={set} label="Date & Time" name="date" type="datetime-local" required />
+                        <FormField formData={form} onChange={set} label="Time (display)" name="time" placeholder="e.g. 10:00–18:00 (UTC+4)" />
+                        <FormField formData={form} onChange={set} label="Venue" name="venue" />
+                        <FormField formData={form} onChange={set} label="Country" name="country" />
                         <div>
                             <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Online / Offline</label>
                             <select value={form.onlineOrOffline} onChange={e => set('onlineOrOffline', e.target.value)}
@@ -147,8 +150,8 @@ const EventFormModal = ({ event, onClose, onSaved }) => {
                                 <option>Free</option><option>Paid</option><option>Paid (trade) / Free (public)</option>
                             </select>
                         </div>
-                        <Field label="Latitude" name="lat" type="number" step="any" />
-                        <Field label="Longitude" name="lng" type="number" step="any" />
+                        <FormField formData={form} onChange={set} label="Latitude" name="lat" type="number" step="any" />
+                        <FormField formData={form} onChange={set} label="Longitude" name="lng" type="number" step="any" />
                         <div className="col-span-2">
                             <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Description</label>
                             <textarea value={form.description || ''} onChange={e => set('description', e.target.value)} rows={3}

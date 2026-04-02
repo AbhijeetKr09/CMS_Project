@@ -378,7 +378,7 @@ export const publish = async (req, res) => {
 export const listJournalists = async (req, res) => {
     try {
         const journalists = await prisma.cmsUser.findMany({
-            where: { role: { in: ['JOURNALIST', 'ADMIN'] } },
+            where: { role: { in: ['JOURNALIST', 'EDITOR', 'ADMIN'] } },
             select: { id: true, name: true, email: true, role: true },
             orderBy: { name: 'asc' },
         });

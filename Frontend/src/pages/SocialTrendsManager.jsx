@@ -31,6 +31,15 @@ const Toggle = ({ checked, onChange }) => (
     </button>
 );
 
+// ── Trend Form Field ─────────────────────────────────────────────────────────
+const FormField = ({ label, name, type = 'text', placeholder, formData, onChange, ...rest }) => (
+    <div>
+        <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
+        <input type={type} value={formData[name] || ''} onChange={e => onChange(name, e.target.value)} placeholder={placeholder}
+            className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all" {...rest} />
+    </div>
+);
+
 // ── Trend Form Modal ──────────────────────────────────────────────────────────
 const TrendModal = ({ trend, onClose, onSaved }) => {
     const [form, setForm] = useState(trend ? {
@@ -51,13 +60,7 @@ const TrendModal = ({ trend, onClose, onSaved }) => {
         finally { setSaving(false); }
     };
 
-    const Field = ({ label, name, type = 'text', placeholder }) => (
-        <div>
-            <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">{label}</label>
-            <input type={type} value={form[name] || ''} onChange={e => set(name, e.target.value)} placeholder={placeholder}
-                className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all" />
-        </div>
-    );
+
 
     return (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4" style={{ background: 'rgba(0,0,0,0.7)' }}>
@@ -83,12 +86,12 @@ const TrendModal = ({ trend, onClose, onSaved }) => {
                         <textarea value={form.content || ''} onChange={e => set('content', e.target.value)} rows={3}
                             className="w-full px-3 py-2 rounded-xl border border-border bg-bg-primary text-text-primary text-sm focus:outline-none focus:border-accent transition-all resize-none" />
                     </div>
-                    <Field label="URL (post link) *" name="url" type="url" />
-                    <Field label="Author / Channel" name="author" />
-                    <Field label="Image URL (thumbnail)" name="imageUrl" type="url" />
+                    <FormField formData={form} onChange={set} label="URL (post link) *" name="url" type="url" />
+                    <FormField formData={form} onChange={set} label="Author / Channel" name="author" />
+                    <FormField formData={form} onChange={set} label="Image URL (thumbnail)" name="imageUrl" type="url" />
                     <div className="grid grid-cols-2 gap-4">
-                        <Field label="Likes (e.g. 25k)" name="likes" placeholder="25k" />
-                        <Field label="Date" name="date" type="date" />
+                        <FormField formData={form} onChange={set} label="Likes (e.g. 25k)" name="likes" placeholder="25k" />
+                        <FormField formData={form} onChange={set} label="Date" name="date" type="date" />
                     </div>
                     <div className="flex items-center gap-3">
                         <Toggle checked={form.isActive} onChange={v => set('isActive', v)} />

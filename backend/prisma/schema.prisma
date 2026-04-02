@@ -494,7 +494,6 @@ model StagedArticleKeyInsight {
 }
 
 
-
 enum CmsRole {
   JOURNALIST
   EDITOR

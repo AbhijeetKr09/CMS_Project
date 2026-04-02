@@ -559,9 +559,15 @@ const EditorDashboard = () => {
 
             <main className="flex-1 overflow-y-auto">
                 <div className="max-w-4xl mx-auto px-6 lg:px-8 py-8">
-                    <div className="mb-8">
-                        <h1 className="text-2xl font-bold text-text-primary">{current.title}</h1>
-                        <p className="text-text-secondary text-sm mt-1">{current.subtitle}</p>
+                    <div className="flex items-center justify-between mb-8">
+                        <div>
+                            <h1 className="text-2xl font-bold text-text-primary">{current.title}</h1>
+                            <p className="text-text-secondary text-sm mt-1">{current.subtitle}</p>
+                        </div>
+                        <button onClick={() => navigate('/editor')}
+                            className="flex items-center gap-2 bg-accent hover:bg-accent-hover text-white px-4 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-lg shadow-accent/20">
+                            <HiOutlinePencil className="w-4 h-4" /> New Article
+                        </button>
                     </div>
 
                     {activeTab === 'submissions' && <SubmissionsTab navigate={navigate} />}

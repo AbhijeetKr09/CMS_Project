@@ -393,6 +393,12 @@ const Dashboard = () => {
             .catch(() => {});
     }, []);
 
+    useEffect(() => {
+        if (activeTab === 'submissions' || activeTab === 'published') {
+            navigate('/editor-dashboard');
+        }
+    }, [activeTab, navigate]);
+
     const renderTab = () => {
         switch (activeTab) {
             case 'all-articles':    return <AllArticlesTab />;

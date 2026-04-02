@@ -32,8 +32,8 @@ function AppRoutes() {
       {/* Public */}
       <Route path="/login" element={<PublicRoute><Login /></PublicRoute>} />
 
-      {/* Journalist routes */}
-      <Route element={<ProtectedRoute allowedRoles={['JOURNALIST', 'ADMIN']} />}>
+      {/* Journalist routes (+ Editor acting as journalist) */}
+      <Route element={<ProtectedRoute allowedRoles={['JOURNALIST', 'EDITOR', 'ADMIN']} />}>
         <Route path="/dashboard"   element={<Dashboard />} />
         <Route path="/editor"      element={<ArticleEditor />} />
         <Route path="/editor/:id"  element={<ArticleEditor />} />

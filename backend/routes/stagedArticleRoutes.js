@@ -21,10 +21,10 @@ const router = Router();
 router.use(authenticate);
 
 // ─── Journalist routes ───────────────────────────────────────────────────────
-router.get('/mine', requireRole('JOURNALIST', 'ADMIN'), listMine);
-router.post('/', requireRole('JOURNALIST', 'ADMIN'), createDraft);
-router.put('/:id', requireRole('JOURNALIST', 'ADMIN'), updateDraft);
-router.put('/:id/submit', requireRole('JOURNALIST', 'ADMIN'), submitForReview);
+router.get('/mine', requireRole('JOURNALIST', 'EDITOR', 'ADMIN'), listMine);
+router.post('/', requireRole('JOURNALIST', 'EDITOR', 'ADMIN'), createDraft);
+router.put('/:id', requireRole('JOURNALIST', 'EDITOR', 'ADMIN'), updateDraft);
+router.put('/:id/submit', requireRole('JOURNALIST', 'EDITOR', 'ADMIN'), submitForReview);
 
 // ─── Editor routes ───────────────────────────────────────────────────────────
 router.get('/', requireRole('EDITOR', 'ADMIN'), listSubmissions);
