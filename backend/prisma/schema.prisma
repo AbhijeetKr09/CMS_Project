@@ -286,6 +286,7 @@ model AnalyticalArticle {
   tags               String[]
 
   // Specific to AnalyticalArticle
+  isPremium Boolean @default(false)
   dataKey String?
 
   // Flexible JSON fields for structure content
@@ -492,6 +493,7 @@ model StagedArticleKeyInsight {
 
   @@map("staged_article_key_insights")
 }
+
 
 
 enum CmsRole {
