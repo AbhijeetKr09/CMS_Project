@@ -330,6 +330,10 @@ export type StagedArticleWhereInput = {
   relatedArticle2Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   relatedArticle3Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   relatedArticle4Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  relatedArticle1?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle2?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle3?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle4?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
   images?: Prisma.StagedArticleImageListRelationFilter
   keyInsights?: Prisma.StagedArticleKeyInsightListRelationFilter
   reviewedBy?: Prisma.XOR<Prisma.CmsUserNullableScalarRelationFilter, Prisma.CmsUserWhereInput> | null
@@ -362,6 +366,10 @@ export type StagedArticleOrderByWithRelationInput = {
   relatedArticle2Id?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedArticle3Id?: Prisma.SortOrderInput | Prisma.SortOrder
   relatedArticle4Id?: Prisma.SortOrderInput | Prisma.SortOrder
+  relatedArticle1?: Prisma.ArticleOrderByWithRelationInput
+  relatedArticle2?: Prisma.ArticleOrderByWithRelationInput
+  relatedArticle3?: Prisma.ArticleOrderByWithRelationInput
+  relatedArticle4?: Prisma.ArticleOrderByWithRelationInput
   images?: Prisma.StagedArticleImageOrderByRelationAggregateInput
   keyInsights?: Prisma.StagedArticleKeyInsightOrderByRelationAggregateInput
   reviewedBy?: Prisma.CmsUserOrderByWithRelationInput
@@ -397,6 +405,10 @@ export type StagedArticleWhereUniqueInput = Prisma.AtLeast<{
   relatedArticle2Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   relatedArticle3Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   relatedArticle4Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  relatedArticle1?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle2?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle3?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
+  relatedArticle4?: Prisma.XOR<Prisma.ArticleNullableScalarRelationFilter, Prisma.ArticleWhereInput> | null
   images?: Prisma.StagedArticleImageListRelationFilter
   keyInsights?: Prisma.StagedArticleKeyInsightListRelationFilter
   reviewedBy?: Prisma.XOR<Prisma.CmsUserNullableScalarRelationFilter, Prisma.CmsUserWhereInput> | null
@@ -482,10 +494,10 @@ export type StagedArticleCreateInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
   keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
   reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
@@ -540,10 +552,10 @@ export type StagedArticleUpdateInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
   keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
   reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
@@ -625,10 +637,6 @@ export type StagedArticleUpdateManyMutationInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StagedArticleUncheckedUpdateManyInput = {
@@ -750,6 +758,174 @@ export type StagedArticleMinOrderByAggregateInput = {
 export type StagedArticleScalarRelationFilter = {
   is?: Prisma.StagedArticleWhereInput
   isNot?: Prisma.StagedArticleWhereInput
+}
+
+export type StagedArticleCreateNestedManyWithoutRelatedArticle1Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input> | Prisma.StagedArticleCreateWithoutRelatedArticle1Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle1InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleCreateNestedManyWithoutRelatedArticle2Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input> | Prisma.StagedArticleCreateWithoutRelatedArticle2Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle2InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleCreateNestedManyWithoutRelatedArticle3Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input> | Prisma.StagedArticleCreateWithoutRelatedArticle3Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle3InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleCreateNestedManyWithoutRelatedArticle4Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input> | Prisma.StagedArticleCreateWithoutRelatedArticle4Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle4InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleUncheckedCreateNestedManyWithoutRelatedArticle1Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input> | Prisma.StagedArticleCreateWithoutRelatedArticle1Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle1InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleUncheckedCreateNestedManyWithoutRelatedArticle2Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input> | Prisma.StagedArticleCreateWithoutRelatedArticle2Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle2InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleUncheckedCreateNestedManyWithoutRelatedArticle3Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input> | Prisma.StagedArticleCreateWithoutRelatedArticle3Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle3InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleUncheckedCreateNestedManyWithoutRelatedArticle4Input = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input> | Prisma.StagedArticleCreateWithoutRelatedArticle4Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle4InputEnvelope
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+}
+
+export type StagedArticleUpdateManyWithoutRelatedArticle1NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input> | Prisma.StagedArticleCreateWithoutRelatedArticle1Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle1Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle1Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle1InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle1Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle1Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle1Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle1Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUpdateManyWithoutRelatedArticle2NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input> | Prisma.StagedArticleCreateWithoutRelatedArticle2Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle2Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle2Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle2InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle2Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle2Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle2Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle2Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUpdateManyWithoutRelatedArticle3NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input> | Prisma.StagedArticleCreateWithoutRelatedArticle3Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle3Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle3Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle3InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle3Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle3Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle3Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle3Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUpdateManyWithoutRelatedArticle4NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input> | Prisma.StagedArticleCreateWithoutRelatedArticle4Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle4Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle4Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle4InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle4Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle4Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle1NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input> | Prisma.StagedArticleCreateWithoutRelatedArticle1Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle1Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle1Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle1Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle1InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle1Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle1Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle1Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle1Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle2NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input> | Prisma.StagedArticleCreateWithoutRelatedArticle2Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle2Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle2Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle2Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle2InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle2Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle2Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle2Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle2Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle3NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input> | Prisma.StagedArticleCreateWithoutRelatedArticle3Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle3Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle3Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle3Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle3InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle3Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle3Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle3Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle3Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle4NestedInput = {
+  create?: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input> | Prisma.StagedArticleCreateWithoutRelatedArticle4Input[] | Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input[]
+  connectOrCreate?: Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input | Prisma.StagedArticleCreateOrConnectWithoutRelatedArticle4Input[]
+  upsert?: Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle4Input | Prisma.StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle4Input[]
+  createMany?: Prisma.StagedArticleCreateManyRelatedArticle4InputEnvelope
+  set?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  disconnect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  delete?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  connect?: Prisma.StagedArticleWhereUniqueInput | Prisma.StagedArticleWhereUniqueInput[]
+  update?: Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle4Input | Prisma.StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle4Input[]
+  updateMany?: Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input | Prisma.StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input[]
+  deleteMany?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
 }
 
 export type StagedArticleCreateNestedManyWithoutReviewedByInput = {
@@ -919,6 +1095,364 @@ export type StagedArticleUpdateOneRequiredWithoutKeyInsightsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.StagedArticleUpdateToOneWithWhereWithoutKeyInsightsInput, Prisma.StagedArticleUpdateWithoutKeyInsightsInput>, Prisma.StagedArticleUncheckedUpdateWithoutKeyInsightsInput>
 }
 
+export type StagedArticleCreateWithoutRelatedArticle1Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
+  images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
+  reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
+  submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
+  assignedTo?: Prisma.CmsUserCreateNestedOneWithoutAssignedArticlesInput
+}
+
+export type StagedArticleUncheckedCreateWithoutRelatedArticle1Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle2Id?: string | null
+  relatedArticle3Id?: string | null
+  relatedArticle4Id?: string | null
+  images?: Prisma.StagedArticleImageUncheckedCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedCreateNestedManyWithoutStagedArticleInput
+}
+
+export type StagedArticleCreateOrConnectWithoutRelatedArticle1Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input>
+}
+
+export type StagedArticleCreateManyRelatedArticle1InputEnvelope = {
+  data: Prisma.StagedArticleCreateManyRelatedArticle1Input | Prisma.StagedArticleCreateManyRelatedArticle1Input[]
+  skipDuplicates?: boolean
+}
+
+export type StagedArticleCreateWithoutRelatedArticle2Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
+  images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
+  reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
+  submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
+  assignedTo?: Prisma.CmsUserCreateNestedOneWithoutAssignedArticlesInput
+}
+
+export type StagedArticleUncheckedCreateWithoutRelatedArticle2Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle3Id?: string | null
+  relatedArticle4Id?: string | null
+  images?: Prisma.StagedArticleImageUncheckedCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedCreateNestedManyWithoutStagedArticleInput
+}
+
+export type StagedArticleCreateOrConnectWithoutRelatedArticle2Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input>
+}
+
+export type StagedArticleCreateManyRelatedArticle2InputEnvelope = {
+  data: Prisma.StagedArticleCreateManyRelatedArticle2Input | Prisma.StagedArticleCreateManyRelatedArticle2Input[]
+  skipDuplicates?: boolean
+}
+
+export type StagedArticleCreateWithoutRelatedArticle3Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
+  images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
+  reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
+  submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
+  assignedTo?: Prisma.CmsUserCreateNestedOneWithoutAssignedArticlesInput
+}
+
+export type StagedArticleUncheckedCreateWithoutRelatedArticle3Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle2Id?: string | null
+  relatedArticle4Id?: string | null
+  images?: Prisma.StagedArticleImageUncheckedCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedCreateNestedManyWithoutStagedArticleInput
+}
+
+export type StagedArticleCreateOrConnectWithoutRelatedArticle3Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input>
+}
+
+export type StagedArticleCreateManyRelatedArticle3InputEnvelope = {
+  data: Prisma.StagedArticleCreateManyRelatedArticle3Input | Prisma.StagedArticleCreateManyRelatedArticle3Input[]
+  skipDuplicates?: boolean
+}
+
+export type StagedArticleCreateWithoutRelatedArticle4Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
+  reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
+  submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
+  assignedTo?: Prisma.CmsUserCreateNestedOneWithoutAssignedArticlesInput
+}
+
+export type StagedArticleUncheckedCreateWithoutRelatedArticle4Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle2Id?: string | null
+  relatedArticle3Id?: string | null
+  images?: Prisma.StagedArticleImageUncheckedCreateNestedManyWithoutStagedArticleInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedCreateNestedManyWithoutStagedArticleInput
+}
+
+export type StagedArticleCreateOrConnectWithoutRelatedArticle4Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input>
+}
+
+export type StagedArticleCreateManyRelatedArticle4InputEnvelope = {
+  data: Prisma.StagedArticleCreateManyRelatedArticle4Input | Prisma.StagedArticleCreateManyRelatedArticle4Input[]
+  skipDuplicates?: boolean
+}
+
+export type StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle1Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle1Input>
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle1Input>
+}
+
+export type StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle1Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle1Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle1Input>
+}
+
+export type StagedArticleUpdateManyWithWhereWithoutRelatedArticle1Input = {
+  where: Prisma.StagedArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateManyMutationInput, Prisma.StagedArticleUncheckedUpdateManyWithoutRelatedArticle1Input>
+}
+
+export type StagedArticleScalarWhereInput = {
+  AND?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+  OR?: Prisma.StagedArticleScalarWhereInput[]
+  NOT?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
+  id?: Prisma.StringFilter<"StagedArticle"> | string
+  title?: Prisma.StringFilter<"StagedArticle"> | string
+  body?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  shortDescription?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  mainImage?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  readTime?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  tags?: Prisma.StringNullableListFilter<"StagedArticle">
+  type?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  status?: Prisma.EnumStagedArticleStatusFilter<"StagedArticle"> | $Enums.StagedArticleStatus
+  editorNote?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  submittedById?: Prisma.StringFilter<"StagedArticle"> | string
+  reviewedById?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  assignedToId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  recalledFromId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  publishedArticleId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  createdAt?: Prisma.DateTimeFilter<"StagedArticle"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"StagedArticle"> | Date | string
+  submittedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
+  reviewedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
+  assignedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
+  relatedArticle1Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  relatedArticle2Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  relatedArticle3Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+  relatedArticle4Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
+}
+
+export type StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle2Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle2Input>
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle2Input>
+}
+
+export type StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle2Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle2Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle2Input>
+}
+
+export type StagedArticleUpdateManyWithWhereWithoutRelatedArticle2Input = {
+  where: Prisma.StagedArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateManyMutationInput, Prisma.StagedArticleUncheckedUpdateManyWithoutRelatedArticle2Input>
+}
+
+export type StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle3Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle3Input>
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle3Input>
+}
+
+export type StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle3Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle3Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle3Input>
+}
+
+export type StagedArticleUpdateManyWithWhereWithoutRelatedArticle3Input = {
+  where: Prisma.StagedArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateManyMutationInput, Prisma.StagedArticleUncheckedUpdateManyWithoutRelatedArticle3Input>
+}
+
+export type StagedArticleUpsertWithWhereUniqueWithoutRelatedArticle4Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  update: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle4Input>
+  create: Prisma.XOR<Prisma.StagedArticleCreateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedCreateWithoutRelatedArticle4Input>
+}
+
+export type StagedArticleUpdateWithWhereUniqueWithoutRelatedArticle4Input = {
+  where: Prisma.StagedArticleWhereUniqueInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateWithoutRelatedArticle4Input, Prisma.StagedArticleUncheckedUpdateWithoutRelatedArticle4Input>
+}
+
+export type StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input = {
+  where: Prisma.StagedArticleScalarWhereInput
+  data: Prisma.XOR<Prisma.StagedArticleUpdateManyMutationInput, Prisma.StagedArticleUncheckedUpdateManyWithoutRelatedArticle4Input>
+}
+
 export type StagedArticleCreateWithoutReviewedByInput = {
   id?: string
   title?: string
@@ -937,10 +1471,10 @@ export type StagedArticleCreateWithoutReviewedByInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
   keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
   submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
@@ -1003,10 +1537,10 @@ export type StagedArticleCreateWithoutSubmittedByInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
   keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
   reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
@@ -1069,10 +1603,10 @@ export type StagedArticleCreateWithoutAssignedToInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
   keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
   reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
@@ -1133,36 +1667,6 @@ export type StagedArticleUpdateManyWithWhereWithoutReviewedByInput = {
   data: Prisma.XOR<Prisma.StagedArticleUpdateManyMutationInput, Prisma.StagedArticleUncheckedUpdateManyWithoutReviewedByInput>
 }
 
-export type StagedArticleScalarWhereInput = {
-  AND?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
-  OR?: Prisma.StagedArticleScalarWhereInput[]
-  NOT?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
-  id?: Prisma.StringFilter<"StagedArticle"> | string
-  title?: Prisma.StringFilter<"StagedArticle"> | string
-  body?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  shortDescription?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  mainImage?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  readTime?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  tags?: Prisma.StringNullableListFilter<"StagedArticle">
-  type?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  status?: Prisma.EnumStagedArticleStatusFilter<"StagedArticle"> | $Enums.StagedArticleStatus
-  editorNote?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  submittedById?: Prisma.StringFilter<"StagedArticle"> | string
-  reviewedById?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  assignedToId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  recalledFromId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  publishedArticleId?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"StagedArticle"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"StagedArticle"> | Date | string
-  submittedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
-  reviewedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
-  assignedAt?: Prisma.DateTimeNullableFilter<"StagedArticle"> | Date | string | null
-  relatedArticle1Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  relatedArticle2Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  relatedArticle3Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-  relatedArticle4Id?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
-}
-
 export type StagedArticleUpsertWithWhereUniqueWithoutSubmittedByInput = {
   where: Prisma.StagedArticleWhereUniqueInput
   update: Prisma.XOR<Prisma.StagedArticleUpdateWithoutSubmittedByInput, Prisma.StagedArticleUncheckedUpdateWithoutSubmittedByInput>
@@ -1213,10 +1717,10 @@ export type StagedArticleCreateWithoutImagesInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   keyInsights?: Prisma.StagedArticleKeyInsightCreateNestedManyWithoutStagedArticleInput
   reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
   submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
@@ -1285,10 +1789,10 @@ export type StagedArticleUpdateWithoutImagesInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
   reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
   submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
@@ -1341,10 +1845,10 @@ export type StagedArticleCreateWithoutKeyInsightsInput = {
   submittedAt?: Date | string | null
   reviewedAt?: Date | string | null
   assignedAt?: Date | string | null
-  relatedArticle1Id?: string | null
-  relatedArticle2Id?: string | null
-  relatedArticle3Id?: string | null
-  relatedArticle4Id?: string | null
+  relatedArticle1?: Prisma.ArticleCreateNestedOneWithoutStagedRelated1Input
+  relatedArticle2?: Prisma.ArticleCreateNestedOneWithoutStagedRelated2Input
+  relatedArticle3?: Prisma.ArticleCreateNestedOneWithoutStagedRelated3Input
+  relatedArticle4?: Prisma.ArticleCreateNestedOneWithoutStagedRelated4Input
   images?: Prisma.StagedArticleImageCreateNestedManyWithoutStagedArticleInput
   reviewedBy?: Prisma.CmsUserCreateNestedOneWithoutReviewedArticlesInput
   submittedBy: Prisma.CmsUserCreateNestedOneWithoutSubmittedArticlesInput
@@ -1413,10 +1917,10 @@ export type StagedArticleUpdateWithoutKeyInsightsInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
   reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
   submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
@@ -1449,6 +1953,438 @@ export type StagedArticleUncheckedUpdateWithoutKeyInsightsInput = {
   relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   images?: Prisma.StagedArticleImageUncheckedUpdateManyWithoutStagedArticleNestedInput
+}
+
+export type StagedArticleCreateManyRelatedArticle1Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle2Id?: string | null
+  relatedArticle3Id?: string | null
+  relatedArticle4Id?: string | null
+}
+
+export type StagedArticleCreateManyRelatedArticle2Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle3Id?: string | null
+  relatedArticle4Id?: string | null
+}
+
+export type StagedArticleCreateManyRelatedArticle3Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle2Id?: string | null
+  relatedArticle4Id?: string | null
+}
+
+export type StagedArticleCreateManyRelatedArticle4Input = {
+  id?: string
+  title?: string
+  body?: string | null
+  shortDescription?: string | null
+  mainImage?: string | null
+  readTime?: string | null
+  tags?: Prisma.StagedArticleCreatetagsInput | string[]
+  type?: string | null
+  status?: $Enums.StagedArticleStatus
+  editorNote?: string | null
+  submittedById: string
+  reviewedById?: string | null
+  assignedToId?: string | null
+  recalledFromId?: string | null
+  publishedArticleId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  submittedAt?: Date | string | null
+  reviewedAt?: Date | string | null
+  assignedAt?: Date | string | null
+  relatedArticle1Id?: string | null
+  relatedArticle2Id?: string | null
+  relatedArticle3Id?: string | null
+}
+
+export type StagedArticleUpdateWithoutRelatedArticle1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
+  images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
+  reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
+  submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
+  assignedTo?: Prisma.CmsUserUpdateOneWithoutAssignedArticlesNestedInput
+}
+
+export type StagedArticleUncheckedUpdateWithoutRelatedArticle1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StagedArticleImageUncheckedUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedUpdateManyWithoutStagedArticleNestedInput
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle1Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type StagedArticleUpdateWithoutRelatedArticle2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
+  images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
+  reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
+  submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
+  assignedTo?: Prisma.CmsUserUpdateOneWithoutAssignedArticlesNestedInput
+}
+
+export type StagedArticleUncheckedUpdateWithoutRelatedArticle2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StagedArticleImageUncheckedUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedUpdateManyWithoutStagedArticleNestedInput
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle2Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type StagedArticleUpdateWithoutRelatedArticle3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
+  images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
+  reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
+  submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
+  assignedTo?: Prisma.CmsUserUpdateOneWithoutAssignedArticlesNestedInput
+}
+
+export type StagedArticleUncheckedUpdateWithoutRelatedArticle3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StagedArticleImageUncheckedUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedUpdateManyWithoutStagedArticleNestedInput
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle3Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+}
+
+export type StagedArticleUpdateWithoutRelatedArticle4Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
+  reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
+  submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
+  assignedTo?: Prisma.CmsUserUpdateOneWithoutAssignedArticlesNestedInput
+}
+
+export type StagedArticleUncheckedUpdateWithoutRelatedArticle4Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  images?: Prisma.StagedArticleImageUncheckedUpdateManyWithoutStagedArticleNestedInput
+  keyInsights?: Prisma.StagedArticleKeyInsightUncheckedUpdateManyWithoutStagedArticleNestedInput
+}
+
+export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle4Input = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  mainImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tags?: Prisma.StagedArticleUpdatetagsInput | string[]
+  type?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumStagedArticleStatusFieldUpdateOperationsInput | $Enums.StagedArticleStatus
+  editorNote?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  submittedById?: Prisma.StringFieldUpdateOperationsInput | string
+  reviewedById?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  assignedToId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recalledFromId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  publishedArticleId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type StagedArticleCreateManyReviewedByInput = {
@@ -1547,10 +2483,10 @@ export type StagedArticleUpdateWithoutReviewedByInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
   keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
   submittedBy?: Prisma.CmsUserUpdateOneRequiredWithoutSubmittedArticlesNestedInput
@@ -1629,10 +2565,10 @@ export type StagedArticleUpdateWithoutSubmittedByInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
   keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
   reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
@@ -1711,10 +2647,10 @@ export type StagedArticleUpdateWithoutAssignedToInput = {
   submittedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   reviewedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   assignedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  relatedArticle1Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle2Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle3Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  relatedArticle4Id?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  relatedArticle1?: Prisma.ArticleUpdateOneWithoutStagedRelated1NestedInput
+  relatedArticle2?: Prisma.ArticleUpdateOneWithoutStagedRelated2NestedInput
+  relatedArticle3?: Prisma.ArticleUpdateOneWithoutStagedRelated3NestedInput
+  relatedArticle4?: Prisma.ArticleUpdateOneWithoutStagedRelated4NestedInput
   images?: Prisma.StagedArticleImageUpdateManyWithoutStagedArticleNestedInput
   keyInsights?: Prisma.StagedArticleKeyInsightUpdateManyWithoutStagedArticleNestedInput
   reviewedBy?: Prisma.CmsUserUpdateOneWithoutReviewedArticlesNestedInput
@@ -1840,6 +2776,10 @@ export type StagedArticleSelect<ExtArgs extends runtime.Types.Extensions.Interna
   relatedArticle2Id?: boolean
   relatedArticle3Id?: boolean
   relatedArticle4Id?: boolean
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   images?: boolean | Prisma.StagedArticle$imagesArgs<ExtArgs>
   keyInsights?: boolean | Prisma.StagedArticle$keyInsightsArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
@@ -1873,6 +2813,10 @@ export type StagedArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types
   relatedArticle2Id?: boolean
   relatedArticle3Id?: boolean
   relatedArticle4Id?: boolean
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
   submittedBy?: boolean | Prisma.CmsUserDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.StagedArticle$assignedToArgs<ExtArgs>
@@ -1903,6 +2847,10 @@ export type StagedArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
   relatedArticle2Id?: boolean
   relatedArticle3Id?: boolean
   relatedArticle4Id?: boolean
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
   submittedBy?: boolean | Prisma.CmsUserDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.StagedArticle$assignedToArgs<ExtArgs>
@@ -1937,6 +2885,10 @@ export type StagedArticleSelectScalar = {
 
 export type StagedArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "body" | "shortDescription" | "mainImage" | "readTime" | "tags" | "type" | "status" | "editorNote" | "submittedById" | "reviewedById" | "assignedToId" | "recalledFromId" | "publishedArticleId" | "createdAt" | "updatedAt" | "submittedAt" | "reviewedAt" | "assignedAt" | "relatedArticle1Id" | "relatedArticle2Id" | "relatedArticle3Id" | "relatedArticle4Id", ExtArgs["result"]["stagedArticle"]>
 export type StagedArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   images?: boolean | Prisma.StagedArticle$imagesArgs<ExtArgs>
   keyInsights?: boolean | Prisma.StagedArticle$keyInsightsArgs<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
@@ -1945,11 +2897,19 @@ export type StagedArticleInclude<ExtArgs extends runtime.Types.Extensions.Intern
   _count?: boolean | Prisma.StagedArticleCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type StagedArticleIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
   submittedBy?: boolean | Prisma.CmsUserDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.StagedArticle$assignedToArgs<ExtArgs>
 }
 export type StagedArticleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
+  relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
+  relatedArticle3?: boolean | Prisma.StagedArticle$relatedArticle3Args<ExtArgs>
+  relatedArticle4?: boolean | Prisma.StagedArticle$relatedArticle4Args<ExtArgs>
   reviewedBy?: boolean | Prisma.StagedArticle$reviewedByArgs<ExtArgs>
   submittedBy?: boolean | Prisma.CmsUserDefaultArgs<ExtArgs>
   assignedTo?: boolean | Prisma.StagedArticle$assignedToArgs<ExtArgs>
@@ -1958,6 +2918,10 @@ export type StagedArticleIncludeUpdateManyAndReturn<ExtArgs extends runtime.Type
 export type $StagedArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "StagedArticle"
   objects: {
+    relatedArticle1: Prisma.$ArticlePayload<ExtArgs> | null
+    relatedArticle2: Prisma.$ArticlePayload<ExtArgs> | null
+    relatedArticle3: Prisma.$ArticlePayload<ExtArgs> | null
+    relatedArticle4: Prisma.$ArticlePayload<ExtArgs> | null
     images: Prisma.$StagedArticleImagePayload<ExtArgs>[]
     keyInsights: Prisma.$StagedArticleKeyInsightPayload<ExtArgs>[]
     reviewedBy: Prisma.$CmsUserPayload<ExtArgs> | null
@@ -2383,6 +3347,10 @@ readonly fields: StagedArticleFieldRefs;
  */
 export interface Prisma__StagedArticleClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  relatedArticle1<T extends Prisma.StagedArticle$relatedArticle1Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$relatedArticle1Args<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  relatedArticle2<T extends Prisma.StagedArticle$relatedArticle2Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$relatedArticle2Args<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  relatedArticle3<T extends Prisma.StagedArticle$relatedArticle3Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$relatedArticle3Args<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  relatedArticle4<T extends Prisma.StagedArticle$relatedArticle4Args<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$relatedArticle4Args<ExtArgs>>): Prisma.Prisma__ArticleClient<runtime.Types.Result.GetResult<Prisma.$ArticlePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   images<T extends Prisma.StagedArticle$imagesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$imagesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StagedArticleImagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   keyInsights<T extends Prisma.StagedArticle$keyInsightsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$keyInsightsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$StagedArticleKeyInsightPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviewedBy<T extends Prisma.StagedArticle$reviewedByArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.StagedArticle$reviewedByArgs<ExtArgs>>): Prisma.Prisma__CmsUserClient<runtime.Types.Result.GetResult<Prisma.$CmsUserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
@@ -2839,6 +3807,82 @@ export type StagedArticleDeleteManyArgs<ExtArgs extends runtime.Types.Extensions
    * Limit how many StagedArticles to delete.
    */
   limit?: number
+}
+
+/**
+ * StagedArticle.relatedArticle1
+ */
+export type StagedArticle$relatedArticle1Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
+}
+
+/**
+ * StagedArticle.relatedArticle2
+ */
+export type StagedArticle$relatedArticle2Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
+}
+
+/**
+ * StagedArticle.relatedArticle3
+ */
+export type StagedArticle$relatedArticle3Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
+}
+
+/**
+ * StagedArticle.relatedArticle4
+ */
+export type StagedArticle$relatedArticle4Args<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Article
+   */
+  select?: Prisma.ArticleSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Article
+   */
+  omit?: Prisma.ArticleOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ArticleInclude<ExtArgs> | null
+  where?: Prisma.ArticleWhereInput
 }
 
 /**

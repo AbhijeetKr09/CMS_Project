@@ -18,7 +18,7 @@ import {
     HiOutlineExternalLink,
     HiOutlineTrash,
 } from 'react-icons/hi';
-import ReactMarkdown from 'react-markdown';
+import TipTapEditor from '../components/editor/TipTapEditor';
 
 const ARTICLE_TYPES = ['All', 'Headline', 'Business', 'News', 'Trending', 'Aerospace', 'Breaking'];
 
@@ -46,13 +46,6 @@ const StatusBadge = ({ status }) => {
 };
 
 // ── Article Reader Helpers ───────────────────────────────────────────────────
-const isHTML = (str) => str && /<[a-z][\s\S]*>/i.test(str);
-
-const BodyRenderer = ({ body }) => {
-    if (!body) return <p className="text-text-tertiary italic text-sm">No body content.</p>;
-    if (isHTML(body)) return <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: body }} />;
-    return <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed text-sm"><ReactMarkdown>{body}</ReactMarkdown></div>;
-};
 
 const useSignedUrl = (key) => {
     const [url, setUrl] = useState(null);
@@ -116,7 +109,11 @@ const JournalistArticleReader = ({ article, onBack }) => {
                             className="w-full rounded-xl object-cover max-h-80" />
                     )}
 
-                    <BodyRenderer body={article.body} />
+                    {article.body ? (
+                        <TipTapEditor content={article.body} editable={false} />
+                    ) : (
+                        <p className="text-text-tertiary italic text-sm">No body content.</p>
+                    )}
 
                     {article.keyInsights?.length > 0 && (
                         <div className="bg-accent/5 border border-accent/15 rounded-xl p-5">

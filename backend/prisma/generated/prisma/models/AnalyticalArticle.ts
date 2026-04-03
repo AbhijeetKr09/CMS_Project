@@ -32,6 +32,7 @@ export type AnalyticalArticleMinAggregateOutputType = {
   mainImage: string | null
   shortDescription: string | null
   body: string | null
+  isPremium: boolean | null
   dataKey: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -45,6 +46,7 @@ export type AnalyticalArticleMaxAggregateOutputType = {
   mainImage: string | null
   shortDescription: string | null
   body: string | null
+  isPremium: boolean | null
   dataKey: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -59,6 +61,7 @@ export type AnalyticalArticleCountAggregateOutputType = {
   shortDescription: number
   body: number
   tags: number
+  isPremium: number
   dataKey: number
   tableOfContents: number
   faq: number
@@ -78,6 +81,7 @@ export type AnalyticalArticleMinAggregateInputType = {
   mainImage?: true
   shortDescription?: true
   body?: true
+  isPremium?: true
   dataKey?: true
   createdAt?: true
   updatedAt?: true
@@ -91,6 +95,7 @@ export type AnalyticalArticleMaxAggregateInputType = {
   mainImage?: true
   shortDescription?: true
   body?: true
+  isPremium?: true
   dataKey?: true
   createdAt?: true
   updatedAt?: true
@@ -105,6 +110,7 @@ export type AnalyticalArticleCountAggregateInputType = {
   shortDescription?: true
   body?: true
   tags?: true
+  isPremium?: true
   dataKey?: true
   tableOfContents?: true
   faq?: true
@@ -196,6 +202,7 @@ export type AnalyticalArticleGroupByOutputType = {
   shortDescription: string | null
   body: string | null
   tags: string[]
+  isPremium: boolean
   dataKey: string | null
   tableOfContents: runtime.JsonValue | null
   faq: runtime.JsonValue | null
@@ -235,6 +242,7 @@ export type AnalyticalArticleWhereInput = {
   shortDescription?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   body?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   tags?: Prisma.StringNullableListFilter<"AnalyticalArticle">
+  isPremium?: Prisma.BoolFilter<"AnalyticalArticle"> | boolean
   dataKey?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   tableOfContents?: Prisma.JsonNullableFilter<"AnalyticalArticle">
   faq?: Prisma.JsonNullableFilter<"AnalyticalArticle">
@@ -253,6 +261,7 @@ export type AnalyticalArticleOrderByWithRelationInput = {
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   dataKey?: Prisma.SortOrderInput | Prisma.SortOrder
   tableOfContents?: Prisma.SortOrderInput | Prisma.SortOrder
   faq?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -274,6 +283,7 @@ export type AnalyticalArticleWhereUniqueInput = Prisma.AtLeast<{
   shortDescription?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   body?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   tags?: Prisma.StringNullableListFilter<"AnalyticalArticle">
+  isPremium?: Prisma.BoolFilter<"AnalyticalArticle"> | boolean
   dataKey?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   tableOfContents?: Prisma.JsonNullableFilter<"AnalyticalArticle">
   faq?: Prisma.JsonNullableFilter<"AnalyticalArticle">
@@ -292,6 +302,7 @@ export type AnalyticalArticleOrderByWithAggregationInput = {
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
   tags?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   dataKey?: Prisma.SortOrderInput | Prisma.SortOrder
   tableOfContents?: Prisma.SortOrderInput | Prisma.SortOrder
   faq?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -316,6 +327,7 @@ export type AnalyticalArticleScalarWhereWithAggregatesInput = {
   shortDescription?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
   body?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
   tags?: Prisma.StringNullableListFilter<"AnalyticalArticle">
+  isPremium?: Prisma.BoolWithAggregatesFilter<"AnalyticalArticle"> | boolean
   dataKey?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
   tableOfContents?: Prisma.JsonNullableWithAggregatesFilter<"AnalyticalArticle">
   faq?: Prisma.JsonNullableWithAggregatesFilter<"AnalyticalArticle">
@@ -334,6 +346,7 @@ export type AnalyticalArticleCreateInput = {
   shortDescription?: string | null
   body?: string | null
   tags?: Prisma.AnalyticalArticleCreatetagsInput | string[]
+  isPremium?: boolean
   dataKey?: string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -352,6 +365,7 @@ export type AnalyticalArticleUncheckedCreateInput = {
   shortDescription?: string | null
   body?: string | null
   tags?: Prisma.AnalyticalArticleCreatetagsInput | string[]
+  isPremium?: boolean
   dataKey?: string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -370,6 +384,7 @@ export type AnalyticalArticleUpdateInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.AnalyticalArticleUpdatetagsInput | string[]
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dataKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -388,6 +403,7 @@ export type AnalyticalArticleUncheckedUpdateInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.AnalyticalArticleUpdatetagsInput | string[]
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dataKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -406,6 +422,7 @@ export type AnalyticalArticleCreateManyInput = {
   shortDescription?: string | null
   body?: string | null
   tags?: Prisma.AnalyticalArticleCreatetagsInput | string[]
+  isPremium?: boolean
   dataKey?: string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -424,6 +441,7 @@ export type AnalyticalArticleUpdateManyMutationInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.AnalyticalArticleUpdatetagsInput | string[]
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dataKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -442,6 +460,7 @@ export type AnalyticalArticleUncheckedUpdateManyInput = {
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tags?: Prisma.AnalyticalArticleUpdatetagsInput | string[]
+  isPremium?: Prisma.BoolFieldUpdateOperationsInput | boolean
   dataKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tableOfContents?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
   faq?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
@@ -460,6 +479,7 @@ export type AnalyticalArticleCountOrderByAggregateInput = {
   shortDescription?: Prisma.SortOrder
   body?: Prisma.SortOrder
   tags?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   dataKey?: Prisma.SortOrder
   tableOfContents?: Prisma.SortOrder
   faq?: Prisma.SortOrder
@@ -477,6 +497,7 @@ export type AnalyticalArticleMaxOrderByAggregateInput = {
   mainImage?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   dataKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -490,6 +511,7 @@ export type AnalyticalArticleMinOrderByAggregateInput = {
   mainImage?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
   body?: Prisma.SortOrder
+  isPremium?: Prisma.SortOrder
   dataKey?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -524,6 +546,7 @@ export type AnalyticalArticleSelect<ExtArgs extends runtime.Types.Extensions.Int
   shortDescription?: boolean
   body?: boolean
   tags?: boolean
+  isPremium?: boolean
   dataKey?: boolean
   tableOfContents?: boolean
   faq?: boolean
@@ -542,6 +565,7 @@ export type AnalyticalArticleSelectCreateManyAndReturn<ExtArgs extends runtime.T
   shortDescription?: boolean
   body?: boolean
   tags?: boolean
+  isPremium?: boolean
   dataKey?: boolean
   tableOfContents?: boolean
   faq?: boolean
@@ -560,6 +584,7 @@ export type AnalyticalArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.T
   shortDescription?: boolean
   body?: boolean
   tags?: boolean
+  isPremium?: boolean
   dataKey?: boolean
   tableOfContents?: boolean
   faq?: boolean
@@ -578,6 +603,7 @@ export type AnalyticalArticleSelectScalar = {
   shortDescription?: boolean
   body?: boolean
   tags?: boolean
+  isPremium?: boolean
   dataKey?: boolean
   tableOfContents?: boolean
   faq?: boolean
@@ -587,7 +613,7 @@ export type AnalyticalArticleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AnalyticalArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "headingDescription" | "readTime" | "mainImage" | "shortDescription" | "body" | "tags" | "dataKey" | "tableOfContents" | "faq" | "advertisement" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["analyticalArticle"]>
+export type AnalyticalArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "headingDescription" | "readTime" | "mainImage" | "shortDescription" | "body" | "tags" | "isPremium" | "dataKey" | "tableOfContents" | "faq" | "advertisement" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["analyticalArticle"]>
 
 export type $AnalyticalArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AnalyticalArticle"
@@ -601,6 +627,7 @@ export type $AnalyticalArticlePayload<ExtArgs extends runtime.Types.Extensions.I
     shortDescription: string | null
     body: string | null
     tags: string[]
+    isPremium: boolean
     dataKey: string | null
     tableOfContents: runtime.JsonValue | null
     faq: runtime.JsonValue | null
@@ -1039,6 +1066,7 @@ export interface AnalyticalArticleFieldRefs {
   readonly shortDescription: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly body: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly tags: Prisma.FieldRef<"AnalyticalArticle", 'String[]'>
+  readonly isPremium: Prisma.FieldRef<"AnalyticalArticle", 'Boolean'>
   readonly dataKey: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly tableOfContents: Prisma.FieldRef<"AnalyticalArticle", 'Json'>
   readonly faq: Prisma.FieldRef<"AnalyticalArticle", 'Json'>

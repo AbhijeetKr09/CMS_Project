@@ -286,15 +286,25 @@ export const publish = async (req, res) => {
             return res.status(400).json({ message: 'Can only publish SUBMITTED articles.' });
 
         // ── Compute next sequential article-N id (mirrors getNextArticleId logic) ──
-        const allIds = await prisma.article.findMany({ select: { id: true } });
+        const allLiveIds = await prisma.article.findMany({ select: { id: true } });
+        const allStagedIds = await prisma.stagedArticle.findMany({ 
+            where: { publishedArticleId: { not: null } },
+            select: { publishedArticleId: true }
+        });
+        
         let maxNum = 0;
-        allIds.forEach(a => {
-            const m = a.id.match(/^article-(\d+)$/i);
+        const checkMax = (id) => {
+            if (!id) return;
+            const m = id.match(/^article-(\d+)$/i);
             if (m) {
                 const n = parseInt(m[1], 10);
                 if (n > maxNum) maxNum = n;
             }
-        });
+        };
+        
+        allLiveIds.forEach(a => checkMax(a.id));
+        allStagedIds.forEach(s => checkMax(s.publishedArticleId));
+        
         const nextArticleId = `article-${maxNum + 1}`;
 
         // Atomic transaction: create live article (with all sub-rows) + mark staged as PUBLISHED
@@ -460,6 +470,8 @@ export const deleteArticle = async (req, res) => {
         if (!article) return res.status(404).json({ message: 'Article not found.' });
 
         // Cascade handles children (ArticleImage, Comment, etc. all have onDelete: Cascade)
+        // Ensure we also clean up any PUBLISHED StagedArticle references to avoid unique constraints
+        await prisma.stagedArticle.deleteMany({ where: { publishedArticleId: articleId } });
         await prisma.article.delete({ where: { id: articleId } });
 
         res.json({ message: 'Article permanently deleted.' });

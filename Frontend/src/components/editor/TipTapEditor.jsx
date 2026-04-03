@@ -3,21 +3,24 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Image from '@tiptap/extension-image';
 import Placeholder from '@tiptap/extension-placeholder';
-import Link from '@tiptap/extension-link';
 import { Markdown } from 'tiptap-markdown';
 import EditorToolbar from './EditorToolbar';
 import '../../styles/editor.css';
 
-const TipTapEditor = forwardRef(({ content, onUpdate, onImageUploadRequest }, ref) => {
-    const isReady = useRef(false);
-
+const TipTapEditor = forwardRef(({ content, onUpdate = () => {}, onImageUploadRequest, editable = true }, ref) => {
     const editor = useEditor({
+        editable: editable,
         extensions: [
             StarterKit.configure({
-                heading: { levels: [1, 2, 3] },
+                link: {
+                    openOnClick: false,
+                    HTMLAttributes: {
+                        class: 'text-accent underline hover:text-accent-hover',
+                    },
+                },
             }),
             Markdown.configure({
-                html: false,
+                html: true,
                 transformPastedText: true,
                 transformCopiedText: true,
             }),
@@ -28,17 +31,13 @@ const TipTapEditor = forwardRef(({ content, onUpdate, onImageUploadRequest }, re
             Placeholder.configure({
                 placeholder: 'Start writing your article here...',
             }),
-            Link.configure({
-                openOnClick: false,
-                HTMLAttributes: {
-                    class: 'text-accent underline hover:text-accent-hover',
-                },
-            }),
         ],
         content: content || '',
         onUpdate: ({ editor }) => {
-            const markdown = editor.storage.markdown.getMarkdown();
-            onUpdate(markdown);
+            if (typeof onUpdate === 'function') {
+                const markdown = editor.storage.markdown?.getMarkdown() || '';
+                onUpdate(markdown);
+            }
         },
         editorProps: {
             attributes: {
@@ -46,6 +45,33 @@ const TipTapEditor = forwardRef(({ content, onUpdate, onImageUploadRequest }, re
             },
         },
     });
+
+    const isReady = useRef(false);
+
+    useEffect(() => {
+        if (editor && !isReady.current && content) {
+            try {
+                // Determine if content is HTML or Markdown
+                // If it contains tags like <p, <h, <img etc, it's likely HTML
+                const isHtml = /<[a-z][\s\S]*>/i.test(content);
+                
+                if (isHtml) {
+                    // Load as HTML
+                    editor.commands.setContent(content, false);
+                } else {
+                    // Load as Markdown
+                    let parsedContent = content;
+                    if (editor.storage.markdown && editor.storage.markdown.parser) {
+                        parsedContent = editor.storage.markdown.parser.parse(content);
+                    }
+                    editor.commands.setContent(parsedContent, false);
+                }
+            } catch (err) {
+                editor.commands.setContent(content, false);
+            }
+            isReady.current = true;
+        }
+    }, [editor, content]);
 
     // Expose imperative methods to parent via ref
     useImperativeHandle(ref, () => ({
@@ -83,20 +109,13 @@ const TipTapEditor = forwardRef(({ content, onUpdate, onImageUploadRequest }, re
         },
     }), [editor]);
 
-    useEffect(() => {
-        if (editor && !isReady.current && content) {
-            editor.commands.setContent(content);
-            isReady.current = true;
-        }
-    }, [editor, content]);
-
     return (
-        <div className="border border-border rounded-xl flex flex-col bg-bg-secondary w-full">
-            <EditorToolbar editor={editor} onImageUploadRequest={onImageUploadRequest} />
-            <div className="relative flex-1 bg-bg-secondary rounded-b-xl overflow-hidden min-h-[500px]">
+        <div className={`border border-border rounded-xl flex flex-col bg-bg-secondary w-full ${!editable ? 'border-none bg-transparent' : ''}`}>
+            {editable && <EditorToolbar editor={editor} onImageUploadRequest={onImageUploadRequest} />}
+            <div className={`relative flex-1 bg-bg-secondary ${editable ? 'rounded-b-xl min-h-[500px]' : 'bg-transparent h-auto'} overflow-hidden`}>
                 <EditorContent 
                     editor={editor} 
-                    className="absolute inset-0 overflow-y-auto px-6 py-6"
+                    className={`${editable ? 'absolute inset-0 overflow-y-auto px-6 py-6' : 'px-0 py-2'} min-h-full`}
                 />
             </div>
         </div>

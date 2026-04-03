@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactMarkdown from 'react-markdown';
 import api from '../services/api';
 import { getSignedUrl } from '../services/s3';
 import CmsSidebar from '../components/cms/CmsSidebar';
+import TipTapEditor from '../components/editor/TipTapEditor';
 import {
     HiOutlineDocumentText,
     HiOutlineSearch,
@@ -24,13 +24,6 @@ import {
 } from 'react-icons/hi';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
-const isHTML = (str) => str && /<[a-z][\s\S]*>/i.test(str);
-
-const BodyRenderer = ({ body }) => {
-    if (!body) return <p className="text-text-tertiary italic text-sm">No body content.</p>;
-    if (isHTML(body)) return <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed text-sm" dangerouslySetInnerHTML={{ __html: body }} />;
-    return <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed text-sm"><ReactMarkdown>{body}</ReactMarkdown></div>;
-};
 
 const useSignedUrl = (key) => {
     const [url, setUrl] = useState(null);
@@ -268,7 +261,11 @@ const ArticleReader = ({ article, onBack, onRecall, onDelete }) => {
                             className="w-full rounded-xl object-cover max-h-80" />
                     )}
 
-                    <BodyRenderer body={article.body} />
+                    {article.body ? (
+                        <TipTapEditor content={article.body} editable={false} />
+                    ) : (
+                        <p className="text-text-tertiary italic text-sm">No body content.</p>
+                    )}
 
                     {/* Key Insights */}
                     {article.keyInsights?.length > 0 && (

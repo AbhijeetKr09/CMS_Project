@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { HiOutlineArrowLeft, HiOutlineCloudUpload, HiOutlineTrash, HiOutlinePlus, HiOutlineX, HiOutlineExclamationCircle, HiOutlinePaperAirplane } from 'react-icons/hi';
 import api from '../services/api';
-import { uploadFile, uploadStagedFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
 import TipTapEditor from '../components/editor/TipTapEditor';
+import { uploadFile, uploadStagedFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
 
 const ARTICLE_TYPES = ['Headline', 'Business', 'News', 'Trending', 'Aerospace', 'Breaking'];
 
@@ -54,11 +54,13 @@ const ArticleEditor = () => {
     const [editorNote, setEditorNote] = useState(null);
     const [submitting, setSubmitting] = useState(false); // for Submit for Review button
 
+    const [initialLoadDone, setInitialLoadDone] = useState(false);
+
     useEffect(() => {
         if (isEditMode) {
-            fetchArticle();
+            fetchArticle().finally(() => setInitialLoadDone(true));
         } else {
-            fetchDraftId();
+            fetchDraftId().finally(() => setInitialLoadDone(true));
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
@@ -88,7 +90,6 @@ const ArticleEditor = () => {
             const data = res.data;
             setTitle(data.title || '');
             setShortDescription(data.shortDescription || '');
-            // Sign all image srcs in the body before loading into TipTap
             const signedBody = await signBodyImageSrcs(data.body || '');
             setBody(signedBody);
             setType(data.type || '');
@@ -459,7 +460,11 @@ const ArticleEditor = () => {
                             Article Body
                         </label>
                         <div className="border border-border rounded-xl">
-                            <TipTapEditor ref={editorRef} content={body} onUpdate={(html) => setBody(html)} onImageUploadRequest={handleTipTapImageUpload} />
+                            {initialLoadDone ? (
+                                <TipTapEditor key={id} ref={editorRef} content={body} onUpdate={(html) => setBody(html)} onImageUploadRequest={handleTipTapImageUpload} />
+                            ) : (
+                                <div className="min-h-[500px] flex items-center justify-center text-text-tertiary">Loading editor...</div>
+                            )}
                         </div>
                     </div>
 

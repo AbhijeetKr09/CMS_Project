@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../services/api';
 import CmsSidebar from '../components/cms/CmsSidebar';
+import TipTapEditor from '../components/editor/TipTapEditor';
+import { replaceBlobsWithKeys, getSignedUrl } from '../services/s3';
 import {
     HiOutlinePlus, HiOutlinePencil, HiOutlineTrash, HiOutlineX,
     HiOutlineDocumentText, HiOutlineChevronLeft, HiOutlineUpload,
@@ -80,6 +82,7 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
     const [saving, setSaving] = useState(false);
     const [uploadingData, setUploadingData] = useState(false);
     const [uploadingImage, setUploadingImage] = useState(false);
+    const imageMappings = useRef([]);
 
     const [form, setForm] = useState(isEdit ? {
         title:             article.title || '',
@@ -139,12 +142,39 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
         finally { setUploadingImage(false); }
     };
 
+    const handleTipTapImageUpload = async (file) => {
+        if (!form.id) { alert('Title/ID is required before uploading images.'); throw new Error('No id'); }
+        setUploadingImage(true);
+        try {
+            const fd = new FormData();
+            fd.append('file', file);
+            const res = await api.post(`/api/cms/upload-private?folder=analytics/${form.id}/images`, fd, {
+                headers: { 'Content-Type': 'multipart/form-data' },
+            });
+            const key = res.data.key;
+            setForm(f => ({ ...f, images: [...(f.images || []), key] }));
+            const signed = await getSignedUrl(key);
+            const previewUrl = signed || URL.createObjectURL(file);
+            imageMappings.current.push({ src: key, previewUrl });
+            return previewUrl;
+        } catch(err) {
+            alert('Image upload failed.');
+            throw err;
+        } finally {
+            setUploadingImage(false);
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setSaving(true);
         try {
+            // Replace any signed URLs or blobs inserted via TipTap back to raw S3 keys
+            const cleanBody = replaceBlobsWithKeys(form.body, imageMappings.current);
+
             const payload = {
                 ...form,
+                body: cleanBody,
                 tags: form.tags.split(',').map(t => t.trim()).filter(Boolean),
                 advertisement: form.advertisement,
             };
@@ -235,17 +265,15 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
                                     Article Body (Markdown)
                                 </label>
                                 <p className="text-xs text-text-tertiary mb-2">Use <code className="text-accent">[IMAGE]</code> as placeholder where images should appear. Use <code className="text-accent">[Advertisement]</code> for ad slots.</p>
-                                <textarea value={form.body} onChange={e => set('body', e.target.value)} rows={18}
-                                    className="w-full px-3 py-2.5 rounded-xl border border-border bg-bg-secondary text-text-primary font-mono text-sm focus:outline-none focus:border-accent transition-all resize-none"
-                                    spellCheck={false} />
+                                <TipTapEditor
+                                    content={form.body}
+                                    onUpdate={(html) => set('body', html)}
+                                    onImageUploadRequest={handleTipTapImageUpload}
+                                />
                                 <div className="flex gap-2 mt-2">
-                                    <button type="button" onClick={() => set('body', form.body + '\n[IMAGE]')}
-                                        className="px-3 py-1.5 text-xs rounded-lg border border-border text-text-tertiary hover:text-accent hover:border-accent/30 bg-transparent transition-all">
-                                        Insert [IMAGE]
-                                    </button>
                                     <button type="button" onClick={() => set('body', form.body + '\n[Advertisement]')}
                                         className="px-3 py-1.5 text-xs rounded-lg border border-border text-text-tertiary hover:text-accent hover:border-accent/30 bg-transparent transition-all">
-                                        Insert [Advertisement]
+                                        Note: Append [Advertisement] to place ad slots.
                                     </button>
                                 </div>
                             </div>
@@ -281,14 +309,19 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
                             <div>
                                 <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Data File (.xlsx)</label>
                                 <p className="text-xs text-text-tertiary mb-2">Will be stored at <code className="text-accent">analytics/{form.id || '<id>'}/data/data.xlsx</code> in the private bucket.</p>
-                                <label className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border border-border bg-bg-secondary text-text-secondary hover:border-accent hover:text-accent cursor-pointer transition-all text-sm ${!form.id ? 'opacity-50 cursor-not-allowed' : ''}`}>
+                                <label className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border border-border bg-bg-secondary text-text-secondary ${form.dataKey ? '' : 'hover:border-accent hover:text-accent cursor-pointer'} transition-all text-sm ${!form.id ? 'opacity-50 cursor-not-allowed' : ''}`}>
                                     <HiOutlineUpload className="w-4 h-4" />
                                     {uploadingData ? 'Uploading…' : form.dataKey ? `✅ ${form.dataKey.split('/').pop()}` : 'Choose .xlsx file'}
-                                    <input type="file" className="hidden" accept=".xlsx,.xls" disabled={!form.id || uploadingData}
-                                        onChange={e => e.target.files[0] && uploadData(e.target.files[0])} />
+                                    {!form.dataKey && (
+                                        <input type="file" className="hidden" accept=".xlsx,.xls" disabled={!form.id || uploadingData}
+                                            onChange={e => e.target.files[0] && uploadData(e.target.files[0])} />
+                                    )}
                                 </label>
                                 {form.dataKey && (
-                                    <p className="text-xs text-text-tertiary mt-1">Key: <code className="text-accent">{form.dataKey}</code></p>
+                                    <div className="flex items-center gap-2 mt-2">
+                                        <p className="text-xs text-text-tertiary">Key: <code className="text-accent">{form.dataKey}</code></p>
+                                        <button type="button" onClick={() => set('dataKey', '')} className="text-xs text-danger hover:underline border-none bg-transparent">Remove File</button>
+                                    </div>
                                 )}
                                 {!form.id && <p className="text-xs text-amber-400 mt-1">⚠️ Set title/ID on Meta tab first.</p>}
                             </div>

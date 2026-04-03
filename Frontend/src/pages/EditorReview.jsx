@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
 import api from '../services/api';
 import { getSignedUrl, signBodyImageSrcs } from '../services/s3';
+import TipTapEditor from '../components/editor/TipTapEditor';
 import Navbar from '../components/common/Navbar';
 import {
     HiOutlineArrowLeft,
@@ -35,26 +36,6 @@ const S3Image = ({ s3Key, alt, className }) => {
     const url = useSignedUrl(s3Key);
     if (!url) return <div className={`${className} bg-bg-primary border border-border rounded-xl animate-pulse`} />;
     return <img src={url} alt={alt || ''} className={className} />;
-};
-
-// ── Detect if content is HTML or markdown ────────────────────────────────────
-const isHTML = (str) => str && /<[a-z][\s\S]*>/i.test(str);
-
-const BodyRenderer = ({ body }) => {
-    if (!body) return <p className="text-text-tertiary italic">No body content yet.</p>;
-    if (isHTML(body)) {
-        return (
-            <div
-                className="prose prose-invert max-w-none text-text-secondary leading-relaxed"
-                dangerouslySetInnerHTML={{ __html: body }}
-            />
-        );
-    }
-    return (
-        <div className="prose prose-invert max-w-none text-text-secondary leading-relaxed">
-            <ReactMarkdown>{body}</ReactMarkdown>
-        </div>
-    );
 };
 
 // ── Status badge ─────────────────────────────────────────────────────────────
@@ -290,8 +271,12 @@ const EditorReview = () => {
                                 className="w-full rounded-xl object-cover max-h-80" />
                         )}
 
-                        {/* Body — handles both HTML and markdown */}
-                        <BodyRenderer body={article.body} />
+                        {/* Body */}
+                        {article.body ? (
+                            <TipTapEditor content={article.body} editable={false} />
+                        ) : (
+                            <p className="text-text-tertiary italic">No body content yet.</p>
+                        )}
 
                         {/* Key Insights */}
                         {article.keyInsights?.length > 0 && (

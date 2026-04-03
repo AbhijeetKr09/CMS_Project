@@ -2908,6 +2908,7 @@ export const AnalyticalArticleScalarFieldEnum = {
   shortDescription: 'shortDescription',
   body: 'body',
   tags: 'tags',
+  isPremium: 'isPremium',
   dataKey: 'dataKey',
   tableOfContents: 'tableOfContents',
   faq: 'faq',
