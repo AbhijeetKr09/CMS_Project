@@ -55,6 +55,8 @@ const ArticleEditor = () => {
     const [submitting, setSubmitting] = useState(false); // for Submit for Review button
 
     const [initialLoadDone, setInitialLoadDone] = useState(false);
+    const [lastAutoSavedAt, setLastAutoSavedAt] = useState(null);
+    const [lastSavedData, setLastSavedData] = useState(null);
 
     useEffect(() => {
         if (isEditMode) {
@@ -114,10 +116,29 @@ const ArticleEditor = () => {
             ]);
             // Resolve gallery image keys to signed URLs for preview
             if (data.images?.length) {
-                const signed = await signImagePreviews(data.images.map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '' })));
+                const signed = await signImagePreviews(data.images.map(img => ({ 
+                    src: img.src, 
+                    alt: img.alt || '', 
+                    caption: img.caption || '',
+                    link: img.link || ''
+                })));
                 setImages(signed);
             }
             // (stagedFolderId is already set to `id` via useState initialiser — no fetch needed)
+            
+            // Set initial lastSavedData to avoid immediate auto-save after load
+            setLastSavedData(JSON.stringify({
+                title: data.title || '',
+                body: data.body || '',
+                shortDescription: data.shortDescription || '',
+                mainImage: data.mainImage || null,
+                readTime: data.readTime || '',
+                tags: data.tags || [],
+                type: data.type || '',
+                images: (data.images || []).map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '', link: img.link || '' })),
+                keyInsights: (data.keyInsights || []).map(ki => ({ insightText: ki.insightText })),
+                relatedArticleIds: [data.relatedArticle1Id || '', data.relatedArticle2Id || '', data.relatedArticle3Id || '', data.relatedArticle4Id || '']
+            }));
         } catch {
             // Fallback: load from published articles table (for direct edits by admin)
             try {
@@ -142,7 +163,12 @@ const ArticleEditor = () => {
                     setCurrentTimestamp(data.timestampDate);
                 }
                 if (data.images?.length) {
-                    const signed = await signImagePreviews(data.images.map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '' })));
+                    const signed = await signImagePreviews(data.images.map(img => ({ 
+                        src: img.src, 
+                        alt: img.alt || '', 
+                        caption: img.caption || '',
+                        link: img.link || ''
+                    })));
                     setImages(signed);
                 }
                 setKeyInsights(data.keyInsights || []);
@@ -153,6 +179,21 @@ const ArticleEditor = () => {
                     data.relatedArticle3Id || '',
                     data.relatedArticle4Id || '',
                 ]);
+
+                // Set initial lastSavedData for published articles (though auto-save is usually disabled for them)
+                setLastSavedData(JSON.stringify({
+                    title: data.title || '',
+                    body: data.body || '',
+                    shortDescription: data.shortDescription || '',
+                    mainImage: data.mainImage || null,
+                    readTime: data.readTime || '',
+                    tags: data.tags || [],
+                    type: data.type || '',
+                    images: (data.images || []).map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '', link: img.link || '' })),
+                    keyInsights: (data.keyInsights || []).map(ki => ({ insightText: ki.insightText })),
+                    relatedArticleIds: [data.relatedArticle1Id || '', data.relatedArticle2Id || '', data.relatedArticle3Id || '', data.relatedArticle4Id || '']
+                }));
+
                 // (legacy direct-publish path — numeric ID needed for S3 folder)
                 try {
                     const nextIdRes = await api.get('/api/articles/draft/next-id');
@@ -200,7 +241,7 @@ const ArticleEditor = () => {
             const signedUrl = await getSignedUrl(key);
             // Blob URL used for replaceBlobsWithKeys matching on save
             const blobUrl = URL.createObjectURL(file);
-            const newImage = { src: key, previewUrl: signedUrl || blobUrl, alt: file.name || '', caption: '' };
+            const newImage = { src: key, previewUrl: signedUrl || blobUrl, alt: file.name || '', caption: '', link: '' };
             setImages(prev => [...prev, newImage]);
 
             setStatus('Image uploaded');
@@ -214,6 +255,53 @@ const ArticleEditor = () => {
             throw err;
         }
     };
+
+    // Auto-save logic
+    useEffect(() => {
+        // Only auto-save if initial load is done and we are in edit mode of a STAGED article.
+        // We don't auto-save direct edits to published articles (stagedArticleStatus === null)
+        // because those edits are live and should be intentional.
+        if (!initialLoadDone || saving || submitting || !isEditMode || !stagedArticleStatus) return;
+        if (stagedArticleStatus === 'SUBMITTED' || stagedArticleStatus === 'PUBLISHED') return;
+
+        const timer = setTimeout(() => {
+            const cleanBody = replaceBlobsWithKeys(body, images);
+            const currentData = {
+                title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
+                keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
+                relatedArticleIds
+            };
+            const currentDataStr = JSON.stringify(currentData);
+
+            if (currentDataStr !== lastSavedData) {
+                autoSave(currentData, currentDataStr);
+            }
+        }, 30000); // 30 second debounce
+
+        return () => clearTimeout(timer);
+    }, [title, body, shortDescription, mainImage, readTime, tags, type, images, keyInsights, relatedArticleIds, initialLoadDone, isEditMode, saving, submitting, stagedArticleStatus, lastSavedData]);
+
+    const autoSave = async (payload, payloadStr) => {
+        try {
+            // Simplified payload for backend structure (mapping related IDs to flat fields)
+            const backendPayload = {
+                ...payload,
+                relatedArticle1Id: payload.relatedArticleIds[0] || null,
+                relatedArticle2Id: payload.relatedArticleIds[1] || null,
+                relatedArticle3Id: payload.relatedArticleIds[2] || null,
+                relatedArticle4Id: payload.relatedArticleIds[3] || null,
+            };
+            delete backendPayload.relatedArticleIds;
+
+            await api.put(`/cms/staged/${id}`, backendPayload);
+            setLastSavedData(payloadStr);
+            setLastAutoSavedAt(new Date());
+        } catch (err) {
+            console.error('Auto-save failed', err);
+        }
+    };
+
 
     // Tag handlers
     const handleAddTag = (e) => {
@@ -236,7 +324,12 @@ const ArticleEditor = () => {
         const cleanBody = replaceBlobsWithKeys(body, images);
         const payload = {
             title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
-            images: images.map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
+            images: images.map(({ src, alt, caption, link }) => ({ 
+                src, 
+                alt: alt || '', 
+                caption: caption || '',
+                link: link || ''
+            })),
             keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
             relatedArticle1Id: relatedArticleIds[0] || null,
             relatedArticle2Id: relatedArticleIds[1] || null,
@@ -253,6 +346,20 @@ const ArticleEditor = () => {
                 navigate(`/editor/${res.data.id}`, { replace: true });
                 setStatus('Draft created');
                 setStatusType('success');
+                setLastSavedData(JSON.stringify({
+                    title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                    images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
+                    keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
+                    relatedArticleIds
+                }));
+            }
+            if (isEditMode) {
+                setLastSavedData(JSON.stringify({
+                    title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                    images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
+                    keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
+                    relatedArticleIds
+                }));
             }
         } catch (err) {
             console.error(err);
@@ -277,7 +384,12 @@ const ArticleEditor = () => {
             const cleanBody = replaceBlobsWithKeys(body, images);
             const payload = {
                 title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
-                images: images.map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
+                images: images.map(({ src, alt, caption, link }) => ({ 
+                    src, 
+                    alt: alt || '', 
+                    caption: caption || '',
+                    link: link || ''
+                })),
                 keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
                 relatedArticle1Id: relatedArticleIds[0] || null,
                 relatedArticle2Id: relatedArticleIds[1] || null,
@@ -324,7 +436,13 @@ const ArticleEditor = () => {
         const payload = {
             id: isEditMode ? id : draftId,
             title, shortDescription, body, type, tags,
-            timestampDate, readTime, mainImage, images,
+            timestampDate, readTime, mainImage,
+            images: images.map(({ src, alt, caption, link }) => ({ 
+                src, 
+                alt: alt || '', 
+                caption: caption || '',
+                link: link || ''
+            })),
             keyInsights, relatedNews,
             currentTimestamp: isEditMode ? currentTimestamp : undefined
         };
@@ -380,6 +498,12 @@ const ArticleEditor = () => {
                     </button>
 
                     <div className="flex items-center gap-3">
+                        {lastAutoSavedAt && !status && (
+                            <span className="text-[10px] text-text-tertiary bg-bg-tertiary/50 px-2 py-1 rounded-md border border-border/50">
+                                Auto-saved at {lastAutoSavedAt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+                            </span>
+                        )}
+
                         {status && (
                             <span className={`text-xs font-medium px-3 py-1.5 rounded-full ${
                                 statusType === 'success' ? 'bg-success/10 text-success' :
@@ -530,6 +654,14 @@ const ArticleEditor = () => {
                                                 value={img.alt || ''}
                                                 onChange={(e) => {
                                                     const copy = [...images]; copy[idx].alt = e.target.value; setImages(copy);
+                                                }}
+                                                className="w-full px-2 py-1.5 text-xs bg-bg-primary border border-border rounded-md text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent"
+                                            />
+                                            <input
+                                                placeholder="Link"
+                                                value={img.link || ''}
+                                                onChange={(e) => {
+                                                    const copy = [...images]; copy[idx].link = e.target.value; setImages(copy);
                                                 }}
                                                 className="w-full px-2 py-1.5 text-xs bg-bg-primary border border-border rounded-md text-text-primary placeholder-text-tertiary focus:outline-none focus:border-accent mb-1"
                                             />

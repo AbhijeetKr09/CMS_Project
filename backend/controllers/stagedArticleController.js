@@ -3,7 +3,7 @@ import { S3Client, ListObjectsV2Command, DeleteObjectsCommand } from '@aws-sdk/c
 
 // Helper: build sub-model create payloads from request body
 const buildSubRelations = (body) => ({
-    images:      (body.images      || []).map(({ src, alt, caption }) => ({ src, alt: alt || '', caption: caption || '' })),
+    images:      (body.images      || []).map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
     keyInsights: (body.keyInsights || []).map(({ insightText }) => ({ insightText })),
 });
 
@@ -60,7 +60,10 @@ export const createDraft = async (req, res) => {
 export const updateDraft = async (req, res) => {
     const { id } = req.params;
     try {
-        const existing = await prisma.stagedArticle.findUnique({ where: { id } });
+        const existing = await prisma.stagedArticle.findUnique({ 
+            where: { id },
+            include: { images: true, keyInsights: true }
+        });
         if (!existing) return res.status(404).json({ message: 'Article not found.' });
         const canEdit = existing.submittedById === req.cmsUser.id || existing.assignedToId === req.cmsUser.id;
         if (!canEdit)
@@ -71,11 +74,20 @@ export const updateDraft = async (req, res) => {
         const { images, keyInsights } = buildSubRelations(req.body);
         const relatedIds = extractRelatedIds(req.body);
 
-        // Replace sub-relation rows: delete all existing then re-create
-        await prisma.$transaction([
-            prisma.stagedArticleImage.deleteMany({ where: { stagedArticleId: id } }),
-            prisma.stagedArticleKeyInsight.deleteMany({ where: { stagedArticleId: id } }),
-        ]);
+        // Optimization: only replace sub-relation rows if they've changed.
+        // Prevents unnecessary churn on staged articles during auto-saves.
+        const existingImgs = (existing.images || []).map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' }));
+        const existingIns  = (existing.keyInsights || []).map(({ insightText }) => ({ insightText }));
+
+        const imagesChanged  = JSON.stringify(images)  !== JSON.stringify(existingImgs);
+        const insightsChanged = JSON.stringify(keyInsights) !== JSON.stringify(existingIns);
+
+        if (imagesChanged) {
+            await prisma.stagedArticleImage.deleteMany({ where: { stagedArticleId: id } });
+        }
+        if (insightsChanged) {
+            await prisma.stagedArticleKeyInsight.deleteMany({ where: { stagedArticleId: id } });
+        }
 
         const updated = await prisma.stagedArticle.update({
             where: { id },
@@ -88,8 +100,8 @@ export const updateDraft = async (req, res) => {
                 tags:             req.body.tags             ?? existing.tags,
                 type:             req.body.type             ?? existing.type,
                 ...relatedIds,
-                images:      { create: images },
-                keyInsights: { create: keyInsights },
+                ...(imagesChanged  ? { images:      { create: images } } : {}),
+                ...(insightsChanged ? { keyInsights: { create: keyInsights } } : {}),
             },
             include: FULL_INCLUDE,
         });
@@ -331,7 +343,7 @@ export const publish = async (req, res) => {
                     type:             staged.type,
                     // Copy sub-relations
                     images: {
-                        create: staged.images.map(({ src, alt, caption }) => ({ src, alt, caption })),
+                        create: staged.images.map(({ src, alt, caption, link }) => ({ src, alt, caption, link })),
                     },
                     keyInsights: {
                         create: staged.keyInsights.map(({ insightText }) => ({ insightText })),
@@ -434,7 +446,7 @@ export const recall = async (req, res) => {
                 assignedToId,
                 assignedAt:       new Date(),
                 recalledFromId:   live.id,
-                images:      { create: live.images.map(({ src, alt, caption }) => ({ src, alt: alt ?? '', caption: caption ?? '' })) },
+                images:      { create: live.images.map(({ src, alt, caption, link }) => ({ src, alt: alt ?? '', caption: caption ?? '', link: link ?? '' })) },
                 keyInsights: { create: live.keyInsights.map(({ insightText }) => ({ insightText })) },
                 // Map existing ArticleRelatedNews back to the flat relatedArticle1–4 IDs
                 relatedArticle1Id: live.relatedNews[0]?.relatedArticleId ?? null,

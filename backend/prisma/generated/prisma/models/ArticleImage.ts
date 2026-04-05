@@ -39,6 +39,7 @@ export type ArticleImageMinAggregateOutputType = {
   src: string | null
   alt: string | null
   caption: string | null
+  link: string | null
   articleId: string | null
 }
 
@@ -47,6 +48,7 @@ export type ArticleImageMaxAggregateOutputType = {
   src: string | null
   alt: string | null
   caption: string | null
+  link: string | null
   articleId: string | null
 }
 
@@ -55,6 +57,7 @@ export type ArticleImageCountAggregateOutputType = {
   src: number
   alt: number
   caption: number
+  link: number
   articleId: number
   _all: number
 }
@@ -73,6 +76,7 @@ export type ArticleImageMinAggregateInputType = {
   src?: true
   alt?: true
   caption?: true
+  link?: true
   articleId?: true
 }
 
@@ -81,6 +85,7 @@ export type ArticleImageMaxAggregateInputType = {
   src?: true
   alt?: true
   caption?: true
+  link?: true
   articleId?: true
 }
 
@@ -89,6 +94,7 @@ export type ArticleImageCountAggregateInputType = {
   src?: true
   alt?: true
   caption?: true
+  link?: true
   articleId?: true
   _all?: true
 }
@@ -184,6 +190,7 @@ export type ArticleImageGroupByOutputType = {
   src: string
   alt: string | null
   caption: string | null
+  link: string | null
   articleId: string
   _count: ArticleImageCountAggregateOutputType | null
   _avg: ArticleImageAvgAggregateOutputType | null
@@ -215,6 +222,7 @@ export type ArticleImageWhereInput = {
   src?: Prisma.StringFilter<"ArticleImage"> | string
   alt?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   caption?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
+  link?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   articleId?: Prisma.StringFilter<"ArticleImage"> | string
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }
@@ -224,6 +232,7 @@ export type ArticleImageOrderByWithRelationInput = {
   src?: Prisma.SortOrder
   alt?: Prisma.SortOrderInput | Prisma.SortOrder
   caption?: Prisma.SortOrderInput | Prisma.SortOrder
+  link?: Prisma.SortOrderInput | Prisma.SortOrder
   articleId?: Prisma.SortOrder
   article?: Prisma.ArticleOrderByWithRelationInput
 }
@@ -236,6 +245,7 @@ export type ArticleImageWhereUniqueInput = Prisma.AtLeast<{
   src?: Prisma.StringFilter<"ArticleImage"> | string
   alt?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   caption?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
+  link?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   articleId?: Prisma.StringFilter<"ArticleImage"> | string
   article?: Prisma.XOR<Prisma.ArticleScalarRelationFilter, Prisma.ArticleWhereInput>
 }, "id">
@@ -245,6 +255,7 @@ export type ArticleImageOrderByWithAggregationInput = {
   src?: Prisma.SortOrder
   alt?: Prisma.SortOrderInput | Prisma.SortOrder
   caption?: Prisma.SortOrderInput | Prisma.SortOrder
+  link?: Prisma.SortOrderInput | Prisma.SortOrder
   articleId?: Prisma.SortOrder
   _count?: Prisma.ArticleImageCountOrderByAggregateInput
   _avg?: Prisma.ArticleImageAvgOrderByAggregateInput
@@ -261,6 +272,7 @@ export type ArticleImageScalarWhereWithAggregatesInput = {
   src?: Prisma.StringWithAggregatesFilter<"ArticleImage"> | string
   alt?: Prisma.StringNullableWithAggregatesFilter<"ArticleImage"> | string | null
   caption?: Prisma.StringNullableWithAggregatesFilter<"ArticleImage"> | string | null
+  link?: Prisma.StringNullableWithAggregatesFilter<"ArticleImage"> | string | null
   articleId?: Prisma.StringWithAggregatesFilter<"ArticleImage"> | string
 }
 
@@ -268,6 +280,7 @@ export type ArticleImageCreateInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
   article: Prisma.ArticleCreateNestedOneWithoutImagesInput
 }
 
@@ -276,6 +289,7 @@ export type ArticleImageUncheckedCreateInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
   articleId: string
 }
 
@@ -283,6 +297,7 @@ export type ArticleImageUpdateInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   article?: Prisma.ArticleUpdateOneRequiredWithoutImagesNestedInput
 }
 
@@ -291,6 +306,7 @@ export type ArticleImageUncheckedUpdateInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -299,6 +315,7 @@ export type ArticleImageCreateManyInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
   articleId: string
 }
 
@@ -306,6 +323,7 @@ export type ArticleImageUpdateManyMutationInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleImageUncheckedUpdateManyInput = {
@@ -313,6 +331,7 @@ export type ArticleImageUncheckedUpdateManyInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   articleId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -331,6 +350,7 @@ export type ArticleImageCountOrderByAggregateInput = {
   src?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   caption?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
 }
 
@@ -343,6 +363,7 @@ export type ArticleImageMaxOrderByAggregateInput = {
   src?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   caption?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
 }
 
@@ -351,6 +372,7 @@ export type ArticleImageMinOrderByAggregateInput = {
   src?: Prisma.SortOrder
   alt?: Prisma.SortOrder
   caption?: Prisma.SortOrder
+  link?: Prisma.SortOrder
   articleId?: Prisma.SortOrder
 }
 
@@ -404,6 +426,7 @@ export type ArticleImageCreateWithoutArticleInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
 }
 
 export type ArticleImageUncheckedCreateWithoutArticleInput = {
@@ -411,6 +434,7 @@ export type ArticleImageUncheckedCreateWithoutArticleInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
 }
 
 export type ArticleImageCreateOrConnectWithoutArticleInput = {
@@ -447,6 +471,7 @@ export type ArticleImageScalarWhereInput = {
   src?: Prisma.StringFilter<"ArticleImage"> | string
   alt?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   caption?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
+  link?: Prisma.StringNullableFilter<"ArticleImage"> | string | null
   articleId?: Prisma.StringFilter<"ArticleImage"> | string
 }
 
@@ -455,12 +480,14 @@ export type ArticleImageCreateManyArticleInput = {
   src: string
   alt?: string | null
   caption?: string | null
+  link?: string | null
 }
 
 export type ArticleImageUpdateWithoutArticleInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleImageUncheckedUpdateWithoutArticleInput = {
@@ -468,6 +495,7 @@ export type ArticleImageUncheckedUpdateWithoutArticleInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type ArticleImageUncheckedUpdateManyWithoutArticleInput = {
@@ -475,6 +503,7 @@ export type ArticleImageUncheckedUpdateManyWithoutArticleInput = {
   src?: Prisma.StringFieldUpdateOperationsInput | string
   alt?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   caption?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  link?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -484,6 +513,7 @@ export type ArticleImageSelect<ExtArgs extends runtime.Types.Extensions.Internal
   src?: boolean
   alt?: boolean
   caption?: boolean
+  link?: boolean
   articleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
@@ -493,6 +523,7 @@ export type ArticleImageSelectCreateManyAndReturn<ExtArgs extends runtime.Types.
   src?: boolean
   alt?: boolean
   caption?: boolean
+  link?: boolean
   articleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
@@ -502,6 +533,7 @@ export type ArticleImageSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.
   src?: boolean
   alt?: boolean
   caption?: boolean
+  link?: boolean
   articleId?: boolean
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["articleImage"]>
@@ -511,10 +543,11 @@ export type ArticleImageSelectScalar = {
   src?: boolean
   alt?: boolean
   caption?: boolean
+  link?: boolean
   articleId?: boolean
 }
 
-export type ArticleImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "src" | "alt" | "caption" | "articleId", ExtArgs["result"]["articleImage"]>
+export type ArticleImageOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "src" | "alt" | "caption" | "link" | "articleId", ExtArgs["result"]["articleImage"]>
 export type ArticleImageInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   article?: boolean | Prisma.ArticleDefaultArgs<ExtArgs>
 }
@@ -535,6 +568,7 @@ export type $ArticleImagePayload<ExtArgs extends runtime.Types.Extensions.Intern
     src: string
     alt: string | null
     caption: string | null
+    link: string | null
     articleId: string
   }, ExtArgs["result"]["articleImage"]>
   composites: {}
@@ -964,6 +998,7 @@ export interface ArticleImageFieldRefs {
   readonly src: Prisma.FieldRef<"ArticleImage", 'String'>
   readonly alt: Prisma.FieldRef<"ArticleImage", 'String'>
   readonly caption: Prisma.FieldRef<"ArticleImage", 'String'>
+  readonly link: Prisma.FieldRef<"ArticleImage", 'String'>
   readonly articleId: Prisma.FieldRef<"ArticleImage", 'String'>
 }
     

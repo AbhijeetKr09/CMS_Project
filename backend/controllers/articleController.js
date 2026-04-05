@@ -91,7 +91,8 @@ const createArticle = async (req, res) => {
         const imagesToInsert = (images || []).map(img => ({
             src: extractS3Key(img.src) || extractS3Key(img.previewUrl),
             alt: img.alt || null,
-            caption: img.caption || null
+            caption: img.caption || null,
+            link: img.link || null
         })).filter(img => img.src); // drop any that ended up with null src (e.g. blob-only)
 
         // Replace markdown image syntax ![…](…) and {{IMG_X}} with [IMAGE] in body
@@ -197,7 +198,8 @@ const updateArticle = async (req, res) => {
         const imagesToInsert = (images || []).map(img => ({
             src: extractS3Key(img.src) || extractS3Key(img.previewUrl),
             alt: img.alt || null,
-            caption: img.caption || null
+            caption: img.caption || null,
+            link: img.link || null
         })).filter(img => img.src);
 
         // Replace markdown image syntax and {{IMG_X}} with [IMAGE] in body

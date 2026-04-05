@@ -50,11 +50,13 @@ model ArticleImage {
   src       String
   alt       String?
   caption   String?
+  link      String?
   articleId String
   article   Article @relation(fields: [articleId], references: [id], onDelete: Cascade)
 
   @@map("article_images")
 }
+
 
 model ArticleKeyInsight {
   id          Int     @id @default(autoincrement())
@@ -479,11 +481,13 @@ model StagedArticleImage {
   src             String
   alt             String?
   caption         String?
+  link            String?
   stagedArticleId String
   stagedArticle   StagedArticle @relation(fields: [stagedArticleId], references: [id], onDelete: Cascade)
 
   @@map("staged_article_images")
 }
+
 
 model StagedArticleKeyInsight {
   id              Int           @id @default(autoincrement())

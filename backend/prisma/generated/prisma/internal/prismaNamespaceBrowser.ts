@@ -129,6 +129,7 @@ export const ArticleImageScalarFieldEnum = {
   src: 'src',
   alt: 'alt',
   caption: 'caption',
+  link: 'link',
   articleId: 'articleId'
 } as const
 
@@ -478,6 +479,7 @@ export const StagedArticleImageScalarFieldEnum = {
   src: 'src',
   alt: 'alt',
   caption: 'caption',
+  link: 'link',
   stagedArticleId: 'stagedArticleId'
 } as const
 
