@@ -10,6 +10,13 @@ import {
 const PLATFORMS = ['linkedin', 'twitter', 'youtube'];
 const PLATFORM_COLORS = { linkedin: 'bg-blue-600/10 border-blue-600/20 text-blue-400', twitter: 'bg-sky-500/10 border-sky-500/20 text-sky-400', youtube: 'bg-red-500/10 border-red-500/20 text-red-400' };
 
+const getLocalDateString = (date) => {
+    const d = date ? new Date(date) : new Date();
+    if (isNaN(d.getTime())) return '';
+    const tzoffset = d.getTimezoneOffset() * 60000;
+    return new Date(d.getTime() - tzoffset).toISOString().slice(0, 10);
+};
+
 const useSidebarNav = (navigate) => (tab) => {
     const routes = {
         'events': '/admin/events', 'social-trends': '/admin/social-trends',
@@ -43,8 +50,8 @@ const FormField = ({ label, name, type = 'text', placeholder, formData, onChange
 // ── Trend Form Modal ──────────────────────────────────────────────────────────
 const TrendModal = ({ trend, onClose, onSaved }) => {
     const [form, setForm] = useState(trend ? {
-        ...trend, date: trend.date ? new Date(trend.date).toISOString().slice(0, 10) : '',
-    } : { ...EMPTY_FORM, date: new Date().toISOString().slice(0, 10) });
+        ...trend, date: trend.date ? getLocalDateString(trend.date) : '',
+    } : { ...EMPTY_FORM, date: getLocalDateString() });
     const [saving, setSaving] = useState(false);
 
     const set = (k, v) => setForm(f => ({ ...f, [k]: v }));

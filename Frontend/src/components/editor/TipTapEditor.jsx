@@ -112,7 +112,7 @@ const TipTapEditor = forwardRef(({ content, onUpdate = () => {}, onImageUploadRe
     return (
         <div className={`border border-border rounded-xl flex flex-col bg-bg-secondary w-full ${!editable ? 'border-none bg-transparent' : ''}`}>
             {editable && <EditorToolbar editor={editor} onImageUploadRequest={onImageUploadRequest} />}
-            <div className={`relative flex-1 bg-bg-secondary ${editable ? 'rounded-b-xl min-h-[500px]' : 'bg-transparent h-auto'} overflow-hidden`}>
+            <div className={`relative flex-1 bg-bg-secondary ${editable ? 'rounded-b-xl min-h-[800px]' : 'bg-transparent h-auto'} overflow-hidden`}>
                 <EditorContent 
                     editor={editor} 
                     className={`${editable ? 'absolute inset-0 overflow-y-auto px-6 py-6' : 'px-0 py-2'} min-h-full`}

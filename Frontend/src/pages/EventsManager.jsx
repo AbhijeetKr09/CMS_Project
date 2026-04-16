@@ -12,6 +12,13 @@ const SERVER_URL = import.meta.env.VITE_SERVER_URL || 'http://localhost:5000';
 const REGIONS = ['Asia', 'Gulf/Middle East', 'North America', 'South America', 'Europe', 'Africa', 'Oceania'];
 const EVENT_TYPES = ['Conference', 'Expo', 'Webinar', 'Summit', 'Seminar', 'Workshop', 'Airshow', 'Other'];
 
+const getLocalISOTime = (date) => {
+    const d = date ? new Date(date) : new Date();
+    if (isNaN(d.getTime())) return '';
+    const tzoffset = d.getTimezoneOffset() * 60000;
+    return new Date(d.getTime() - tzoffset).toISOString().slice(0, 16);
+};
+
 const EMPTY_FORM = {
     eventName: '', eventLink: '', venue: '', onlineOrOffline: 'Offline',
     freeOrPaid: 'Free', date: '', time: '', eventType: '',
@@ -76,7 +83,7 @@ const FormField = ({ label, name, type = 'text', required, formData, onChange, .
 const EventFormModal = ({ event, onClose, onSaved }) => {
     const [form, setForm] = useState(event ? {
         ...event,
-        date: event.date ? new Date(event.date).toISOString().slice(0, 16) : '',
+        date: event.date ? getLocalISOTime(event.date) : '',
         images: event.images || [],
     } : { ...EMPTY_FORM });
     const [saving, setSaving] = useState(false);

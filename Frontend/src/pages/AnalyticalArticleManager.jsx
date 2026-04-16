@@ -86,6 +86,7 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
 
     const [form, setForm] = useState(isEdit ? {
         title:             article.title || '',
+        slug:              article.slug || '',
         id:                article.id    || '',
         headingDescription: article.headingDescription || '',
         shortDescription:  article.shortDescription || '',
@@ -99,7 +100,7 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
         advertisement:     article.advertisement || ['', '', '', ''],
         images:            article.images || [],
     } : {
-        title: '', id: '', headingDescription: '', shortDescription: '',
+        title: '', slug: '', id: '', headingDescription: '', shortDescription: '',
         readTime: '', mainImage: '', body: '', tags: '', dataKey: '',
         tableOfContents: [], faq: [], advertisement: ['', '', '', ''], images: [],
     });
@@ -109,7 +110,10 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
     // Auto-generate slug from title (only when not editing)
     const handleTitleChange = (v) => {
         set('title', v);
-        if (!isEdit) set('id', makeSlug(v));
+        if (!isEdit) {
+            set('id', makeSlug(v));
+            set('slug', v.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
+        }
     };
 
     const uploadData = async (file) => {
@@ -221,12 +225,20 @@ const ArticleEditor = ({ article, onClose, onSaved }) => {
                             </div>
                             <div>
                                 <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">
-                                    Slug / ID {isEdit ? '(read-only)' : '(auto-generated, editable)'}
+                                    S3 Folder ID {isEdit ? '(read-only)' : '(auto-generated)'}
                                 </label>
                                 <input type="text" value={form.id} onChange={e => !isEdit && set('id', e.target.value)}
                                     disabled={isEdit}
                                     className="w-full px-3 py-2.5 rounded-xl border border-border bg-bg-secondary text-text-primary text-sm focus:outline-none focus:border-accent transition-all disabled:opacity-50 font-mono" />
-                                {!isEdit && <p className="text-xs text-text-tertiary mt-1">⚠️ Cannot be changed after creation — it determines the S3 folder path.</p>}
+                                {!isEdit && <p className="text-xs text-text-tertiary mt-1">⚠️ Determines S3 folder path.</p>}
+                            </div>
+                            <div>
+                                <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">
+                                    Slug
+                                </label>
+                                <input type="text" value={form.slug} onChange={e => set('slug', e.target.value)}
+                                    placeholder="e.g. analytical-report-2026"
+                                    className="w-full px-3 py-2.5 rounded-xl border border-border bg-bg-secondary text-text-primary text-sm focus:outline-none focus:border-accent transition-all font-mono" />
                             </div>
                             <div>
                                 <label className="text-xs font-semibold text-text-secondary uppercase tracking-wider block mb-1">Heading Description</label>

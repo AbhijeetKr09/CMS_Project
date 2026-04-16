@@ -5,7 +5,14 @@ import api from '../services/api';
 import TipTapEditor from '../components/editor/TipTapEditor';
 import { uploadFile, uploadStagedFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
 
-const ARTICLE_TYPES = ['Headline', 'Business', 'News', 'Trending', 'Aerospace', 'Breaking'];
+const ARTICLE_TYPES = ['Business', 'News', 'Aerospace', 'Breaking'];
+
+const getLocalISOTime = (date) => {
+    const d = date ? new Date(date) : new Date();
+    if (isNaN(d.getTime())) return '';
+    const tzoffset = d.getTimezoneOffset() * 60000;
+    return new Date(d.getTime() - tzoffset).toISOString().slice(0, 16);
+};
 
 const ArticleEditor = () => {
     const { id } = useParams();
@@ -15,19 +22,20 @@ const ArticleEditor = () => {
 
     // State
     const [title, setTitle] = useState('');
+    const [slug, setSlug] = useState('');
     const [shortDescription, setShortDescription] = useState('');
     const [body, setBody] = useState('');
     const [type, setType] = useState('');
     const [tags, setTags] = useState([]);
     const [tagInput, setTagInput] = useState('');
-    const [timestampDate, setTimestampDate] = useState(new Date().toISOString().substring(0, 16));
+    const [timestampDate, setTimestampDate] = useState(getLocalISOTime());
     const [readTime, setReadTime] = useState('');
 
     // Media
     const [mainImage, setMainImage] = useState(null);
     const [mainImagePreview, setMainImagePreview] = useState(null);
     const [images, setImages] = useState([]);
-    
+
     // Draft ID for new articles before they are saved
     const [draftId, setDraftId] = useState(null);
     // Numeric article ID (e.g. 'article-146') — only used for legacy direct-publish S3 folder naming
@@ -58,12 +66,65 @@ const ArticleEditor = () => {
     const [lastAutoSavedAt, setLastAutoSavedAt] = useState(null);
     const [lastSavedData, setLastSavedData] = useState(null);
 
+    // Custom Modal State
+    const [confirmModal, setConfirmModal] = useState({ isOpen: false, title: '', message: '', onConfirm: null, onCancel: null, confirmText: 'Confirm', cancelText: 'Cancel' });
+    const showConfirm = (title, message, confirmText, cancelText, onConfirm, onCancel) => {
+        setConfirmModal({ isOpen: true, title, message, confirmText, cancelText, onConfirm, onCancel });
+    };
+    const closeConfirm = () => setConfirmModal((prev) => ({ ...prev, isOpen: false }));
+
+    const maybeRestoreLocal = (basePayloadStr) => {
+        try {
+            const key = `draft_article_${isEditMode ? id : 'new'}`;
+            const savedStr = localStorage.getItem(key);
+            if (savedStr) {
+                if (basePayloadStr && savedStr === basePayloadStr) {
+                    localStorage.removeItem(key);
+                    return;
+                }
+                showConfirm(
+                    "Recover Unsaved Changes",
+                    "You have unsaved changes recovered from a previous session. Do you want to restore them?",
+                    "Restore Progress",
+                    "Discard",
+                    () => {
+                        const parsed = JSON.parse(savedStr);
+                        setTitle(parsed.title || '');
+                        setSlug(parsed.slug || '');
+                        setBody(parsed.body || '');
+                        setShortDescription(parsed.shortDescription || '');
+                        setReadTime(parsed.readTime || '');
+                        if (parsed.mainImage) setMainImage(parsed.mainImage);
+                        setTags(parsed.tags || []);
+                        setType(parsed.type || '');
+                        if (parsed.images) setImages(parsed.images);
+                        if (parsed.keyInsights) setKeyInsights(parsed.keyInsights);
+                        if (parsed.relatedArticleIds) setRelatedArticleIds(parsed.relatedArticleIds);
+                        closeConfirm();
+                    },
+                    () => {
+                        localStorage.removeItem(key);
+                        closeConfirm();
+                    }
+                );
+            }
+        } catch (e) { console.error(e) }
+    };
+
     useEffect(() => {
-        if (isEditMode) {
-            fetchArticle().finally(() => setInitialLoadDone(true));
-        } else {
-            fetchDraftId().finally(() => setInitialLoadDone(true));
-        }
+        const load = async () => {
+            let basePayloadStr = null;
+            if (isEditMode) {
+                basePayloadStr = await fetchArticle();
+            } else {
+                basePayloadStr = await fetchDraftId();
+            }
+            setTimeout(() => {
+                maybeRestoreLocal(basePayloadStr);
+                setInitialLoadDone(true);
+            }, 100);
+        };
+        load();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [id]);
 
@@ -72,6 +133,14 @@ const ArticleEditor = () => {
             const res = await api.get('/api/articles/draft/next-id');
             setDraftId(res.data.nextId);
             setDraftNumericId(res.data.nextId); // same for new articles
+            
+            const payload = {
+                title: '', slug: '', body: '', shortDescription: '', mainImage: '', readTime: '', tags: [], type: '',
+                images: [], keyInsights: [], relatedArticleIds: ['', '', '', '']
+            };
+            const payloadStr = JSON.stringify(payload);
+            setLastSavedData(payloadStr);
+            return payloadStr;
         } catch (err) {
             console.error('Failed to get draft id', err);
         }
@@ -91,6 +160,7 @@ const ArticleEditor = () => {
             const res = await api.get(`/cms/staged/${id}`);
             const data = res.data;
             setTitle(data.title || '');
+            setSlug(data.slug || '');
             setShortDescription(data.shortDescription || '');
             const signedBody = await signBodyImageSrcs(data.body || '');
             setBody(signedBody);
@@ -116,35 +186,40 @@ const ArticleEditor = () => {
             ]);
             // Resolve gallery image keys to signed URLs for preview
             if (data.images?.length) {
-                const signed = await signImagePreviews(data.images.map(img => ({ 
-                    src: img.src, 
-                    alt: img.alt || '', 
+                const signed = await signImagePreviews(data.images.map(img => ({
+                    src: img.src,
+                    alt: img.alt || '',
                     caption: img.caption || '',
                     link: img.link || ''
                 })));
                 setImages(signed);
             }
             // (stagedFolderId is already set to `id` via useState initialiser — no fetch needed)
-            
+
             // Set initial lastSavedData to avoid immediate auto-save after load
-            setLastSavedData(JSON.stringify({
+            const payload = {
                 title: data.title || '',
+                slug: data.slug || '',
                 body: data.body || '',
                 shortDescription: data.shortDescription || '',
-                mainImage: data.mainImage || null,
+                mainImage: data.mainImage || '',
                 readTime: data.readTime || '',
                 tags: data.tags || [],
                 type: data.type || '',
                 images: (data.images || []).map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '', link: img.link || '' })),
                 keyInsights: (data.keyInsights || []).map(ki => ({ insightText: ki.insightText })),
                 relatedArticleIds: [data.relatedArticle1Id || '', data.relatedArticle2Id || '', data.relatedArticle3Id || '', data.relatedArticle4Id || '']
-            }));
+            };
+            const payloadStr = JSON.stringify(payload);
+            setLastSavedData(payloadStr);
+            return payloadStr;
         } catch {
             // Fallback: load from published articles table (for direct edits by admin)
             try {
                 const res = await api.get(`/api/articles/${id}`);
                 const data = res.data;
                 setTitle(data.title || '');
+                setSlug(data.slug || '');
                 setShortDescription(data.shortDescription || '');
                 // Sign body image srcs before TipTap renders
                 const signedBody = await signBodyImageSrcs(data.body || '');
@@ -159,13 +234,13 @@ const ArticleEditor = () => {
                     setMainImagePreview(signed);
                 }
                 if (data.timestampDate) {
-                    setTimestampDate(new Date(data.timestampDate).toISOString().substring(0, 16));
+                    setTimestampDate(getLocalISOTime(data.timestampDate));
                     setCurrentTimestamp(data.timestampDate);
                 }
                 if (data.images?.length) {
-                    const signed = await signImagePreviews(data.images.map(img => ({ 
-                        src: img.src, 
-                        alt: img.alt || '', 
+                    const signed = await signImagePreviews(data.images.map(img => ({
+                        src: img.src,
+                        alt: img.alt || '',
                         caption: img.caption || '',
                         link: img.link || ''
                     })));
@@ -181,24 +256,29 @@ const ArticleEditor = () => {
                 ]);
 
                 // Set initial lastSavedData for published articles (though auto-save is usually disabled for them)
-                setLastSavedData(JSON.stringify({
+                const payload = {
                     title: data.title || '',
+                    slug: data.slug || '',
                     body: data.body || '',
                     shortDescription: data.shortDescription || '',
-                    mainImage: data.mainImage || null,
+                    mainImage: data.mainImage || '',
                     readTime: data.readTime || '',
                     tags: data.tags || [],
                     type: data.type || '',
                     images: (data.images || []).map(img => ({ src: img.src, alt: img.alt || '', caption: img.caption || '', link: img.link || '' })),
                     keyInsights: (data.keyInsights || []).map(ki => ({ insightText: ki.insightText })),
                     relatedArticleIds: [data.relatedArticle1Id || '', data.relatedArticle2Id || '', data.relatedArticle3Id || '', data.relatedArticle4Id || '']
-                }));
+                };
+                const payloadStr = JSON.stringify(payload);
+                setLastSavedData(payloadStr);
 
                 // (legacy direct-publish path — numeric ID needed for S3 folder)
                 try {
                     const nextIdRes = await api.get('/api/articles/draft/next-id');
                     setDraftNumericId(nextIdRes.data.nextId);
-                } catch { /* ignore */ }
+                } catch { /* empty */ }
+
+                return payloadStr;
             } catch (err) {
                 console.error('Failed to load article', err);
                 setStatus('Error loading article');
@@ -256,31 +336,85 @@ const ArticleEditor = () => {
         }
     };
 
-    // Auto-save logic
+    const currentDataStr = JSON.stringify({
+        title, slug, body: replaceBlobsWithKeys(body, images), shortDescription, mainImage, readTime, tags, type,
+        images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
+        keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
+        relatedArticleIds
+    });
+
+    const [baselineSet, setBaselineSet] = useState(false);
     useEffect(() => {
-        // Only auto-save if initial load is done and we are in edit mode of a STAGED article.
-        // We don't auto-save direct edits to published articles (stagedArticleStatus === null)
-        // because those edits are live and should be intentional.
-        if (!initialLoadDone || saving || submitting || !isEditMode || !stagedArticleStatus) return;
+        if (initialLoadDone && !baselineSet) {
+            // Wait a fraction of a second for TipTap/Blob resolution to fully format and settle
+            const timer = setTimeout(() => {
+                setLastSavedData(currentDataStr);
+                setBaselineSet(true);
+            }, 800);
+            return () => clearTimeout(timer);
+        }
+    }, [initialLoadDone, baselineSet, currentDataStr]);
+
+    const isDirty = baselineSet && (currentDataStr !== lastSavedData);
+
+    const handleBackClick = () => {
+        if (isDirty && !saving && !submitting) {
+            showConfirm(
+                "Unsaved Changes",
+                "You have unsaved changes. Are you sure you want to leave this page and lose your progress?",
+                "Leave Page",
+                "Stay",
+                () => {
+                    closeConfirm();
+                    navigate('/dashboard');
+                },
+                () => {
+                    closeConfirm();
+                }
+            );
+        } else {
+            navigate('/dashboard');
+        }
+    };
+
+    // Browser exit / refresh prompt warning
+    useEffect(() => {
+        const handleBeforeUnload = (e) => {
+            if (isDirty) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        };
+        window.addEventListener('beforeunload', handleBeforeUnload);
+        return () => window.removeEventListener('beforeunload', handleBeforeUnload);
+    }, [isDirty]);
+
+    // Local storage fast-caching for unsaved progress
+    useEffect(() => {
+        if (!initialLoadDone) return;
+        const key = `draft_article_${isEditMode ? id : 'new'}`;
+        if (isDirty && stagedArticleStatus !== 'SUBMITTED' && stagedArticleStatus !== 'PUBLISHED') {
+            const timer = setTimeout(() => {
+                localStorage.setItem(key, currentDataStr);
+            }, 1000);
+            return () => clearTimeout(timer);
+        } else {
+            localStorage.removeItem(key);
+        }
+    }, [isDirty, currentDataStr, isEditMode, id, initialLoadDone, stagedArticleStatus]);
+
+    // Auto-save to database logic
+    useEffect(() => {
+        if (!isDirty || saving || submitting || !isEditMode || !stagedArticleStatus) return;
         if (stagedArticleStatus === 'SUBMITTED' || stagedArticleStatus === 'PUBLISHED') return;
 
         const timer = setTimeout(() => {
-            const cleanBody = replaceBlobsWithKeys(body, images);
-            const currentData = {
-                title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
-                images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
-                keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
-                relatedArticleIds
-            };
-            const currentDataStr = JSON.stringify(currentData);
-
-            if (currentDataStr !== lastSavedData) {
-                autoSave(currentData, currentDataStr);
-            }
+            const currentData = JSON.parse(currentDataStr);
+            autoSave(currentData, currentDataStr);
         }, 30000); // 30 second debounce
 
         return () => clearTimeout(timer);
-    }, [title, body, shortDescription, mainImage, readTime, tags, type, images, keyInsights, relatedArticleIds, initialLoadDone, isEditMode, saving, submitting, stagedArticleStatus, lastSavedData]);
+    }, [isDirty, currentDataStr, initialLoadDone, isEditMode, saving, submitting, stagedArticleStatus]);
 
     const autoSave = async (payload, payloadStr) => {
         try {
@@ -314,6 +448,16 @@ const ArticleEditor = () => {
         }
     };
 
+    // Auto-generate slug from title
+    const handleTitleChange = (e) => {
+        const val = e.target.value;
+        setTitle(val);
+        if (!isEditMode) {
+            const generatedSlug = val.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+            setSlug(generatedSlug);
+        }
+    };
+
 
     // Save draft to staged articles table
     const handleSaveDraft = async () => {
@@ -323,10 +467,10 @@ const ArticleEditor = () => {
         // Replace any blob: URLs in the TipTap HTML with the real S3 keys
         const cleanBody = replaceBlobsWithKeys(body, images);
         const payload = {
-            title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
-            images: images.map(({ src, alt, caption, link }) => ({ 
-                src, 
-                alt: alt || '', 
+            title, slug, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+            images: images.map(({ src, alt, caption, link }) => ({
+                src,
+                alt: alt || '',
                 caption: caption || '',
                 link: link || ''
             })),
@@ -347,7 +491,7 @@ const ArticleEditor = () => {
                 setStatus('Draft created');
                 setStatusType('success');
                 setLastSavedData(JSON.stringify({
-                    title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                    title, slug, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
                     images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
                     keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
                     relatedArticleIds
@@ -355,7 +499,7 @@ const ArticleEditor = () => {
             }
             if (isEditMode) {
                 setLastSavedData(JSON.stringify({
-                    title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                    title, slug, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
                     images: images.map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' })),
                     keyInsights: keyInsights.map(({ insightText }) => ({ insightText })),
                     relatedArticleIds
@@ -383,10 +527,10 @@ const ArticleEditor = () => {
         try {
             const cleanBody = replaceBlobsWithKeys(body, images);
             const payload = {
-                title, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
-                images: images.map(({ src, alt, caption, link }) => ({ 
-                    src, 
-                    alt: alt || '', 
+                title, slug, body: cleanBody, shortDescription, mainImage, readTime, tags, type,
+                images: images.map(({ src, alt, caption, link }) => ({
+                    src,
+                    alt: alt || '',
                     caption: caption || '',
                     link: link || ''
                 })),
@@ -435,11 +579,11 @@ const ArticleEditor = () => {
         setStatusType('');
         const payload = {
             id: isEditMode ? id : draftId,
-            title, shortDescription, body, type, tags,
+            title, slug, shortDescription, body, type, tags,
             timestampDate, readTime, mainImage,
-            images: images.map(({ src, alt, caption, link }) => ({ 
-                src, 
-                alt: alt || '', 
+            images: images.map(({ src, alt, caption, link }) => ({
+                src,
+                alt: alt || '',
                 caption: caption || '',
                 link: link || ''
             })),
@@ -490,7 +634,7 @@ const ArticleEditor = () => {
             <header className="sticky top-0 z-40 bg-bg-secondary/80 backdrop-blur-xl border-b border-border">
                 <div className="max-w-screen-2xl mx-auto px-6 flex items-center justify-between h-14">
                     <button
-                        onClick={() => navigate('/dashboard')}
+                        onClick={handleBackClick}
                         className="flex items-center gap-2 text-text-secondary hover:text-text-primary transition-colors bg-transparent border-none cursor-pointer text-sm"
                     >
                         <HiOutlineArrowLeft className="w-4 h-4" />
@@ -505,11 +649,10 @@ const ArticleEditor = () => {
                         )}
 
                         {status && (
-                            <span className={`text-xs font-medium px-3 py-1.5 rounded-full ${
-                                statusType === 'success' ? 'bg-success/10 text-success' :
+                            <span className={`text-xs font-medium px-3 py-1.5 rounded-full ${statusType === 'success' ? 'bg-success/10 text-success' :
                                 statusType === 'error' ? 'bg-danger/10 text-danger' :
-                                'bg-bg-tertiary text-text-secondary'
-                            }`}>
+                                    'bg-bg-tertiary text-text-secondary'
+                                }`}>
                                 {status}
                             </span>
                         )}
@@ -536,7 +679,7 @@ const ArticleEditor = () => {
                                 <><div className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />Submitting...</>
                             ) : (
                                 <><HiOutlinePaperAirplane className="w-4 h-4" />
-                                {stagedArticleStatus === 'SUBMITTED' ? 'Awaiting Review' : 'Submit for Review'}</>
+                                    {stagedArticleStatus === 'SUBMITTED' ? 'Awaiting Review' : 'Submit for Review'}</>
                             )}
                         </button>
                     </div>
@@ -564,9 +707,18 @@ const ArticleEditor = () => {
                         type="text"
                         placeholder="Article Headline..."
                         value={title}
-                        onChange={(e) => setTitle(e.target.value)}
+                        onChange={handleTitleChange}
                         className="w-full text-4xl font-extrabold bg-transparent border-none outline-none text-text-primary placeholder-text-tertiary mb-4 leading-tight"
                         style={{ fontFamily: "'Inter', sans-serif" }}
+                    />
+
+                    {/* Slug */}
+                    <input
+                        type="text"
+                        placeholder="Article url slug... (optional, auto-generated if blank)"
+                        value={slug}
+                        onChange={(e) => setSlug(e.target.value)}
+                        className="w-full text-sm font-mono bg-transparent border-none outline-none text-accent placeholder-text-tertiary mb-6 font-medium"
                     />
 
                     {/* Short Description */}
@@ -578,6 +730,39 @@ const ArticleEditor = () => {
                         className="w-full text-lg bg-transparent border-none outline-none text-text-secondary placeholder-text-tertiary resize-none mb-8 leading-relaxed"
                     />
 
+                    {/* Main Image */}
+                    <div className="border border-border rounded-xl p-6 bg-bg-secondary/30 mb-8 mt-4">
+                        <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
+                            Cover Image
+                        </h3>
+                        <div className="relative">
+                            {mainImagePreview ? (
+                                <div className="relative group">
+                                    <img
+                                        src={mainImagePreview}
+                                        alt="Main"
+                                        className="w-full max-h-80 object-cover rounded-lg border border-border"
+                                    />
+                                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
+                                        <label className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg cursor-pointer text-sm font-medium hover:bg-white/30 transition-colors border border-white/20">
+                                            Replace Image
+                                            <input type="file" hidden accept="image/*" onChange={handleMainImageUpload} />
+                                        </label>
+                                    </div>
+                                </div>
+                            ) : (
+                                <label className="flex flex-col items-center justify-center py-12 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-accent/50 transition-colors group">
+                                    <HiOutlineCloudUpload className="w-10 h-10 text-text-tertiary group-hover:text-accent transition-colors mb-3" />
+                                    <span className="text-sm text-text-tertiary group-hover:text-text-secondary transition-colors font-medium">
+                                        Click to upload cover image
+                                    </span>
+                                    <span className="text-xs text-text-tertiary mt-1">JPG, PNG, WebP supported</span>
+                                    <input type="file" hidden accept="image/*" onChange={handleMainImageUpload} />
+                                </label>
+                            )}
+                        </div>
+                    </div>
+
                     {/* WYSIWYG Editor */}
                     <div className="flex flex-col gap-2 mb-8">
                         <label className="text-sm font-semibold text-text-secondary uppercase tracking-wider">
@@ -587,45 +772,13 @@ const ArticleEditor = () => {
                             {initialLoadDone ? (
                                 <TipTapEditor key={id} ref={editorRef} content={body} onUpdate={(html) => setBody(html)} onImageUploadRequest={handleTipTapImageUpload} />
                             ) : (
-                                <div className="min-h-[500px] flex items-center justify-center text-text-tertiary">Loading editor...</div>
+                                <div className="min-h-[800px] flex items-center justify-center text-text-tertiary">Loading editor...</div>
                             )}
                         </div>
                     </div>
 
                     {/* Image sections */}
                     <div className="mt-10 space-y-8">
-                        {/* Main Image */}
-                        <div className="border border-border rounded-xl p-6 bg-bg-secondary/30">
-                            <h3 className="text-sm font-semibold text-text-secondary uppercase tracking-wider mb-4">
-                                Cover Image
-                            </h3>
-                            <div className="relative">
-                                {mainImagePreview ? (
-                                    <div className="relative group">
-                                        <img
-                                            src={mainImagePreview}
-                                            alt="Main"
-                                            className="w-full max-h-80 object-cover rounded-lg border border-border"
-                                        />
-                                        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
-                                            <label className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-lg cursor-pointer text-sm font-medium hover:bg-white/30 transition-colors border border-white/20">
-                                                Replace Image
-                                                <input type="file" hidden accept="image/*" onChange={handleMainImageUpload} />
-                                            </label>
-                                        </div>
-                                    </div>
-                                ) : (
-                                    <label className="flex flex-col items-center justify-center py-12 border-2 border-dashed border-border rounded-lg cursor-pointer hover:border-accent/50 transition-colors group">
-                                        <HiOutlineCloudUpload className="w-10 h-10 text-text-tertiary group-hover:text-accent transition-colors mb-3" />
-                                        <span className="text-sm text-text-tertiary group-hover:text-text-secondary transition-colors font-medium">
-                                            Click to upload cover image
-                                        </span>
-                                        <span className="text-xs text-text-tertiary mt-1">JPG, PNG, WebP supported</span>
-                                        <input type="file" hidden accept="image/*" onChange={handleMainImageUpload} />
-                                    </label>
-                                )}
-                            </div>
-                        </div>
 
                         {/* Gallery */}
                         <div className="border border-border rounded-xl p-6 bg-bg-secondary/30">
@@ -765,7 +918,7 @@ const ArticleEditor = () => {
                         </div>
 
                         {/* Key Insights */}
-                        <div>
+                        {/* <div>
                             <label className="block text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-2">
                                 Key Insights
                             </label>
@@ -802,7 +955,7 @@ const ArticleEditor = () => {
                             >
                                 + Add Insight
                             </button>
-                        </div>
+                        </div> */}
 
                         {/* Related Articles */}
                         <div>
@@ -847,6 +1000,30 @@ const ArticleEditor = () => {
                     </div>
                 </aside>
             </div>
+
+            {/* Custom Confirm Modal */}
+            {confirmModal.isOpen && (
+                <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+                    <div className="bg-bg-primary border border-border rounded-2xl shadow-2xl max-w-md w-full p-6 animate-fade-in-up">
+                        <h3 className="text-xl font-bold text-text-primary mb-2">{confirmModal.title}</h3>
+                        <p className="text-text-secondary mb-6 text-sm">{confirmModal.message}</p>
+                        <div className="flex justify-end gap-3">
+                            <button
+                                onClick={confirmModal.onCancel}
+                                className="px-4 py-2 rounded-xl border border-border text-text-secondary hover:bg-bg-secondary transition-all font-semibold text-sm bg-transparent cursor-pointer"
+                            >
+                                {confirmModal.cancelText}
+                            </button>
+                            <button
+                                onClick={confirmModal.onConfirm}
+                                className="px-5 py-2 rounded-xl bg-accent text-white hover:bg-accent/90 transition-all font-semibold text-sm shadow-lg shadow-accent/20 border-none cursor-pointer"
+                            >
+                                {confirmModal.confirmText}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

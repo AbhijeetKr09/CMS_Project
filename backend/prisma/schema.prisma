@@ -17,6 +17,7 @@ model session {
 
 model Article {
   id               String   @id @default(uuid())
+  slug             String?  @unique
   title            String
   timestampDate    DateTime
   readTime         String?
@@ -279,6 +280,7 @@ model FeedLike {
 
 model AnalyticalArticle {
   id                 String   @id @default(uuid())
+  slug               String?  @unique
   title              String
   headingDescription String?
   readTime           String?
@@ -435,6 +437,7 @@ model CmsUser {
 
 model StagedArticle {
   id                 String                  @id @default(uuid())
+  slug               String?                 @unique
   title              String                  @default("")
   body               String?
   shortDescription   String?
