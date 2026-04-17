@@ -138,15 +138,20 @@ const createArticle = async (req, res) => {
                 },
                 relatedNews: {
                     create: (relatedNews || []).map(rn => ({
-                        newsTitle: rn.newsTitle,
-                        newsUrl: rn.newsUrl || null
+                        relatedArticleId: rn.relatedArticleId || rn
                     }))
                 }
             },
             include: {
                 images: true,
                 keyInsights: true,
-                relatedNews: true
+                relatedNews: {
+                    include: {
+                        relatedArticle: {
+                            select: { id: true, title: true, slug: true, mainImage: true }
+                        }
+                    }
+                }
             }
         });
 
@@ -236,12 +241,21 @@ const updateArticle = async (req, res) => {
                 },
                 relatedNews: {
                     create: (relatedNews || []).map(rn => ({
-                        newsTitle: rn.newsTitle,
-                        newsUrl: rn.newsUrl || null
+                        relatedArticleId: rn.relatedArticleId || rn
                     }))
                 }
             },
-            include: { images: true, keyInsights: true, relatedNews: true }
+            include: { 
+                images: true, 
+                keyInsights: true, 
+                relatedNews: {
+                    include: {
+                        relatedArticle: {
+                            select: { id: true, title: true, slug: true, mainImage: true }
+                        }
+                    }
+                } 
+            }
         });
 
         if (updatedArticle.mainImage) updatedArticle.mainImage = await getPresignedUrl(updatedArticle.mainImage);
@@ -358,7 +372,13 @@ const getArticleById = async (req, res) => {
             include: {
                 images: true,
                 keyInsights: true,
-                relatedNews: true,
+                relatedNews: {
+                    include: {
+                        relatedArticle: {
+                            select: { id: true, title: true, slug: true }
+                        }
+                    }
+                },
                 comments: {
                     include: {
                         user: {

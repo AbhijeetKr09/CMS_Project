@@ -110,6 +110,7 @@ export type SessionScalarFieldEnum = (typeof SessionScalarFieldEnum)[keyof typeo
 
 export const ArticleScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   title: 'title',
   timestampDate: 'timestampDate',
   readTime: 'readTime',
@@ -309,6 +310,7 @@ export type FeedLikeScalarFieldEnum = (typeof FeedLikeScalarFieldEnum)[keyof typ
 
 export const AnalyticalArticleScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   title: 'title',
   headingDescription: 'headingDescription',
   readTime: 'readTime',
@@ -446,6 +448,7 @@ export type CmsUserScalarFieldEnum = (typeof CmsUserScalarFieldEnum)[keyof typeo
 
 export const StagedArticleScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   title: 'title',
   body: 'body',
   shortDescription: 'shortDescription',

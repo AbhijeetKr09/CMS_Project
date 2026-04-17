@@ -153,17 +153,19 @@ const JournalistArticleReader = ({ article, onBack }) => {
                     {article.relatedNews?.length > 0 && (
                         <div>
                             <p className="flex items-center gap-2 text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-3">
-                                <HiOutlineExternalLink className="w-4 h-4" /> Related News
+                                <HiOutlineExternalLink className="w-4 h-4" /> Related Articles
                             </p>
                             <div className="space-y-2">
-                                {article.relatedNews.map(n => (
-                                    <div key={n.id} className="flex items-center gap-2 text-sm text-text-secondary">
-                                        <span className="w-1 h-1 rounded-full bg-text-tertiary flex-shrink-0" />
-                                        {n.newsUrl ? (
-                                            <a href={n.newsUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{n.newsTitle}</a>
-                                        ) : <span>{n.newsTitle}</span>}
-                                    </div>
-                                ))}
+                                {article.relatedNews.map(n => {
+                                    const related = n.relatedArticle;
+                                    if (!related) return null;
+                                    return (
+                                        <div key={n.id} className="flex items-center gap-2 text-sm text-text-secondary cursor-pointer hover:text-text-primary transition-colors" onClick={() => window.open(`/article/${related.slug || related.id}`, '_blank')}>
+                                            <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                                            <span className="underline decoration-border hover:decoration-accent/50 underline-offset-4">{related.title}</span>
+                                        </div>
+                                    );
+                                })}
                             </div>
                         </div>
                     )}

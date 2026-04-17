@@ -26,6 +26,7 @@ export type AggregateAnalyticalArticle = {
 
 export type AnalyticalArticleMinAggregateOutputType = {
   id: string | null
+  slug: string | null
   title: string | null
   headingDescription: string | null
   readTime: string | null
@@ -40,6 +41,7 @@ export type AnalyticalArticleMinAggregateOutputType = {
 
 export type AnalyticalArticleMaxAggregateOutputType = {
   id: string | null
+  slug: string | null
   title: string | null
   headingDescription: string | null
   readTime: string | null
@@ -54,6 +56,7 @@ export type AnalyticalArticleMaxAggregateOutputType = {
 
 export type AnalyticalArticleCountAggregateOutputType = {
   id: number
+  slug: number
   title: number
   headingDescription: number
   readTime: number
@@ -75,6 +78,7 @@ export type AnalyticalArticleCountAggregateOutputType = {
 
 export type AnalyticalArticleMinAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   headingDescription?: true
   readTime?: true
@@ -89,6 +93,7 @@ export type AnalyticalArticleMinAggregateInputType = {
 
 export type AnalyticalArticleMaxAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   headingDescription?: true
   readTime?: true
@@ -103,6 +108,7 @@ export type AnalyticalArticleMaxAggregateInputType = {
 
 export type AnalyticalArticleCountAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   headingDescription?: true
   readTime?: true
@@ -195,6 +201,7 @@ export type AnalyticalArticleGroupByArgs<ExtArgs extends runtime.Types.Extension
 
 export type AnalyticalArticleGroupByOutputType = {
   id: string
+  slug: string | null
   title: string
   headingDescription: string | null
   readTime: string | null
@@ -235,6 +242,7 @@ export type AnalyticalArticleWhereInput = {
   OR?: Prisma.AnalyticalArticleWhereInput[]
   NOT?: Prisma.AnalyticalArticleWhereInput | Prisma.AnalyticalArticleWhereInput[]
   id?: Prisma.StringFilter<"AnalyticalArticle"> | string
+  slug?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   title?: Prisma.StringFilter<"AnalyticalArticle"> | string
   headingDescription?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
   readTime?: Prisma.StringNullableFilter<"AnalyticalArticle"> | string | null
@@ -254,6 +262,7 @@ export type AnalyticalArticleWhereInput = {
 
 export type AnalyticalArticleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   headingDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   readTime?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -273,6 +282,7 @@ export type AnalyticalArticleOrderByWithRelationInput = {
 
 export type AnalyticalArticleWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   AND?: Prisma.AnalyticalArticleWhereInput | Prisma.AnalyticalArticleWhereInput[]
   OR?: Prisma.AnalyticalArticleWhereInput[]
   NOT?: Prisma.AnalyticalArticleWhereInput | Prisma.AnalyticalArticleWhereInput[]
@@ -291,10 +301,11 @@ export type AnalyticalArticleWhereUniqueInput = Prisma.AtLeast<{
   images?: Prisma.StringNullableListFilter<"AnalyticalArticle">
   createdAt?: Prisma.DateTimeFilter<"AnalyticalArticle"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"AnalyticalArticle"> | Date | string
-}, "id">
+}, "id" | "slug">
 
 export type AnalyticalArticleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   headingDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   readTime?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -320,6 +331,7 @@ export type AnalyticalArticleScalarWhereWithAggregatesInput = {
   OR?: Prisma.AnalyticalArticleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.AnalyticalArticleScalarWhereWithAggregatesInput | Prisma.AnalyticalArticleScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"AnalyticalArticle"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"AnalyticalArticle"> | string
   headingDescription?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
   readTime?: Prisma.StringNullableWithAggregatesFilter<"AnalyticalArticle"> | string | null
@@ -339,6 +351,7 @@ export type AnalyticalArticleScalarWhereWithAggregatesInput = {
 
 export type AnalyticalArticleCreateInput = {
   id?: string
+  slug?: string | null
   title: string
   headingDescription?: string | null
   readTime?: string | null
@@ -358,6 +371,7 @@ export type AnalyticalArticleCreateInput = {
 
 export type AnalyticalArticleUncheckedCreateInput = {
   id?: string
+  slug?: string | null
   title: string
   headingDescription?: string | null
   readTime?: string | null
@@ -377,6 +391,7 @@ export type AnalyticalArticleUncheckedCreateInput = {
 
 export type AnalyticalArticleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   headingDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -396,6 +411,7 @@ export type AnalyticalArticleUpdateInput = {
 
 export type AnalyticalArticleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   headingDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -415,6 +431,7 @@ export type AnalyticalArticleUncheckedUpdateInput = {
 
 export type AnalyticalArticleCreateManyInput = {
   id?: string
+  slug?: string | null
   title: string
   headingDescription?: string | null
   readTime?: string | null
@@ -434,6 +451,7 @@ export type AnalyticalArticleCreateManyInput = {
 
 export type AnalyticalArticleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   headingDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -453,6 +471,7 @@ export type AnalyticalArticleUpdateManyMutationInput = {
 
 export type AnalyticalArticleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   headingDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   readTime?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -472,6 +491,7 @@ export type AnalyticalArticleUncheckedUpdateManyInput = {
 
 export type AnalyticalArticleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   headingDescription?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
@@ -491,6 +511,7 @@ export type AnalyticalArticleCountOrderByAggregateInput = {
 
 export type AnalyticalArticleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   headingDescription?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
@@ -505,6 +526,7 @@ export type AnalyticalArticleMaxOrderByAggregateInput = {
 
 export type AnalyticalArticleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   headingDescription?: Prisma.SortOrder
   readTime?: Prisma.SortOrder
@@ -539,6 +561,7 @@ export type AnalyticalArticleUpdateimagesInput = {
 
 export type AnalyticalArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   headingDescription?: boolean
   readTime?: boolean
@@ -558,6 +581,7 @@ export type AnalyticalArticleSelect<ExtArgs extends runtime.Types.Extensions.Int
 
 export type AnalyticalArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   headingDescription?: boolean
   readTime?: boolean
@@ -577,6 +601,7 @@ export type AnalyticalArticleSelectCreateManyAndReturn<ExtArgs extends runtime.T
 
 export type AnalyticalArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   headingDescription?: boolean
   readTime?: boolean
@@ -596,6 +621,7 @@ export type AnalyticalArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.T
 
 export type AnalyticalArticleSelectScalar = {
   id?: boolean
+  slug?: boolean
   title?: boolean
   headingDescription?: boolean
   readTime?: boolean
@@ -613,13 +639,14 @@ export type AnalyticalArticleSelectScalar = {
   updatedAt?: boolean
 }
 
-export type AnalyticalArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "headingDescription" | "readTime" | "mainImage" | "shortDescription" | "body" | "tags" | "isPremium" | "dataKey" | "tableOfContents" | "faq" | "advertisement" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["analyticalArticle"]>
+export type AnalyticalArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "headingDescription" | "readTime" | "mainImage" | "shortDescription" | "body" | "tags" | "isPremium" | "dataKey" | "tableOfContents" | "faq" | "advertisement" | "images" | "createdAt" | "updatedAt", ExtArgs["result"]["analyticalArticle"]>
 
 export type $AnalyticalArticlePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "AnalyticalArticle"
   objects: {}
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    slug: string | null
     title: string
     headingDescription: string | null
     readTime: string | null
@@ -1059,6 +1086,7 @@ export interface Prisma__AnalyticalArticleClient<T, Null = never, ExtArgs extend
  */
 export interface AnalyticalArticleFieldRefs {
   readonly id: Prisma.FieldRef<"AnalyticalArticle", 'String'>
+  readonly slug: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly title: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly headingDescription: Prisma.FieldRef<"AnalyticalArticle", 'String'>
   readonly readTime: Prisma.FieldRef<"AnalyticalArticle", 'String'>

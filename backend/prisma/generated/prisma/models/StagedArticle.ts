@@ -26,6 +26,7 @@ export type AggregateStagedArticle = {
 
 export type StagedArticleMinAggregateOutputType = {
   id: string | null
+  slug: string | null
   title: string | null
   body: string | null
   shortDescription: string | null
@@ -52,6 +53,7 @@ export type StagedArticleMinAggregateOutputType = {
 
 export type StagedArticleMaxAggregateOutputType = {
   id: string | null
+  slug: string | null
   title: string | null
   body: string | null
   shortDescription: string | null
@@ -78,6 +80,7 @@ export type StagedArticleMaxAggregateOutputType = {
 
 export type StagedArticleCountAggregateOutputType = {
   id: number
+  slug: number
   title: number
   body: number
   shortDescription: number
@@ -107,6 +110,7 @@ export type StagedArticleCountAggregateOutputType = {
 
 export type StagedArticleMinAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   body?: true
   shortDescription?: true
@@ -133,6 +137,7 @@ export type StagedArticleMinAggregateInputType = {
 
 export type StagedArticleMaxAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   body?: true
   shortDescription?: true
@@ -159,6 +164,7 @@ export type StagedArticleMaxAggregateInputType = {
 
 export type StagedArticleCountAggregateInputType = {
   id?: true
+  slug?: true
   title?: true
   body?: true
   shortDescription?: true
@@ -259,6 +265,7 @@ export type StagedArticleGroupByArgs<ExtArgs extends runtime.Types.Extensions.In
 
 export type StagedArticleGroupByOutputType = {
   id: string
+  slug: string | null
   title: string
   body: string | null
   shortDescription: string | null
@@ -307,6 +314,7 @@ export type StagedArticleWhereInput = {
   OR?: Prisma.StagedArticleWhereInput[]
   NOT?: Prisma.StagedArticleWhereInput | Prisma.StagedArticleWhereInput[]
   id?: Prisma.StringFilter<"StagedArticle"> | string
+  slug?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   title?: Prisma.StringFilter<"StagedArticle"> | string
   body?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   shortDescription?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
@@ -343,6 +351,7 @@ export type StagedArticleWhereInput = {
 
 export type StagedArticleOrderByWithRelationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -379,6 +388,7 @@ export type StagedArticleOrderByWithRelationInput = {
 
 export type StagedArticleWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  slug?: string
   publishedArticleId?: string
   AND?: Prisma.StagedArticleWhereInput | Prisma.StagedArticleWhereInput[]
   OR?: Prisma.StagedArticleWhereInput[]
@@ -414,10 +424,11 @@ export type StagedArticleWhereUniqueInput = Prisma.AtLeast<{
   reviewedBy?: Prisma.XOR<Prisma.CmsUserNullableScalarRelationFilter, Prisma.CmsUserWhereInput> | null
   submittedBy?: Prisma.XOR<Prisma.CmsUserScalarRelationFilter, Prisma.CmsUserWhereInput>
   assignedTo?: Prisma.XOR<Prisma.CmsUserNullableScalarRelationFilter, Prisma.CmsUserWhereInput> | null
-}, "id" | "publishedArticleId">
+}, "id" | "slug" | "publishedArticleId">
 
 export type StagedArticleOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrderInput | Prisma.SortOrder
   title?: Prisma.SortOrder
   body?: Prisma.SortOrderInput | Prisma.SortOrder
   shortDescription?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -451,6 +462,7 @@ export type StagedArticleScalarWhereWithAggregatesInput = {
   OR?: Prisma.StagedArticleScalarWhereWithAggregatesInput[]
   NOT?: Prisma.StagedArticleScalarWhereWithAggregatesInput | Prisma.StagedArticleScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"StagedArticle"> | string
+  slug?: Prisma.StringNullableWithAggregatesFilter<"StagedArticle"> | string | null
   title?: Prisma.StringWithAggregatesFilter<"StagedArticle"> | string
   body?: Prisma.StringNullableWithAggregatesFilter<"StagedArticle"> | string | null
   shortDescription?: Prisma.StringNullableWithAggregatesFilter<"StagedArticle"> | string | null
@@ -478,6 +490,7 @@ export type StagedArticleScalarWhereWithAggregatesInput = {
 
 export type StagedArticleCreateInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -507,6 +520,7 @@ export type StagedArticleCreateInput = {
 
 export type StagedArticleUncheckedCreateInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -536,6 +550,7 @@ export type StagedArticleUncheckedCreateInput = {
 
 export type StagedArticleUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -565,6 +580,7 @@ export type StagedArticleUpdateInput = {
 
 export type StagedArticleUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -594,6 +610,7 @@ export type StagedArticleUncheckedUpdateInput = {
 
 export type StagedArticleCreateManyInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -621,6 +638,7 @@ export type StagedArticleCreateManyInput = {
 
 export type StagedArticleUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -641,6 +659,7 @@ export type StagedArticleUpdateManyMutationInput = {
 
 export type StagedArticleUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -678,6 +697,7 @@ export type StagedArticleOrderByRelationAggregateInput = {
 
 export type StagedArticleCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   body?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
@@ -705,6 +725,7 @@ export type StagedArticleCountOrderByAggregateInput = {
 
 export type StagedArticleMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   body?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
@@ -731,6 +752,7 @@ export type StagedArticleMaxOrderByAggregateInput = {
 
 export type StagedArticleMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
+  slug?: Prisma.SortOrder
   title?: Prisma.SortOrder
   body?: Prisma.SortOrder
   shortDescription?: Prisma.SortOrder
@@ -1097,6 +1119,7 @@ export type StagedArticleUpdateOneRequiredWithoutKeyInsightsNestedInput = {
 
 export type StagedArticleCreateWithoutRelatedArticle1Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1125,6 +1148,7 @@ export type StagedArticleCreateWithoutRelatedArticle1Input = {
 
 export type StagedArticleUncheckedCreateWithoutRelatedArticle1Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1163,6 +1187,7 @@ export type StagedArticleCreateManyRelatedArticle1InputEnvelope = {
 
 export type StagedArticleCreateWithoutRelatedArticle2Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1191,6 +1216,7 @@ export type StagedArticleCreateWithoutRelatedArticle2Input = {
 
 export type StagedArticleUncheckedCreateWithoutRelatedArticle2Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1229,6 +1255,7 @@ export type StagedArticleCreateManyRelatedArticle2InputEnvelope = {
 
 export type StagedArticleCreateWithoutRelatedArticle3Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1257,6 +1284,7 @@ export type StagedArticleCreateWithoutRelatedArticle3Input = {
 
 export type StagedArticleUncheckedCreateWithoutRelatedArticle3Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1295,6 +1323,7 @@ export type StagedArticleCreateManyRelatedArticle3InputEnvelope = {
 
 export type StagedArticleCreateWithoutRelatedArticle4Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1323,6 +1352,7 @@ export type StagedArticleCreateWithoutRelatedArticle4Input = {
 
 export type StagedArticleUncheckedCreateWithoutRelatedArticle4Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1380,6 +1410,7 @@ export type StagedArticleScalarWhereInput = {
   OR?: Prisma.StagedArticleScalarWhereInput[]
   NOT?: Prisma.StagedArticleScalarWhereInput | Prisma.StagedArticleScalarWhereInput[]
   id?: Prisma.StringFilter<"StagedArticle"> | string
+  slug?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   title?: Prisma.StringFilter<"StagedArticle"> | string
   body?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
   shortDescription?: Prisma.StringNullableFilter<"StagedArticle"> | string | null
@@ -1455,6 +1486,7 @@ export type StagedArticleUpdateManyWithWhereWithoutRelatedArticle4Input = {
 
 export type StagedArticleCreateWithoutReviewedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1483,6 +1515,7 @@ export type StagedArticleCreateWithoutReviewedByInput = {
 
 export type StagedArticleUncheckedCreateWithoutReviewedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1521,6 +1554,7 @@ export type StagedArticleCreateManyReviewedByInputEnvelope = {
 
 export type StagedArticleCreateWithoutSubmittedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1549,6 +1583,7 @@ export type StagedArticleCreateWithoutSubmittedByInput = {
 
 export type StagedArticleUncheckedCreateWithoutSubmittedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1587,6 +1622,7 @@ export type StagedArticleCreateManySubmittedByInputEnvelope = {
 
 export type StagedArticleCreateWithoutAssignedToInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1615,6 +1651,7 @@ export type StagedArticleCreateWithoutAssignedToInput = {
 
 export type StagedArticleUncheckedCreateWithoutAssignedToInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1701,6 +1738,7 @@ export type StagedArticleUpdateManyWithWhereWithoutAssignedToInput = {
 
 export type StagedArticleCreateWithoutImagesInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1729,6 +1767,7 @@ export type StagedArticleCreateWithoutImagesInput = {
 
 export type StagedArticleUncheckedCreateWithoutImagesInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1773,6 +1812,7 @@ export type StagedArticleUpdateToOneWithWhereWithoutImagesInput = {
 
 export type StagedArticleUpdateWithoutImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1801,6 +1841,7 @@ export type StagedArticleUpdateWithoutImagesInput = {
 
 export type StagedArticleUncheckedUpdateWithoutImagesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1829,6 +1870,7 @@ export type StagedArticleUncheckedUpdateWithoutImagesInput = {
 
 export type StagedArticleCreateWithoutKeyInsightsInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1857,6 +1899,7 @@ export type StagedArticleCreateWithoutKeyInsightsInput = {
 
 export type StagedArticleUncheckedCreateWithoutKeyInsightsInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1901,6 +1944,7 @@ export type StagedArticleUpdateToOneWithWhereWithoutKeyInsightsInput = {
 
 export type StagedArticleUpdateWithoutKeyInsightsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1929,6 +1973,7 @@ export type StagedArticleUpdateWithoutKeyInsightsInput = {
 
 export type StagedArticleUncheckedUpdateWithoutKeyInsightsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1957,6 +2002,7 @@ export type StagedArticleUncheckedUpdateWithoutKeyInsightsInput = {
 
 export type StagedArticleCreateManyRelatedArticle1Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -1983,6 +2029,7 @@ export type StagedArticleCreateManyRelatedArticle1Input = {
 
 export type StagedArticleCreateManyRelatedArticle2Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2009,6 +2056,7 @@ export type StagedArticleCreateManyRelatedArticle2Input = {
 
 export type StagedArticleCreateManyRelatedArticle3Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2035,6 +2083,7 @@ export type StagedArticleCreateManyRelatedArticle3Input = {
 
 export type StagedArticleCreateManyRelatedArticle4Input = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2061,6 +2110,7 @@ export type StagedArticleCreateManyRelatedArticle4Input = {
 
 export type StagedArticleUpdateWithoutRelatedArticle1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2089,6 +2139,7 @@ export type StagedArticleUpdateWithoutRelatedArticle1Input = {
 
 export type StagedArticleUncheckedUpdateWithoutRelatedArticle1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2117,6 +2168,7 @@ export type StagedArticleUncheckedUpdateWithoutRelatedArticle1Input = {
 
 export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle1Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2143,6 +2195,7 @@ export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle1Input = {
 
 export type StagedArticleUpdateWithoutRelatedArticle2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2171,6 +2224,7 @@ export type StagedArticleUpdateWithoutRelatedArticle2Input = {
 
 export type StagedArticleUncheckedUpdateWithoutRelatedArticle2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2199,6 +2253,7 @@ export type StagedArticleUncheckedUpdateWithoutRelatedArticle2Input = {
 
 export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle2Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2225,6 +2280,7 @@ export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle2Input = {
 
 export type StagedArticleUpdateWithoutRelatedArticle3Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2253,6 +2309,7 @@ export type StagedArticleUpdateWithoutRelatedArticle3Input = {
 
 export type StagedArticleUncheckedUpdateWithoutRelatedArticle3Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2281,6 +2338,7 @@ export type StagedArticleUncheckedUpdateWithoutRelatedArticle3Input = {
 
 export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle3Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2307,6 +2365,7 @@ export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle3Input = {
 
 export type StagedArticleUpdateWithoutRelatedArticle4Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2335,6 +2394,7 @@ export type StagedArticleUpdateWithoutRelatedArticle4Input = {
 
 export type StagedArticleUncheckedUpdateWithoutRelatedArticle4Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2363,6 +2423,7 @@ export type StagedArticleUncheckedUpdateWithoutRelatedArticle4Input = {
 
 export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle4Input = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2389,6 +2450,7 @@ export type StagedArticleUncheckedUpdateManyWithoutRelatedArticle4Input = {
 
 export type StagedArticleCreateManyReviewedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2415,6 +2477,7 @@ export type StagedArticleCreateManyReviewedByInput = {
 
 export type StagedArticleCreateManySubmittedByInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2441,6 +2504,7 @@ export type StagedArticleCreateManySubmittedByInput = {
 
 export type StagedArticleCreateManyAssignedToInput = {
   id?: string
+  slug?: string | null
   title?: string
   body?: string | null
   shortDescription?: string | null
@@ -2467,6 +2531,7 @@ export type StagedArticleCreateManyAssignedToInput = {
 
 export type StagedArticleUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2495,6 +2560,7 @@ export type StagedArticleUpdateWithoutReviewedByInput = {
 
 export type StagedArticleUncheckedUpdateWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2523,6 +2589,7 @@ export type StagedArticleUncheckedUpdateWithoutReviewedByInput = {
 
 export type StagedArticleUncheckedUpdateManyWithoutReviewedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2549,6 +2616,7 @@ export type StagedArticleUncheckedUpdateManyWithoutReviewedByInput = {
 
 export type StagedArticleUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2577,6 +2645,7 @@ export type StagedArticleUpdateWithoutSubmittedByInput = {
 
 export type StagedArticleUncheckedUpdateWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2605,6 +2674,7 @@ export type StagedArticleUncheckedUpdateWithoutSubmittedByInput = {
 
 export type StagedArticleUncheckedUpdateManyWithoutSubmittedByInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2631,6 +2701,7 @@ export type StagedArticleUncheckedUpdateManyWithoutSubmittedByInput = {
 
 export type StagedArticleUpdateWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2659,6 +2730,7 @@ export type StagedArticleUpdateWithoutAssignedToInput = {
 
 export type StagedArticleUncheckedUpdateWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2687,6 +2759,7 @@ export type StagedArticleUncheckedUpdateWithoutAssignedToInput = {
 
 export type StagedArticleUncheckedUpdateManyWithoutAssignedToInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
+  slug?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   title?: Prisma.StringFieldUpdateOperationsInput | string
   body?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   shortDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2753,6 +2826,7 @@ export type StagedArticleCountOutputTypeCountKeyInsightsArgs<ExtArgs extends run
 
 export type StagedArticleSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   body?: boolean
   shortDescription?: boolean
@@ -2790,6 +2864,7 @@ export type StagedArticleSelect<ExtArgs extends runtime.Types.Extensions.Interna
 
 export type StagedArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   body?: boolean
   shortDescription?: boolean
@@ -2824,6 +2899,7 @@ export type StagedArticleSelectCreateManyAndReturn<ExtArgs extends runtime.Types
 
 export type StagedArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
+  slug?: boolean
   title?: boolean
   body?: boolean
   shortDescription?: boolean
@@ -2858,6 +2934,7 @@ export type StagedArticleSelectUpdateManyAndReturn<ExtArgs extends runtime.Types
 
 export type StagedArticleSelectScalar = {
   id?: boolean
+  slug?: boolean
   title?: boolean
   body?: boolean
   shortDescription?: boolean
@@ -2883,7 +2960,7 @@ export type StagedArticleSelectScalar = {
   relatedArticle4Id?: boolean
 }
 
-export type StagedArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "title" | "body" | "shortDescription" | "mainImage" | "readTime" | "tags" | "type" | "status" | "editorNote" | "submittedById" | "reviewedById" | "assignedToId" | "recalledFromId" | "publishedArticleId" | "createdAt" | "updatedAt" | "submittedAt" | "reviewedAt" | "assignedAt" | "relatedArticle1Id" | "relatedArticle2Id" | "relatedArticle3Id" | "relatedArticle4Id", ExtArgs["result"]["stagedArticle"]>
+export type StagedArticleOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "slug" | "title" | "body" | "shortDescription" | "mainImage" | "readTime" | "tags" | "type" | "status" | "editorNote" | "submittedById" | "reviewedById" | "assignedToId" | "recalledFromId" | "publishedArticleId" | "createdAt" | "updatedAt" | "submittedAt" | "reviewedAt" | "assignedAt" | "relatedArticle1Id" | "relatedArticle2Id" | "relatedArticle3Id" | "relatedArticle4Id", ExtArgs["result"]["stagedArticle"]>
 export type StagedArticleInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   relatedArticle1?: boolean | Prisma.StagedArticle$relatedArticle1Args<ExtArgs>
   relatedArticle2?: boolean | Prisma.StagedArticle$relatedArticle2Args<ExtArgs>
@@ -2930,6 +3007,7 @@ export type $StagedArticlePayload<ExtArgs extends runtime.Types.Extensions.Inter
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
+    slug: string | null
     title: string
     body: string | null
     shortDescription: string | null
@@ -3386,6 +3464,7 @@ export interface Prisma__StagedArticleClient<T, Null = never, ExtArgs extends ru
  */
 export interface StagedArticleFieldRefs {
   readonly id: Prisma.FieldRef<"StagedArticle", 'String'>
+  readonly slug: Prisma.FieldRef<"StagedArticle", 'String'>
   readonly title: Prisma.FieldRef<"StagedArticle", 'String'>
   readonly body: Prisma.FieldRef<"StagedArticle", 'String'>
   readonly shortDescription: Prisma.FieldRef<"StagedArticle", 'String'>
