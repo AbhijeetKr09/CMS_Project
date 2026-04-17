@@ -37,6 +37,7 @@ export const createDraft = async (req, res) => {
             data: {
                 submittedById:   req.cmsUser.id,
                 title:           req.body.title           || '',
+                slug:            req.body.slug            || null,
                 body:            req.body.body,
                 shortDescription:req.body.shortDescription,
                 mainImage:       req.body.mainImage,
@@ -93,6 +94,7 @@ export const updateDraft = async (req, res) => {
             where: { id },
             data: {
                 title:            req.body.title            ?? existing.title,
+                slug:             req.body.slug             ?? existing.slug,
                 body:             req.body.body             ?? existing.body,
                 shortDescription: req.body.shortDescription ?? existing.shortDescription,
                 mainImage:        req.body.mainImage        ?? existing.mainImage,
@@ -155,7 +157,7 @@ export const listMine = async (req, res) => {
             },
             orderBy: { updatedAt: 'desc' },
             select: {
-                id: true, title: true, status: true, editorNote: true,
+                id: true, title: true, slug: true, status: true, editorNote: true,
                 createdAt: true, updatedAt: true, submittedAt: true,
                 tags: true, type: true, mainImage: true, assignedToId: true,
                 assignedAt: true, recalledFromId: true,
@@ -333,6 +335,7 @@ export const publish = async (req, res) => {
             const article = await tx.article.create({
                 data: {
                     id:               nextArticleId,
+                    slug:             staged.slug,
                     title:            staged.title,
                     timestampDate:    new Date(),
                     body:             publishBody,
@@ -434,6 +437,7 @@ export const recall = async (req, res) => {
         const staged = await prisma.stagedArticle.create({
             data: {
                 title:            live.title,
+                slug:             live.slug,
                 body:             live.body,
                 shortDescription: live.shortDescription,
                 mainImage:        live.mainImage,

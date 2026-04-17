@@ -41,16 +41,16 @@ const S3Image = ({ s3Key, alt, className }) => {
 // ── Status badge ─────────────────────────────────────────────────────────────
 const StatusBadge = ({ status }) => {
     const map = {
-        SUBMITTED:     'bg-blue-500/10 border-blue-500/20 text-blue-400',
+        SUBMITTED: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
         NEEDS_CHANGES: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
-        DRAFT:         'bg-bg-tertiary border-border text-text-tertiary',
-        PUBLISHED:     'bg-success/10 border-success/20 text-success',
+        DRAFT: 'bg-bg-tertiary border-border text-text-tertiary',
+        PUBLISHED: 'bg-success/10 border-success/20 text-success',
     };
     const labels = {
-        SUBMITTED:     'Submitted',
+        SUBMITTED: 'Submitted',
         NEEDS_CHANGES: 'Changes Requested',
-        DRAFT:         'Draft',
-        PUBLISHED:     'Published',
+        DRAFT: 'Draft',
+        PUBLISHED: 'Published',
     };
     return (
         <span className={`inline-flex items-center px-3 py-1 rounded-lg border text-xs font-semibold ${map[status] || map.DRAFT}`}>
@@ -191,6 +191,12 @@ const EditorReview = () => {
     );
 
     const isSubmitted = article.status === 'SUBMITTED';
+    const relatedArticles = article ? [
+        article.relatedArticle1,
+        article.relatedArticle2,
+        article.relatedArticle3,
+        article.relatedArticle4
+    ].filter(Boolean) : [];
 
     return (
         <div className="min-h-screen bg-bg-primary">
@@ -253,10 +259,15 @@ const EditorReview = () => {
                     </div>
 
                     <div className="px-8 py-8 space-y-8">
-                        {/* Title */}
-                        <h1 className="text-3xl font-bold text-text-primary leading-tight">
-                            {article.title || <span className="text-text-tertiary italic">Untitled</span>}
-                        </h1>
+                        {/* Title & Slug */}
+                        <div className="space-y-2">
+                            <h1 className="text-3xl font-bold text-text-primary leading-tight">
+                                {article.title || <span className="text-text-tertiary italic">Untitled</span>}
+                            </h1>
+                            {article.slug && (
+                                <p className="text-sm font-mono font-medium text-accent">/{article.slug}</p>
+                            )}
+                        </div>
 
                         {/* Short description */}
                         {article.shortDescription && (
@@ -317,20 +328,17 @@ const EditorReview = () => {
                             </div>
                         )}
 
-                        {/* Related News */}
-                        {article.relatedNews?.length > 0 && (
+                        {/* Related Articles */}
+                        {relatedArticles.length > 0 && (
                             <div>
                                 <p className="flex items-center gap-2 text-xs font-semibold text-text-tertiary uppercase tracking-wider mb-3">
-                                    <HiOutlineExternalLink className="w-4 h-4" /> Related News
+                                    <HiOutlineExternalLink className="w-4 h-4" /> Related Articles
                                 </p>
                                 <div className="space-y-2">
-                                    {article.relatedNews.map(n => (
-                                        <div key={n.id} className="flex items-center gap-2 text-sm text-text-secondary">
-                                            <span className="w-1 h-1 rounded-full bg-text-tertiary flex-shrink-0" />
-                                            {n.newsUrl
-                                                ? <a href={n.newsUrl} target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">{n.newsTitle}</a>
-                                                : <span>{n.newsTitle}</span>
-                                            }
+                                    {relatedArticles.map(n => (
+                                        <div key={n.id} className="flex items-center gap-2 text-sm text-text-secondary hover:text-text-primary transition-colors cursor-pointer" onClick={() => window.open(`/article/${n.slug || n.id}`, '_blank')}>
+                                            <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
+                                            <span className="underline decoration-border hover:decoration-accent/50 underline-offset-4">{n.title}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -433,7 +441,7 @@ const EditorReview = () => {
                         </div>
                         <div className="px-6 py-5">
                             <p className="text-text-secondary text-sm mb-4">
-                                This will change the article status to <strong className="text-amber-400">Needs Changes</strong> and notify the journalist.
+                                This will change the article status to <strong className="text-amber-400">Revision</strong> and notify the journalist.
                             </p>
                             <textarea value={changesNote} onChange={(e) => setChangesNote(e.target.value)} rows={5}
                                 placeholder="e.g. The headline is misleading. Please revise the intro paragraph..."

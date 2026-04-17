@@ -36,10 +36,10 @@ const SignedThumb = ({ s3Key, fallback }) => {
 // ── Status badge ─────────────────────────────────────────────────────────────
 const StatusBadge = ({ status }) => {
     const map = {
-        DRAFT:         { cls: 'bg-bg-tertiary border-border text-text-tertiary',    label: 'Draft' },
-        SUBMITTED:     { cls: 'bg-blue-500/10 border-blue-500/20 text-blue-400',    label: 'Under Review' },
-        NEEDS_CHANGES: { cls: 'bg-amber-500/10 border-amber-500/20 text-amber-400', label: 'Needs Changes' },
-        PUBLISHED:     { cls: 'bg-success/10 border-success/20 text-success',       label: 'Published' },
+        DRAFT: { cls: 'bg-bg-tertiary border-border text-text-tertiary', label: 'Draft' },
+        SUBMITTED: { cls: 'bg-blue-500/10 border-blue-500/20 text-blue-400', label: 'Under Review' },
+        NEEDS_CHANGES: { cls: 'bg-amber-500/10 border-amber-500/20 text-amber-400', label: 'Revision' },
+        PUBLISHED: { cls: 'bg-success/10 border-success/20 text-success', label: 'Published' },
     };
     const { cls, label } = map[status] || map.DRAFT;
     return <span className={`inline-flex items-center px-2 py-0.5 rounded border text-xs font-semibold ${cls}`}>{label}</span>;
@@ -242,7 +242,7 @@ const AllArticlesTab = () => {
                 ) : (
                     <div className="divide-y divide-border">
                         {articles.map(a => (
-                            <div key={a.id} 
+                            <div key={a.id}
                                 className="flex items-center gap-4 px-5 py-3.5 hover:bg-bg-primary/40 cursor-pointer group transition-colors"
                                 onClick={() => openReader(a.id)}>
                                 {a.mainImage ? (
@@ -419,7 +419,7 @@ const Dashboard = () => {
                 const data = res.data;
                 setCounts({ needsChanges: data.filter(a => a.status === 'NEEDS_CHANGES').length });
             })
-            .catch(() => {});
+            .catch(() => { });
     }, []);
 
     useEffect(() => {
@@ -430,17 +430,17 @@ const Dashboard = () => {
 
     const renderTab = () => {
         switch (activeTab) {
-            case 'all-articles':    return <AllArticlesTab />;
-            case 'needs-changes':   return <NeedsChangesTab navigate={navigate} />;
-            case 'my-submissions':  return <MySubmissionsTab navigate={navigate} />;
-            case 'write-new':       return null; // navigates away
-            default:                return <MySubmissionsTab navigate={navigate} />;
+            case 'all-articles': return <AllArticlesTab />;
+            case 'needs-changes': return <NeedsChangesTab navigate={navigate} />;
+            case 'my-submissions': return <MySubmissionsTab navigate={navigate} />;
+            case 'write-new': return null; // navigates away
+            default: return <MySubmissionsTab navigate={navigate} />;
         }
     };
 
     const tabTitles = {
-        'all-articles':   { title: 'All Articles', subtitle: 'Browse all published articles (read-only)' },
-        'needs-changes':  { title: 'Needs Changes', subtitle: 'Articles sent back by the editor for revision' },
+        'all-articles': { title: 'All Articles', subtitle: 'Browse all published articles (read-only)' },
+        'needs-changes': { title: 'Revision', subtitle: 'Articles sent back by the editor for revision' },
         'my-submissions': { title: 'My Submissions', subtitle: 'All your staged and published articles' },
     };
     const current = tabTitles[activeTab] || tabTitles['my-submissions'];
