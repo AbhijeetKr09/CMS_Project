@@ -1,11 +1,15 @@
 import { Router } from 'express';
 import { authenticate, requireRole } from '../middleware/cmsAuth.js';
-import { login, listUsers, createUser, updateUserRole, resetUserPassword, deleteUser } from '../controllers/cmsAuthController.js';
+import { login, listUsers, createUser, updateUserRole, resetUserPassword, deleteUser, getMe, updateMe } from '../controllers/cmsAuthController.js';
 
 const router = Router();
 
 // Public: login
 router.post('/login', login);
+
+// Protected: personal profile (all roles)
+router.get('/me', authenticate, getMe);
+router.put('/me', authenticate, updateMe);
 
 // Protected: user management (EDITOR + ADMIN)
 router.get('/',                 authenticate, requireRole('EDITOR', 'ADMIN'), listUsers);

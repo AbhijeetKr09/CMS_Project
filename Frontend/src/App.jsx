@@ -9,6 +9,7 @@ import Dashboard from './pages/Dashboard';
 import ArticleEditor from './pages/ArticleEditor';
 import EditorDashboard from './pages/EditorDashboard';
 import EditorReview from './pages/EditorReview';
+import Profile from './pages/Profile';
 
 // New admin / content management pages
 import EventsManager           from './pages/EventsManager';
@@ -37,6 +38,7 @@ function AppRoutes() {
         <Route path="/dashboard"   element={<Dashboard />} />
         <Route path="/editor"      element={<ArticleEditor />} />
         <Route path="/editor/:id"  element={<ArticleEditor />} />
+        <Route path="/profile"     element={<Profile />} />
       </Route>
 
       {/* Editor + Admin routes (article workflow) */}

@@ -228,6 +228,12 @@ const ArticleReader = ({ article, onBack, onRecall, onDelete }) => {
                 {/* Meta */}
                 <div className="border-b border-border px-8 py-5 flex flex-wrap gap-4 text-sm text-text-secondary">
                     <span className="px-2.5 py-0.5 rounded-full bg-success/10 border border-success/20 text-success text-xs font-semibold">Published</span>
+                    {article.author && (
+                        <span className="flex items-center gap-1.5 text-text-primary text-xs font-semibold">
+                            <HiOutlineUser className="w-3.5 h-3.5 text-text-tertiary" />
+                            {article.author.name}
+                        </span>
+                    )}
                     {article.type && (
                         <span className="px-2.5 py-0.5 rounded-full bg-accent/10 border border-accent/20 text-accent text-xs font-semibold">{article.type}</span>
                     )}
@@ -536,6 +542,7 @@ const PublishedTab = () => {
                                 <div className="flex-1 min-w-0">
                                     <p className="text-text-primary text-sm font-medium truncate group-hover:text-accent transition-colors">{a.title}</p>
                                     <p className="text-text-tertiary text-xs mt-0.5">
+                                        {a.author && <span className="font-semibold text-text-secondary mr-1.5">{a.author.name} ·</span>}
                                         {new Date(a.timestampDate).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                                         {a.type && <> · {a.type}</>}
                                         {a.views != null && <> · {a.views} views</>}

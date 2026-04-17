@@ -214,6 +214,10 @@ const EditorReview = () => {
                         <StatusBadge status={article.status} />
                         {isSubmitted && (
                             <>
+                                <button onClick={() => navigate(`/editor/${id}`)}
+                                    className="flex items-center gap-2 border border-blue-500/30 text-blue-400 hover:bg-blue-500/10 px-4 py-2 rounded-xl font-semibold text-sm transition-all">
+                                    <HiOutlinePencil className="w-4 h-4" /> Edit Article
+                                </button>
                                 <button onClick={() => setShowChangesModal(true)}
                                     className="flex items-center gap-2 border border-amber-500/30 text-amber-400 hover:bg-amber-500/10 px-4 py-2 rounded-xl font-semibold text-sm transition-all">
                                     <HiOutlineExclamationCircle className="w-4 h-4" /> Request Changes

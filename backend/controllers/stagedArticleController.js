@@ -22,10 +22,10 @@ const FULL_INCLUDE = {
     assignedTo:       { select: { id: true, name: true, email: true } },
     images:           true,
     keyInsights:      true,
-    relatedArticle1:  { select: { id: true, title: true, mainImage: true } },
-    relatedArticle2:  { select: { id: true, title: true, mainImage: true } },
-    relatedArticle3:  { select: { id: true, title: true, mainImage: true } },
-    relatedArticle4:  { select: { id: true, title: true, mainImage: true } },
+    relatedArticle1:  { select: { id: true, title: true, slug: true, mainImage: true } },
+    relatedArticle2:  { select: { id: true, title: true, slug: true, mainImage: true } },
+    relatedArticle3:  { select: { id: true, title: true, slug: true, mainImage: true } },
+    relatedArticle4:  { select: { id: true, title: true, slug: true, mainImage: true } },
 };
 
 // ─── JOURNALIST: Create new draft ───────────────────────────────────────────
@@ -66,10 +66,13 @@ export const updateDraft = async (req, res) => {
             include: { images: true, keyInsights: true }
         });
         if (!existing) return res.status(404).json({ message: 'Article not found.' });
-        const canEdit = existing.submittedById === req.cmsUser.id || existing.assignedToId === req.cmsUser.id;
+        const isEditorOrAdmin = ['EDITOR', 'ADMIN'].includes(req.cmsUser.role);
+        const canEdit = existing.submittedById === req.cmsUser.id || existing.assignedToId === req.cmsUser.id || isEditorOrAdmin;
         if (!canEdit)
             return res.status(403).json({ message: 'Not your article.' });
-        if (!['DRAFT', 'NEEDS_CHANGES'].includes(existing.status))
+        
+        const allowedStatuses = isEditorOrAdmin ? ['DRAFT', 'NEEDS_CHANGES', 'SUBMITTED'] : ['DRAFT', 'NEEDS_CHANGES'];
+        if (!allowedStatuses.includes(existing.status))
             return res.status(400).json({ message: `Cannot edit article with status: ${existing.status}` });
 
         const { images, keyInsights } = buildSubRelations(req.body);

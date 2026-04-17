@@ -349,8 +349,8 @@ app.use('/cms/social-trends',       socialTrendRoutes);
 app.use('/cms/experts',             expertCmsRoutes);
 app.use('/cms/media',               mediaCmsRoutes);
 app.use('/cms/analytical-articles', analyticalArticleCmsRoutes);
-app.use('/cms',                     airlineCmsRoutes);
 app.use('/cms/users',               cmsAuthRoutes);
+app.use('/cms',                     airlineCmsRoutes);
 
 // ── Health check ──────────────────────────────────────────────────────────────
 app.get('/health', (_req, res) => res.send('API is running.'));

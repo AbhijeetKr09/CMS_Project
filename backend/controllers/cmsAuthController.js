@@ -27,6 +27,60 @@ export const login = async (req, res) => {
     }
 };
 
+// ─── GET ME ──────────────────────────────────────────────────────────────────
+export const getMe = async (req, res) => {
+    try {
+        const user = await prisma.cmsUser.findUnique({
+            where: { id: req.cmsUser.id },
+            select: { id: true, name: true, email: true, role: true, createdAt: true }
+        });
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+        res.json(user);
+    } catch (err) {
+        console.error('[CMS Auth] getMe error:', err);
+        res.status(500).json({ message: 'Failed to fetch user.' });
+    }
+};
+
+// ─── UPDATE ME ───────────────────────────────────────────────────────────────
+export const updateMe = async (req, res) => {
+    const { name, email, oldPassword, newPassword } = req.body;
+    try {
+        const user = await prisma.cmsUser.findUnique({ where: { id: req.cmsUser.id } });
+        if (!user) return res.status(404).json({ message: 'User not found.' });
+
+        const updateData = {};
+        if (name?.trim()) updateData.name = name.trim();
+        if (email?.trim()) updateData.email = email.trim().toLowerCase();
+
+        // Check and update password if provided
+        if (newPassword) {
+            if (!oldPassword) {
+                return res.status(400).json({ message: 'Old password is required to set a new password.' });
+            }
+            const valid = await bcrypt.compare(oldPassword, user.passwordHash);
+            if (!valid) return res.status(401).json({ message: 'Invalid old password.' });
+            if (newPassword.length < 8) return res.status(400).json({ message: 'New password must be at least 8 characters.' });
+            
+            updateData.passwordHash = await bcrypt.hash(newPassword, 12);
+        }
+
+        const updatedUser = await prisma.cmsUser.update({
+            where: { id: req.cmsUser.id },
+            data: updateData,
+            select: { id: true, name: true, email: true, role: true }
+        });
+        res.json({ message: 'Profile updated successfully.', user: updatedUser });
+    } catch (err) {
+        console.error('[CMS Auth] updateMe error:', err);
+        if (err.code === 'P2002' && err.meta?.target.includes('email')) {
+            return res.status(409).json({ message: 'Email already exists.' });
+        }
+        res.status(500).json({ message: 'Failed to update profile.' });
+    }
+};
+
+
 // ─── LIST all CMS users ──────────────────────────────────────────────────────
 export const listUsers = async (req, res) => {
     try {

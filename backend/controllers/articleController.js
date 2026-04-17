@@ -333,6 +333,11 @@ const getArticles = async (req, res) => {
         };
 
         const processedArticles = await Promise.all(articles.map(async (a) => {
+            const staged = await prisma.stagedArticle.findUnique({
+                where: { publishedArticleId: a.id },
+                select: { submittedBy: { select: { name: true, email: true } } }
+            });
+
             if (a.mainImage) a.mainImage = await getPresignedUrl(a.mainImage);
             if (a.images) {
                 for (let i = 0; i < a.images.length; i++) {
@@ -341,6 +346,7 @@ const getArticles = async (req, res) => {
             }
             return {
                 ...a,
+                author: staged?.submittedBy || null,
                 body: processBody(a.body, a.images)
             };
         }));
@@ -393,6 +399,12 @@ const getArticleById = async (req, res) => {
             return res.status(404).json({ message: "Article not found" });
         }
         
+        const staged = await prisma.stagedArticle.findUnique({
+            where: { publishedArticleId: article.id },
+            select: { submittedBy: { select: { name: true, email: true } } }
+        });
+        article.author = staged?.submittedBy || null;
+
         // Sign the base object URLs before returning to client!
         if (article.mainImage) article.mainImage = await getPresignedUrl(article.mainImage);
         

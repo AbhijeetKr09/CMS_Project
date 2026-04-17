@@ -19,6 +19,7 @@ import {
     HiOutlineUsers,
     HiOutlinePaperAirplane,
     HiOutlineAnnotation,
+    HiOutlineCog,
 } from 'react-icons/hi';
 
 const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
@@ -241,6 +242,13 @@ const CmsSidebar = ({ activeTab, onTabChange, counts = {} }) => {
                             <p className="text-text-tertiary text-xs truncate">{user?.email}</p>
                         </div>
                     )}
+                    <button
+                        onClick={() => navigate('/profile')}
+                        title="Profile"
+                        className="p-1.5 rounded-lg text-text-tertiary hover:text-accent hover:bg-accent/10 transition-all bg-transparent border-none flex-shrink-0"
+                    >
+                        <HiOutlineCog className="w-4 h-4" />
+                    </button>
                     <button
                         onClick={handleLogout}
                         title="Logout"

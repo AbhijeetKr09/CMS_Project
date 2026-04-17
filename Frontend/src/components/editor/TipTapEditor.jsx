@@ -43,6 +43,50 @@ const TipTapEditor = forwardRef(({ content, onUpdate = () => {}, onImageUploadRe
             attributes: {
                 class: 'tiptap-content prose prose-invert max-w-none focus:outline-none',
             },
+            handlePaste: (view, event, slice) => {
+                if (!editable || !onImageUploadRequest) return false;
+                const items = Array.from(event.clipboardData?.items || []);
+                for (const item of items) {
+                    if (item.type.indexOf('image') === 0) {
+                        const file = item.getAsFile();
+                        if (file) {
+                            event.preventDefault();
+                            onImageUploadRequest(file).then(url => {
+                                if (url) {
+                                    const { schema } = view.state;
+                                    const node = schema.nodes.image.create({ src: url });
+                                    const transaction = view.state.tr.replaceSelectionWith(node);
+                                    view.dispatch(transaction);
+                                }
+                            }).catch(err => console.error(err));
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            },
+            handleDrop: (view, event, slice, moved) => {
+                if (!editable || !onImageUploadRequest || moved) return false;
+                if (event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files.length > 0) {
+                    const file = event.dataTransfer.files[0];
+                    if (file.type.indexOf('image') === 0) {
+                        event.preventDefault();
+                        const coordinates = view.posAtCoords({ left: event.clientX, top: event.clientY });
+                        if (!coordinates) return false;
+                        
+                        onImageUploadRequest(file).then(url => {
+                            if (url) {
+                                const { schema } = view.state;
+                                const node = schema.nodes.image.create({ src: url });
+                                const transaction = view.state.tr.insert(coordinates.pos, node);
+                                view.dispatch(transaction);
+                            }
+                        }).catch(err => console.error(err));
+                        return true;
+                    }
+                }
+                return false;
+            }
         },
     });
 

@@ -4,6 +4,7 @@ import { HiOutlineArrowLeft, HiOutlineCloudUpload, HiOutlineTrash, HiOutlinePlus
 import api from '../services/api';
 import TipTapEditor from '../components/editor/TipTapEditor';
 import { uploadFile, uploadStagedFile, replaceBlobsWithKeys, getSignedUrl, signImagePreviews, signBodyImageSrcs } from '../services/s3';
+import { useAuth } from '../context/AuthContext';
 
 const ARTICLE_TYPES = ['Business', 'News', 'Aerospace', 'Breaking'];
 
@@ -19,6 +20,8 @@ const ArticleEditor = () => {
     const navigate = useNavigate();
     const isEditMode = !!id;
     const editorRef = useRef(null); // ref to TipTapEditor imperative API
+    const { role } = useAuth();
+    const isEditorOrAdmin = role === 'EDITOR' || role === 'ADMIN';
 
     // State
     const [title, setTitle] = useState('');
@@ -406,7 +409,9 @@ const ArticleEditor = () => {
     // Auto-save to database logic
     useEffect(() => {
         if (!isDirty || saving || submitting || !isEditMode || !stagedArticleStatus) return;
-        if (stagedArticleStatus === 'SUBMITTED' || stagedArticleStatus === 'PUBLISHED') return;
+        
+        const isLockedStatus = stagedArticleStatus === 'PUBLISHED' || (!isEditorOrAdmin && stagedArticleStatus === 'SUBMITTED');
+        if (isLockedStatus) return;
 
         const timer = setTimeout(() => {
             const currentData = JSON.parse(currentDataStr);
@@ -660,13 +665,13 @@ const ArticleEditor = () => {
                         {/* Staged workflow buttons */}
                         <button
                             onClick={handleSaveDraft}
-                            disabled={saving || stagedArticleStatus === 'SUBMITTED' || stagedArticleStatus === 'PUBLISHED'}
+                            disabled={saving || stagedArticleStatus === 'PUBLISHED' || (!isEditorOrAdmin && stagedArticleStatus === 'SUBMITTED')}
                             className="flex items-center gap-2 border border-border text-text-secondary hover:text-text-primary hover:border-accent/40 px-4 py-2 rounded-full font-semibold text-sm transition-all disabled:opacity-40 disabled:cursor-not-allowed"
                         >
                             {saving ? (
                                 <><div className="w-3.5 h-3.5 border-2 border-current/30 border-t-current rounded-full animate-spin" />Saving...</>
                             ) : (
-                                <><HiOutlineCloudUpload className="w-4 h-4" />Save Draft</>
+                                <><HiOutlineCloudUpload className="w-4 h-4" />{stagedArticleStatus === 'SUBMITTED' ? 'Save Changes' : 'Save Draft'}</>
                             )}
                         </button>
 
