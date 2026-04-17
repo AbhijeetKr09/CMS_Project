@@ -126,6 +126,78 @@ const ResetPasswordModal = ({ user, onClose }) => {
     );
 };
 
+// ── User Row (with bio expand) ────────────────────────────────────────────────
+const UserRow = ({ u, onChangeRole, onReset, onDelete }) => {
+    const [expanded, setExpanded] = React.useState(false);
+
+    return (
+        <div className="px-5 py-4 hover:bg-bg-primary/40 group transition-colors">
+            <div className="flex items-start gap-4">
+                {/* Avatar */}
+                <div className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <span className="text-accent text-sm font-bold uppercase">{u.name?.[0] || '?'}</span>
+                </div>
+
+                {/* Info */}
+                <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2 flex-wrap">
+                        <p className="text-text-primary font-semibold text-sm">{u.name}</p>
+                        <span className={`px-2 py-0.5 rounded-full border text-xs font-bold ${ROLE_COLORS[u.role]}`}>{u.role}</span>
+                    </div>
+                    <p className="text-text-tertiary text-xs mt-0.5">{u.email}</p>
+                    <p className="text-text-tertiary text-xs">
+                        Joined {new Date(u.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </p>
+
+                    {/* Bio / About */}
+                    {u.bio ? (
+                        <div className="mt-2">
+                            <p className={`text-text-secondary text-xs leading-relaxed ${!expanded ? 'line-clamp-2' : ''}`}>
+                                {u.bio}
+                            </p>
+                            {u.bio.length > 120 && (
+                                <button
+                                    onClick={() => setExpanded(e => !e)}
+                                    className="text-accent text-xs font-semibold mt-0.5 bg-transparent border-none p-0 cursor-pointer hover:underline"
+                                >
+                                    {expanded ? 'Show less' : 'Show more'}
+                                </button>
+                            )}
+                        </div>
+                    ) : (
+                        <p className="text-text-tertiary/50 text-xs mt-1 italic">No about section added yet.</p>
+                    )}
+                </div>
+
+                {/* Actions */}
+                <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity flex-shrink-0">
+                    {u.role !== 'ADMIN' && (
+                        <select
+                            value={u.role}
+                            onChange={e => onChangeRole(u, e.target.value)}
+                            onClick={e => e.stopPropagation()}
+                            className="px-2 py-1.5 rounded-lg border border-border bg-bg-primary text-text-secondary text-xs focus:outline-none focus:border-accent transition-all"
+                        >
+                            <option value="JOURNALIST">Journalist</option>
+                            <option value="EDITOR">Editor</option>
+                        </select>
+                    )}
+                    <button onClick={() => onReset(u)} title="Reset Password"
+                        className="p-2 rounded-lg text-text-tertiary hover:text-accent hover:bg-accent/10 bg-transparent border-none transition-all">
+                        <HiOutlineKey className="w-4 h-4" />
+                    </button>
+                    {u.role !== 'ADMIN' && (
+                        <button onClick={() => onDelete(u.id, u.name)} title="Delete User"
+                            className="p-2 rounded-lg text-text-tertiary hover:text-red-400 hover:bg-red-500/10 bg-transparent border-none transition-all">
+                            <HiOutlineTrash className="w-4 h-4" />
+                        </button>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
 // ── User Manager ──────────────────────────────────────────────────────────────
 const UserManager = () => {
     const navigate = useNavigate();
@@ -186,42 +258,13 @@ const UserManager = () => {
                         ) : (
                             <div className="divide-y divide-border">
                                 {users.map(u => (
-                                    <div key={u.id} className="flex items-center gap-4 px-5 py-4 hover:bg-bg-primary/40 group transition-colors">
-                                        <div className="w-9 h-9 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                                            <span className="text-accent text-sm font-bold uppercase">{u.name?.[0] || '?'}</span>
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2 flex-wrap">
-                                                <p className="text-text-primary font-semibold text-sm">{u.name}</p>
-                                                <span className={`px-2 py-0.5 rounded-full border text-xs font-bold ${ROLE_COLORS[u.role]}`}>{u.role}</span>
-                                            </div>
-                                            <p className="text-text-tertiary text-xs mt-0.5">{u.email}</p>
-                                            <p className="text-text-tertiary text-xs">Joined {new Date(u.createdAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
-                                        </div>
-                                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                                            {/* Role toggle */}
-                                            {u.role !== 'ADMIN' && (
-                                                <select
-                                                    value={u.role}
-                                                    onChange={e => changeRole(u, e.target.value)}
-                                                    onClick={e => e.stopPropagation()}
-                                                    className="px-2 py-1.5 rounded-lg border border-border bg-bg-primary text-text-secondary text-xs focus:outline-none focus:border-accent transition-all">
-                                                    <option value="JOURNALIST">Journalist</option>
-                                                    <option value="EDITOR">Editor</option>
-                                                </select>
-                                            )}
-                                            <button onClick={() => setResetModal(u)} title="Reset Password"
-                                                className="p-2 rounded-lg text-text-tertiary hover:text-accent hover:bg-accent/10 bg-transparent border-none transition-all">
-                                                <HiOutlineKey className="w-4 h-4" />
-                                            </button>
-                                            {u.role !== 'ADMIN' && (
-                                                <button onClick={() => deleteUser(u.id, u.name)} title="Delete User"
-                                                    className="p-2 rounded-lg text-text-tertiary hover:text-red-400 hover:bg-red-500/10 bg-transparent border-none transition-all">
-                                                    <HiOutlineTrash className="w-4 h-4" />
-                                                </button>
-                                            )}
-                                        </div>
-                                    </div>
+                                    <UserRow
+                                        key={u.id}
+                                        u={u}
+                                        onChangeRole={changeRole}
+                                        onReset={setResetModal}
+                                        onDelete={deleteUser}
+                                    />
                                 ))}
                             </div>
                         )}
