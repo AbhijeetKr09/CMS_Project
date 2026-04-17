@@ -436,7 +436,19 @@ export const recall = async (req, res) => {
         });
         if (!live) return res.status(404).json({ message: 'Published article not found.' });
 
-        // Step 1: Create the staged article (outside transaction to avoid timeout)
+        // Step 1: Remove any existing staged records tied to this live article OR
+        // sharing the same slug BEFORE creating the new one — prevents unique
+        // constraint violations on the slug field.
+        await prisma.stagedArticle.deleteMany({
+            where: {
+                OR: [
+                    { publishedArticleId: articleId },
+                    ...(live.slug ? [{ slug: live.slug }] : []),
+                ],
+            },
+        });
+
+        // Step 2: Create the staged article
         const staged = await prisma.stagedArticle.create({
             data: {
                 title:            live.title,
@@ -462,11 +474,6 @@ export const recall = async (req, res) => {
                 relatedArticle4Id: live.relatedNews[3]?.relatedArticleId ?? null,
             },
         });
-
-        // Step 2: Remove the obsolete PUBLISHED staged record(s) that pointed to this
-        // live article — prevents the article appearing twice in the journalist's list
-        // (once as PUBLISHED ghost, once as the new NEEDS_CHANGES recall entry).
-        await prisma.stagedArticle.deleteMany({ where: { publishedArticleId: articleId } });
 
         // Step 3: Delete the live article (cascade handles children)
         await prisma.article.delete({ where: { id: articleId } });

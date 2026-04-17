@@ -29,6 +29,7 @@ export type CmsUserMinAggregateOutputType = {
   email: string | null
   passwordHash: string | null
   name: string | null
+  bio: string | null
   role: $Enums.CmsRole | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -39,6 +40,7 @@ export type CmsUserMaxAggregateOutputType = {
   email: string | null
   passwordHash: string | null
   name: string | null
+  bio: string | null
   role: $Enums.CmsRole | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +51,7 @@ export type CmsUserCountAggregateOutputType = {
   email: number
   passwordHash: number
   name: number
+  bio: number
   role: number
   createdAt: number
   updatedAt: number
@@ -61,6 +64,7 @@ export type CmsUserMinAggregateInputType = {
   email?: true
   passwordHash?: true
   name?: true
+  bio?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -71,6 +75,7 @@ export type CmsUserMaxAggregateInputType = {
   email?: true
   passwordHash?: true
   name?: true
+  bio?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +86,7 @@ export type CmsUserCountAggregateInputType = {
   email?: true
   passwordHash?: true
   name?: true
+  bio?: true
   role?: true
   createdAt?: true
   updatedAt?: true
@@ -164,6 +170,7 @@ export type CmsUserGroupByOutputType = {
   email: string
   passwordHash: string
   name: string
+  bio: string | null
   role: $Enums.CmsRole
   createdAt: Date
   updatedAt: Date
@@ -195,6 +202,7 @@ export type CmsUserWhereInput = {
   email?: Prisma.StringFilter<"CmsUser"> | string
   passwordHash?: Prisma.StringFilter<"CmsUser"> | string
   name?: Prisma.StringFilter<"CmsUser"> | string
+  bio?: Prisma.StringNullableFilter<"CmsUser"> | string | null
   role?: Prisma.EnumCmsRoleFilter<"CmsUser"> | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFilter<"CmsUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CmsUser"> | Date | string
@@ -208,6 +216,7 @@ export type CmsUserOrderByWithRelationInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -224,6 +233,7 @@ export type CmsUserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.CmsUserWhereInput | Prisma.CmsUserWhereInput[]
   passwordHash?: Prisma.StringFilter<"CmsUser"> | string
   name?: Prisma.StringFilter<"CmsUser"> | string
+  bio?: Prisma.StringNullableFilter<"CmsUser"> | string | null
   role?: Prisma.EnumCmsRoleFilter<"CmsUser"> | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFilter<"CmsUser"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"CmsUser"> | Date | string
@@ -237,6 +247,7 @@ export type CmsUserOrderByWithAggregationInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrderInput | Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -253,6 +264,7 @@ export type CmsUserScalarWhereWithAggregatesInput = {
   email?: Prisma.StringWithAggregatesFilter<"CmsUser"> | string
   passwordHash?: Prisma.StringWithAggregatesFilter<"CmsUser"> | string
   name?: Prisma.StringWithAggregatesFilter<"CmsUser"> | string
+  bio?: Prisma.StringNullableWithAggregatesFilter<"CmsUser"> | string | null
   role?: Prisma.EnumCmsRoleWithAggregatesFilter<"CmsUser"> | $Enums.CmsRole
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"CmsUser"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"CmsUser"> | Date | string
@@ -263,6 +275,7 @@ export type CmsUserCreateInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -276,6 +289,7 @@ export type CmsUserUncheckedCreateInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -289,6 +303,7 @@ export type CmsUserUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -302,6 +317,7 @@ export type CmsUserUncheckedUpdateInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -315,6 +331,7 @@ export type CmsUserCreateManyInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -325,6 +342,7 @@ export type CmsUserUpdateManyMutationInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -335,6 +353,7 @@ export type CmsUserUncheckedUpdateManyInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -345,6 +364,7 @@ export type CmsUserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -355,6 +375,7 @@ export type CmsUserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -365,6 +386,7 @@ export type CmsUserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  bio?: Prisma.SortOrder
   role?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -435,6 +457,7 @@ export type CmsUserCreateWithoutReviewedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -447,6 +470,7 @@ export type CmsUserUncheckedCreateWithoutReviewedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -464,6 +488,7 @@ export type CmsUserCreateWithoutSubmittedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -476,6 +501,7 @@ export type CmsUserUncheckedCreateWithoutSubmittedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -493,6 +519,7 @@ export type CmsUserCreateWithoutAssignedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -505,6 +532,7 @@ export type CmsUserUncheckedCreateWithoutAssignedArticlesInput = {
   email: string
   passwordHash: string
   name: string
+  bio?: string | null
   role?: $Enums.CmsRole
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -533,6 +561,7 @@ export type CmsUserUpdateWithoutReviewedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -545,6 +574,7 @@ export type CmsUserUncheckedUpdateWithoutReviewedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -568,6 +598,7 @@ export type CmsUserUpdateWithoutSubmittedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -580,6 +611,7 @@ export type CmsUserUncheckedUpdateWithoutSubmittedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -603,6 +635,7 @@ export type CmsUserUpdateWithoutAssignedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -615,6 +648,7 @@ export type CmsUserUncheckedUpdateWithoutAssignedArticlesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
+  bio?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   role?: Prisma.EnumCmsRoleFieldUpdateOperationsInput | $Enums.CmsRole
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -676,6 +710,7 @@ export type CmsUserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   email?: boolean
   passwordHash?: boolean
   name?: boolean
+  bio?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -690,6 +725,7 @@ export type CmsUserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   email?: boolean
   passwordHash?: boolean
   name?: boolean
+  bio?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -700,6 +736,7 @@ export type CmsUserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   email?: boolean
   passwordHash?: boolean
   name?: boolean
+  bio?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -710,12 +747,13 @@ export type CmsUserSelectScalar = {
   email?: boolean
   passwordHash?: boolean
   name?: boolean
+  bio?: boolean
   role?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CmsUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["cmsUser"]>
+export type CmsUserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "passwordHash" | "name" | "bio" | "role" | "createdAt" | "updatedAt", ExtArgs["result"]["cmsUser"]>
 export type CmsUserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   reviewedArticles?: boolean | Prisma.CmsUser$reviewedArticlesArgs<ExtArgs>
   submittedArticles?: boolean | Prisma.CmsUser$submittedArticlesArgs<ExtArgs>
@@ -737,6 +775,7 @@ export type $CmsUserPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     email: string
     passwordHash: string
     name: string
+    bio: string | null
     role: $Enums.CmsRole
     createdAt: Date
     updatedAt: Date
@@ -1170,6 +1209,7 @@ export interface CmsUserFieldRefs {
   readonly email: Prisma.FieldRef<"CmsUser", 'String'>
   readonly passwordHash: Prisma.FieldRef<"CmsUser", 'String'>
   readonly name: Prisma.FieldRef<"CmsUser", 'String'>
+  readonly bio: Prisma.FieldRef<"CmsUser", 'String'>
   readonly role: Prisma.FieldRef<"CmsUser", 'CmsRole'>
   readonly createdAt: Prisma.FieldRef<"CmsUser", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"CmsUser", 'DateTime'>
