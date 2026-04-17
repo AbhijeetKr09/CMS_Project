@@ -425,6 +425,7 @@ model CmsUser {
   email             String          @unique
   passwordHash      String
   name              String
+  bio               String?         // About the journalist
   role              CmsRole         @default(JOURNALIST)
   createdAt         DateTime        @default(now())
   updatedAt         DateTime        @updatedAt

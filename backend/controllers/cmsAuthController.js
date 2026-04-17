@@ -32,7 +32,7 @@ export const getMe = async (req, res) => {
     try {
         const user = await prisma.cmsUser.findUnique({
             where: { id: req.cmsUser.id },
-            select: { id: true, name: true, email: true, role: true, createdAt: true }
+            select: { id: true, name: true, email: true, bio: true, role: true, createdAt: true }
         });
         if (!user) return res.status(404).json({ message: 'User not found.' });
         res.json(user);
@@ -44,7 +44,7 @@ export const getMe = async (req, res) => {
 
 // ─── UPDATE ME ───────────────────────────────────────────────────────────────
 export const updateMe = async (req, res) => {
-    const { name, email, oldPassword, newPassword } = req.body;
+    const { name, email, bio, oldPassword, newPassword } = req.body;
     try {
         const user = await prisma.cmsUser.findUnique({ where: { id: req.cmsUser.id } });
         if (!user) return res.status(404).json({ message: 'User not found.' });
@@ -52,6 +52,7 @@ export const updateMe = async (req, res) => {
         const updateData = {};
         if (name?.trim()) updateData.name = name.trim();
         if (email?.trim()) updateData.email = email.trim().toLowerCase();
+        if (bio !== undefined) updateData.bio = bio?.trim() || null;
 
         // Check and update password if provided
         if (newPassword) {
@@ -68,7 +69,7 @@ export const updateMe = async (req, res) => {
         const updatedUser = await prisma.cmsUser.update({
             where: { id: req.cmsUser.id },
             data: updateData,
-            select: { id: true, name: true, email: true, role: true }
+            select: { id: true, name: true, email: true, bio: true, role: true }
         });
         res.json({ message: 'Profile updated successfully.', user: updatedUser });
     } catch (err) {
@@ -85,7 +86,7 @@ export const updateMe = async (req, res) => {
 export const listUsers = async (req, res) => {
     try {
         const users = await prisma.cmsUser.findMany({
-            select: { id: true, name: true, email: true, role: true, createdAt: true, updatedAt: true },
+            select: { id: true, name: true, email: true, bio: true, role: true, createdAt: true, updatedAt: true },
             orderBy: { createdAt: 'desc' },
         });
         res.json(users);
