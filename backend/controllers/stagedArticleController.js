@@ -37,7 +37,7 @@ export const createDraft = async (req, res) => {
             data: {
                 submittedById:   req.cmsUser.id,
                 title:           req.body.title           || '',
-                slug:            req.body.slug            || null,
+                slug:            req.body.slug?.trim()    || null,
                 body:            req.body.body,
                 shortDescription:req.body.shortDescription,
                 mainImage:       req.body.mainImage,
@@ -78,6 +78,11 @@ export const updateDraft = async (req, res) => {
         const { images, keyInsights } = buildSubRelations(req.body);
         const relatedIds = extractRelatedIds(req.body);
 
+        // Normalise slug: treat empty string as null so the unique index never
+        // fires for articles that simply haven't been given a slug yet.
+        const rawSlug = req.body.slug !== undefined ? req.body.slug : existing.slug;
+        const normalisedSlug = rawSlug?.trim() || null;
+
         // Optimization: only replace sub-relation rows if they've changed.
         // Prevents unnecessary churn on staged articles during auto-saves.
         const existingImgs = (existing.images || []).map(({ src, alt, caption, link }) => ({ src, alt: alt || '', caption: caption || '', link: link || '' }));
@@ -97,7 +102,7 @@ export const updateDraft = async (req, res) => {
             where: { id },
             data: {
                 title:            req.body.title            ?? existing.title,
-                slug:             req.body.slug             ?? existing.slug,
+                slug:             normalisedSlug,
                 body:             req.body.body             ?? existing.body,
                 shortDescription: req.body.shortDescription ?? existing.shortDescription,
                 mainImage:        req.body.mainImage        ?? existing.mainImage,
